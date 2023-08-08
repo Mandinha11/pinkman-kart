@@ -43,7 +43,7 @@ public class Conexao {
 		}
 	}
 
-	public static Conexao getInstancia() {
+	public Conexao getInstancia() {
 		if (instancia == null) {
 			instancia = new Conexao();
 			leArquivoBD("credentials.txt");

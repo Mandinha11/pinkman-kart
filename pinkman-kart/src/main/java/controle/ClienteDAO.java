@@ -1,8 +1,10 @@
 package controle;
+import modelo.Cliente;
 
+
+import java.sql.Connection;
 import java.util.ArrayList;
 
-import modelo.Cliente;
 
 public class ClienteDAO {
 
@@ -22,6 +24,13 @@ public class ClienteDAO {
 		if (c != null) {
 			listaCliente.add(c);
 			return true;
+			
+			Conexao c = conexao.getInstancia();
+			
+			Connection con = c.conectar();
+			
+			String query = "INSERT INTO";
+			
 		}
 		return false;
 	}
