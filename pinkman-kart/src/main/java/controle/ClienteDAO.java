@@ -1,63 +1,47 @@
 package controle;
-import modelo.Cliente;
-
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import modelo.Cliente;
 
 public class ClienteDAO {
 
 	private static ClienteDAO instancia;
-	private static ArrayList<Cliente> listaCliente;
 
 	public static ClienteDAO getinstancia() {
 
 		if (instancia == null) {
 			instancia = new ClienteDAO();
-			listaCliente = new ArrayList<>();
 		}
 		return instancia;
 	}
 
-	public Boolean Inserir(Cliente c) {
+	public Boolean inserir(Cliente c) {
 		if (c != null) {
-			listaCliente.add(c);
-			return true;
-			
-			Conexao c = conexao.getInstancia();
-			
-			Connection con = c.conectar();
-			
+
+			Conexao con = Conexao.getInstancia();
+
+			Connection conn = con.conectar();
+
 			String query = "INSERT INTO";
-			
+
 		}
 		return false;
 	}
 
-	public Boolean Alterar(Cliente c) {
-		for (Cliente cliente : listaCliente) {
-			if (c.getCpf() == cliente.getCpf()) {
-				cliente.setNomeEmpressa(c.getNomeEmpresa());
-				cliente.setTelefone(c.getTelefone());
-				return true;
-			}
-		}
+	public Boolean alterar(Cliente c) {
+
 		return false;
 	}
 
-	public Boolean Deletar(Cliente c) {
-		if (c != null) {
-			listaCliente.remove(c);
-			return true;
-		}
+	public Boolean deletar(Cliente c) {
+
 		return false;
 	}
-	
-	public ArrayList<Cliente> Listar() {
-		return listaCliente;
+
+	public ArrayList<Cliente> listar() {
+		return null;
 	}
-	public static ArrayList<Cliente> listarCliente() {
-		return listaCliente;
-	}
+
 }

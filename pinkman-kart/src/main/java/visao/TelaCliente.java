@@ -113,7 +113,7 @@ public class TelaCliente extends JFrame {
 				}
 
 				clienteDAO = ClienteDAO.getinstancia();
-				boolean info = clienteDAO.Inserir(cliente);
+				boolean info = clienteDAO.inserir(null);
 				if (info == true) {
 					atualizarTabela();
 					JOptionPane.showMessageDialog(null, "Cadatrado com sucesso!");
@@ -397,7 +397,7 @@ public class TelaCliente extends JFrame {
 	public void atualizarTabela() {
 
 		clienteDAO = ClienteDAO.getinstancia();
-		ArrayList<Cliente> clientes = clienteDAO.Listar();
+		ArrayList<Cliente> clientes = clienteDAO.listar();
 
 		modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });

@@ -4,9 +4,8 @@ import java.util.ArrayList;
 
 import modelo.Karts;
 
-
 public class KartsDAO {
-	
+
 	private static KartsDAO instancia;
 	private static ArrayList<Karts> listaKarts;
 
@@ -20,7 +19,7 @@ public class KartsDAO {
 	}
 
 	public Boolean Inserir(Karts k) {
-		if(k!=null) {
+		if (k != null) {
 			listaKarts.add(k);
 			return true;
 		}
@@ -39,6 +38,3 @@ public class KartsDAO {
 		return listaKarts;
 	}
 }
-
-
-
