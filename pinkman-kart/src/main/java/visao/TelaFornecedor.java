@@ -134,7 +134,7 @@ public class TelaFornecedor extends JFrame {
 					fornecedor.setNomeEmpresa(txtNomeEmpresa.getText());
 				}
 
-				if (dao.Inserir(fornecedor) == true) {
+				if (dao.inserir(fornecedor) == true) {
 					JOptionPane.showMessageDialog(btnCadastrar, "Boa");
 					atualizarTabela();
 				} else {

@@ -6,8 +6,17 @@ public class Cliente {
 
 	private String nomeCompleto;
 	private Long cpf;
-	private LocalDate dataNac;
+	private Long dataNac;
 	private Long telefone;
+	private Long IdCliente;
+
+	public Long getIdCliente() {
+		return IdCliente;
+	}
+
+	public void setIdCliente(Long idCliente) {
+		IdCliente = idCliente;
+	}
 
 	public Cliente() {
 	}
@@ -20,11 +29,11 @@ public class Cliente {
 		this.nomeCompleto = nomeCompleto;
 	}
 
-	public LocalDate getDataNac() {
+	public Long getDataNac() {
 		return dataNac;
 	}
 
-	public void setDataNac(LocalDate dataNac) {
+	public void setDataNac(Long dataNac) {
 		this.dataNac = dataNac;
 	}
 
