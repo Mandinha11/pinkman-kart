@@ -25,8 +25,8 @@ Trabalho em grupo PI2
 * A tela de vendas é onde o funcionário informa o que foi vendido junto ao nome , e a quantia do saldo, podendo listar.
 
 == Fluxograma de uso do sistema;
-/assets/images/Fluxograma Karts.drawio.png
+* /assets/images/Fluxograma Karts.drawio.png
 == Diagrama de casos de uso (com base na descrição das funcionalidades).
-/assets/images/Diagrama de Caso de Uso.drawio.png
+* /assets/images/Diagrama de Caso de Uso.drawio.png
 == Diagrama de Classes:
-/assets/images/Diagrama de Classes.jpg
+* /assets/images/Diagrama de Classes.jpg
