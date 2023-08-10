@@ -1,12 +1,19 @@
 # pinkman-kart
 
-Trabalho em grupo PI2
+![Captura de tela 2023-08-10 111126](https://github.com/Mandinha11/pinkman-kart/assets/111304063/92eaa59e-4afa-4c1f-91c9-5174f554de25)
 
-* Colaboradores:
-- Amanda Alves de Lima
-- Lucas Antonio Lemes
-- Lucas Henrique Bairros
-- Henry Janke
+
+Instituto Federal de Santa Catarina - Campus Gaspar
+* Projeto Integrador
+
+```
+INSERT INTO sistema_pinkman_kart (nomes) VALUES (
+'Lucas Henrique Santos de Bairros',
+  'Tiago Luiz Pereira',
+  'Amanda Alves de Lima',
+  'Lucas Antonio Vieira Lemes'
+)
+```
 
 * Descrição textual das funcionalidades: O sistema do Pinkman Kart tem o objetivo de otimizar os processos envolvidos para consulta e vendas automobilísticas, e serviços de controle de estoque. O funcionário pode logar no sistema, fazer alterações como cadastrar novos, finalizar compras, atualizar dados dos clientes e dos fornecedores.
 
