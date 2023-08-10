@@ -1,6 +1,7 @@
 # pinkman-kart
 
-![Captura de tela 2023-08-10 111126](https://github.com/Mandinha11/pinkman-kart/assets/111304063/92eaa59e-4afa-4c1f-91c9-5174f554de25)
+
+![Captura de tela 2023-08-10 111126](https://github.com/Mandinha11/pinkman-kart/assets/111304063/f145ccee-d54a-41b0-825d-a039d7eea305)
 
 
 Instituto Federal de Santa Catarina - Campus Gaspar
