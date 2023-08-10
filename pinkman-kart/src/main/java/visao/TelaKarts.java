@@ -11,9 +11,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.text.MaskFormatter;
 
-import controle.ClienteDAO;
+
 import controle.KartsDAO;
-import modelo.Cliente;
+
 import modelo.Karts;
 
 import java.awt.Color;
@@ -30,8 +30,6 @@ import java.awt.Panel;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
-//<<<<<<< Updated upstream;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 //=======
 import javax.swing.JFormattedTextField;
@@ -94,32 +92,9 @@ public class TelaKarts extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.add(btnVoltar);
 		
-		tabelaKarts = new JTable();
-		tabelaKarts.setBorder(new EtchedBorder(EtchedBorder.LOWERED, UIManager.getColor("nimbusInfoBlue"),
-		        UIManager.getColor("nimbusFocus")));
-		tabelaKarts.setRowHeight(20);
-		tabelaKarts.setShowVerticalLines(true);
-		tabelaKarts.setModel(new DefaultTableModel(
-		        new Object[][] {
-		                { null, null, null, null, null, null, null, null, null },
-		                { null, null, null, null, null, null, null, null, null },
-		                { null, null, null, null, null, null, null, null, null },
-		                { null, null, null, null, null, null, null, null, null },
-		                { null, null, null, null, null, null, null, null, null },
-		                { null, null, null, null, null, null, null, null, null },
-		                { null, null, null, null, null, null, null, null, null },
-		                { null, null, null, null, null, null, null, null, null },
-		        },
-		        new String[] { "ID Kart", "Cor", "Quantidade", "Fornecedor", "Ano", "Preço", "Modelo", "Data Entrada",
-		                "Marca" }) {
-		    private static final long serialVersionUID = 1L;
-
-		    boolean[] columnEditables = new boolean[] { false, false, false, false, false, false, false };
-
-		    public boolean isCellEditable(int row, int column) {
-		        return columnEditables[column];
-		    }
-		});
+	
+		    
+		
 
 		JScrollPane scrollPane = new JScrollPane(tabelaKarts);
 		scrollPane.setViewportView(tabelaKarts);
@@ -134,7 +109,7 @@ public class TelaKarts extends JFrame {
 				Karts karts = new Karts();
 				
 				
-				KartsDAO kartsDao = KartsDAO.getinstancia();
+				KartsDAO kartsdao = KartsDAO.getinstancia();
 				
 				
 			
@@ -199,7 +174,7 @@ public class TelaKarts extends JFrame {
 		txtPreco = new JTextField();
 		MaskFormatter formatter = null;
 		try {
-			formatter = new MaskFormatter("R$ ###.###,##");
+			formatter = new MaskFormatter("R$ #.###.###,##");
 		}catch(ParseException e2) {
 			e2.printStackTrace();
 		}

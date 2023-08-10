@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import modelo.Cliente;
 import modelo.Fornecedor;
 
 public class FornecedorDAO {
@@ -54,14 +53,61 @@ public class FornecedorDAO {
 		return false;
 	}
 
-	//public Boolean Alterar(Fornecedor f) {
+	public Boolean Alterar(Fornecedor f) {
+		Conexao con = Conexao.getInstancia();
+
+		Connection conn = con.conectar();
+
+		String query = "UPDATE fornecedor SET nome_empresa = ?, cnpj = ?";
 		
-	//}
+		try {
+
+			PreparedStatement ps = conn.prepareStatement(query);
+
+			ps.setString(1, f.getNomeEmpresa());
+			ps.setLong(2, f.getTelefone());
+
+			ps.executeUpdate();
+
+			con.fecharConexao();
+			
+			return true;
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+	
+		}
+		
+		
+		return false;
+		
+	}
 
 	public Boolean Deletar(Fornecedor f) {
-		if (f != null) {
-			listaFornecedores.remove(f);
+Conexao con = Conexao.getInstancia();
+		
+		Connection conn = con.conectar();
+
+		String query = "DELETE FROM cliente WHERE id_cliente = ?";
+		
+		try {
+
+			PreparedStatement ps = conn.prepareStatement(query);
+
+			ps.setLong(1, f.getCnpj());
+			
+
+			ps.executeUpdate();
+
+			con.fecharConexao();
+			
 			return true;
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+	
 		}
 		return false;
 	}

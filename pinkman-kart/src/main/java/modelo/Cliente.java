@@ -1,7 +1,5 @@
 package modelo;
 
-import java.time.LocalDate;
-
 public class Cliente {
 
 	private String nomeCompleto;

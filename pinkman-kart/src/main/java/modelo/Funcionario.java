@@ -2,6 +2,7 @@ package modelo;
 
 public class Funcionario {
 	
+	private String Matricula;
 	private Long Cpf;
 	private String nomeCompleto;
 	private Long dataNac;
@@ -10,6 +11,8 @@ public class Funcionario {
     public Funcionario(){
 		
 	}
+    
+    
     
     public String getNomeCompleto() {
 		return nomeCompleto;
@@ -41,6 +44,11 @@ public class Funcionario {
 
 		public void setCargo(String cargo) {
 			this.cargo = cargo;
+		}
+
+		public String getMatricula() {
+			
+			return Matricula;
 		}
     
     

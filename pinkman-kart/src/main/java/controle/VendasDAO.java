@@ -59,10 +59,62 @@ public class VendasDAO {
 	}
 
 	public Boolean Alterar(Vendas v) {
+		
+		Conexao con = Conexao.getInstancia();
+
+		Connection conn = con.conectar();
+
+		String query = "UPDATE vendas SET data_vendas = ?, id_vendas = ?";
+		
+		try {
+
+			PreparedStatement ps = conn.prepareStatement(query);
+
+			ps.setLong(1, v.getdata());
+
+			ps.executeUpdate();
+
+			con.fecharConexao();
+			
+			return true;
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+	
+		}
+
+		
 		return false;
 	}
 
 	public Boolean Deletar(Vendas v) {
+		
+Conexao con = Conexao.getInstancia();
+		
+		Connection conn = con.conectar();
+
+		String query = "DELETE FROM vendas WHERE id_vendas = ?";
+		
+		try {
+
+			PreparedStatement ps = conn.prepareStatement(query);
+
+			ps.setLong(1, v.getIdVendas());
+			
+
+			ps.executeUpdate();
+
+			con.fecharConexao();
+			
+			return true;
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+	
+		}
+		
 		return false;
 	}
 

@@ -2,6 +2,7 @@ package modelo;
 
 public class Vendas {
 	
+	private Long idVendas;
 	private String kart;
 	private String cliente;
 	private Long preco;
@@ -47,6 +48,15 @@ public class Vendas {
 	}
 	public void setmatricula(Long matricula) {
 		this.matricula = matricula;
+	}
+
+	public void setIdVendas(Long idVendas) {
+		this.idVendas = idVendas;
+	}
+
+	public long getIdVendas() {
+		
+		return idVendas;
 	}
 	
 	

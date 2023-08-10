@@ -28,7 +28,7 @@ public class KartsDAO {
 
 			Connection conn = con.conectar();
 
-			String query = "INSERT INTOINSERT INTO karts (id_kart, cor, modelo, marca, ano, quantidade, data_entrada, preco, fornecedor_cnpj) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO karts (id_kart, cor, modelo, marca, ano, quantidade, data_entrada, preco, fornecedor_cnpj) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			try {
 				
@@ -61,10 +61,61 @@ public class KartsDAO {
 	}
 
 	public Boolean Alterar(Karts k) {
+		Conexao con = Conexao.getInstancia();
+
+		Connection conn = con.conectar();
+
+		String query = "UPDATE karts SET cor = ?, id_kart In (?)";
+		
+		try {
+
+			PreparedStatement ps = conn.prepareStatement(query);
+
+			ps.setString(1, k.getcor());
+
+			ps.executeUpdate();
+
+			con.fecharConexao();
+			
+			return true;
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+	
+		}
+		
 		return false;
 	}
 
 	public Boolean Deletar(Karts k) {
+		
+		Conexao con = Conexao.getInstancia();
+		
+		Connection conn = con.conectar();
+
+		String query = "DELETE FROM kart WHERE id_kart = ?";
+		
+		try {
+
+			PreparedStatement ps = conn.prepareStatement(query);
+
+			ps.setLong(1, k.getId());
+			
+
+			ps.executeUpdate();
+
+			con.fecharConexao();
+			
+			return true;
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+	
+		}
+
+		
 		return false;
 	}
 
