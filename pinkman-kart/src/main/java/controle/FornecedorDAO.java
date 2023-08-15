@@ -2,9 +2,11 @@ package controle;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import modelo.Cliente;
 import modelo.Fornecedor;
 
 public class FornecedorDAO {
@@ -12,8 +14,49 @@ public class FornecedorDAO {
 	private static FornecedorDAO instancia;
 	private static ArrayList<Fornecedor> listaFornecedores;
 
-	public static FornecedorDAO getinstancia() {
+		public ArrayList<Fornecedor> listar() {
 
+			Conexao c = Conexao.getInstancia();
+
+			Connection con = c.conectar();
+
+			ArrayList<Fornecedor> fornecedores = new ArrayList();
+
+			String query = "SELECT * FROM fornecedor";
+
+			try {
+				PreparedStatement ps = con.prepareStatement(query);
+
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+
+					
+					long telefone = rs.getLong("telefone");
+					long cep = rs.getLong("cep");
+					long cnpj = rs.getLong("cnpj");
+					String nomeEmpresa = rs.getString("nome_empresa");
+
+					Fornecedor f = new Fornecedor();
+					f.setCep(cep);
+					f.setNomeEmpresa(nomeEmpresa);
+					f.setTelefone(telefone);
+					f.setCnpj(cnpj);
+					
+
+					fornecedores.add(f);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			c.fecharConexao();
+
+			return fornecedores;
+
+		}
+		
+		public static FornecedorDAO getinstancia() {
 		if (instancia == null) {
 			instancia = new FornecedorDAO();
 			listaFornecedores = new ArrayList<>();
@@ -112,7 +155,5 @@ Conexao con = Conexao.getInstancia();
 		return false;
 	}
 
-	public ArrayList<Fornecedor> Listar() {
-		return listaFornecedores;
-	}
+
 }

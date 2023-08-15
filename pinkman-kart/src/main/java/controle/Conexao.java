@@ -23,8 +23,7 @@ public class Conexao {
 
 	public Connection conectar() {
 		try {
-			conexao = DriverManager.getConnection("jdbc:mysql://localhost/" + DATABASE + "?serverTimezone=UTC", USER,
-					PSW);
+			conexao = DriverManager.getConnection("jdbc:mysql://localhost/"+ DATABASE + "?serverTimezone=UTC", USER, PSW);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
