@@ -2,14 +2,60 @@ package controle;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import modelo.Karts;
 import modelo.Vendas;
 
 
 
 public class VendasDAO {
+	
+	public ArrayList <Vendas> listar (){
+		
+		Conexao c = Conexao.getInstancia();
+		
+		Connection con = c.conectar();
+		
+		ArrayList<Vendas> vendas = new ArrayList();
+		String query = "SELECT * FROM vendas";
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();
+		while(rs.next()) {
+			
+		
+			long idVendas = rs.getLong("idVendas");
+			String kart = rs.getString("kart");
+			String cliente = rs.getString("cliente");
+			long preco = rs.getLong("preco");
+			long data = rs.getLong("data");
+			long matricula = rs.getLong("matricula");
+			
+			
+			Vendas v = new Vendas();
+			v.setIdVendas (idVendas);
+			v.setkarts (kart);
+			v.setcliente (cliente);
+			v.setpreco (preco);
+			v.setdata(data);
+			v.setmatricula(matricula);
+			
+			vendas.add(v);
+		 		}
+			}
+			
+		catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+			c.fecharConexao();
+			
+			return vendas;
+		
+	}
 
 	
 	private static VendasDAO instancia;
@@ -118,9 +164,6 @@ Conexao con = Conexao.getInstancia();
 		return false;
 	}
 
-	public ArrayList<Vendas> Listar() {
-		return null;
-	}
 }
 
 
