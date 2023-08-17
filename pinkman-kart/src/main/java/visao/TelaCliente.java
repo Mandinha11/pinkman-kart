@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -37,7 +38,7 @@ public class TelaCliente extends JFrame {
 	private JTable table;
 	private ClienteDAO clienteDAO;
 	private DefaultTableModel modelo;
-	private ArrayList<ClienteDAO> listaCliente = new ArrayList<ClienteDAO>();
+	private ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
 	
 	
 
@@ -78,8 +79,20 @@ public class TelaCliente extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Cliente cliente = new Cliente();
-
+				
+				
+				String nomeCompleto = textNomeCompleto.getName();
+				Long cpf = Long.valueOf(textCPF.getText());
+				Date dataNac = new Date("11/03/1999");
+				Long telefone = Long.valueOf(textTelefone.getText());
+				
+				Cliente cliente = new Cliente(nomeCompleto, cpf, 1111l, telefone, 1111l);
+				
+				listaCliente.add(cliente);
+				atualizarTabela();
+				limparCampos();
+				
+				
 				if (textNomeCompleto.getText().trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "Nome não preenchido!!");
 					return;
@@ -355,7 +368,8 @@ public class TelaCliente extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int selectedRow = table.getSelectedRow();
+               
+            	int selectedRow = table.getSelectedRow();
                 if (selectedRow != -1) {
                     // Remove a linha selecionada
                     DefaultTableModel tableModel = (DefaultTableModel) table.getModel();

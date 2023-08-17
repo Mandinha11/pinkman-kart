@@ -7,6 +7,16 @@ public class Cliente {
 	private Long dataNac;
 	private Long telefone;
 	private Long IdCliente;
+	
+	
+	public Cliente(String nomeCompleto, Long cpf, Long dataNac, Long telefone, Long idCliente) {
+		super();
+		this.nomeCompleto = nomeCompleto;
+		this.cpf = cpf;
+		this.dataNac = dataNac;
+		this.telefone = telefone;
+		IdCliente = idCliente;
+	}
 
 	public Long getIdCliente() {
 		return IdCliente;

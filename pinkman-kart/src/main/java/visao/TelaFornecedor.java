@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import ExemploJTable.Pessoa;
 import controle.ClienteDAO;
 import controle.FornecedorDAO;
 import modelo.Cliente;
@@ -290,6 +291,16 @@ public class TelaFornecedor extends JFrame {
 
 	public void atualizarTabela() {
 
+		/*
+		 String nome = txtNome.getText();
+				String cpf = txtCPF.getText();
+				Pessoa p = new Pessoa();
+				p.setNome(nome);
+				p.setCpf(cpf);
+				listaPessoas.add(p);
+				atualizarJTable();
+				limparCampos();
+		 */
 		dao = FornecedorDAO.getinstancia();
 		ArrayList<Fornecedor> fornecedores = dao.listar();
 
@@ -305,5 +316,4 @@ public class TelaFornecedor extends JFrame {
 
 		table.setModel(modelo);
 	}
-
 }
