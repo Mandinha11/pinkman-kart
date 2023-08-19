@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import modelo.Cliente;
@@ -31,13 +32,17 @@ public class ClienteDAO {
 				long dataNac = rs.getLong("data_de_nascimento");
 				long cpf = rs.getLong("cpf");
 				String nomeCompleto = rs.getString("nome_completo");
-
+				
 				Cliente cl = new Cliente();
+				
 				cl.setIdCliente(IdCliente);
 				cl.setNomeCompleto(nomeCompleto);
 				cl.setTelefone(telefone);
 				cl.setCpf(cpf);
-				cl.setDataNac(dataNac);
+				
+				LocalDate dataNascimento = LocalDate.ofEpochDay(dataNac);
+				
+				cl.setDataNac(dataNascimento);
 
 				clientes.add(cl);
 			}
@@ -64,20 +69,17 @@ public class ClienteDAO {
 
 	public boolean inserir(Cliente c) {
 		if (c != null) {
-
 			Conexao con = Conexao.getInstancia();
-
 			Connection conn = con.conectar();
-
-			String query = "INSERT INTO clientes (id_cliente, nome_completo, data_nascimento, cpf, telefone) VALUES (??,??,??,??,??)";
-
+			String query = "INSERT INTO clientes (id_cliente, nome_completo, data_nascimento, cpf, telefone) VALUES (?,?,?,?)";
+			
 			try {
 
 				PreparedStatement ps = conn.prepareStatement(query);
 
-				ps.setLong(1, c.getIdCliente());
+				java.sql.Date dataNascimento = java.sql.Date.valueOf(c.getDataNac());
 				ps.setString(2, c.getNomeCompleto());
-				ps.setLong(3, c.getDataNac());
+				ps.setDate(3, dataNascimento);
 				ps.setLong(4, c.getCpf());
 				ps.setLong(5, c.getTelefone());
 

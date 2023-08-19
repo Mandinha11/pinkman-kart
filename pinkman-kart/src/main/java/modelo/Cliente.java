@@ -1,22 +1,23 @@
 package modelo;
 
+import java.time.LocalDate;
+
 public class Cliente {
 
-	private String nomeCompleto;
-	private Long cpf;
-	private Long dataNac;
-	private Long telefone;
-	private Long IdCliente;
-	
-	
-	public Cliente(String nomeCompleto, Long cpf, Long dataNac, Long telefone, Long idCliente) {
-		super();
-		this.nomeCompleto = nomeCompleto;
-		this.cpf = cpf;
-		this.dataNac = dataNac;
-		this.telefone = telefone;
-		IdCliente = idCliente;
-	}
+
+    private String nomeCompleto;
+    private Long cpf;
+    private LocalDate dataNac;
+    private Long telefone;
+    private Long IdCliente;
+
+    public Cliente(String nomeCompleto, Long cpf, LocalDate dataNac, Long telefone) {
+        super();
+        this.nomeCompleto = nomeCompleto;
+        this.cpf = cpf;
+        this.dataNac = dataNac;
+        this.telefone = telefone;
+    }
 
 	public Long getIdCliente() {
 		return IdCliente;
@@ -37,11 +38,11 @@ public class Cliente {
 		this.nomeCompleto = nomeCompleto;
 	}
 
-	public Long getDataNac() {
+	public LocalDate getDataNac() {
 		return dataNac;
 	}
 
-	public void setDataNac(Long dataNac) {
+	public void setDataNac(LocalDate dataNac) {
 		this.dataNac = dataNac;
 	}
 

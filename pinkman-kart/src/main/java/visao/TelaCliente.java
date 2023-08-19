@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -64,6 +65,7 @@ public class TelaCliente extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCliente() {
+		
 		setTitle("Cliente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 2216, 1104);
@@ -79,69 +81,27 @@ public class TelaCliente extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
-				
-				String nomeCompleto = textNomeCompleto.getName();
-				Long cpf = Long.valueOf(textCPF.getText());
-				Date dataNac = new Date("11/03/1999");
-				Long telefone = Long.valueOf(textTelefone.getText());
-				
-				Cliente cliente = new Cliente(nomeCompleto, cpf, 1111l, telefone, 1111l);
-				
-				listaCliente.add(cliente);
-				atualizarTabela();
-				limparCampos();
-				
-				
-				if (textNomeCompleto.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Nome não preenchido!!");
-					return;
-				} else {
-					cliente.setNomeEmpressa(textNomeCompleto.getText());
-				}
+				  String nomeCompleto = textNomeCompleto.getText();
+	                String cpf = textCPF.getText();
+	                String dataNac = boxDia.getSelectedItem() + "/" + boxMes.getSelectedItem() + "/" + boxAno.getSelectedItem();
+	                String telefone = textTelefone.getText();
 
-				if (textCPF.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "CPF não preenchido!!");
-					return;
-				} else {
-					String semMask = textCPF.getText();
-					semMask = semMask.replace("-", "");
-					semMask = semMask.replace(".", "");
-					semMask = semMask.trim();
-					cliente.setCpf(Long.valueOf(semMask));
-				}
-
-				if (textTelefone.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Telefone não preenchido!!");
-					return;
-				} else {
-					String semMask = textTelefone.getText();
-					semMask = semMask.replace("(", "");
-					semMask = semMask.replace(")", "");
-					semMask = semMask.replace("-", "");
-					semMask = semMask.replace(" ", "");
-					semMask = semMask.trim();
-
-					cliente.setTelefone(Long.valueOf(semMask));
-				}
-
-				clienteDAO = ClienteDAO.getinstancia();
-				boolean info = clienteDAO.inserir(null);
-				if (info == true) {
-					atualizarTabela();
-					JOptionPane.showMessageDialog(null, "Cadatrado com sucesso!");
-
-					// limpar os campos
-					textCPF.setText("");
-					textNomeCompleto.setText("");
-					textTelefone.setText("");
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
-				}
-
-			}
+	                Cliente cliente = new Cliente(nomeCompleto, cpf, dataNac);
+	                clienteDAO = ClienteDAO.getinstancia();
+	                
+	                // Chame o método para inserir no banco de dados
+	                boolean info = clienteDAO.inserir(cliente);
+	                
+	                if (info) {
+	                    atualizarTabela();
+	                    JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+	                    limparCampos();
+	                } else {
+	                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
+	                }
+	            }
 		});
+		
 		contentPane.setLayout(null);
 		contentPane.add(btnNewButton);
 
@@ -294,6 +254,8 @@ public class TelaCliente extends JFrame {
 		lblNewLabel_4.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 17));
 		lblNewLabel_4.setForeground(new Color(0, 128, 128));
 
+		
+		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBounds(1048, 107, 506, 45);
 		panel_1_1.setLayout(null);
@@ -410,19 +372,19 @@ public class TelaCliente extends JFrame {
 
 	public void atualizarTabela() {
 
-		clienteDAO = ClienteDAO.getinstancia();
-		ArrayList<Cliente> clientes = clienteDAO.listar();
+		 	clienteDAO = ClienteDAO.getinstancia();
+			ArrayList<Cliente> clientes = clienteDAO.listar();
 
-		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
-		table.setModel(modelo);
+	        modelo = new DefaultTableModel(new Object[][] {},
+	                new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
+	        table.setModel(modelo);
 
-		for (Cliente cliente : clientes) {
-			Object[] linha = { cliente.getNomeEmpresa(), cliente.getCpf(), cliente.getDataNac(),
-					cliente.getTelefone() };
-			modelo.addRow(linha);
-		}
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-		table.setModel(modelo);
+	        for (Cliente cliente : clientes) {
+	            Object[] linha = { cliente.getNomeCompleto(), cliente.getCpf(), cliente.getDataNac().format(formatter),
+	                    cliente.getTelefone() };
+	            modelo.addRow(linha);
+	        }
 	}
 }
