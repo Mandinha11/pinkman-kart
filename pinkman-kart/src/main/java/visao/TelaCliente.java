@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,11 +28,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import com.mysql.cj.protocol.a.LocalDateTimeValueEncoder;
+
 import controle.ClienteDAO;
 import modelo.Cliente;
 
 public class TelaCliente extends JFrame {
 
+	
 	private JPanel contentPane;
 	private JTextField textNomeCompleto;
 	private JTextField textCPF;
@@ -40,7 +44,9 @@ public class TelaCliente extends JFrame {
 	private ClienteDAO clienteDAO;
 	private DefaultTableModel modelo;
 	private ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
-	
+	private JComboBox<String> boxDia;
+	private JComboBox<String> boxMes;
+	private JComboBox<Integer> boxAno;
 	
 
 	/**
@@ -64,6 +70,7 @@ public class TelaCliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public TelaCliente() {
 		
 		setTitle("Cliente");
@@ -74,33 +81,40 @@ public class TelaCliente extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-
-		JButton btnNewButton = new JButton("Cadastrar");
+		 
+	        
+	    JButton btnNewButton = new JButton("Cadastrar");
 		btnNewButton.setBounds(51, 218, 242, 57);
 		btnNewButton.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		btnNewButton.addActionListener(new ActionListener() {
+		
 			public void actionPerformed(ActionEvent e) {
+			    String nomeCompleto = textNomeCompleto.getText();
+			    Long cpf = Long.valueOf(textCPF.getText());
+			    			    
+			    // Converter a data de nascimento de String para LocalDate
+			    int dia = Integer.valueOf((String) boxDia.getSelectedItem());
+			    int mes = Integer.valueOf((String) boxMes.getSelectedItem());
+			    int ano = (Integer) boxAno.getSelectedItem();
+			    Long telefone = Long.valueOf(textTelefone.getText());
+			    
+			    LocalDate dataNac = LocalDate.of(dia, mes,ano);
+			    
+			    Cliente cliente = new Cliente(nomeCompleto, cpf, dataNac, telefone);
+			    clienteDAO = ClienteDAO.getinstancia();
 
-				  String nomeCompleto = textNomeCompleto.getText();
-	                String cpf = textCPF.getText();
-	                String dataNac = boxDia.getSelectedItem() + "/" + boxMes.getSelectedItem() + "/" + boxAno.getSelectedItem();
-	                String telefone = textTelefone.getText();
+			    
+			    boolean info = clienteDAO.inserir(cliente);
 
-	                Cliente cliente = new Cliente(nomeCompleto, cpf, dataNac);
-	                clienteDAO = ClienteDAO.getinstancia();
-	                
-	                // Chame o método para inserir no banco de dados
-	                boolean info = clienteDAO.inserir(cliente);
-	                
-	                if (info) {
-	                    atualizarTabela();
-	                    JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-	                    limparCampos();
-	                } else {
-	                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
-	                }
-	            }
-		});
+			    if (info) {
+			        atualizarTabela();
+			        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+			        limparCampos();
+			    } else {
+			        JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
+			    }
+			}
+		})	;
 		
 		contentPane.setLayout(null);
 		contentPane.add(btnNewButton);
@@ -170,89 +184,48 @@ public class TelaCliente extends JFrame {
 		panel_2.setToolTipText("");
 		panel_2.setBackground(new Color(211, 211, 211));
 		contentPane.add(panel_2);
+		JLabel lblNewLabel_2 = new JLabel("Data de Nascimento:");
+		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblNewLabel_2.setBounds(10, 11, 191, 25);
+		panel_2.add(lblNewLabel_2);
 
-		JLabel lblNewLabel_2 = new JLabel("Data De Nascimento:");
+		boxDia = new JComboBox<>();
+		boxDia.setBounds(198, 11, 62, 25);
+		for (int i = 1; i <= 31; i++) {
+		    boxDia.addItem(String.format("%02d", i));
+		}
+		panel_2.add(boxDia);
+
+		JLabel lblNewLabel_5 = new JLabel("Mês");
+		lblNewLabel_5.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblNewLabel_5.setForeground(new Color(0, 128, 128));
+		lblNewLabel_5.setBounds(270, 8, 47, 27);
+		panel_2.add(lblNewLabel_5);
+
+		boxMes = new JComboBox<>();
+		boxMes.setBounds(309, 11, 59, 25);
+		for (int i = 1; i <= 12; i++) {
+		    boxMes.addItem(String.format("%02d", i));
+		}
+		panel_2.add(boxMes);
+
+		JLabel lblNewLabel_6 = new JLabel("Ano");
+		lblNewLabel_6.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblNewLabel_6.setForeground(new Color(0, 128, 128));
+		lblNewLabel_6.setBounds(378, 10, 47, 22);
+		panel_2.add(lblNewLabel_6);
+
+		boxAno = new JComboBox<>();
+		boxAno.setBounds(415, 11, 81, 25);
+		for (int i = 1923; i <= 2023; i++) {
+		    boxAno.addItem(i);
+		}
+		panel_2.add(boxAno);
+		JLabel lblDataNasc = new JLabel("Data De Nascimento:");
 		lblNewLabel_2.setBounds(10, 11, 191, 25);
 		panel_2.add(lblNewLabel_2);
 		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblNewLabel_2.setForeground(new Color(0, 0, 0));
-
-		JComboBox<String> boxDia = new JComboBox<>();
-		boxDia.setBounds(198, 11, 62, 25);
-		panel_2.add(boxDia);
-		boxDia.addItem("01");
-		boxDia.addItem("02");
-		boxDia.addItem("03");
-		boxDia.addItem("04");
-		boxDia.addItem("05");
-		boxDia.addItem("06");
-		boxDia.addItem("07");
-		boxDia.addItem("08");
-		boxDia.addItem("09");
-		boxDia.addItem("10");
-		boxDia.addItem("11");
-		boxDia.addItem("12");
-		boxDia.addItem("13");
-		boxDia.addItem("14");
-		boxDia.addItem("15");
-		boxDia.addItem("16");
-		boxDia.addItem("17");
-		boxDia.addItem("18");
-		boxDia.addItem("19");
-		boxDia.addItem("20");
-		boxDia.addItem("21");
-		boxDia.addItem("22");
-		boxDia.addItem("23");
-		boxDia.addItem("24");
-		boxDia.addItem("25");
-		boxDia.addItem("26");
-		boxDia.addItem("27");
-		boxDia.addItem("28");
-		boxDia.addItem("29");
-		boxDia.addItem("30");
-		boxDia.addItem("31");
-
-		JComboBox<String> boxMes = new JComboBox<>();
-		boxMes.setBounds(309, 11, 59, 25);
-		panel_2.add(boxMes);
-		boxMes.addItem("01");
-		boxMes.addItem("02");
-		boxMes.addItem("03");
-		boxMes.addItem("04");
-		boxMes.addItem("05");
-		boxMes.addItem("06");
-		boxMes.addItem("07");
-		boxMes.addItem("08");
-		boxMes.addItem("09");
-		boxMes.addItem("10");
-		boxMes.addItem("11");
-		boxMes.addItem("12");
-
-		JLabel lblNewLabel_5 = new JLabel("Mês");
-		lblNewLabel_5.setBounds(270, 8, 47, 27);
-		panel_2.add(lblNewLabel_5);
-		lblNewLabel_5.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		lblNewLabel_5.setForeground(new Color(0, 128, 128));
-
-		JLabel lblNewLabel_6 = new JLabel("Ano");
-		lblNewLabel_6.setBounds(378, 10, 47, 22);
-		panel_2.add(lblNewLabel_6);
-		lblNewLabel_6.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		lblNewLabel_6.setForeground(new Color(0, 128, 128));
-
-		JComboBox<Integer> boxAno = new JComboBox<>();
-		boxAno.setBounds(415, 11, 81, 25);
-		panel_2.add(boxAno);
-
-		for (int i = 1923; i <= 2023; i++) {
-			boxAno.addItem(i);
-		}
-
-		JLabel lblNewLabel_4 = new JLabel("Dia");
-		lblNewLabel_4.setBounds(168, 12, 33, 22);
-		panel_2.add(lblNewLabel_4);
-		lblNewLabel_4.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 17));
-		lblNewLabel_4.setForeground(new Color(0, 128, 128));
 
 		
 		
