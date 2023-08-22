@@ -83,6 +83,8 @@ public class TelaVendas extends JFrame {
 		panel.add(table);
 		
 		JButton btnCadastra = new JButton("Cadastrar");
+		btnCadastra.setForeground(new Color(255, 255, 255));
+		btnCadastra.setBackground(new Color(0, 0, 0));
 		btnCadastra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -134,6 +136,8 @@ public class TelaVendas extends JFrame {
 		contentPane.add(btnCadastra);
 		
 		JButton btnNewButton_2 = new JButton("Voltar");
+		btnNewButton_2.setBackground(new Color(0, 0, 0));
+		btnNewButton_2.setForeground(new Color(255, 255, 255));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -147,12 +151,13 @@ public class TelaVendas extends JFrame {
 		contentPane.add(btnNewButton_2);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(211, 211, 211));
+		panel_1.setBackground(new Color(47, 79, 79));
 		panel_1.setBounds(281, 31, 483, 55);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel lblData = new JLabel("Data:");
+		lblData.setForeground(new Color(255, 255, 255));
 		lblData.setBounds(10, 16, 48, 24);
 		panel_1.add(lblData);
 		lblData.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -216,26 +221,26 @@ public class TelaVendas extends JFrame {
 		}
 		
 		JLabel lblNewLabel_3 = new JLabel("Dia");
-		lblNewLabel_3.setForeground(new Color(0, 139, 139));
+		lblNewLabel_3.setForeground(new Color(255, 255, 255));
 		lblNewLabel_3.setBounds(70, 14, 28, 28);
 		panel_1.add(lblNewLabel_3);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		JLabel lblNewLabel_2 = new JLabel("Mês");
-		lblNewLabel_2.setForeground(new Color(0, 128, 128));
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setBounds(199, 21, 34, 14);
 		panel_1.add(lblNewLabel_2);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		JLabel lblNewLabel_4 = new JLabel("Ano");
-		lblNewLabel_4.setForeground(new Color(0, 128, 128));
+		lblNewLabel_4.setForeground(new Color(255, 255, 255));
 		lblNewLabel_4.setBounds(329, 21, 36, 14);
 		panel_1.add(lblNewLabel_4);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
-		panel_1_1.setBackground(new Color(211, 211, 211));
+		panel_1_1.setBackground(new Color(47, 79, 79));
 		panel_1_1.setBounds(281, 104, 483, 55);
 		contentPane.add(panel_1_1);
 		
@@ -245,13 +250,14 @@ public class TelaVendas extends JFrame {
 		panel_1_1.add(txtKart);
 		
 		JLabel lblKartVendido = new JLabel("Id Kart:");
+		lblKartVendido.setForeground(new Color(255, 255, 255));
 		lblKartVendido.setBounds(10, 16, 102, 24);
 		panel_1_1.add(lblKartVendido);
 		lblKartVendido.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JPanel panel_1_2 = new JPanel();
 		panel_1_2.setLayout(null);
-		panel_1_2.setBackground(new Color(211, 211, 211));
+		panel_1_2.setBackground(new Color(47, 79, 79));
 		panel_1_2.setBounds(850, 31, 483, 55);
 		contentPane.add(panel_1_2);
 		
@@ -270,13 +276,14 @@ public class TelaVendas extends JFrame {
 		panel_1_2.add(txtCliente);
 		
 		JLabel lblComprador = new JLabel("Cliente CPF:");
+		lblComprador.setForeground(new Color(255, 255, 255));
 		lblComprador.setBounds(10, 18, 133, 20);
 		panel_1_2.add(lblComprador);
 		lblComprador.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JPanel panel_1_2_1 = new JPanel();
 		panel_1_2_1.setLayout(null);
-		panel_1_2_1.setBackground(new Color(211, 211, 211));
+		panel_1_2_1.setBackground(new Color(47, 79, 79));
 		panel_1_2_1.setBounds(850, 104, 483, 55);
 		contentPane.add(panel_1_2_1);
 		
@@ -286,13 +293,15 @@ public class TelaVendas extends JFrame {
 		panel_1_2_1.add(txtPreco);
 		
 		JLabel lblNewLabel = new JLabel("Valor Da Venda:");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setBackground(new Color(255, 255, 255));
 		lblNewLabel.setBounds(10, 16, 121, 24);
 		panel_1_2_1.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 		JPanel panel_1_2_2 = new JPanel();
 		panel_1_2_2.setLayout(null);
-		panel_1_2_2.setBackground(new Color(211, 211, 211));
+		panel_1_2_2.setBackground(new Color(47, 79, 79));
 		panel_1_2_2.setBounds(1362, 31, 507, 55);
 		contentPane.add(panel_1_2_2);
 		
@@ -302,15 +311,20 @@ public class TelaVendas extends JFrame {
 		panel_1_2_2.add(txtMatricula);
 		
 		JLabel lblMatriculaFuncionario = new JLabel("Matricula Funcionario:");
+		lblMatriculaFuncionario.setForeground(new Color(255, 255, 255));
 		lblMatriculaFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMatriculaFuncionario.setBounds(10, 18, 156, 20);
 		panel_1_2_2.add(lblMatriculaFuncionario);
 		
 		JButton btnListar = new JButton("Listar");
+		btnListar.setBackground(new Color(0, 0, 0));
+		btnListar.setForeground(new Color(255, 255, 255));
 		btnListar.setBounds(36, 274, 187, 49);
 		contentPane.add(btnListar);
 		
 		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.setBackground(new Color(0, 0, 0));
+		btnExcluir.setForeground(new Color(255, 255, 255));
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 int selectedRow = table.getSelectedRow();

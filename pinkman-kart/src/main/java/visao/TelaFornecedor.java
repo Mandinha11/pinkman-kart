@@ -1,37 +1,29 @@
 package visao;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
-import ExemploJTable.Pessoa;
-import controle.ClienteDAO;
 import controle.FornecedorDAO;
-import modelo.Cliente;
 import modelo.Fornecedor;
-
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import java.awt.GridLayout;
-
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JTable;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.awt.event.ActionEvent;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.ImageIcon;
 
 public class TelaFornecedor extends JFrame {
 
@@ -68,7 +60,6 @@ public class TelaFornecedor extends JFrame {
 
 	/* CONSTRUTOR */
 	public TelaFornecedor() {
-		dao = FornecedorDAO.getinstancia();
 		setTitle("Fornecedor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1940, 1162);
@@ -80,6 +71,8 @@ public class TelaFornecedor extends JFrame {
 		setContentPane(contentPane);
 
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setBackground(new Color(0, 0, 0));
+		btnVoltar.setForeground(new Color(255, 255, 255));
 		btnVoltar.setBounds(12, 12, 127, 28);
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -95,36 +88,49 @@ public class TelaFornecedor extends JFrame {
 		contentPane.add(btnVoltar);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setForeground(new Color(255, 255, 255));
 		btnCadastrar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		btnCadastrar.setBounds(1687, 293, 210, 42);
-		btnCadastrar.setBackground(new Color(255, 255, 255));
+		btnCadastrar.setBackground(new Color(0, 0, 0));
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				Fornecedor fornecedor = new Fornecedor();
 
-				FornecedorDAO fornecedorDao = FornecedorDAO.getinstancia();
-
-				if (txtCEP.getText().trim().length() == 0) {
+				String text = txtCEP.getText();
+				if (text.trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "CEP não preenchido!!");
 					return;
 				} else {
-					fornecedor.setTelefone(Long.valueOf(txtCEP.getText()));
+					text = text.replace("-", "");
+					fornecedor.setCep(Long.valueOf(text));
 
 				}
-				if (txtTelefone.getText().trim().length() == 0) {
+				String tel = txtTelefone.getText();
+				if (tel.trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "Telefone não preenchido!!");
 					return;
 				} else {
-					fornecedor.setTelefone(Long.valueOf(txtTelefone.getText()));
+					tel = tel.replace("-", "");
+					tel = tel.replace(" ", "");
+					tel = tel.replace("(", "");
+					tel = tel.replace(")", "");
+					tel = tel.trim();
+
+					fornecedor.setTelefone(Long.valueOf(tel));
 
 				}
 
-				if (txtCNPJ.getText().trim().length() == 0) {
+				String cnpj = txtCNPJ.getText();
+				if (cnpj.trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "CNPJ não preenchido!!");
 					return;
 				} else {
-					fornecedor.setTelefone(Long.valueOf(txtCNPJ.getText()));
+					cnpj = cnpj.replace("/", "");
+					cnpj = cnpj.replace(".", "");
+					cnpj = cnpj.replace("-", "");
+
+					fornecedor.setCnpj(Long.valueOf(cnpj));
 
 				}
 
@@ -135,7 +141,8 @@ public class TelaFornecedor extends JFrame {
 					fornecedor.setNomeEmpresa(txtNomeEmpresa.getText());
 				}
 
-				if (dao.inserir(fornecedor) == true) {
+				FornecedorDAO fornecedorDao = FornecedorDAO.getinstancia();
+				if (fornecedorDao.inserir(fornecedor) == true) {
 					JOptionPane.showMessageDialog(btnCadastrar, "Boa");
 					atualizarTabela();
 				} else {
@@ -148,31 +155,50 @@ public class TelaFornecedor extends JFrame {
 		contentPane.add(btnCadastrar);
 
 		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.setForeground(new Color(255, 255, 255));
 		btnAtualizar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		btnAtualizar.setBounds(1687, 135, 210, 42);
-		btnAtualizar.setBackground(new Color(255, 255, 255));
+		btnAtualizar.setBackground(new Color(0, 0, 0));
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				atualizarTabela();
+				
+				// TODO atualizar dados dos campos
+				
+				
+				
 			}
 		});
 		contentPane.add(btnAtualizar);
 
 		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.setForeground(new Color(255, 255, 255));
 		btnExcluir.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 int selectedRow = table.getSelectedRow();
-	                if (selectedRow != -1) {
-	                    // Remove a linha selecionada
-	                    DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-	                    tableModel.removeRow(selectedRow);
-	                    JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
-	                }
+				int selectedRow = table.getSelectedRow();
+
+				long cnpj = (long) table.getValueAt(selectedRow, 1);
+
+				FornecedorDAO dao = FornecedorDAO.getinstancia();
+
+				Fornecedor f = new Fornecedor();
+				f.setCnpj(cnpj);
+				boolean retorno = dao.Deletar(f);
+
+				if (retorno == true) {
+					// Remove a linha selecionada
+					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					tableModel.removeRow(selectedRow);
+					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Erro ao excluir!");
+				}
+
 			}
 		});
 		btnExcluir.setBounds(1689, 213, 208, 42);
-		btnExcluir.setBackground(new Color(255, 255, 255));
+		btnExcluir.setBackground(new Color(0, 0, 0));
 		contentPane.add(btnExcluir);
 
 		JPanel panel = new JPanel();
@@ -182,7 +208,7 @@ public class TelaFornecedor extends JFrame {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(211, 211, 211));
+		panel_1.setBackground(new Color(47, 79, 79));
 		panel_1.setBounds(513, 12, 513, 46);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
@@ -193,14 +219,15 @@ public class TelaFornecedor extends JFrame {
 		txtNomeEmpresa.setColumns(10);
 
 		JLabel lblNomeEmpresa = new JLabel("Nome da empresa:");
+		lblNomeEmpresa.setBackground(new Color(255, 255, 255));
 		lblNomeEmpresa.setBounds(5, 11, 141, 28);
 		panel_1.add(lblNomeEmpresa);
-		lblNomeEmpresa.setForeground(new Color(0, 0, 0));
+		lblNomeEmpresa.setForeground(new Color(255, 255, 255));
 		lblNomeEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 17));
 
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
-		panel_1_1.setBackground(new Color(211, 211, 211));
+		panel_1_1.setBackground(new Color(47, 79, 79));
 		panel_1_1.setBounds(513, 78, 513, 46);
 		contentPane.add(panel_1_1);
 
@@ -219,12 +246,12 @@ public class TelaFornecedor extends JFrame {
 		JLabel lblCnpj = new JLabel("CNPJ:");
 		lblCnpj.setBounds(10, 7, 43, 31);
 		panel_1_1.add(lblCnpj);
-		lblCnpj.setForeground(new Color(0, 0, 0));
+		lblCnpj.setForeground(new Color(255, 255, 255));
 		lblCnpj.setFont(new Font("Tahoma", Font.PLAIN, 17));
 
 		JPanel panel_1_1_1 = new JPanel();
 		panel_1_1_1.setLayout(null);
-		panel_1_1_1.setBackground(new Color(211, 211, 211));
+		panel_1_1_1.setBackground(new Color(47, 79, 79));
 		panel_1_1_1.setBounds(1092, 12, 513, 46);
 		contentPane.add(panel_1_1_1);
 
@@ -243,12 +270,12 @@ public class TelaFornecedor extends JFrame {
 		JLabel lblCpf = new JLabel("CEP:");
 		lblCpf.setBounds(10, 11, 71, 28);
 		panel_1_1_1.add(lblCpf);
-		lblCpf.setForeground(new Color(0, 0, 0));
+		lblCpf.setForeground(new Color(255, 255, 255));
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 17));
 
 		JPanel panel_1_1_1_1 = new JPanel();
 		panel_1_1_1_1.setLayout(null);
-		panel_1_1_1_1.setBackground(new Color(211, 211, 211));
+		panel_1_1_1_1.setBackground(new Color(47, 79, 79));
 		panel_1_1_1_1.setBounds(1090, 78, 513, 46);
 		contentPane.add(panel_1_1_1_1);
 
@@ -267,7 +294,7 @@ public class TelaFornecedor extends JFrame {
 		JLabel lblTelefone = new JLabel("Telefone:");
 		lblTelefone.setBounds(10, 6, 70, 31);
 		panel_1_1_1_1.add(lblTelefone);
-		lblTelefone.setForeground(new Color(0, 0, 0));
+		lblTelefone.setForeground(new Color(255, 255, 255));
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 17));
 
 		table = new JTable();
@@ -279,6 +306,8 @@ public class TelaFornecedor extends JFrame {
 				new String[] { "Nome da Empresa", "CNPJ", "CPF", "Telefone" });
 		table.setModel(modelo);
 
+		atualizarTabela();
+
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JLabel lblNewLabel = new JLabel("");
@@ -286,27 +315,28 @@ public class TelaFornecedor extends JFrame {
 		lblNewLabel.setBounds(0, 0, 1924, 1061);
 		contentPane.add(lblNewLabel);
 
-		atualizarTabela();
+	}
+
+	protected void limparCampos() {
+		txtNomeEmpresa.setText("");
+		txtCNPJ.setText("");
+		txtCEP.setText("");
+		txtTelefone.setText("");
+
 	}
 
 	public void atualizarTabela() {
 
 		/*
-		 String nome = txtNome.getText();
-				String cpf = txtCPF.getText();
-				Pessoa p = new Pessoa();
-				p.setNome(nome);
-				p.setCpf(cpf);
-				listaPessoas.add(p);
-				atualizarJTable();
-				limparCampos();
+		 * String nome = txtNome.getText(); String cpf = txtCPF.getText(); Pessoa p =
+		 * new Pessoa(); p.setNome(nome); p.setCpf(cpf); listaPessoas.add(p);
+		 * atualizarJTable(); limparCampos();
 		 */
 		dao = FornecedorDAO.getinstancia();
-		ArrayList<Fornecedor> fornecedores = dao.listar();
+		ArrayList<Fornecedor> fornecedores = dao.Listar();
 
 		modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "Nome da Empresa", "CNPJ", "CPF", "Telefone" });
-		table.setModel(modelo);
 
 		for (Fornecedor fornecedor : fornecedores) {
 			Object[] linha = { fornecedor.getNomeEmpresa(), fornecedor.getCnpj(), fornecedor.getCep(),

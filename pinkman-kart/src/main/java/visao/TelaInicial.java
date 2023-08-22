@@ -86,9 +86,9 @@ public class TelaInicial extends JFrame {
 		textLogin.setColumns(10);
 
 		JButton btnEntrar = new JButton("Logar");
-		btnEntrar.setForeground(new Color(0, 0, 0));
+		btnEntrar.setForeground(new Color(255, 255, 255));
 		btnEntrar.setFont(new Font("Segoe UI Semibold", Font.BOLD, 16));
-		btnEntrar.setBackground(UIManager.getColor("Button.background"));
+		btnEntrar.setBackground(new Color(47, 79, 79));
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -97,7 +97,7 @@ public class TelaInicial extends JFrame {
 			
 				
 				if (checkLogin(textLogin.getText(), new String(textSenha.getText()))) {
-					JOptionPane.showMessageDialog(null, "Voce entrou no sistema");
+					
 					
 					dispose();
 					TelaSelecao ts = new TelaSelecao();
@@ -109,8 +109,6 @@ public class TelaInicial extends JFrame {
 				}
 				
 				
-		
-			//	ArrayList<String>  = new ArrayList<>();
 				
 			}
 			

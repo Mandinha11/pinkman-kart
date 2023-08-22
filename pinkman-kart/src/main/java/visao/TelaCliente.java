@@ -83,10 +83,12 @@ public class TelaCliente extends JFrame {
 		setContentPane(contentPane);
 		 
 	        
-	    JButton btnNewButton = new JButton("Cadastrar");
-		btnNewButton.setBounds(51, 218, 242, 57);
-		btnNewButton.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		btnNewButton.addActionListener(new ActionListener() {
+	    JButton BntCadastra = new JButton("Cadastrar");
+	    BntCadastra.setForeground(new Color(255, 255, 255));
+	    BntCadastra.setBackground(new Color(0, 0, 0));
+		BntCadastra.setBounds(51, 218, 242, 57);
+		BntCadastra.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		BntCadastra.addActionListener(new ActionListener() {
 		
 			public void actionPerformed(ActionEvent e) {
 			    String nomeCompleto = textNomeCompleto.getText();
@@ -117,9 +119,11 @@ public class TelaCliente extends JFrame {
 		})	;
 		
 		contentPane.setLayout(null);
-		contentPane.add(btnNewButton);
+		contentPane.add(BntCadastra);
 
 		JButton btnNewButton_2 = new JButton("Voltar");
+		btnNewButton_2.setBackground(new Color(0, 0, 0));
+		btnNewButton_2.setForeground(new Color(255, 255, 255));
 		btnNewButton_2.setBounds(4, 9, 89, 23);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -134,7 +138,7 @@ public class TelaCliente extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBounds(380, 35, 506, 45);
-		panel.setBackground(new Color(211, 211, 211));
+		panel.setBackground(new Color(47, 79, 79));
 		panel.setToolTipText("");
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -144,7 +148,7 @@ public class TelaCliente extends JFrame {
 		lblNewLabel.setBounds(10, 11, 176, 25);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		lblNewLabel.setForeground(new Color(0, 0, 0));
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 
 		textNomeCompleto = new JTextField();
 		textNomeCompleto.setBounds(177, 11, 319, 23);
@@ -156,10 +160,10 @@ public class TelaCliente extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		panel_1.setToolTipText("");
-		panel_1.setBackground(new Color(211, 211, 211));
+		panel_1.setBackground(new Color(47, 79, 79));
 
 		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setForeground(Color.BLACK);
+		lblCpf.setForeground(new Color(255, 255, 255));
 		lblCpf.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblCpf.setBackground(Color.BLACK);
 		lblCpf.setBounds(29, 6, 110, 25);
@@ -182,7 +186,7 @@ public class TelaCliente extends JFrame {
 		panel_2.setBounds(380, 107, 506, 45);
 		panel_2.setLayout(null);
 		panel_2.setToolTipText("");
-		panel_2.setBackground(new Color(211, 211, 211));
+		panel_2.setBackground(new Color(47, 79, 79));
 		contentPane.add(panel_2);
 		JLabel lblNewLabel_2 = new JLabel("Data de Nascimento:");
 		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
@@ -198,7 +202,7 @@ public class TelaCliente extends JFrame {
 
 		JLabel lblNewLabel_5 = new JLabel("Mês");
 		lblNewLabel_5.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		lblNewLabel_5.setForeground(new Color(0, 128, 128));
+		lblNewLabel_5.setForeground(new Color(255, 255, 255));
 		lblNewLabel_5.setBounds(270, 8, 47, 27);
 		panel_2.add(lblNewLabel_5);
 
@@ -211,7 +215,7 @@ public class TelaCliente extends JFrame {
 
 		JLabel lblNewLabel_6 = new JLabel("Ano");
 		lblNewLabel_6.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		lblNewLabel_6.setForeground(new Color(0, 128, 128));
+		lblNewLabel_6.setForeground(new Color(255, 255, 255));
 		lblNewLabel_6.setBounds(378, 10, 47, 22);
 		panel_2.add(lblNewLabel_6);
 
@@ -225,7 +229,7 @@ public class TelaCliente extends JFrame {
 		lblNewLabel_2.setBounds(10, 11, 191, 25);
 		panel_2.add(lblNewLabel_2);
 		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		lblNewLabel_2.setForeground(new Color(0, 0, 0));
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 
 		
 		
@@ -233,14 +237,14 @@ public class TelaCliente extends JFrame {
 		panel_1_1.setBounds(1048, 107, 506, 45);
 		panel_1_1.setLayout(null);
 		panel_1_1.setToolTipText("");
-		panel_1_1.setBackground(new Color(211, 211, 211));
+		panel_1_1.setBackground(new Color(47, 79, 79));
 		contentPane.add(panel_1_1);
 
 		JLabel lblNewLabel_3 = new JLabel("Numero de Telefone:");
 		lblNewLabel_3.setBounds(10, 11, 156, 23);
 		panel_1_1.add(lblNewLabel_3);
 		lblNewLabel_3.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		lblNewLabel_3.setForeground(new Color(0, 0, 0));
+		lblNewLabel_3.setForeground(new Color(255, 255, 255));
 
 		MaskFormatter mascaraTel = null;
 		try {
@@ -274,6 +278,8 @@ public class TelaCliente extends JFrame {
 		atualizarTabela();
 
 		JButton btnListar = new JButton("Alterar");
+		btnListar.setBackground(new Color(0, 0, 0));
+		btnListar.setForeground(new Color(255, 255, 255));
         btnListar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
         int selectedRow = table.getSelectedRow();
@@ -300,6 +306,8 @@ public class TelaCliente extends JFrame {
 		
 		//Amanda
 		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.setForeground(new Color(255, 255, 255));
+		btnExcluir.setBackground(new Color(0, 0, 0));
 		btnExcluir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -67,6 +67,8 @@ public class TelaFuncionari extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setForeground(new Color(255, 255, 255));
+		btnVoltar.setBackground(new Color(0, 0, 0));
 		btnVoltar.setBounds(23, 11, 112, 28);
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -82,7 +84,7 @@ public class TelaFuncionari extends JFrame {
 		contentPane.add(btnVoltar);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(211, 211, 211));
+		panel.setBackground(new Color(47, 79, 79));
 		panel.setBounds(464, 22, 516, 48);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -101,22 +103,25 @@ public class TelaFuncionari extends JFrame {
 		textCPF.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("CPF:");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNewLabel.setBounds(105, 7, 34, 28);
 		panel.add(lblNewLabel);
 		
 		JPanel PnDataDeNascimento = new JPanel();
-		PnDataDeNascimento.setBackground(new Color(211, 211, 211));
+		PnDataDeNascimento.setBackground(new Color(47, 79, 79));
 		PnDataDeNascimento.setLayout(null);
 		PnDataDeNascimento.setBounds(464, 127, 516, 48);
 		contentPane.add(PnDataDeNascimento);
 		
 		JLabel lblNewLabel_2 = new JLabel("Data De Nascimento:");
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNewLabel_2.setBounds(23, 11, 160, 26);
 		PnDataDeNascimento.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Dia");
+		lblNewLabel_3.setForeground(new Color(255, 255, 255));
 		lblNewLabel_3.setBounds(193, 14, 31, 26);
 		PnDataDeNascimento.add(lblNewLabel_3);
 		
@@ -156,6 +161,7 @@ public class TelaFuncionari extends JFrame {
 		boxDia.addItem("31");
 		
 		JLabel lblNewLabel_4 = new JLabel("Mês");
+		lblNewLabel_4.setForeground(new Color(255, 255, 255));
 		lblNewLabel_4.setBounds(291, 14, 27, 26);
 		PnDataDeNascimento.add(lblNewLabel_4);
 		
@@ -177,6 +183,7 @@ public class TelaFuncionari extends JFrame {
 		boxMes.addItem("12");
 		
 		JLabel lblNewLabel_5 = new JLabel("Ano");
+		lblNewLabel_5.setForeground(new Color(255, 255, 255));
 		lblNewLabel_5.setBounds(385, 13, 27, 28);
 		PnDataDeNascimento.add(lblNewLabel_5);
 		
@@ -188,12 +195,13 @@ public class TelaFuncionari extends JFrame {
 		}
 		
 		JPanel PnCargo = new JPanel();
-		PnCargo.setBackground(new Color(211, 211, 211));
+		PnCargo.setBackground(new Color(47, 79, 79));
 		PnCargo.setLayout(null);
 		PnCargo.setBounds(1095, 127, 518, 48);
 		contentPane.add(PnCargo);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Cargo:");
+		lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNewLabel_1_1.setBounds(90, 10, 51, 28);
 		PnCargo.add(lblNewLabel_1_1);
@@ -216,16 +224,22 @@ public class TelaFuncionari extends JFrame {
 	
 		
 		JButton btnCadastratar = new JButton("Cadastrar");
+		btnCadastratar.setForeground(new Color(255, 255, 255));
+		btnCadastratar.setBackground(new Color(47, 79, 79));
 		btnCadastratar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCadastratar.setBounds(66, 260, 276, 53);
 		contentPane.add(btnCadastratar);
 		
 		JButton btnListar = new JButton("Listar");
+		btnListar.setForeground(new Color(255, 255, 255));
+		btnListar.setBackground(new Color(47, 79, 79));
 		btnListar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnListar.setBounds(66, 355, 276, 53);
 		contentPane.add(btnListar);
 		
 		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.setForeground(new Color(255, 255, 255));
+		btnExcluir.setBackground(new Color(47, 79, 79));
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 int selectedRow = table.getSelectedRow();
@@ -242,7 +256,7 @@ public class TelaFuncionari extends JFrame {
 		contentPane.add(btnExcluir);
 		
 		JPanel PnNomeCompleto = new JPanel();
-		PnNomeCompleto.setBackground(new Color(211, 211, 211));
+		PnNomeCompleto.setBackground(new Color(47, 79, 79));
 		PnNomeCompleto.setLayout(null);
 		PnNomeCompleto.setBounds(1095, 22, 518, 48);
 		contentPane.add(PnNomeCompleto);
@@ -253,6 +267,7 @@ public class TelaFuncionari extends JFrame {
 		PnNomeCompleto.add(textField_1);
 		
 		JLabel lblNomeCompleto = new JLabel("Nome Completo:");
+		lblNomeCompleto.setForeground(new Color(255, 255, 255));
 		lblNomeCompleto.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNomeCompleto.setBounds(10, 7, 129, 28);
 		PnNomeCompleto.add(lblNomeCompleto);
