@@ -217,7 +217,7 @@ public class TelaSelecao extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				dispose();
-				TelaFuncionari tf = new TelaFuncionari();
+				TelaFuncionario tf = new TelaFuncionario();
 				tf.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				tf.setVisible(true);
 			}
