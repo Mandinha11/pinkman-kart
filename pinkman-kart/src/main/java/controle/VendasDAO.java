@@ -50,8 +50,9 @@ public class VendasDAO {
 		catch (SQLException e) {
 			e.printStackTrace();
 			
-		}
+		}finally {
 			c.fecharConexao();
+		}
 			
 			return vendas;
 		
@@ -90,14 +91,14 @@ public class VendasDAO {
 				
 				ps.executeUpdate();
 				
-				con.fecharConexao();
-			
 		
 			return true;
 			
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
+			}finally {
+				con.fecharConexao();
 			}
 		}
 			return false;
@@ -120,7 +121,6 @@ public class VendasDAO {
 
 			ps.executeUpdate();
 
-			con.fecharConexao();
 			
 			return true;
 			
@@ -128,6 +128,8 @@ public class VendasDAO {
 		catch (SQLException e) {
 			e.printStackTrace();
 	
+		}finally {
+			con.fecharConexao();
 		}
 
 		
@@ -151,7 +153,6 @@ Conexao con = Conexao.getInstancia();
 
 			ps.executeUpdate();
 
-			con.fecharConexao();
 			
 			return true;
 			
@@ -159,6 +160,8 @@ Conexao con = Conexao.getInstancia();
 		catch (SQLException e) {
 			e.printStackTrace();
 	
+		}finally {
+			con.fecharConexao();
 		}
 		
 		return false;

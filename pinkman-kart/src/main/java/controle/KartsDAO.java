@@ -50,8 +50,9 @@ public class KartsDAO {
 				}catch (SQLException e) {
 				e.printStackTrace();
 				
-			}
+			}finally {
 				c.fecharConexao();
+			}
 				
 				return Karts;
 	
@@ -96,14 +97,13 @@ public class KartsDAO {
 				
 				ps.executeUpdate();
 				
-				con.fecharConexao();
-				
-			
 			
 			return true;
 		}
 			catch (SQLException e) {
 				e.printStackTrace();
+			}finally {
+				con.fecharConexao();
 			}
 		}
 		return false;
@@ -124,14 +124,14 @@ public class KartsDAO {
 
 			ps.executeUpdate();
 
-			con.fecharConexao();
-			
 			return true;
 			
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 	
+		}finally {
+			con.fecharConexao();
 		}
 		
 		return false;
@@ -154,14 +154,14 @@ public class KartsDAO {
 
 			ps.executeUpdate();
 
-			con.fecharConexao();
-			
 			return true;
 			
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 	
+		}finally {
+			con.fecharConexao();
 		}
 
 		

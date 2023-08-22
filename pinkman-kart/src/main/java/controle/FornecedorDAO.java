@@ -48,9 +48,10 @@ public class FornecedorDAO {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}finally {
+				c.fecharConexao();
 			}
 
-			c.fecharConexao();
 
 			return fornecedores;
 
@@ -90,6 +91,8 @@ public class FornecedorDAO {
 			return true;
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}finally {
+				con.fecharConexao();
 			}
 			
 		}
@@ -112,7 +115,6 @@ public class FornecedorDAO {
 
 			ps.executeUpdate();
 
-			con.fecharConexao();
 			
 			return true;
 			
@@ -120,6 +122,8 @@ public class FornecedorDAO {
 		catch (SQLException e) {
 			e.printStackTrace();
 	
+		}finally {
+			con.fecharConexao();
 		}
 		
 		
@@ -143,7 +147,6 @@ Conexao con = Conexao.getInstancia();
 
 			ps.executeUpdate();
 
-			con.fecharConexao();
 			
 			return true;
 			
@@ -151,6 +154,8 @@ Conexao con = Conexao.getInstancia();
 		catch (SQLException e) {
 			e.printStackTrace();
 	
+		}finally {
+			con.fecharConexao();
 		}
 		return false;
 	}

@@ -49,9 +49,10 @@ public class ClienteDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			c.fecharConexao();
 		}
 
-		c.fecharConexao();
 
 		return clientes;
 
@@ -85,12 +86,13 @@ public class ClienteDAO {
 
 				ps.executeUpdate();
 
-				con.fecharConexao();
 
 				return true;
 
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}finally {
+				con.fecharConexao();
 			}
 
 		}
@@ -115,13 +117,14 @@ public class ClienteDAO {
 
 			ps.executeUpdate();
 
-			con.fecharConexao();
 
 			return true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 
+		}finally {
+			con.fecharConexao();
 		}
 		return false;
 	}
@@ -149,6 +152,8 @@ public class ClienteDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 
+		}finally {
+			con.fecharConexao();
 		}
 		return false;
 	}

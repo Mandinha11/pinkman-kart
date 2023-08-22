@@ -48,9 +48,9 @@ public class FuncionarioDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			c.fecharConexao();
 		}
-
-		c.fecharConexao();
 
 		return funcionarios;
 
@@ -94,6 +94,8 @@ public class FuncionarioDAO {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}finally{
+				con.fecharConexao();
 			}
 
 		}
@@ -126,6 +128,8 @@ public class FuncionarioDAO {
 		catch (SQLException e) {
 			e.printStackTrace();
 	
+		}finally {
+			con.fecharConexao();
 		}
 
 		return false;
@@ -156,6 +160,8 @@ public class FuncionarioDAO {
 		catch (SQLException e) {
 			e.printStackTrace();
 	
+		}finally {
+			con.fecharConexao();
 		}
 
 		return false;
