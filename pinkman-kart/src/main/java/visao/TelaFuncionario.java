@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import net.miginfocom.swing.MigLayout;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -64,6 +65,7 @@ public class TelaFuncionario extends JFrame {
 	 * CONSTRUTOR
 	 */
 	public TelaFuncionario() {
+		
 		setTitle("Funcionario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 2093, 1226);
@@ -231,7 +233,7 @@ public class TelaFuncionario extends JFrame {
 		btnCadastratar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Funcionario Funcionari = new Funcionario();
+				Funcionario Funcionario = new Funcionario();
 
 				String text = textCPF.getText();
 				if (text.trim().length() == 0) {
@@ -242,31 +244,30 @@ public class TelaFuncionario extends JFrame {
 					text = text.replace(".", "");
 					text = text.replace(".", "");
 
-					Funcionari.setCpf(Long.valueOf(text));
+					Funcionario.setCpf(Long.valueOf(text));
 				}
 				String txt = textNomeCompleto.getText();
 				if (txt.trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "Nome não preenchido!");
 					return;
 				} else {
-					Funcionari.setNomeCompleto(String.valueOf(txt));
+					Funcionario.setNomeCompleto(String.valueOf(txt));
 				}
 				
 				//String dia = boxDia.getSelectedItem();
 				//String mes = boxMes.getSelectedItem();
 				//String ano = boxAno.getSelectedItem();
 				
-				Funcionari.setDataNac(null);
+				Funcionario.setDataNac(null);
 
 				FuncionarioDAO dao = FuncionarioDAO.getinstancia();
 
-				if (dao.inserir(Funcionari) == true) {
+				if (dao.inserir(Funcionario) == true) {
 					JOptionPane.showMessageDialog(null, "Boa");
 					atualizarTabela();
 				} else {
 					JOptionPane.showMessageDialog(null, "Deu não");
 				}
-
 			}
 		});
 		btnCadastratar.setBounds(66, 223, 276, 53);
@@ -341,5 +342,18 @@ public class TelaFuncionario extends JFrame {
 	protected void atualizarTabela() {
 		// TODO Auto-generated method stub
 		
+	}
+	private void listarFuncionarios() {
+	    FuncionarioDAO funcionarioDAO = FuncionarioDAO.getinstancia();
+	    ArrayList<Funcionario> funcionarios = funcionarioDAO.listar();
+	    
+	    
+	    DefaultTableModel tableModel = (DefaultTableModel) tableFunc.getModel();
+	    tableModel.setRowCount(0); 
+	    
+	    for (Funcionario funcionario : funcionarios) {
+	        Object[] rowData = { funcionario.getMatricula(), funcionario.getNomeCompleto(), funcionario.getCpf(), funcionario.getDataNac(), funcionario.getCargo() };
+	        tableModel.addRow(rowData);
+	    }
 	}
 }

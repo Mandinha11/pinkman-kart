@@ -7,11 +7,11 @@ public class Cliente {
 
     private String nomeCompleto;
     private Long cpf;
-    private LocalDate dataNac;
+    private Long dataNac;
     private Long telefone;
     private Long IdCliente;
-
-    public Cliente(String nomeCompleto, Long cpf, LocalDate dataNac, Long telefone) {
+    public Cliente() {}
+    public Cliente(String nomeCompleto, Long cpf, Long dataNac, Long telefone) {
         super();
         this.nomeCompleto = nomeCompleto;
         this.cpf = cpf;
@@ -27,8 +27,7 @@ public class Cliente {
 		IdCliente = idCliente;
 	}
 
-	public Cliente() {
-	}
+	
 
 	public String getNomeCompleto() {
 		return nomeCompleto;
@@ -38,11 +37,11 @@ public class Cliente {
 		this.nomeCompleto = nomeCompleto;
 	}
 
-	public LocalDate getDataNac() {
+	public Long getDataNac() {
 		return dataNac;
 	}
 
-	public void setDataNac(LocalDate dataNac) {
+	public void setDataNac(Long dataNac) {
 		this.dataNac = dataNac;
 	}
 

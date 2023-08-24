@@ -31,7 +31,9 @@ import javax.swing.text.MaskFormatter;
 import com.mysql.cj.protocol.a.LocalDateTimeValueEncoder;
 
 import controle.ClienteDAO;
+import controle.FornecedorDAO;
 import modelo.Cliente;
+import modelo.Fornecedor;
 
 public class TelaCliente extends JFrame {
 
@@ -83,43 +85,85 @@ public class TelaCliente extends JFrame {
 		setContentPane(contentPane);
 		 
 	        
-	    JButton BntCadastra = new JButton("Cadastrar");
-	    BntCadastra.setForeground(new Color(255, 255, 255));
-	    BntCadastra.setBackground(new Color(0, 0, 0));
-		BntCadastra.setBounds(51, 218, 242, 57);
-		BntCadastra.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		BntCadastra.addActionListener(new ActionListener() {
+	    JButton btnCadastrar = new JButton("Cadastrar");
+	    btnCadastrar.setForeground(new Color(255, 255, 255));
+	    btnCadastrar.setBackground(new Color(0, 0, 0));
+		btnCadastrar.setBounds(51, 218, 242, 57);
+		btnCadastrar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		btnCadastrar.addActionListener(new ActionListener() {
 		
 			public void actionPerformed(ActionEvent e) {
-			    String nomeCompleto = textNomeCompleto.getText();
-			    Long cpf = Long.valueOf(textCPF.getText());
-			    			    
-			    // Converter a data de nascimento de String para LocalDate
-			    int dia = Integer.valueOf((String) boxDia.getSelectedItem());
+			   
+				Cliente cliente = new Cliente();
+				
+				//telefone
+				//nome Completo
+				// cpf
+				//data nasc
+				int dia = Integer.valueOf((String) boxDia.getSelectedItem());
 			    int mes = Integer.valueOf((String) boxMes.getSelectedItem());
 			    int ano = (Integer) boxAno.getSelectedItem();
-			    Long telefone = Long.valueOf(textTelefone.getText());
+			    String dn = ""+boxDia+boxMes+boxAno;
 			    
-			    LocalDate dataNac = LocalDate.of(dia, mes,ano);
 			    
-			    Cliente cliente = new Cliente(nomeCompleto, cpf, dataNac, telefone);
-			    clienteDAO = ClienteDAO.getinstancia();
-
-			    
-			    boolean info = clienteDAO.inserir(cliente);
-
-			    if (info) {
-			        atualizarTabela();
-			        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-			        limparCampos();
-			    } else {
-			        JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
+			    if(dn.trim().length() == 0) {
+			    	JOptionPane.showMessageDialog(null, "Data de nascimento não preenchido!!");
+					return;
+			    }else {
+			    	
+			    	cliente.setDataNac(Long.valueOf(dn));
 			    }
+				
+				String cpf = textCPF.getText();
+				if (cpf.trim().length() == 0) {
+					JOptionPane.showMessageDialog(null, "CPF não preenchido!!");
+					return;
+				} else {
+					cpf = cpf.replace(".", "");
+					cpf = cpf.replace(".", "");
+					cpf = cpf.replace("-", "");
+
+					cliente.setCpf(Long.valueOf(cpf));
+
+				}
+				
+				String tel = textTelefone.getText();
+				if (tel.trim().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Telefone não preenchido!!");
+					return;
+				} else {
+					tel = tel.replace("-", "");
+					tel = tel.replace(" ", "");
+					tel = tel.replace("(", "");
+					tel = tel.replace(")", "");
+					tel = tel.trim();
+
+					cliente.setTelefone(Long.valueOf(tel));
+
+				}
+
+				
+				if (textNomeCompleto.getText().trim().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Nome da Pessoa não preenchido!!");
+					return;
+				} else {
+					cliente.setNomeCompleto(textNomeCompleto.getText());
+				}
+
+				ClienteDAO clienteDao = ClienteDAO.getinstancia();
+				if (clienteDao.inserir(cliente) == true) {
+					JOptionPane.showMessageDialog(btnCadastrar, "Boa");
+					atualizarTabela();
+				} else {
+					JOptionPane.showMessageDialog(btnCadastrar, "Deu não");
+				}
+
 			}
-		})	;
+
+		});
 		
 		contentPane.setLayout(null);
-		contentPane.add(BntCadastra);
+		contentPane.add(btnCadastrar);
 
 		JButton btnNewButton_2 = new JButton("Voltar");
 		btnNewButton_2.setBackground(new Color(0, 0, 0));
@@ -269,7 +313,7 @@ public class TelaCliente extends JFrame {
 		table = new JTable();
 		table.setBackground(new Color(255, 255, 255));
 		panel_3.setLayout(new BorderLayout());
-		panel_3.add(new JScrollPane(table), BorderLayout.CENTER);
+		panel_3.add(new JScrollPane(table), BorderLayout.NORTH);
 
 		modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
@@ -363,7 +407,7 @@ public class TelaCliente extends JFrame {
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	        for (Cliente cliente : clientes) {
-	            Object[] linha = { cliente.getNomeCompleto(), cliente.getCpf(), cliente.getDataNac().format(formatter),
+	            Object[] linha = { cliente.getNomeCompleto(), cliente.getCpf(), cliente.getDataNac(),
 	                    cliente.getTelefone() };
 	            modelo.addRow(linha);
 	        }
