@@ -1,36 +1,33 @@
 package visao;
 
+import java.util.Date;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
-import controle.FornecedorDAO;
 import controle.FuncionarioDAO;
-import modelo.Fornecedor;
 import modelo.Funcionario;
-
-import javax.swing.JButton;
-import net.miginfocom.swing.MigLayout;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
-
-import java.awt.Color;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
 
 public class TelaFuncionario extends JFrame {
 
@@ -43,6 +40,7 @@ public class TelaFuncionario extends JFrame {
 	private JComboBox<String> boxCargo;
 	private JComboBox<String> boxMes;
 	private JComboBox<String> boxDia;
+	private JComboBox<String> boxAno;
 
 	/**
 	 * Launch the application.
@@ -195,11 +193,11 @@ public class TelaFuncionario extends JFrame {
 		lblNewLabel_5.setBounds(385, 13, 27, 28);
 		PnDataDeNascimento.add(lblNewLabel_5);
 
-		JComboBox<Integer> BoxAno = new JComboBox<>();
-		BoxAno.setBounds(422, 14, 68, 26);
-		PnDataDeNascimento.add(BoxAno);
+		JComboBox<Integer> boxAno = new JComboBox<>();
+		boxAno.setBounds(422, 14, 68, 26);
+		PnDataDeNascimento.add(boxAno);
 		for (int i = 1923; i <= 2023; i++) {
-			BoxAno.addItem(i);
+			boxAno.addItem(i);
 		}
 
 		JPanel PnCargo = new JPanel();
@@ -240,10 +238,9 @@ public class TelaFuncionario extends JFrame {
 					JOptionPane.showMessageDialog(null, "CPF não foi preenchido!");
 					return;
 				} else {
+					text = text.replace(".", "");
+					text = text.replace(".", "");
 					text = text.replace("-", "");
-					text = text.replace(".", "");
-					text = text.replace(".", "");
-
 					Funcionario.setCpf(Long.valueOf(text));
 				}
 				String txt = textNomeCompleto.getText();
@@ -253,12 +250,30 @@ public class TelaFuncionario extends JFrame {
 				} else {
 					Funcionario.setNomeCompleto(String.valueOf(txt));
 				}
-				
-				//String dia = boxDia.getSelectedItem();
-				//String mes = boxMes.getSelectedItem();
-				//String ano = boxAno.getSelectedItem();
-				
-				Funcionario.setDataNac(null);
+				String dia = (String) boxDia.getSelectedItem();
+				String mes = (String) boxMes.getSelectedItem();
+				String ano = (String) boxAno.getSelectedItem();
+
+				if (dia == null || mes == null || ano == null) {
+				    JOptionPane.showMessageDialog(null, "Data não preenchida corretamente!");
+				    return;
+				}
+
+				String dataString = dia + mes + ano; 
+
+				try {
+				    
+				    SimpleDateFormat sdf = new SimpleDateFormat("MMyyyy");
+
+				    java.util.Date dataNascimento = sdf.parse(dataString);
+
+				    
+				    Funcionario.setDataNac(dataNascimento);
+				} catch (ParseException e1) {
+				    e1.printStackTrace();
+				    JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+				    return; 
+				}
 
 				FuncionarioDAO dao = FuncionarioDAO.getinstancia();
 
@@ -277,6 +292,11 @@ public class TelaFuncionario extends JFrame {
 		contentPane.add(btnCadastratar);
 
 		JButton btnListar = new JButton("Listar");
+		btnListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listarFuncionarios();
+			}
+		});
 		btnListar.setBounds(66, 314, 276, 53);
 		btnListar.setForeground(new Color(255, 255, 255));
 		btnListar.setBackground(new Color(47, 79, 79));
@@ -290,12 +310,25 @@ public class TelaFuncionario extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table.getSelectedRow();
-				if (selectedRow != -1) {
+
+				long matricula = (long) table.getValueAt(selectedRow, 1);
+
+				FuncionarioDAO dao = FuncionarioDAO.getinstancia();
+
+				Funcionario f = new Funcionario();
+				f.setMatricula(matricula);
+				boolean retorno = dao.deletar(f);
+
+				if (retorno == true) {
 					// Remove a linha selecionada
 					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 					tableModel.removeRow(selectedRow);
 					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Erro ao excluir!");
 				}
+
 			}
 		});
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -330,7 +363,17 @@ public class TelaFuncionario extends JFrame {
 		contentPane.add(panel_1);
 
 		table_1 = new JTable();
+		table_1.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column", "New column"
+			}
+		));
 		panel_1.add(table_1);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		panel_1.add(scrollPane_1);
 
 		JLabel lblNewLabel_6 = new JLabel("");
 		lblNewLabel_6.setIcon(new ImageIcon(TelaFuncionario.class.getResource("/imgs/FundoDeTela.jpg")));

@@ -1,6 +1,7 @@
 package controle;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +32,7 @@ public class FuncionarioDAO {
 
 				
 				String cargo = rs.getString("cargo");
-				long dataNac = rs.getLong("data_de_nascimento");
+				Date dataNac = rs.getDate("data_de_nascimento");
 				long cpf = rs.getLong("cpf");
 				String nomeCompleto = rs.getString("nome_completo");
 				String matricula = rs.getString("matricula");
@@ -79,10 +80,10 @@ public class FuncionarioDAO {
 
 				PreparedStatement ps = conn.prepareStatement(query);
 				
-				ps.setString(1, f.getMatricula());
+				ps.setLong(1, f.getMatricula());
 				ps.setLong(2, f.getCpf());
 				ps.setString(3, f.getNomeCompleto());
-				ps.setLong(4, f.getDataNac());
+				ps.setDate(4, (Date) f.getDataNac());
 				ps.setString(5, f.getCargo());
 				
 
@@ -147,7 +148,7 @@ public class FuncionarioDAO {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setString(1, f.getMatricula());
+			ps.setLong(1, f.getMatricula());
 			
 
 			ps.executeUpdate();
@@ -166,6 +167,10 @@ public class FuncionarioDAO {
 
 		return false;
 	}
+
+
+
+	
 
 
 }

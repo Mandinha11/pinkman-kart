@@ -1,18 +1,18 @@
 package modelo;
 
+import java.sql.Date;
+
 public class Funcionario {
 	
-	private String Matricula;
+	private Long Matricula;
 	private Long Cpf;
 	private String nomeCompleto;
-	private Long dataNac;
+	private java.util.Date dataNac;
 	private String cargo;
 	
     public Funcionario(){
-		
+		this.Matricula = 1l;
 	}
-    
-    
     
     public String getNomeCompleto() {
 		return nomeCompleto;
@@ -22,12 +22,12 @@ public class Funcionario {
 		this.nomeCompleto = nomeCompleto;
 	}
 	
-	public Long getDataNac() {
+	public java.util.Date getDataNac() {
 		return dataNac;
 	}
 
-	public void setDataNac(Long dataNac) {
-		this.dataNac = dataNac;
+	public void setDataNac(java.util.Date dataNascimento) {
+		this.dataNac = dataNascimento;
 	}
 	
 	public Long getCpf() {
@@ -46,9 +46,13 @@ public class Funcionario {
 			this.cargo = cargo;
 		}
 
-		public String getMatricula() {
+		public Long getMatricula() {
 			
 			return Matricula;
+		}
+
+		public void setMatricula(Long matricula) {
+			Matricula = matricula;
 		}
     
     
