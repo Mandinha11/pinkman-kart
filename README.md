@@ -1,4 +1,4 @@
-# pinkman-kart
+# Pinkman-Kart
 
 
 ![Captura de tela 2023-08-10 111126](https://github.com/Mandinha11/pinkman-kart/assets/111304063/f145ccee-d54a-41b0-825d-a039d7eea305)
@@ -38,3 +38,6 @@ INSERT INTO sistema_pinkman_kart (nomes) VALUES (
 * /assets/images/Diagrama de Caso de Uso.drawio.png
 == Diagrama de Classes:
 * /assets/images/Diagrama de Classes.jpg
+
+Link do Documento editavel 
+  https://docs.google.com/document/d/1kpgR25-CgklVrcE-6rWICn5qj_Gh7ZXoRv91psQtyhY/edit
