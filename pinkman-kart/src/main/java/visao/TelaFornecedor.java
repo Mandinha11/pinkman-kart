@@ -25,6 +25,7 @@ import javax.swing.text.MaskFormatter;
 import controle.FornecedorDAO;
 import modelo.Fornecedor;
 import javax.swing.JScrollPane;
+import java.awt.Component;
 
 public class TelaFornecedor extends JFrame {
 
@@ -304,15 +305,21 @@ public class TelaFornecedor extends JFrame {
 		panel.add(table);
 
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "Nome da Empresa", "CNPJ", "CPF", "Telefone" });
-		table.setModel(modelo);
+				new String[] { "Nome da Empresa", "CNPJ", "CEP", "Telefone" });
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+					 "Nome da empresa","CNPJ", "CEP","Telefone"
+			}
+		));
 
 		atualizarTabela();
 
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
-		panel.add(scrollPane);
+		JScrollPane scrollPane_1 = new JScrollPane(table);
+		panel.add(scrollPane_1);
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(TelaFornecedor.class.getResource("/imgs/FundoDeTela.jpg")));
