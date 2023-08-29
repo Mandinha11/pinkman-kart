@@ -46,9 +46,7 @@ public class TelaCliente extends JFrame {
 	private ClienteDAO clienteDAO;
 	private DefaultTableModel modelo;
 	private ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
-	private JComboBox<String> boxDia;
-	private JComboBox<String> boxMes;
-	private JComboBox<Integer> boxAno;
+	private JTextField txtData;
 	
 
 	/**
@@ -96,23 +94,17 @@ public class TelaCliente extends JFrame {
 			   
 				Cliente cliente = new Cliente();
 				
-				//telefone
-				//nome Completo
-				// cpf
-				//data nasc
-				int dia = Integer.valueOf((String) boxDia.getSelectedItem());
-			    int mes = Integer.valueOf((String) boxMes.getSelectedItem());
-			    int ano = (Integer) boxAno.getSelectedItem();
-			    String dn = ""+boxDia+boxMes+boxAno;
-			    
-			    
-			    if(dn.trim().length() == 0) {
-			    	JOptionPane.showMessageDialog(null, "Data de nascimento não preenchido!!");
+				String data = txtData.getText();
+				if (data.trim().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Data de Nascimento não preenchido!!");
 					return;
-			    }else {
-			    	
-			    	cliente.setDataNac(Long.valueOf(dn));
-			    }
+				} else {
+					data = data.replace("/", "");
+					data = data.trim();
+					cliente.setDataNac(Long.valueOf(data));
+
+				}
+			
 				
 				String cpf = textCPF.getText();
 				if (cpf.trim().length() == 0) {
@@ -161,6 +153,7 @@ public class TelaCliente extends JFrame {
 			}
 
 		});
+		contentPane.add(btnCadastrar);
 		
 		contentPane.setLayout(null);
 		contentPane.add(btnCadastrar);
@@ -193,11 +186,11 @@ public class TelaCliente extends JFrame {
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
-
-		textNomeCompleto = new JTextField();
-		textNomeCompleto.setBounds(177, 11, 319, 23);
-		panel.add(textNomeCompleto);
-		textNomeCompleto.setColumns(10);
+		
+				textNomeCompleto = new JTextField();
+				textNomeCompleto.setBounds(177, 11, 319, 23);
+				panel.add(textNomeCompleto);
+				textNomeCompleto.setColumns(10);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(1048, 35, 506, 45);
@@ -212,7 +205,7 @@ public class TelaCliente extends JFrame {
 		lblCpf.setBackground(Color.BLACK);
 		lblCpf.setBounds(29, 6, 110, 25);
 		panel_1.add(lblCpf);
-
+		
 		MaskFormatter mascaraCPF = null;
 		try {
 			mascaraCPF = new MaskFormatter("###.###.###-##");
@@ -232,48 +225,34 @@ public class TelaCliente extends JFrame {
 		panel_2.setToolTipText("");
 		panel_2.setBackground(new Color(47, 79, 79));
 		contentPane.add(panel_2);
+		
+		
 		JLabel lblNewLabel_2 = new JLabel("Data de Nascimento:");
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblNewLabel_2.setBounds(10, 11, 191, 25);
 		panel_2.add(lblNewLabel_2);
-
-		boxDia = new JComboBox<>();
-		boxDia.setBounds(198, 11, 62, 25);
-		for (int i = 1; i <= 31; i++) {
-		    boxDia.addItem(String.format("%02d", i));
-		}
-		panel_2.add(boxDia);
-
-		JLabel lblNewLabel_5 = new JLabel("Mês");
-		lblNewLabel_5.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		lblNewLabel_5.setForeground(new Color(255, 255, 255));
-		lblNewLabel_5.setBounds(270, 8, 47, 27);
-		panel_2.add(lblNewLabel_5);
-
-		boxMes = new JComboBox<>();
-		boxMes.setBounds(309, 11, 59, 25);
-		for (int i = 1; i <= 12; i++) {
-		    boxMes.addItem(String.format("%02d", i));
-		}
-		panel_2.add(boxMes);
-
-		JLabel lblNewLabel_6 = new JLabel("Ano");
-		lblNewLabel_6.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		lblNewLabel_6.setForeground(new Color(255, 255, 255));
-		lblNewLabel_6.setBounds(378, 10, 47, 22);
-		panel_2.add(lblNewLabel_6);
-
-		boxAno = new JComboBox<>();
-		boxAno.setBounds(415, 11, 81, 25);
-		for (int i = 1923; i <= 2023; i++) {
-		    boxAno.addItem(i);
-		}
-		panel_2.add(boxAno);
+		
+		
 		JLabel lblDataNasc = new JLabel("Data De Nascimento:");
 		lblNewLabel_2.setBounds(10, 11, 191, 25);
 		panel_2.add(lblNewLabel_2);
 		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
+		
+		txtData = new JTextField();
+		txtData.setBounds(176, 11, 320, 25);
+		panel_2.add(txtData);
+		txtData.setColumns(10);
+		
+		MaskFormatter mascaraDataNac = null;
+		try {
+			mascaraDataNac = new MaskFormatter("##/##/####");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		txtData = new JFormattedTextField(mascaraDataNac);
+
 
 		
 		
@@ -304,7 +283,7 @@ public class TelaCliente extends JFrame {
 		textTelefone.setColumns(10);
 
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(354, 223, 1461, 772);
+		panel_3.setBounds(351, 278, 1461, 772);
 		contentPane.add(panel_3);
 
 		/**
@@ -317,9 +296,16 @@ public class TelaCliente extends JFrame {
 
 		modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
-		table.setModel(modelo);
+		
+		table.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+						 "Nome","CPf", "Data Nac","Telefone"
+				}
+			));
 
-		atualizarTabela();
+			atualizarTabela();
 
 		JButton btnListar = new JButton("Alterar");
 		btnListar.setBackground(new Color(0, 0, 0));
@@ -357,13 +343,20 @@ public class TelaCliente extends JFrame {
             public void actionPerformed(ActionEvent e) {
                
             	int selectedRow = table.getSelectedRow();
-                if (selectedRow != -1) {
-                    // Remove a linha selecionada
-                    DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-                    tableModel.removeRow(selectedRow);
-                    JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
-                }
-            }
+            	long cpf = (long) table.getValueAt(selectedRow, 1);
+                   ClienteDAO dao = ClienteDAO.getinstancia();
+                   Cliente c = new Cliente();
+                   c.setCpf(cpf);
+                   boolean retorno = dao.Deletar(c);
+                   if (retorno == true) {
+                	   DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+                	   tableModel.removeRow(selectedRow);
+   					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
+                   }else {
+   					JOptionPane.showMessageDialog(null, "Erro ao excluir!");
+   				}
+
+   			} 
         });
 		
 		btnExcluir.setBounds(120, 42, 89, 23);
@@ -380,11 +373,11 @@ public class TelaCliente extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon(TelaCliente.class.getResource("/imgs/Cliente2.png")));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblNewLabel_1);
-
-		JLabel lblNewLabel_7 = new JLabel("");
-		lblNewLabel_7.setIcon(new ImageIcon(TelaCliente.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel_7.setBounds(0, 0, 1924, 1061);
-		contentPane.add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_4 = new JLabel("New label");
+		lblNewLabel_4.setIcon(new ImageIcon(TelaCliente.class.getResource("/imgs/FundoDeTela.jpg")));
+		lblNewLabel_4.setBounds(0, 0, 1939, 1071);
+		contentPane.add(lblNewLabel_4);
 
 	}
 	
@@ -392,6 +385,7 @@ public class TelaCliente extends JFrame {
 		textNomeCompleto.setText("");
 		textCPF.setText("");
 		textTelefone.setText("");
+		txtData.setText("");
 		
 	}
 
@@ -402,14 +396,16 @@ public class TelaCliente extends JFrame {
 
 	        modelo = new DefaultTableModel(new Object[][] {},
 	                new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
-	        table.setModel(modelo);
+	       
 
-	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	       // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	        for (Cliente cliente : clientes) {
 	            Object[] linha = { cliente.getNomeCompleto(), cliente.getCpf(), cliente.getDataNac(),
 	                    cliente.getTelefone() };
 	            modelo.addRow(linha);
-	        }
+	    
+	      }
+	        table.setModel(modelo);
 	}
 }

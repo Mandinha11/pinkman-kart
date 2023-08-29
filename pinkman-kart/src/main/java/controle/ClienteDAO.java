@@ -10,34 +10,32 @@ import java.util.ArrayList;
 import modelo.Cliente;
 
 public class ClienteDAO {
-
+	
+	private static ClienteDAO instancia;
 	public ArrayList<Cliente> listar() {
 
 		Conexao c = Conexao.getInstancia();
 
 		Connection con = c.conectar();
-
+		
+		String query = "SELECT * FROM clientes";
 		ArrayList<Cliente> clientes = new ArrayList();
-
-		String query = "SELECT * FROM cliente";
-
+		
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 
-				Long IdCliente = rs.getLong("Id_Cliente");
-				long telefone = rs.getLong("telefone");
+				long telefone = rs.getLong("Telefone");
 				long dataNac = rs.getLong("data_de_nascimento");
 				long cpf = rs.getLong("cpf");
 				String nomeCompleto = rs.getString("nome_completo");
 				
 				Cliente cl = new Cliente();
 				
-				cl.setIdCliente(IdCliente);
-				cl.setNomeCompleto(nomeCompleto);
 				cl.setTelefone(telefone);
+				cl.setNomeCompleto(nomeCompleto);
 				cl.setCpf(cpf);
 				cl.setDataNac(dataNac);
 
@@ -54,8 +52,6 @@ public class ClienteDAO {
 		return clientes;
 
 	}
-
-	private static ClienteDAO instancia;
 
 	public static ClienteDAO getinstancia() {
 
@@ -75,7 +71,7 @@ public class ClienteDAO {
 
 				PreparedStatement ps = conn.prepareStatement(query);
 
-				ps.setLong(1, c.getIdCliente());;
+				
 				ps.setString(2, c.getNomeCompleto());
 				ps.setLong(3, c.getDataNac());
 				ps.setLong(4, c.getCpf());
@@ -98,7 +94,7 @@ public class ClienteDAO {
 
 	}
 
-	public Boolean alterar(Cliente c) {
+	public Boolean Alterar(Cliente c) {
 		Conexao con = Conexao.getInstancia();
 
 		Connection conn = con.conectar();
@@ -126,20 +122,18 @@ public class ClienteDAO {
 		return false;
 	}
 
-	public Boolean deletar(Cliente c) {
+	public Boolean Deletar(Cliente c) {
 
 		Conexao con = Conexao.getInstancia();
 
 		Connection conn = con.conectar();
 
-		String query = "DELETE FROM cliente WHERE id_cliente = ?";
+		String query = "DELETE FROM cliente WHERE cpf = ?";
 
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
-
-			ps.setLong(1, c.getIdCliente());
-
+			ps.setLong(1, c.getCpf());
 			ps.executeUpdate();
 
 			con.fecharConexao();
