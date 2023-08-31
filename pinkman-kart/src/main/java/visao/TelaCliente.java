@@ -144,10 +144,10 @@ public class TelaCliente extends JFrame {
 
 				ClienteDAO clienteDao = ClienteDAO.getinstancia();
 				if (clienteDao.inserir(cliente) == true) {
-					JOptionPane.showMessageDialog(btnCadastrar, "Boa");
+					JOptionPane.showMessageDialog(btnCadastrar, "Cadastrado");
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(btnCadastrar, "Deu não");
+					JOptionPane.showMessageDialog(btnCadastrar, "Não foi posivel Cadastrar");
 				}
 
 			}
@@ -159,7 +159,7 @@ public class TelaCliente extends JFrame {
 		contentPane.add(btnCadastrar);
 
 		JButton btnNewButton_2 = new JButton("Voltar");
-		btnNewButton_2.setBackground(new Color(0, 0, 0));
+		btnNewButton_2.setBackground(new Color(167, 10, 10));
 		btnNewButton_2.setForeground(new Color(255, 255, 255));
 		btnNewButton_2.setBounds(4, 9, 89, 23);
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -175,7 +175,7 @@ public class TelaCliente extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBounds(380, 35, 506, 45);
-		panel.setBackground(new Color(47, 79, 79));
+		panel.setBackground(new Color(0, 85, 125));
 		panel.setToolTipText("");
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -197,7 +197,7 @@ public class TelaCliente extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		panel_1.setToolTipText("");
-		panel_1.setBackground(new Color(47, 79, 79));
+		panel_1.setBackground(new Color(0, 85, 125));
 
 		JLabel lblCpf = new JLabel("CPF:");
 		lblCpf.setForeground(new Color(255, 255, 255));
@@ -223,7 +223,7 @@ public class TelaCliente extends JFrame {
 		panel_2.setBounds(380, 107, 506, 45);
 		panel_2.setLayout(null);
 		panel_2.setToolTipText("");
-		panel_2.setBackground(new Color(47, 79, 79));
+		panel_2.setBackground(new Color(0, 85, 125));
 		contentPane.add(panel_2);
 
 		JLabel lblNewLabel_2 = new JLabel("Data de Nascimento:");
@@ -255,7 +255,7 @@ public class TelaCliente extends JFrame {
 		panel_1_1.setBounds(1048, 107, 506, 45);
 		panel_1_1.setLayout(null);
 		panel_1_1.setToolTipText("");
-		panel_1_1.setBackground(new Color(47, 79, 79));
+		panel_1_1.setBackground(new Color(0, 85, 125));
 		contentPane.add(panel_1_1);
 
 		JLabel lblNewLabel_3 = new JLabel("Numero de Telefone:");
@@ -297,7 +297,7 @@ public class TelaCliente extends JFrame {
 
 		atualizarTabela();
 
-		JButton btnListar = new JButton("Alterar");
+		JButton btnListar = new JButton("Atualizar");
 		btnListar.setBackground(new Color(0, 0, 0));
 		btnListar.setForeground(new Color(255, 255, 255));
 		btnListar.addActionListener(new ActionListener() {
@@ -319,8 +319,12 @@ public class TelaCliente extends JFrame {
 				} else {
 					JOptionPane.showMessageDialog(null, "Nenhuma linha selecionada!");
 				}
-			}
+				contentPane.add(btnListar);
+				}
+			
 		});
+		
+		
 		btnListar.setBounds(51, 319, 242, 57);
 		btnListar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		contentPane.add(btnListar);
@@ -332,14 +336,18 @@ public class TelaCliente extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				int selectedRow = table.getSelectedRow();
+				
 				long cpf = (long) table.getValueAt(selectedRow, 1);
+				
 				ClienteDAO dao = ClienteDAO.getinstancia();
+				
 				Cliente c = new Cliente();
 				c.setCpf(cpf);
 				boolean retorno = dao.Deletar(c);
+				
 				if (retorno == true) {
+					
 					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 					tableModel.removeRow(selectedRow);
 					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");

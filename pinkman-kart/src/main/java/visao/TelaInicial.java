@@ -88,7 +88,7 @@ public class TelaInicial extends JFrame {
 		JButton btnEntrar = new JButton("Logar");
 		btnEntrar.setForeground(new Color(255, 255, 255));
 		btnEntrar.setFont(new Font("Segoe UI Semibold", Font.BOLD, 16));
-		btnEntrar.setBackground(new Color(47, 79, 79));
+		btnEntrar.setBackground(new Color(0, 0, 0));
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

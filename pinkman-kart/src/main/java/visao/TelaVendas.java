@@ -136,7 +136,7 @@ public class TelaVendas extends JFrame {
 		contentPane.add(btnCadastra);
 		
 		JButton btnNewButton_2 = new JButton("Voltar");
-		btnNewButton_2.setBackground(new Color(0, 0, 0));
+		btnNewButton_2.setBackground(new Color(167, 10, 10));
 		btnNewButton_2.setForeground(new Color(255, 255, 255));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -151,7 +151,7 @@ public class TelaVendas extends JFrame {
 		contentPane.add(btnNewButton_2);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(47, 79, 79));
+		panel_1.setBackground(new Color(0, 85, 125));
 		panel_1.setBounds(281, 31, 483, 55);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
@@ -240,7 +240,7 @@ public class TelaVendas extends JFrame {
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
-		panel_1_1.setBackground(new Color(47, 79, 79));
+		panel_1_1.setBackground(new Color(0, 85, 125));
 		panel_1_1.setBounds(281, 104, 483, 55);
 		contentPane.add(panel_1_1);
 		
@@ -257,7 +257,7 @@ public class TelaVendas extends JFrame {
 		
 		JPanel panel_1_2 = new JPanel();
 		panel_1_2.setLayout(null);
-		panel_1_2.setBackground(new Color(47, 79, 79));
+		panel_1_2.setBackground(new Color(0, 85, 125));
 		panel_1_2.setBounds(850, 31, 483, 55);
 		contentPane.add(panel_1_2);
 		
@@ -283,7 +283,7 @@ public class TelaVendas extends JFrame {
 		
 		JPanel panel_1_2_1 = new JPanel();
 		panel_1_2_1.setLayout(null);
-		panel_1_2_1.setBackground(new Color(47, 79, 79));
+		panel_1_2_1.setBackground(new Color(0, 85, 125));
 		panel_1_2_1.setBounds(850, 104, 483, 55);
 		contentPane.add(panel_1_2_1);
 		
@@ -301,7 +301,7 @@ public class TelaVendas extends JFrame {
 
 		JPanel panel_1_2_2 = new JPanel();
 		panel_1_2_2.setLayout(null);
-		panel_1_2_2.setBackground(new Color(47, 79, 79));
+		panel_1_2_2.setBackground(new Color(0, 85, 125));
 		panel_1_2_2.setBounds(1362, 31, 507, 55);
 		contentPane.add(panel_1_2_2);
 		

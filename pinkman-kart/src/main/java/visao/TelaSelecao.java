@@ -72,7 +72,10 @@ public class TelaSelecao extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.setBounds(30, 36, 89, 23);
+		btnVoltar.setForeground(new Color(255, 255, 255));
+		btnVoltar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnVoltar.setBackground(new Color(167, 10, 10));
+		btnVoltar.setBounds(10, 23, 109, 30);
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -86,12 +89,13 @@ public class TelaSelecao extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(594, 177, 308, 265);
-		panel_1.setBackground(new Color(47, 79, 79));
+		panel_1.setBackground(new Color(159, 255, 219));
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JButton btnCliente = new JButton("Cliente");
-		btnCliente.setForeground(new Color(0, 0, 0));
+		btnCliente.setBackground(new Color(0, 0, 0));
+		btnCliente.setForeground(new Color(255, 255, 255));
 		btnCliente.setBounds(52, 159, 206, 46);
 		panel_1.add(btnCliente);
 		btnCliente.addActionListener(new ActionListener() {
@@ -113,11 +117,13 @@ public class TelaSelecao extends JFrame {
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBounds(1006, 177, 308, 265);
-		panel_1_1.setBackground(new Color(47, 79, 79));
+		panel_1_1.setBackground(new Color(0, 85, 125));
 		panel_1_1.setLayout(null);
 		contentPane.add(panel_1_1);
 		
 		JButton btnKarts = new JButton("Karts");
+		btnKarts.setForeground(new Color(255, 255, 255));
+		btnKarts.setBackground(new Color(0, 0, 0));
 		btnKarts.setBounds(46, 160, 206, 46);
 		panel_1_1.add(btnKarts);
 		btnKarts.addActionListener(new ActionListener() {
@@ -140,11 +146,13 @@ public class TelaSelecao extends JFrame {
 		
 		JPanel panel_1_2 = new JPanel();
 		panel_1_2.setBounds(429, 481, 308, 265);
-		panel_1_2.setBackground(new Color(47, 79, 79));
+		panel_1_2.setBackground(new Color(0, 85, 125));
 		panel_1_2.setLayout(null);
 		contentPane.add(panel_1_2);
 		
 		JButton btnVendas = new JButton("Vendas");
+		btnVendas.setForeground(new Color(255, 255, 255));
+		btnVendas.setBackground(new Color(0, 0, 0));
 		btnVendas.setBounds(55, 147, 206, 43);
 		panel_1_2.add(btnVendas);
 		btnVendas.addActionListener(new ActionListener() {
@@ -170,7 +178,7 @@ public class TelaSelecao extends JFrame {
 		
 		JPanel panel_1_3 = new JPanel();
 		panel_1_3.setBounds(816, 481, 308, 265);
-		panel_1_3.setBackground(new Color(47, 79, 79));
+		panel_1_3.setBackground(new Color(0, 85, 125));
 		panel_1_3.setLayout(null);
 		contentPane.add(panel_1_3);
 		
@@ -181,9 +189,10 @@ public class TelaSelecao extends JFrame {
 		panel_1_3.add(lblNewLabel_2);
 		
 		JButton btnFornecedor = new JButton("Fornecedor");
+		btnFornecedor.setForeground(new Color(255, 255, 255));
 		btnFornecedor.setBounds(59, 145, 206, 47);
 		panel_1_3.add(btnFornecedor);
-		btnFornecedor.setBackground(UIManager.getColor("Button.background"));
+		btnFornecedor.setBackground(new Color(0, 0, 0));
 		btnFornecedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -196,7 +205,7 @@ public class TelaSelecao extends JFrame {
 		btnFornecedor.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
 		
 		JPanel panel_1_3_1 = new JPanel();
-		panel_1_3_1.setBackground(new Color(47, 79, 79));
+		panel_1_3_1.setBackground(new Color(0, 85, 125));
 		panel_1_3_1.setBounds(1213, 481, 308, 265);
 		contentPane.add(panel_1_3_1);
 		panel_1_3_1.setLayout(null);
@@ -213,6 +222,8 @@ public class TelaSelecao extends JFrame {
 		panel_1_3_1.add(lblNewLabel_4);
 		
 		JButton btnNewButton = new JButton("Funcionario");
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(0, 0, 0));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

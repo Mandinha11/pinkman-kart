@@ -73,7 +73,7 @@ public class TelaFornecedor extends JFrame {
 		setContentPane(contentPane);
 
 		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.setBackground(new Color(0, 0, 0));
+		btnVoltar.setBackground(new Color(167, 10, 10));
 		btnVoltar.setForeground(new Color(255, 255, 255));
 		btnVoltar.setBounds(12, 12, 127, 28);
 		btnVoltar.addActionListener(new ActionListener() {
@@ -145,10 +145,10 @@ public class TelaFornecedor extends JFrame {
 
 				FornecedorDAO fornecedorDao = FornecedorDAO.getinstancia();
 				if (fornecedorDao.inserir(fornecedor) == true) {
-					JOptionPane.showMessageDialog(btnCadastrar, "Boa");
+					JOptionPane.showMessageDialog(btnCadastrar, "Cadastrado");
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(btnCadastrar, "Deu não");
+					JOptionPane.showMessageDialog(btnCadastrar, "Não foi posivl Cadastrar");
 				}
 
 			}
@@ -210,7 +210,7 @@ public class TelaFornecedor extends JFrame {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(47, 79, 79));
+		panel_1.setBackground(new Color(0, 85, 125));
 		panel_1.setBounds(513, 12, 513, 46);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
@@ -229,7 +229,7 @@ public class TelaFornecedor extends JFrame {
 
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
-		panel_1_1.setBackground(new Color(47, 79, 79));
+		panel_1_1.setBackground(new Color(0, 85, 125));
 		panel_1_1.setBounds(513, 78, 513, 46);
 		contentPane.add(panel_1_1);
 
@@ -253,7 +253,7 @@ public class TelaFornecedor extends JFrame {
 
 		JPanel panel_1_1_1 = new JPanel();
 		panel_1_1_1.setLayout(null);
-		panel_1_1_1.setBackground(new Color(47, 79, 79));
+		panel_1_1_1.setBackground(new Color(0, 85, 125));
 		panel_1_1_1.setBounds(1092, 12, 513, 46);
 		contentPane.add(panel_1_1_1);
 
@@ -277,7 +277,7 @@ public class TelaFornecedor extends JFrame {
 
 		JPanel panel_1_1_1_1 = new JPanel();
 		panel_1_1_1_1.setLayout(null);
-		panel_1_1_1_1.setBackground(new Color(47, 79, 79));
+		panel_1_1_1_1.setBackground(new Color(0, 85, 125));
 		panel_1_1_1_1.setBounds(1090, 78, 513, 46);
 		contentPane.add(panel_1_1_1_1);
 

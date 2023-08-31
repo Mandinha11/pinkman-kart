@@ -75,7 +75,7 @@ public class TelaFuncionario extends JFrame {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setBounds(23, 11, 112, 28);
 		btnVoltar.setForeground(new Color(255, 255, 255));
-		btnVoltar.setBackground(new Color(0, 0, 0));
+		btnVoltar.setBackground(new Color(167, 10, 10));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -91,7 +91,7 @@ public class TelaFuncionario extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBounds(464, 22, 516, 48);
-		panel.setBackground(new Color(47, 79, 79));
+		panel.setBackground(new Color(0, 85, 125));
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -116,7 +116,7 @@ public class TelaFuncionario extends JFrame {
 
 		JPanel PnDataDeNascimento = new JPanel();
 		PnDataDeNascimento.setBounds(464, 127, 516, 48);
-		PnDataDeNascimento.setBackground(new Color(47, 79, 79));
+		PnDataDeNascimento.setBackground(new Color(0, 85, 125));
 		PnDataDeNascimento.setLayout(null);
 		contentPane.add(PnDataDeNascimento);
 
@@ -202,7 +202,7 @@ public class TelaFuncionario extends JFrame {
 
 		JPanel PnCargo = new JPanel();
 		PnCargo.setBounds(1095, 127, 518, 48);
-		PnCargo.setBackground(new Color(47, 79, 79));
+		PnCargo.setBackground(new Color(0, 85, 125));
 		PnCargo.setLayout(null);
 		contentPane.add(PnCargo);
 
@@ -336,7 +336,7 @@ public class TelaFuncionario extends JFrame {
 
 		JPanel PnNomeCompleto = new JPanel();
 		PnNomeCompleto.setBounds(1095, 22, 518, 48);
-		PnNomeCompleto.setBackground(new Color(47, 79, 79));
+		PnNomeCompleto.setBackground(new Color(0, 85, 125));
 		PnNomeCompleto.setLayout(null);
 		contentPane.add(PnNomeCompleto);
 

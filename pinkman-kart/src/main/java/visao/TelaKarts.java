@@ -81,7 +81,7 @@ public class TelaKarts extends JFrame {
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setForeground(new Color(255, 255, 255));
-		btnVoltar.setBackground(new Color(0, 0, 0));
+		btnVoltar.setBackground(new Color(167, 10, 10));
 		btnVoltar.setBounds(10, 11, 126, 30);
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -221,7 +221,7 @@ public class TelaKarts extends JFrame {
 		panel.add(table);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(47, 79, 79));
+		panel_1.setBackground(new Color(0, 85, 125));
 		panel_1.setBounds(98, 113, 423, 61);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
@@ -238,7 +238,7 @@ public class TelaKarts extends JFrame {
 		lblIdKart.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		
 		JPanel panel_1_1 = new JPanel();
-		panel_1_1.setBackground(new Color(47, 79, 79));
+		panel_1_1.setBackground(new Color(0, 85, 125));
 		panel_1_1.setLayout(null);
 		panel_1_1.setBounds(98, 195, 423, 61);
 		contentPane.add(panel_1_1);
@@ -310,7 +310,7 @@ public class TelaKarts extends JFrame {
 		
 		
 		JPanel panel_1_1_1 = new JPanel();
-		panel_1_1_1.setBackground(new Color(47, 79, 79));
+		panel_1_1_1.setBackground(new Color(0, 85, 125));
 		panel_1_1_1.setLayout(null);
 		panel_1_1_1.setBounds(98, 279, 423, 61);
 		contentPane.add(panel_1_1_1);
@@ -327,7 +327,7 @@ public class TelaKarts extends JFrame {
 		lblMarcaKarts.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		
 		JPanel panel_1_1_2 = new JPanel();
-		panel_1_1_2.setBackground(new Color(47, 79, 79));
+		panel_1_1_2.setBackground(new Color(0, 85, 125));
 		panel_1_1_2.setLayout(null);
 		panel_1_1_2.setBounds(98, 367, 423, 61);
 		contentPane.add(panel_1_1_2);
@@ -352,7 +352,7 @@ public class TelaKarts extends JFrame {
 		lblNewLabel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		
 		JPanel panel_1_2 = new JPanel();
-		panel_1_2.setBackground(new Color(47, 79, 79));
+		panel_1_2.setBackground(new Color(0, 85, 125));
 		panel_1_2.setLayout(null);
 		panel_1_2.setBounds(553, 113, 423, 61);
 		contentPane.add(panel_1_2);
@@ -378,7 +378,7 @@ public class TelaKarts extends JFrame {
 		boxCor.addItem("Cinza");
 		
 		JPanel panel_1_3 = new JPanel();
-		panel_1_3.setBackground(new Color(47, 79, 79));
+		panel_1_3.setBackground(new Color(0, 85, 125));
 		panel_1_3.setLayout(null);
 		panel_1_3.setBounds(553, 195, 423, 61);
 		contentPane.add(panel_1_3);
@@ -412,7 +412,7 @@ public class TelaKarts extends JFrame {
 		panel_4.setLayout(null);
 
 		JPanel panel_1_4 = new JPanel();
-		panel_1_4.setBackground(new Color(47, 79, 79));
+		panel_1_4.setBackground(new Color(0, 85, 125));
 		panel_1_4.setLayout(null);
 		panel_1_4.setBounds(553, 279, 423, 61);
 		contentPane.add(panel_1_4);
@@ -430,7 +430,7 @@ public class TelaKarts extends JFrame {
 		txtModelo.setColumns(10);
 		
 		JPanel panel_1_5 = new JPanel();
-		panel_1_5.setBackground(new Color(47, 79, 79));
+		panel_1_5.setBackground(new Color(0, 85, 125));
 		panel_1_5.setLayout(null);
 		panel_1_5.setBounds(553, 367, 423, 61);
 		contentPane.add(panel_1_5);
@@ -450,7 +450,7 @@ public class TelaKarts extends JFrame {
 		
 		JPanel panel_1_6 = new JPanel();
 		panel_1_6.setForeground(new Color(255, 255, 255));
-		panel_1_6.setBackground(new Color(47, 79, 79));
+		panel_1_6.setBackground(new Color(0, 85, 125));
 		panel_1_6.setLayout(null);
 		panel_1_6.setBounds(307, 473, 423, 61);
 		contentPane.add(panel_1_6);
