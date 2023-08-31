@@ -20,6 +20,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -42,11 +43,16 @@ public class TelaKarts extends JFrame {
 	private JTextField txtPreco_1;
 	private JTextField txtMarca;
 	private JTextField txtModelo;
-	private JTable table;
 	private JTextField txtId;
 	private JTextField txtFornecedor;
 	private JTextField txtCNPJ;
 	private JTable tabelaKarts;
+	private JTextField txtCor;
+	private JTextField txtQuantidade;
+	private JTextField txtAno;
+	private KartsDAO dao;
+	private DefaultTableModel modelo;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -94,15 +100,6 @@ public class TelaKarts extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.add(btnVoltar);
 		
-	
-		    
-		
-
-		JScrollPane scrollPane = new JScrollPane(tabelaKarts);
-		scrollPane.setViewportView(tabelaKarts);
-		scrollPane.setBounds(996, 54, 857, 939);
-		contentPane.add(scrollPane);
-		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBackground(new Color(0, 0, 0));
 		btnCadastrar.setForeground(new Color(255, 255, 255));
@@ -117,12 +114,18 @@ public class TelaKarts extends JFrame {
 				
 				
 			
-				
-				 if (txtPreco.getText().trim().length() == 0) {
+					String preco = txtPreco_1.getText();
+				 if (txtPreco_1.getText().trim().length() == 0) {
 					 JOptionPane.showMessageDialog(null, "Preço não preenchido!!");
 					 return;
 				 }
 				 else {
+					 preco = preco.replace("R$", "");
+					 preco = preco.replace(".", "");
+					 preco = preco.replace(".", "");
+					 preco = preco.replace(",", "");
+					 preco = preco.trim();
+					 
 				karts.setpreco(Long.valueOf(txtPreco.getText()));
 				 }
 			
@@ -150,18 +153,36 @@ public class TelaKarts extends JFrame {
 				 else {
 				karts.setId(Long.valueOf(txtId.getText()));
 				 }
-				 
-				 if (txtFornecedor.getText().trim().length() == 0) {
+				 String CNPJ = txtCNPJ.getText();
+				 if (txtCNPJ.getText().trim().length() == 0) {
 					 JOptionPane.showMessageDialog(null, "CNPJ do Fornecedor não preenchido!!");
 					 return;
 				 }
 				 else {
+					 
+					 CNPJ = CNPJ.replace(".", "");
+					 CNPJ = CNPJ.replace(".", "");
+					 CNPJ = CNPJ.replace("/", "");
+					 CNPJ = CNPJ.replace("0", "");
+					 CNPJ = CNPJ.replace("0", "");
+					 CNPJ = CNPJ.replace("0", "");
+					 CNPJ = CNPJ.replace("-", "");
+					 CNPJ = CNPJ.trim();
 				karts.setforneCNPJ(Long.valueOf(txtFornecedor.getText()));
 				 }
 				 
+				 KartsDAO kartDao = KartsDAO.getinstancia();
+				 if(kartDao.Inserir(karts)== true) {
+					 JOptionPane.showMessageDialog(btnCadastrar, "fornecedor foi cadastrado com sucesso");
+					 atualizarTabela();
+				 }else {
+					 JOptionPane.showMessageDialog(btnCadastrar, "Erro ao cadastrar o fornecedor ");
+				 }
 				 
 				 
 			}
+
+			
 		});
 		btnCadastrar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		contentPane.add(btnCadastrar);
@@ -205,20 +226,8 @@ public class TelaKarts extends JFrame {
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(new Color(211, 211, 211));
-		panel_4.setBounds(996, 54, 857, 939);
+		panel_4.setBounds(986, 53, 857, 939);
 		contentPane.add(panel_4);
-		panel_4.setLayout(null);
-		
-		Panel panel = new Panel();
-		panel.setBounds(10, 10, 837, 919);
-		panel_4.add(panel);
-		panel.setBackground(new Color(255, 255, 255));
-		panel.setForeground(new Color(255, 255, 255));
-		panel.setLayout(null);
-		
-		table = new JTable();
-		table.setBounds(368, 161, 1, 1);
-		panel.add(table);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(0, 85, 125));
@@ -363,19 +372,10 @@ public class TelaKarts extends JFrame {
 		lblBuscarKarts.setForeground(new Color(255, 255, 255));
 		lblBuscarKarts.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		
-		JComboBox<String> boxCor = new JComboBox<>();
-		boxCor.setBounds(151, 16, 262, 26);
-		panel_1_2.add(boxCor);
-		boxCor.addItem("Selecionar Cor");
-		boxCor.addItem("Amarelo");
-		boxCor.addItem("Vermelho");
-		boxCor.addItem("Azul");
-		boxCor.addItem("Verde");
-		boxCor.addItem("Rosa");
-		boxCor.addItem("Roxo");
-		boxCor.addItem("Preto");
-		boxCor.addItem("Branco");
-		boxCor.addItem("Cinza");
+		txtCor = new JTextField();
+		txtCor.setColumns(10);
+		txtCor.setBounds(153, 19, 260, 30);
+		panel_1_2.add(txtCor);
 		
 		JPanel panel_1_3 = new JPanel();
 		panel_1_3.setBackground(new Color(0, 85, 125));
@@ -383,33 +383,38 @@ public class TelaKarts extends JFrame {
 		panel_1_3.setBounds(553, 195, 423, 61);
 		contentPane.add(panel_1_3);
 		
-		
-		JComboBox<String> boxQuantidade = new JComboBox<>();
-		boxQuantidade.setBounds(151, 21, 262, 29);
-		panel_1_3.add(boxQuantidade);
-		boxQuantidade.addItem("Selecinar Quantidade");
-		boxQuantidade.addItem("1");
-		boxQuantidade.addItem("2");
-		boxQuantidade.addItem("3");
-		boxQuantidade.addItem("4");
-		boxQuantidade.addItem("5");
-		boxQuantidade.addItem("6");
-		boxQuantidade.addItem("7");
-		boxQuantidade.addItem("8");
-		boxQuantidade.addItem("9");
-		boxQuantidade.addItem("10");
-		
 		JLabel lblQuantidade = new JLabel("Quantidade:");
 		lblQuantidade.setBounds(10, 17, 104, 30);
 		panel_1_3.add(lblQuantidade);
 		lblQuantidade.setForeground(new Color(255, 255, 255));
 		lblQuantidade.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		
+		txtQuantidade = new JTextField();
+		txtQuantidade.setColumns(10);
+		txtQuantidade.setBounds(153, 17, 260, 30);
+		panel_1_3.add(txtQuantidade);
+		
 		//JPanel panel_4 = new JPanel();
 		panel_4.setBounds(996, 54, 857, 939);
 		panel_4.setBackground(new Color(211, 211, 211));
 		contentPane.add(panel_4);
 		panel_4.setLayout(null);
+		panel_4.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 857, 1003);
+		panel_4.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID Kart", "Data Entrada", "Marca", "Fornecedor CNPJ", "Cor", "Quantidade", "Modelo", "Ano", "Pre\u00E7o"
+			}
+		));
+		table.getColumnModel().getColumn(3).setPreferredWidth(93);
+		scrollPane.setViewportView(table);
 
 		JPanel panel_1_4 = new JPanel();
 		panel_1_4.setBackground(new Color(0, 85, 125));
@@ -425,7 +430,7 @@ public class TelaKarts extends JFrame {
 		lblModelo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		
 		txtModelo = new JTextField();
-		txtModelo.setBounds(153, 23, 260, 30);
+		txtModelo.setBounds(153, 20, 260, 30);
 		panel_1_4.add(txtModelo);
 		txtModelo.setColumns(10);
 		
@@ -435,12 +440,7 @@ public class TelaKarts extends JFrame {
 		panel_1_5.setBounds(553, 367, 423, 61);
 		contentPane.add(panel_1_5);
 		
-		JComboBox<Integer> boxAno = new JComboBox<>();
-		boxAno.setBounds(153, 20, 260, 30);
-		panel_1_5.add(boxAno);
-		for(int i =1923; i<=2023; i++) {
-			boxAno.addItem(i);
-			}
+		
 		
 		JLabel lblAno = new JLabel("Ano:");
 		lblAno.setBounds(10, 17, 59, 30);
@@ -448,12 +448,29 @@ public class TelaKarts extends JFrame {
 		lblAno.setForeground(new Color(255, 255, 255));
 		lblAno.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		
+		MaskFormatter mascaraAno = null;
+		try {
+			mascaraAno = new MaskFormatter("####");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		txtAno = new JFormattedTextField(mascaraAno);
+		txtAno = new JTextField();
+		txtAno.setColumns(10);
+		txtAno.setBounds(153, 17, 260, 30);
+		panel_1_5.add(txtAno);
+		
+		
+		
 		JPanel panel_1_6 = new JPanel();
 		panel_1_6.setForeground(new Color(255, 255, 255));
 		panel_1_6.setBackground(new Color(0, 85, 125));
 		panel_1_6.setLayout(null);
 		panel_1_6.setBounds(307, 473, 423, 61);
 		contentPane.add(panel_1_6);
+		
+		
 		txtPreco_1 = new JFormattedTextField(formatter);
 		txtPreco_1.setBounds(152, 20, 261, 30);
 		panel_1_6.add(txtPreco_1);
@@ -474,5 +491,19 @@ public class TelaKarts extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/FundoDeTela.jpg")));
 		lblNewLabel_1.setBounds(0, 0, 1924, 1061);
 		contentPane.add(lblNewLabel_1);
-	}
+	}private void atualizarTabela() {
+				
+		dao = KartsDAO.getinstancia();
+			ArrayList<Karts> karts =   dao.listar();
+			
+			modelo = new DefaultTableModel(new Object[][] {},
+					new String[] { "Preço", "Marca", "Modelo", "ID kart", "CNPJ" });
+			
+			for (Karts Karts : karts) {
+				Object[] linha = {Karts.getpreco(), Karts.getmarca(), Karts.getmodelo(), Karts.getId(), Karts.getforneCNPJ()};
+				modelo.addRow(linha);
+				
+			}
+			table.setModel(modelo);
+			}
 }
