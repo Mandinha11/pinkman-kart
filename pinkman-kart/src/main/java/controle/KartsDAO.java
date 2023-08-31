@@ -6,9 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.table.DefaultTableModel;
+
 import modelo.Karts;
 
 public class KartsDAO {
+		
 
 	public ArrayList <Karts> listar (){
 		
