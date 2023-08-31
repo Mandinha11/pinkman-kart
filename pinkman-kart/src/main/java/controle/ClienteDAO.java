@@ -1,26 +1,35 @@
 package controle;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 import modelo.Cliente;
 
 public class ClienteDAO {
-	
+
 	private static ClienteDAO instancia;
+
+	private static LocalDate fromDateToLocalDate(Date date) {
+		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	}
+
 	public ArrayList<Cliente> listar() {
 
 		Conexao c = Conexao.getInstancia();
 
 		Connection con = c.conectar();
-		
+
 		String query = "SELECT * FROM clientes";
 		ArrayList<Cliente> clientes = new ArrayList();
-		
+
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 
@@ -28,26 +37,25 @@ public class ClienteDAO {
 			while (rs.next()) {
 
 				long telefone = rs.getLong("Telefone");
-				long dataNac = rs.getLong("data_de_nascimento");
+				Date dataNac = rs.getDate("data_nascimento");
 				long cpf = rs.getLong("cpf");
 				String nomeCompleto = rs.getString("nome_completo");
-				
+
 				Cliente cl = new Cliente();
-				
 				cl.setTelefone(telefone);
 				cl.setNomeCompleto(nomeCompleto);
 				cl.setCpf(cpf);
-				cl.setDataNac(dataNac);
+
+//				cl.setDataNac(fromDateToLocalDate(dataNac));
 
 				clientes.add(cl);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			c.fecharConexao();
 		}
-
 
 		return clientes;
 
@@ -66,25 +74,23 @@ public class ClienteDAO {
 			Conexao con = Conexao.getInstancia();
 			Connection conn = con.conectar();
 			String query = "INSERT INTO clientes (id_cliente, nome_completo, data_nascimento, cpf, telefone) VALUES (?, ?, ?, ?, ?)";
-			
+
 			try {
 
 				PreparedStatement ps = conn.prepareStatement(query);
 
-				
 				ps.setString(2, c.getNomeCompleto());
-				ps.setLong(3, c.getDataNac());
+				ps.setDate(3, Date.valueOf(c.getDataNac()));
 				ps.setLong(4, c.getCpf());
 				ps.setLong(5, c.getTelefone());
 
 				ps.executeUpdate();
 
-
 				return true;
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally {
+			} finally {
 				con.fecharConexao();
 			}
 
@@ -110,13 +116,12 @@ public class ClienteDAO {
 
 			ps.executeUpdate();
 
-
 			return true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 
-		}finally {
+		} finally {
 			con.fecharConexao();
 		}
 		return false;
@@ -143,7 +148,7 @@ public class ClienteDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 
-		}finally {
+		} finally {
 			con.fecharConexao();
 		}
 		return false;
