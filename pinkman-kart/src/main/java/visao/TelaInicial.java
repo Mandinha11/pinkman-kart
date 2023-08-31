@@ -5,6 +5,11 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -17,7 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import modelo.Fornecedor;
+import modelo.Funcionario;
 import net.miginfocom.swing.MigLayout;
 import java.awt.SystemColor;
 import javax.swing.JToolBar;
@@ -91,31 +96,28 @@ public class TelaInicial extends JFrame {
 		btnEntrar.setBackground(new Color(0, 0, 0));
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-			
-				
-				if (checkLogin(textLogin.getText(), new String(textSenha.getText()))) {
-					
-					
-					dispose();
-					TelaSelecao ts = new TelaSelecao();
-					ts.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					ts.setVisible(true);
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Dados não informados");
-				}
-				
-				
-				
-			}
-			
-			public boolean checkLogin(String login, String senha) {
-				return login.equals("usuario") && senha.equals("123");
-			}
-		});
+                String cpf = textLogin.getText();
+                String senha = textSenha.getText();
+                try {
+                    Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/diagramas_karts",
+                        "root", "root");
+
+                    PreparedStatement st = (PreparedStatement) connection 
+                    		.prepareStatement("SELECT cpf, senha FROM funcionarios WHERE cpf=? AND senha=?");
+
+                    st.setString(1, cpf);
+                    st.setString(2, senha);
+                    ResultSet rs = st.executeQuery();
+                    if (rs.next()) {
+                        JOptionPane.showMessageDialog(btnEntrar, "Você entrou com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(btnEntrar, "Usuário ou senha incorretos!");
+                    }
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
+            }
+        });
 		
 		textSenha = new JPasswordField();
 		contentPane.add(textSenha, "cell 2 3,growx,aligny bottom");
