@@ -173,10 +173,10 @@ public class TelaKarts extends JFrame {
 				 
 				 KartsDAO kartDao = KartsDAO.getinstancia();
 				 if(kartDao.Inserir(karts)== true) {
-					 JOptionPane.showMessageDialog(btnCadastrar, "fornecedor foi cadastrado com sucesso");
+					 JOptionPane.showMessageDialog(btnCadastrar, "Cadastro feito");
 					 atualizarTabela();
 				 }else {
-					 JOptionPane.showMessageDialog(btnCadastrar, "Erro ao cadastrar o fornecedor ");
+					 JOptionPane.showMessageDialog(btnCadastrar, "Erro no cadastro ");
 				 }
 				 
 				 
@@ -211,11 +211,20 @@ public class TelaKarts extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 int selectedRow = table.getSelectedRow();
-	                if (selectedRow != -1) {
+				 long id = (long) table.getValueAt(selectedRow, 1);
+				 
+				 KartsDAO dao = KartsDAO.getinstancia();
+				 
+				 Karts k = new Karts();
+				 k.setId(id);
+				 boolean retorno = dao.Deletar(k);
+	                if (retorno == true) {
 	                    // Remove a linha selecionada
 	                    DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 	                    tableModel.removeRow(selectedRow);
 	                    JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
+	                }else {
+	                	JOptionPane.showMessageDialog(null,"Erro ao tentar Excluir");
 	                }
 			}
 		});

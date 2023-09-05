@@ -148,7 +148,7 @@ public class TelaFornecedor extends JFrame {
 					JOptionPane.showMessageDialog(btnCadastrar, "Cadastrado");
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(btnCadastrar, "Não foi posivl Cadastrar");
+					JOptionPane.showMessageDialog(btnCadastrar, "Não foi possivel Cadastrar");
 				}
 
 			}
