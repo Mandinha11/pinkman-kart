@@ -46,6 +46,7 @@ public class TelaCliente extends JFrame {
 	private DefaultTableModel modelo;
 	private ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
 	private JTextField txtData;
+	private Cliente pessoaSelecionada;
 
 	/**
 	 * Launch the application.
@@ -280,7 +281,7 @@ public class TelaCliente extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(351, 278, 1461, 772);
 		contentPane.add(panel_3);
-
+		
 		/**
 		 * Tabela
 		 */
@@ -288,7 +289,15 @@ public class TelaCliente extends JFrame {
 		table.setBackground(new Color(255, 255, 255));
 		panel_3.setLayout(new BorderLayout());
 		panel_3.add(new JScrollPane(table), BorderLayout.NORTH);
-
+		int posicaoCliente = table.getSelectedRow();
+		
+		pessoaSelecionada = listaCliente.get(posicaoCliente);
+		//txtData.setText(pessoaSelecionada.getDataNac());
+		//textCPF.setText(pessoaSelecionada.getCpf());
+	//	textTelefone.setText(pessoaSelecionada.getTelefone());
+		textNomeCompleto.setText(pessoaSelecionada.getNomeCompleto());
+		
+		
 		modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
 
@@ -302,23 +311,19 @@ public class TelaCliente extends JFrame {
 		btnListar.setForeground(new Color(255, 255, 255));
 		btnListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selectedRow = table.getSelectedRow();
-				if (selectedRow >= 0) {
-					String nomeEmpresa = (String) table.getValueAt(selectedRow, 0);
-					String cpf = (String) table.getValueAt(selectedRow, 1);
-					String dataNasc = (String) table.getValueAt(selectedRow, 2);
-					String telefone = (String) table.getValueAt(selectedRow, 3);
-
-					System.out.println("Valores da linha selecionada:");
-					System.out.println("Nome da Empresa: " + nomeEmpresa);
-					System.out.println("CPF: " + cpf);
-					System.out.println("Data de Nascimento: " + dataNasc);
-					System.out.println("Telefone: " + telefone);
-					
-					Cliente c = new Cliente();
-				} else {
-					JOptionPane.showMessageDialog(null, "Nenhuma linha selecionada!");
-				}
+				
+				int posicao = listaCliente.indexOf(pessoaSelecionada);
+				
+			//	String novoCPF = textCPF.getText();
+				String novoNome = textNomeCompleto.getText();
+				
+				pessoaSelecionada.setNomeCompleto(novoNome);
+				//pessoaSelecionada.setCpf(novoCPF);
+				
+				listaCliente.set(posicao, pessoaSelecionada);
+				atualizarTabela();
+				limparCampos();
+				
 				contentPane.add(btnListar);
 				}
 			
@@ -330,6 +335,8 @@ public class TelaCliente extends JFrame {
 		contentPane.add(btnListar);
 
 		// Amanda
+		
+		
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setForeground(new Color(255, 255, 255));
 		btnExcluir.setBackground(new Color(0, 0, 0));
