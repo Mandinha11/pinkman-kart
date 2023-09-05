@@ -5,24 +5,22 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
-import modelo.Cliente;
 import modelo.Funcionario;
 
 public class FuncionarioDAO {
-	
+
 	private static FuncionarioDAO instancia;
-	
+
 	public ArrayList<Funcionario> listar() {
-
 		Conexao c = Conexao.getInstancia();
-
 		Connection con = c.conectar();
 
-		ArrayList<Funcionario> funcionarios = new ArrayList();
-
-		String query = "SELECT * FROM funcionario";
+		String query = "SELECT * FROM funcionarios";
+		ArrayList<Funcionario> funcionarios = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
@@ -30,34 +28,33 @@ public class FuncionarioDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 
-				
+				Funcionario f = new Funcionario();
 				String cargo = rs.getString("cargo");
-				Date dataNac = rs.getDate("data_de_nascimento");
+				Date dataNac = rs.getDate("data_nascimento");
 				long cpf = rs.getLong("cpf");
 				String nomeCompleto = rs.getString("nome_completo");
-				String matricula = rs.getString("matricula");
+				Long matricula = rs.getLong("matricula");
 
-				Funcionario f = new Funcionario();
-				
+				f.setMatricula(matricula);
 				f.setCargo(cargo);
 				f.setNomeCompleto(nomeCompleto);
 				f.setCpf(cpf);
-				f.setDataNac(dataNac);
+
+				LocalDate dataNascConvertida = dataNac.toLocalDate();
+				f.setDataNac(dataNascConvertida);
 
 				funcionarios.add(f);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			c.fecharConexao();
 		}
 
 		return funcionarios;
 
 	}
-	
-	
 
 	public static FuncionarioDAO getinstancia() {
 
@@ -66,39 +63,30 @@ public class FuncionarioDAO {
 		}
 		return instancia;
 	}
-	
+
 	public boolean inserir(Funcionario f) {
-		if (f != null) {
 
-			Conexao con = Conexao.getInstancia();
+		Conexao con = Conexao.getInstancia();
+		Connection conn = con.conectar();
 
-			Connection conn = con.conectar();
+		String query = "INSERT INTO funcionarios (matricula, cpf, nome_completo, data_nascimento, cargo, senha) VALUES (? ,?, ?, ?, ?, ?)";
 
-			String query = "INSERT INTO funcionarios (matricula, cpf, nome_completo, data_nascimento, cargo, senha) VALUES (? ,?, ?, ?, ?, ?)";
+		try {
 
-			try {
+			PreparedStatement ps = conn.prepareStatement(query);
 
-				PreparedStatement ps = conn.prepareStatement(query);
-				
-				ps.setLong(1, f.getMatricula());
-				ps.setLong(2, f.getCpf());
-				ps.setString(3, f.getNomeCompleto());
-				ps.setDate(4, (Date) f.getDataNac());
-				ps.setString(5, f.getCargo());
-				
-
-				ps.executeUpdate();
-
-				con.fecharConexao();
-
-				return true;
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally{
-				con.fecharConexao();
-			}
-
+			ps.setLong(1, f.getMatricula());
+			ps.setLong(2, f.getCpf());
+			ps.setString(3, f.getNomeCompleto());
+			ps.setDate(4, Date.valueOf(f.getDataNac()));
+			ps.setString(5, f.getCargo());
+			ps.setString(6, f.getSenha());
+			ps.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
 		}
 
 		return false;
@@ -106,30 +94,29 @@ public class FuncionarioDAO {
 	}
 
 	public boolean alterar(Funcionario f) {
-		
+
 		Conexao con = Conexao.getInstancia();
 
 		Connection conn = con.conectar();
 
 		String query = "UPDATE funcionarios SET cargo = ?, matricula = ?";
-		
+
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
 			ps.setString(1, f.getCargo());
-
+			ps.setLong(2, f.getMatricula());
 			ps.executeUpdate();
 
-			con.fecharConexao();
-			
+			;
+
 			return true;
-			
-		}
-		catch (SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-	
-		}finally {
+
+		} finally {
 			con.fecharConexao();
 		}
 
@@ -137,42 +124,33 @@ public class FuncionarioDAO {
 	}
 
 	public boolean deletar(Funcionario f) {
-		
+
 		Conexao con = Conexao.getInstancia();
-		
+
 		Connection conn = con.conectar();
 
 		String query = "DELETE FROM funcionarios WHERE matricula = ?";
-		
+
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
 			ps.setLong(1, f.getMatricula());
-			
 
 			ps.executeUpdate();
 
 			con.fecharConexao();
-			
+
 			return true;
-			
-		}
-		catch (SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-	
-		}finally {
+
+		} finally {
 			con.fecharConexao();
 		}
 
 		return false;
 	}
 
-
-
-	
-
-
 }
-
-
