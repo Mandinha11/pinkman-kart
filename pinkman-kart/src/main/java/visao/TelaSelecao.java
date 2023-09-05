@@ -89,7 +89,7 @@ public class TelaSelecao extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(594, 177, 308, 265);
-		panel_1.setBackground(new Color(159, 255, 219));
+		panel_1.setBackground(new Color(0, 128, 192));
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -117,7 +117,7 @@ public class TelaSelecao extends JFrame {
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBounds(1006, 177, 308, 265);
-		panel_1_1.setBackground(new Color(0, 85, 125));
+		panel_1_1.setBackground(new Color(0, 128, 192));
 		panel_1_1.setLayout(null);
 		contentPane.add(panel_1_1);
 		
@@ -146,7 +146,7 @@ public class TelaSelecao extends JFrame {
 		
 		JPanel panel_1_2 = new JPanel();
 		panel_1_2.setBounds(429, 481, 308, 265);
-		panel_1_2.setBackground(new Color(0, 85, 125));
+		panel_1_2.setBackground(new Color(0, 128, 192));
 		panel_1_2.setLayout(null);
 		contentPane.add(panel_1_2);
 		
@@ -178,7 +178,7 @@ public class TelaSelecao extends JFrame {
 		
 		JPanel panel_1_3 = new JPanel();
 		panel_1_3.setBounds(816, 481, 308, 265);
-		panel_1_3.setBackground(new Color(0, 85, 125));
+		panel_1_3.setBackground(new Color(0, 128, 192));
 		panel_1_3.setLayout(null);
 		contentPane.add(panel_1_3);
 		
@@ -205,7 +205,7 @@ public class TelaSelecao extends JFrame {
 		btnFornecedor.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
 		
 		JPanel panel_1_3_1 = new JPanel();
-		panel_1_3_1.setBackground(new Color(0, 85, 125));
+		panel_1_3_1.setBackground(new Color(0, 128, 192));
 		panel_1_3_1.setBounds(1213, 481, 308, 265);
 		contentPane.add(panel_1_3_1);
 		panel_1_3_1.setLayout(null);
