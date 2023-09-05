@@ -34,6 +34,8 @@ import controle.ClienteDAO;
 import controle.FornecedorDAO;
 import modelo.Cliente;
 import modelo.Fornecedor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaCliente extends JFrame {
 
@@ -45,8 +47,8 @@ public class TelaCliente extends JFrame {
 	private ClienteDAO clienteDAO;
 	private DefaultTableModel modelo;
 	private ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
+	private static Cliente clienteSelecionado;
 	private JTextField txtData;
-	private Cliente pessoaSelecionada;
 
 	/**
 	 * Launch the application.
@@ -281,23 +283,35 @@ public class TelaCliente extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(351, 278, 1461, 772);
 		contentPane.add(panel_3);
-		
+
 		/**
 		 * Tabela
 		 */
 		table = new JTable();
 		table.setBackground(new Color(255, 255, 255));
 		panel_3.setLayout(new BorderLayout());
-		panel_3.add(new JScrollPane(table), BorderLayout.NORTH);
-		int posicaoCliente = table.getSelectedRow();
-		
-		pessoaSelecionada = listaCliente.get(posicaoCliente);
-		//txtData.setText(pessoaSelecionada.getDataNac());
-		//textCPF.setText(pessoaSelecionada.getCpf());
-	//	textTelefone.setText(pessoaSelecionada.getTelefone());
-		textNomeCompleto.setText(pessoaSelecionada.getNomeCompleto());
-		
-		
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				/*
+				 * Selecionou uma linha da tabela
+				 */
+				int selectedRow = table.getSelectedRow();
+
+				String cpf = (String) table.getValueAt(selectedRow, 1);
+
+				// fazer uma consulta no banco procurando um cliente por CPF ou no arraylist
+				
+//				clienteSelecionado = // cliente encontrado
+
+//				textNomeCompleto.setText(clienteSelecionado.getNome...);
+//				txtData.setText();
+//				textTelefone.setText();
+			}
+		});
+		panel_3.add(scrollPane, BorderLayout.NORTH);
+
 		modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
 
@@ -306,37 +320,25 @@ public class TelaCliente extends JFrame {
 
 		atualizarTabela();
 
-		JButton btnListar = new JButton("Atualizar");
-		btnListar.setBackground(new Color(0, 0, 0));
-		btnListar.setForeground(new Color(255, 255, 255));
-		btnListar.addActionListener(new ActionListener() {
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.setBackground(new Color(0, 0, 0));
+		btnAtualizar.setForeground(new Color(255, 255, 255));
+		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				int posicao = listaCliente.indexOf(pessoaSelecionada);
-				
-			//	String novoCPF = textCPF.getText();
-				String novoNome = textNomeCompleto.getText();
-				
-				pessoaSelecionada.setNomeCompleto(novoNome);
-				//pessoaSelecionada.setCpf(novoCPF);
-				
-				listaCliente.set(posicao, pessoaSelecionada);
-				atualizarTabela();
-				limparCampos();
-				
-				contentPane.add(btnListar);
-				}
-			
-		});
-		
-		
-		btnListar.setBounds(51, 319, 242, 57);
-		btnListar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		contentPane.add(btnListar);
 
-		// Amanda
-		
-		
+				// Pega os dados digitados nos campos
+				// Atualiza no usuario selecionado no banco
+
+				atualizarTabela();
+				contentPane.add(btnAtualizar);
+			}
+
+		});
+
+		btnAtualizar.setBounds(51, 319, 242, 57);
+		btnAtualizar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		contentPane.add(btnAtualizar);
+
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setForeground(new Color(255, 255, 255));
 		btnExcluir.setBackground(new Color(0, 0, 0));
@@ -344,17 +346,17 @@ public class TelaCliente extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table.getSelectedRow();
-				
+
 				long cpf = (long) table.getValueAt(selectedRow, 1);
-				
+
 				ClienteDAO dao = ClienteDAO.getinstancia();
-				
+
 				Cliente c = new Cliente();
 				c.setCpf(cpf);
 				boolean retorno = dao.Deletar(c);
-				
+
 				if (retorno == true) {
-					
+
 					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 					tableModel.removeRow(selectedRow);
 					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
