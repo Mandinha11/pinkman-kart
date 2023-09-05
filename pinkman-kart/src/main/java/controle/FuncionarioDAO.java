@@ -39,7 +39,7 @@ public class FuncionarioDAO {
 
 				Funcionario f = new Funcionario();
 				
-				
+				f.setCargo(cargo);
 				f.setNomeCompleto(nomeCompleto);
 				f.setCpf(cpf);
 				f.setDataNac(dataNac);

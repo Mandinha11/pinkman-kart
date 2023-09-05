@@ -4,6 +4,7 @@ import java.util.Date;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -26,8 +27,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import controle.FornecedorDAO;
 import controle.FuncionarioDAO;
+import modelo.Fornecedor;
 import modelo.Funcionario;
+import java.awt.Component;
 
 public class TelaFuncionario extends JFrame {
 
@@ -41,7 +45,8 @@ public class TelaFuncionario extends JFrame {
 	private JComboBox<String> boxMes;
 	private JComboBox<String> boxDia;
 	private JComboBox<String> boxAno;
-
+	private FuncionarioDAO dao;
+	private DefaultTableModel modelo;
 	/**
 	 * Launch the application.
 	 */
@@ -358,21 +363,31 @@ public class TelaFuncionario extends JFrame {
 		contentPane.add(lblNewLabel_1);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(255, 255, 255));
+		
 		panel_1.setBounds(464, 223, 1408, 756);
-		contentPane.add(panel_1);
-
+		
+		
 		table_1 = new JTable();
+		panel_1.setBackground(new Color(255, 255, 255));
+		contentPane.add(panel_1, "cell 0 4 6 8,grow");
+		panel_1.add(table_1);
+
+		modelo = new DefaultTableModel(new Object[][] {},
+				new String[] { "CPF", "Nome", "Cargo", "Data" });
 		table_1.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"New column", "New column", "New column", "New column", "New column"
+					 "CPF", "Nome", "Cargo", "Data"
 			}
 		));
-		panel_1.add(table_1);
+
+		atualizarTabela();
+
+		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
+		 
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
+		JScrollPane scrollPane_1 = new JScrollPane(table_1);
 		panel_1.add(scrollPane_1);
 
 		JLabel lblNewLabel_6 = new JLabel("");
@@ -382,10 +397,7 @@ public class TelaFuncionario extends JFrame {
 
 	}
 
-	protected void atualizarTabela() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	private void listarFuncionarios() {
 	    FuncionarioDAO funcionarioDAO = FuncionarioDAO.getinstancia();
 	    ArrayList<Funcionario> funcionarios = funcionarioDAO.listar();
@@ -398,5 +410,26 @@ public class TelaFuncionario extends JFrame {
 	        Object[] rowData = { funcionario.getMatricula(), funcionario.getNomeCompleto(), funcionario.getCpf(), funcionario.getDataNac(), funcionario.getCargo() };
 	        tableModel.addRow(rowData);
 	    }
+	}
+	public void atualizarTabela() {
+
+		/*
+		 * String nome = txtNome.getText(); String cpf = txtCPF.getText(); Pessoa p =
+		 * new Pessoa(); p.setNome(nome); p.setCpf(cpf); listaPessoas.add(p);
+		 * atualizarJTable(); limparCampos();
+		 */
+		dao = FuncionarioDAO.getinstancia();
+		ArrayList<Funcionario> funcionarios = dao.listar();
+
+		modelo = new DefaultTableModel(new Object[][] {},
+				new String[] { "CPF", "Nome", "Cargo", "Data" });
+
+		for (Funcionario funcionario : funcionarios) {
+			Object[] linha = { funcionario.getCpf(), funcionario.getNomeCompleto(),funcionario.getCargo(),
+					funcionario.getDataNac() };
+			modelo.addRow(linha);
+		}
+
+		table.setModel(modelo);
 	}
 }
