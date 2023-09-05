@@ -91,30 +91,42 @@ public class TelaInicial extends JFrame {
 		textLogin.setColumns(10);
 
 		JButton btnEntrar = new JButton("Logar");
-		btnEntrar.setForeground(new Color(255, 255, 255));
-		btnEntrar.setFont(new Font("Segoe UI Semibold", Font.BOLD, 16));
-		btnEntrar.setBackground(new Color(0, 0, 0));
-		btnEntrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                String cpf = textLogin.getText();
-                String senha = textSenha.getText();
-                try {
-                    Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/diagramas_karts",
-                        "root", "root");
+        btnEntrar.setForeground(new Color(255, 255, 255));
+        btnEntrar.setFont(new Font("Segoe UI Semibold", Font.BOLD, 16));
+        btnEntrar.setBackground(new Color(0, 0, 0));
+        btnEntrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String matricula = textLogin.getText();
+                String senha = new String(textSenha.getPassword());
+                
+                if (matricula.isEmpty() || senha.isEmpty()) {
+                    JOptionPane.showMessageDialog(btnEntrar, "Preencha ambos os campos!");
+                } else {
+                	try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/diagrama_karts",
+                			"root", "aluno")) {
 
-                    PreparedStatement st = (PreparedStatement) connection 
-                    		.prepareStatement("SELECT cpf, senha FROM funcionarios WHERE cpf=? AND senha=?");
+                		String query = "SELECT matricula, senha FROM funcionarios WHERE matricula=? AND senha=?";
+                		PreparedStatement st = connection.prepareStatement(query);
+                		st.setString(1, matricula);
+                		st.setString(2, senha);
+                		ResultSet rs = st.executeQuery();
 
-                    st.setString(1, cpf);
-                    st.setString(2, senha);
-                    ResultSet rs = st.executeQuery();
-                    if (rs.next()) {
-                        JOptionPane.showMessageDialog(btnEntrar, "Você entrou com sucesso!");
-                    } else {
-                        JOptionPane.showMessageDialog(btnEntrar, "Usuário ou senha incorretos!");
-                    }
-                } catch (SQLException sqlException) {
-                    sqlException.printStackTrace();
+                		if (rs.next()) {
+                			JOptionPane.showMessageDialog(btnEntrar, "Você entrou com sucesso!");
+                			
+                			TelaSelecao telaSelecao = new TelaSelecao();
+                			
+                			telaSelecao.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                			telaSelecao.setVisible(true);
+                			
+                			dispose();
+                		} else {
+                			JOptionPane.showMessageDialog(btnEntrar, "Usuário ou senha incorretos!");
+                		}
+                	}
+                	catch (SQLException sqlException) {
+                		sqlException.printStackTrace();
+                	}
                 }
             }
         });
