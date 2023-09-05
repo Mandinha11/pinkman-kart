@@ -298,10 +298,10 @@ public class TelaCliente extends JFrame {
 				 * Selecionou uma linha da tabela
 				 */
 				int selectedRow = table.getSelectedRow();
-
 				String cpf = (String) table.getValueAt(selectedRow, 1);
 
 				// fazer uma consulta no banco procurando um cliente por CPF ou no arraylist
+				
 				
 //				clienteSelecionado = // cliente encontrado
 
