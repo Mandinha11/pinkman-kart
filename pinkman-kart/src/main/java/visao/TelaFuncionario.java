@@ -192,7 +192,7 @@ public class TelaFuncionario extends JFrame {
 		boxMes.addItem("10");
 		boxMes.addItem("11");
 		boxMes.addItem("12");
-
+		
 		JLabel lblNewLabel_5 = new JLabel("Ano");
 		lblNewLabel_5.setForeground(new Color(255, 255, 255));
 		lblNewLabel_5.setBounds(385, 13, 27, 28);
