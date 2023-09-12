@@ -12,6 +12,7 @@ public class Karts {
 	private Long Id;
 	private String motor;
 	private Long forneCNPJ;
+	private Long CNPJ;
 	
 	public Karts(){
 		
@@ -87,6 +88,14 @@ public class Karts {
 	}
 	public void setforneCNPJ(Long forneCNPJ) {
 		this.forneCNPJ = forneCNPJ;
+	}
+
+	public void setCNPJ(Long CNPJ) {
+		this.CNPJ = CNPJ;
+		
+	}
+	public Long getCNPJ() {
+		return CNPJ;
 	}
 	
 

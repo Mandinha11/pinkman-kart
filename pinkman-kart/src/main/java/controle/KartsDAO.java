@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.table.DefaultTableModel;
-
 import modelo.Karts;
 
 public class KartsDAO {
@@ -19,7 +17,7 @@ public class KartsDAO {
 		
 		Connection con = c.conectar();
 		
-		ArrayList<Karts> Karts = new ArrayList();
+		ArrayList<Karts> Karts = new ArrayList<>();
 		String query = "SELECT * FROM karts";
 			try {
 				PreparedStatement ps = con.prepareStatement(query);
@@ -87,15 +85,14 @@ public class KartsDAO {
 				
 				PreparedStatement ps = conn.prepareStatement(query);
 				
+				ps.setLong(8, k.getId());
+				ps.setString(6, k.getcor());
 				ps.setString(1, k.getmodelo());
 				ps.setString(2, k.getmarca());
-				ps.setLong(3, k.getpreco());
 				ps.setLong(4, k.getano());
 				ps.setLong(5, k.getquantidade());
-				ps.setString(6, k.getcor());
 				ps.setLong(7, k.getdataEntrada());
-				ps.setLong(8, k.getId());
-				ps.setString(9, k.getmotor());
+				ps.setLong(3, k.getpreco());
 				ps.setLong(10, k.getforneCNPJ());
 				
 				ps.executeUpdate();
@@ -170,6 +167,9 @@ public class KartsDAO {
 		
 		return false;
 	}
+
+	
+	
 
 	
 }
