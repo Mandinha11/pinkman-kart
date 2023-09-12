@@ -301,7 +301,7 @@ public class TelaFuncionario extends JFrame {
 				boolean retorno = dao.deletar(f);
 
 				if (retorno == true) {
-					// Remove a linha selecionada
+					// Remove a linha selecionado
 					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 					tableModel.removeRow(selectedRow);
 					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
