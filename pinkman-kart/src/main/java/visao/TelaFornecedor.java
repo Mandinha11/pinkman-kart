@@ -101,7 +101,7 @@ public class TelaFornecedor extends JFrame {
 
 				String text = txtCEP.getText();
 				if (text.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "CEP não preenchido!!");
+					new MensagemErro("CEP não preenchido !").setVisible(true);
 					return;
 				} else {
 					text = text.replace("-", "");
@@ -110,7 +110,7 @@ public class TelaFornecedor extends JFrame {
 				}
 				String tel = txtTelefone.getText();
 				if (tel.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Telefone não preenchido!!");
+					new MensagemErro("Telefone não preenchido !").setVisible(true);
 					return;
 				} else {
 					tel = tel.replace("-", "");
@@ -125,7 +125,7 @@ public class TelaFornecedor extends JFrame {
 
 				String cnpj = txtCNPJ.getText();
 				if (cnpj.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "CNPJ não preenchido!!");
+					new MensagemErro("CNPJ não preenchido !").setVisible(true);
 					return;
 				} else {
 					cnpj = cnpj.replace("/", "");
@@ -137,7 +137,7 @@ public class TelaFornecedor extends JFrame {
 				}
 
 				if (txtNomeEmpresa.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Nome da Empresa não preenchido!!");
+					new MensagemErro("Nome da Empresa não preenchido !").setVisible(true);
 					return;
 				} else {
 					fornecedor.setNomeEmpresa(txtNomeEmpresa.getText());
@@ -148,7 +148,7 @@ public class TelaFornecedor extends JFrame {
 					JOptionPane.showMessageDialog(btnCadastrar, "Cadastrado");
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(btnCadastrar, "Não foi possivel Cadastrar");
+					new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
 				}
 
 			}

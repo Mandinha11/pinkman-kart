@@ -240,7 +240,7 @@ public class TelaFuncionario extends JFrame {
 
 				String text = textCPF.getText();
 				if (text.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "CPF não foi preenchido!");
+					new MensagemErro("CPF não preenchido !").setVisible(true);
 					return;
 				} else {
 					text = text.replace(".", "");
@@ -250,7 +250,7 @@ public class TelaFuncionario extends JFrame {
 				}
 				String txt = textNomeCompleto.getText();
 				if (txt.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Nome não preenchido!");
+					new MensagemErro("Nome não preenchido !").setVisible(true);
 					return;
 				} else {
 					Funcionario.setNomeCompleto(String.valueOf(txt));
@@ -260,8 +260,9 @@ public class TelaFuncionario extends JFrame {
 				String ano = (String) boxAno.getSelectedItem();
 
 				if (dia == null || mes == null || ano == null) {
-				    JOptionPane.showMessageDialog(null, "Data não preenchida corretamente!");
-				    return;
+				    
+					new MensagemErro("Data não preenchido !").setVisible(true);
+					return;
 				}
 
 				String dataString = dia + mes + ano; 
@@ -276,7 +277,7 @@ public class TelaFuncionario extends JFrame {
 				    Funcionario.setDataNac(dataNascimento);
 				} catch (ParseException e1) {
 				    e1.printStackTrace();
-				    JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+				    new MensagemErro("Data de Nascimento não preenchido !").setVisible(true);
 				    return; 
 				}
 
@@ -286,7 +287,7 @@ public class TelaFuncionario extends JFrame {
 					JOptionPane.showMessageDialog(null, "Boa");
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(null, "Deu não");
+					new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
 				}
 			}
 		});

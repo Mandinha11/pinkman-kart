@@ -96,23 +96,27 @@ public class TelaCliente extends JFrame {
 
 				String data = txtData.getText();
 				if (data.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Data de Nascimento não preenchido!!");
-					return;
+
 				} else {
 					data = data.replace("/", "");
 					data = data.trim();
 
-					String dia = data.substring(0, 1);
-					String mes = data.substring(2, 3);
-					String ano = data.substring(4, 7);
+					if (data.trim().isEmpty()) {
+						new MensagemErro("Data não preenchida !").setVisible(true);
+						return;
+					} else {
+						String dia = data.substring(0, 1);
+						String mes = data.substring(2, 3);
+						String ano = data.substring(4, 7);
+						cliente.setDataNac(LocalDate.of(Integer.valueOf(ano), Integer.valueOf(mes), Integer.valueOf(dia)));
+					}
 
-					cliente.setDataNac(LocalDate.of(Integer.valueOf(ano), Integer.valueOf(mes), Integer.valueOf(dia)));
 
 				}
 
 				String cpf = textCPF.getText();
 				if (cpf.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "CPF não preenchido!!");
+					new MensagemErro("CPF não preenchido !").setVisible(true);
 					return;
 				} else {
 					cpf = cpf.replace(".", "");
@@ -125,7 +129,7 @@ public class TelaCliente extends JFrame {
 
 				String tel = textTelefone.getText();
 				if (tel.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Telefone não preenchido!!");
+					new MensagemErro("Telefone não preenchido !").setVisible(true);
 					return;
 				} else {
 					tel = tel.replace("-", "");
@@ -139,7 +143,7 @@ public class TelaCliente extends JFrame {
 				}
 
 				if (textNomeCompleto.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Nome da Pessoa não preenchido!!");
+					new MensagemErro("Nome não preenchido !").setVisible(true);
 					return;
 				} else {
 					cliente.setNomeCompleto(textNomeCompleto.getText());
@@ -150,7 +154,7 @@ public class TelaCliente extends JFrame {
 					JOptionPane.showMessageDialog(btnCadastrar, "Cadastrado");
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(btnCadastrar, "Não foi posivel Cadastrar");
+					new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
 				}
 
 			}
@@ -301,8 +305,7 @@ public class TelaCliente extends JFrame {
 				String cpf = (String) table.getValueAt(selectedRow, 1);
 
 				// fazer uma consulta no banco procurando um cliente por CPF ou no arraylist
-				
-				
+
 //				clienteSelecionado = // cliente encontrado
 
 //				textNomeCompleto.setText(clienteSelecionado.getNome...);

@@ -130,7 +130,7 @@ public class TelaKarts extends JFrame {
 				 }
 			
 				 if (txtMarca.getText().trim().length() == 0) {
-					 JOptionPane.showMessageDialog(null, "Marca não preenchido!!");
+					 new MensagemErro("Marca não preenchido !").setVisible(true);
 					 return;
 				 }
 				 else {
@@ -138,7 +138,7 @@ public class TelaKarts extends JFrame {
 				 }
 				 
 				 if (txtModelo.getText().trim().length() == 0) {
-					 JOptionPane.showMessageDialog(null, "Modelo não preenchido!!");
+					 new MensagemErro("Modelo não preenchido !").setVisible(true);
 					 return;
 				 }
 				 else {
@@ -147,7 +147,7 @@ public class TelaKarts extends JFrame {
 				
 				 
 				 if (txtId.getText().trim().length() == 0) {
-					 JOptionPane.showMessageDialog(null, "Id Kart não preenchido!!");
+					 new MensagemErro("Id kart não preenchido !").setVisible(true);
 					 return;
 				 }
 				 else {
@@ -155,7 +155,7 @@ public class TelaKarts extends JFrame {
 				 }
 				 String CNPJ = txtCNPJ.getText();
 				 if (txtCNPJ.getText().trim().length() == 0) {
-					 JOptionPane.showMessageDialog(null, "CNPJ do Fornecedor não preenchido!!");
+					 new MensagemErro("CNPJ não preenchido !").setVisible(true);
 					 return;
 				 }
 				 else {
@@ -176,7 +176,7 @@ public class TelaKarts extends JFrame {
 					 JOptionPane.showMessageDialog(btnCadastrar, "Cadastro feito");
 					 atualizarTabela();
 				 }else {
-					 JOptionPane.showMessageDialog(btnCadastrar, "Erro no cadastro ");
+					 new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
 				 }
 				 
 				 
