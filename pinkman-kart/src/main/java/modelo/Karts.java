@@ -11,7 +11,7 @@ public class Karts {
 	private Long dataEntrada;
 	private Long Id;
 	private String motor;
-	private Long forneCNPJ;
+	private Long CNPJ;
 	
 	public Karts(){
 		
@@ -82,11 +82,13 @@ public class Karts {
 	public void setId(Long Id) {
 		this.Id = Id;
 	}
-	public Long getforneCNPJ() {
-		return forneCNPJ;
+
+	public void setCNPJ(Long CNPJ) {
+		this.CNPJ = CNPJ;
+		
 	}
-	public void setforneCNPJ(Long forneCNPJ) {
-		this.forneCNPJ = forneCNPJ;
+	public Long CNPJ() {
+		return CNPJ;
 	}
 	
 
