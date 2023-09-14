@@ -145,7 +145,7 @@ public class TelaFornecedor extends JFrame {
 
 				FornecedorDAO fornecedorDao = FornecedorDAO.getinstancia();
 				if (fornecedorDao.inserir(fornecedor) == true) {
-					JOptionPane.showMessageDialog(btnCadastrar, "Cadastrado");
+					new MensagemAcerto("Cadastrado !").setVisible(true);
 					atualizarTabela();
 				} else {
 					new MensagemErro("Não foi possivel cadastrar !").setVisible(true);

@@ -151,7 +151,7 @@ public class TelaCliente extends JFrame {
 
 				ClienteDAO clienteDao = ClienteDAO.getinstancia();
 				if (clienteDao.inserir(cliente) == true) {
-					JOptionPane.showMessageDialog(btnCadastrar, "Cadastrado");
+					new MensagemAcerto("Cadastrado !").setVisible(true);
 					atualizarTabela();
 				} else {
 					new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
@@ -362,9 +362,9 @@ public class TelaCliente extends JFrame {
 
 					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 					tableModel.removeRow(selectedRow);
-					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
+					new MensagemAcerto("Excluido com sucesso !").setVisible(true);
 				} else {
-					JOptionPane.showMessageDialog(null, "Erro ao excluir!");
+					new MensagemErro("Não foi possivel excluir!").setVisible(true);
 				}
 
 			}
