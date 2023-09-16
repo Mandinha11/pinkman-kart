@@ -157,7 +157,7 @@ public class TelaCliente extends JFrame {
 					new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
 				}
 
-			}
+		}
 
 		});
 		contentPane.add(btnCadastrar);

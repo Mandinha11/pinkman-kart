@@ -37,7 +37,7 @@ public class ClienteDAO {
 			while (rs.next()) {
 
 				long telefone = rs.getLong("Telefone");
-				Date dataNac = rs.getDate("data_nascimento");
+				//Date dataNac = rs.getDate("data_nascimento");
 				long cpf = rs.getLong("cpf");
 				String nomeCompleto = rs.getString("nome_completo");
 
@@ -105,7 +105,7 @@ public class ClienteDAO {
 
 		Connection conn = con.conectar();
 
-		String query = "UPDATE cliente SET nome_completo = ?, telefone = ?";
+		String query = "UPDATE clientes SET nome_completo = ?, telefone = ?";
 
 		try {
 
@@ -133,7 +133,7 @@ public class ClienteDAO {
 
 		Connection conn = con.conectar();
 
-		String query = "DELETE FROM cliente WHERE cpf = ?";
+		String query = "DELETE FROM clientes WHERE cpf = ?";
 
 		try {
 
