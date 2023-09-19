@@ -322,7 +322,6 @@ public class TelaKarts extends JFrame {
 
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBackground(new Color(0, 85, 125));
-		panel_1_1.setLayout(null);
 		panel_1_1.setBounds(98, 195, 423, 61);
 		contentPane.add(panel_1_1);
 
@@ -477,7 +476,7 @@ public class TelaKarts extends JFrame {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		txtAno = new JFormattedTextField(mascaraAno);
 
 		
