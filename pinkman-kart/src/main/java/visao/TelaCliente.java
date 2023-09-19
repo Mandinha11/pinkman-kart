@@ -6,19 +6,18 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -28,14 +27,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
-import com.mysql.cj.protocol.a.LocalDateTimeValueEncoder;
-
 import controle.ClienteDAO;
-import controle.FornecedorDAO;
 import modelo.Cliente;
-import modelo.Fornecedor;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class TelaCliente extends JFrame {
 
@@ -83,6 +76,37 @@ public class TelaCliente extends JFrame {
 
 		setContentPane(contentPane);
 
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(380, 107, 506, 45);
+		panel_2.setLayout(null);
+		panel_2.setToolTipText("");
+		panel_2.setBackground(new Color(0, 85, 125));
+		contentPane.add(panel_2);
+
+		JLabel lblNewLabel_2 = new JLabel("Data de Nascimento:");
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
+		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblNewLabel_2.setBounds(10, 11, 191, 25);
+		panel_2.add(lblNewLabel_2);
+
+		JLabel lblDataNasc = new JLabel("Data De Nascimento:");
+		lblNewLabel_2.setBounds(10, 11, 191, 25);
+		panel_2.add(lblNewLabel_2);
+		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
+
+		MaskFormatter mascaraDataNac = null;
+		try {
+			mascaraDataNac = new MaskFormatter("##/##/####");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		txtData = new JFormattedTextField(mascaraDataNac);
+		txtData.setBounds(176, 11, 320, 25);
+		panel_2.add(txtData);
+		txtData.setColumns(10);
+
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setForeground(new Color(255, 255, 255));
 		btnCadastrar.setBackground(new Color(0, 0, 0));
@@ -104,15 +128,16 @@ public class TelaCliente extends JFrame {
 					data = data.trim();
 
 					if (data.trim().isEmpty()) {
-						
+
 						new MensagemErro("Data não preenchida !").setVisible(true);
 						return;
-						
+
 					} else {
-						DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato da data
+						DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato da
+																								// data
 						LocalDate dataNasc = LocalDate.parse(data, formato);
 						cliente.setDataNac(dataNasc);
-					
+
 					}
 				}
 
@@ -159,7 +184,7 @@ public class TelaCliente extends JFrame {
 					new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
 				}
 
-		}
+			}
 
 		});
 		contentPane.add(btnCadastrar);
@@ -227,38 +252,6 @@ public class TelaCliente extends JFrame {
 		textCPF.setBounds(179, 9, 317, 25);
 		panel_1.add(textCPF);
 		textCPF.setColumns(10);
-
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(380, 107, 506, 45);
-		panel_2.setLayout(null);
-		panel_2.setToolTipText("");
-		panel_2.setBackground(new Color(0, 85, 125));
-		contentPane.add(panel_2);
-
-		JLabel lblNewLabel_2 = new JLabel("Data de Nascimento:");
-		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		lblNewLabel_2.setBounds(10, 11, 191, 25);
-		panel_2.add(lblNewLabel_2);
-
-		JLabel lblDataNasc = new JLabel("Data De Nascimento:");
-		lblNewLabel_2.setBounds(10, 11, 191, 25);
-		panel_2.add(lblNewLabel_2);
-		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		
-		MaskFormatter mascaraDataNac = null;
-		try {
-			mascaraDataNac = new MaskFormatter("##/##/####");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		txtData = new JTextField();
-		txtData.setBounds(176, 11, 320, 25);
-		panel_2.add(txtData);
-		txtData.setColumns(10);
-		txtData = new JFormattedTextField(mascaraDataNac);
 
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBounds(1048, 107, 506, 45);
@@ -410,7 +403,7 @@ public class TelaCliente extends JFrame {
 				new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
 
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		
+
 		for (Cliente cliente : clientes) {
 			Object[] linha = { cliente.getNomeCompleto(), cliente.getCpf(), cliente.getDataNac().format(formato),
 					cliente.getTelefone() };
