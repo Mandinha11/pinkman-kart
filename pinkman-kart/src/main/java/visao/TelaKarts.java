@@ -11,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.text.MaskFormatter;
 
+import com.google.protobuf.Empty;
+
 import controle.KartsDAO;
 
 import modelo.Karts;
@@ -19,6 +21,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -165,12 +169,6 @@ public class TelaKarts extends JFrame {
 				System.out.println();
 				CNPJ = CNPJ.replace("/", "");
 				System.out.println();
-				CNPJ = CNPJ.replace("0", "");
-				System.out.println();
-				CNPJ = CNPJ.replace("0", "");
-				System.out.println();
-				CNPJ = CNPJ.replace("0", "");
-				System.out.println();
 				CNPJ = CNPJ.replace("-", "");
 				System.out.println();
 				CNPJ = CNPJ.trim();
@@ -185,20 +183,42 @@ public class TelaKarts extends JFrame {
 					karts.setCNPJ(Long.valueOf(CNPJ));
 				}
 				
-				String textDataEntrada = txtDataEntrada.getText();
-				if (txtDataEntrada.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Data da Entrada não foi cadastrada");
-				}else {
-					karts.setdataEntrada(Long.valueOf(textDataEntrada));
+				String DataEntrada = txtDataEntrada.getText();
+				if (DataEntrada.trim().length() == 0) {
+					//new MensagemErro("Data não preenchida !").setVisible(true);
+					return;
+
+				} else {
+					DataEntrada = DataEntrada.replace("/", "");
+					DataEntrada = DataEntrada.trim();
+					
+					if (DataEntrada.trim().isEmpty()) {
+
+						//new MensagemErro("Data não preenchida !").setVisible(true);
+						return;
+
+					} else {
+						DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyyy"); // Define o formato da
+						// data
+						LocalDate dataEntradaformatada = LocalDate.parse(DataEntrada, formato);
+						karts.setdataEntrada(dataEntradaformatada);
+					}
 				}
+
 				
 				String textQuantidade = txtQuantidade.getText();
 				if(txtQuantidade.getText().trim().length()==0) {
-					JOptionPane.showMessageDialog(null, "Quantidade não foi cadastrada");
+					JOptionPane.showMessageDialog(null, "Quantidade não foi Preenchida");
 					return;
 				}else {
 					karts.setquantidade(Long.valueOf(textQuantidade));
 				}
+				String Cor = txtCor.getText();
+					if(txtCor.getText().trim().length() == 0) {
+						JOptionPane.showMessageDialog(null, "A Cor não foi Preenchida");
+					}else {
+						karts.setcor(String.valueOf(Cor));
+					}
 
 				KartsDAO kartDao = KartsDAO.getinstancia();
 				

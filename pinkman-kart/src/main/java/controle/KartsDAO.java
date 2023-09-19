@@ -1,6 +1,7 @@
 package controle;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +32,7 @@ public class KartsDAO {
 				String marca = rs.getString("marca");
 				long ano = rs.getLong("ano");
 				long quantidade = rs.getLong("quantidade");
-				long dataentrada = rs.getLong("data_entrada");
+				Date dataentrada = rs.getDate("data_entrada");
 				long preco = rs.getLong("preco");
 				long CNPJ = rs.getInt("CNPJ");
 				
@@ -42,7 +43,7 @@ public class KartsDAO {
 				k.setmarca(marca);
 				k.setano(ano);
 				k.setquantidade(quantidade);
-				k.setdataEntrada(dataentrada);
+				k.setdataEntrada(dataentrada.toLocalDate());
 				k.setpreco(preco);
 				k.setCNPJ(CNPJ);
 				
@@ -95,9 +96,10 @@ public class KartsDAO {
 				ps.setLong(5, k.getano());
 				ps.setLong(6, k.getquantidade());
 				ps.setLong(8, k.getpreco());
-				ps.setLong(7, k.getdataEntrada());
+				ps.setDate(7,Date.valueOf(k.getdataEntrada()));
 				ps.setLong(9, k.CNPJ());
-				
+				System.out.println(ps);
+				System.out.println(ps.toString());
 				ps.executeUpdate();
 				
 			

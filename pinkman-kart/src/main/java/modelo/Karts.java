@@ -1,5 +1,8 @@
 package modelo;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class Karts {
 	
 	private String modelo;
@@ -8,7 +11,7 @@ public class Karts {
 	private Long ano;
 	private Long quantidade;
 	private String cor;
-	private Long dataEntrada;
+	private LocalDate dataEntrada;
 	private Long Id;
 	private String motor;
 	private Long CNPJ;
@@ -69,10 +72,10 @@ public class Karts {
 		this.motor = motor;
 	}
 	
-	public Long getdataEntrada() {
+	public LocalDate getdataEntrada() {
 		return dataEntrada;
 	}
-	public void setdataEntrada(Long dataEntrada) {
+	public void setdataEntrada(LocalDate dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
 	
