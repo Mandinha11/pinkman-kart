@@ -35,18 +35,21 @@ public class ClienteDAO {
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-
+				
+				Cliente cl = new Cliente();
+				
 				long telefone = rs.getLong("Telefone");
 				Date dataNac = rs.getDate("data_nascimento");
 				long cpf = rs.getLong("cpf");
 				String nomeCompleto = rs.getString("nome_completo");
 
-				Cliente cl = new Cliente();
+				//Cliente cl = new Cliente();
 				cl.setTelefone(telefone);
 				cl.setNomeCompleto(nomeCompleto);
 				cl.setCpf(cpf);
 
-				cl.setDataNac(fromDateToLocalDate(dataNac));
+				LocalDate dataNascConvertida = dataNac.toLocalDate();
+				cl.setDataNac(dataNascConvertida);
 
 				clientes.add(cl);
 			}

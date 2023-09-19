@@ -105,6 +105,9 @@ public class TelaCliente extends JFrame {
 
 					if (data.trim().isEmpty()) {
 						
+						new MensagemErro("Data não preenchida !").setVisible(true);
+						return;
+						
 					} else {
 						DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato da data
 						LocalDate dataNasc = LocalDate.parse(data, formato);
