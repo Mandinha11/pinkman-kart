@@ -96,22 +96,21 @@ public class TelaCliente extends JFrame {
 
 				String data = txtData.getText();
 				if (data.trim().length() == 0) {
+					new MensagemErro("Data não preenchida !").setVisible(true);
+					return;
 
 				} else {
 					data = data.replace("/", "");
 					data = data.trim();
 
 					if (data.trim().isEmpty()) {
-						new MensagemErro("Data não preenchida !").setVisible(true);
-						return;
+						
 					} else {
-						String dia = data.substring(0, 1);
-						String mes = data.substring(2, 3);
-						String ano = data.substring(4, 7);
-						cliente.setDataNac(LocalDate.of(Integer.valueOf(ano), Integer.valueOf(mes), Integer.valueOf(dia)));
+						DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato da data
+						LocalDate dataNasc = LocalDate.parse(data, formato);
+						cliente.setDataNac(dataNasc);
+					
 					}
-
-
 				}
 
 				String cpf = textCPF.getText();
@@ -244,18 +243,18 @@ public class TelaCliente extends JFrame {
 		panel_2.add(lblNewLabel_2);
 		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-
-		txtData = new JTextField();
-		txtData.setBounds(176, 11, 320, 25);
-		panel_2.add(txtData);
-		txtData.setColumns(10);
-
+		
 		MaskFormatter mascaraDataNac = null;
 		try {
 			mascaraDataNac = new MaskFormatter("##/##/####");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+
+		txtData = new JTextField();
+		txtData.setBounds(176, 11, 320, 25);
+		panel_2.add(txtData);
+		txtData.setColumns(10);
 		txtData = new JFormattedTextField(mascaraDataNac);
 
 		JPanel panel_1_1 = new JPanel();
@@ -407,10 +406,10 @@ public class TelaCliente extends JFrame {
 		modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
 
-		// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
 		for (Cliente cliente : clientes) {
-			Object[] linha = { cliente.getNomeCompleto(), cliente.getCpf(), cliente.getDataNac(),
+			Object[] linha = { cliente.getNomeCompleto(), cliente.getCpf(), cliente.getDataNac().format(formato),
 					cliente.getTelefone() };
 			modelo.addRow(linha);
 

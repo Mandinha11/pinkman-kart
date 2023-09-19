@@ -37,7 +37,7 @@ public class ClienteDAO {
 			while (rs.next()) {
 
 				long telefone = rs.getLong("Telefone");
-				//Date dataNac = rs.getDate("data_nascimento");
+				Date dataNac = rs.getDate("data_nascimento");
 				long cpf = rs.getLong("cpf");
 				String nomeCompleto = rs.getString("nome_completo");
 
@@ -46,7 +46,7 @@ public class ClienteDAO {
 				cl.setNomeCompleto(nomeCompleto);
 				cl.setCpf(cpf);
 
-//				cl.setDataNac(fromDateToLocalDate(dataNac));
+				cl.setDataNac(fromDateToLocalDate(dataNac));
 
 				clientes.add(cl);
 			}
