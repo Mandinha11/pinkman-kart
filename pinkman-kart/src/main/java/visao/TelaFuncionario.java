@@ -43,8 +43,6 @@ public class TelaFuncionario extends JFrame {
 	private FuncionarioDAO dao;
 	private DefaultTableModel modelo;
 	private JTextField textDataNac;
-	private JTextField txtSenha;
-	private JTextField txtMatricula;
 
 	/**
 	 * Launch the application.
@@ -91,36 +89,6 @@ public class TelaFuncionario extends JFrame {
 			}
 		});
 		contentPane.setLayout(null);
-		
-		JPanel panelSenha_1 = new JPanel();
-		panelSenha_1.setLayout(null);
-		panelSenha_1.setBackground(new Color(0, 85, 125));
-		panelSenha_1.setBounds(1097, 807, 516, 48);
-		contentPane.add(panelSenha_1);
-		
-		JLabel lblMatricula = new JLabel("Matricula:");
-		lblMatricula.setBounds(21, 11, 62, 26);
-		panelSenha_1.add(lblMatricula);
-		
-		txtMatricula = new JTextField();
-		txtMatricula.setBounds(105, 14, 342, 20);
-		panelSenha_1.add(txtMatricula);
-		txtMatricula.setColumns(10);
-		
-		JPanel panelSenha = new JPanel();
-		panelSenha.setLayout(null);
-		panelSenha.setBackground(new Color(0, 85, 125));
-		panelSenha.setBounds(464, 807, 516, 48);
-		contentPane.add(panelSenha);
-		
-		JLabel lblNewLabel_3 = new JLabel("Senha:");
-		lblNewLabel_3.setBounds(10, 11, 74, 26);
-		panelSenha.add(lblNewLabel_3);
-		
-		txtSenha = new JTextField();
-		txtSenha.setBounds(64, 14, 401, 20);
-		panelSenha.add(txtSenha);
-		txtSenha.setColumns(10);
 		contentPane.add(btnVoltar);
 
 		JPanel panel = new JPanel();
@@ -203,23 +171,7 @@ public class TelaFuncionario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				Funcionario funcionario = new Funcionario();
-				
-				String matricula = txtMatricula.getText();
-				if (matricula.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Matricula não foi preenchido!");
-				} else {
-					funcionario.setMatricula(Long.valueOf(matricula));
-				}
-				
-				String senha = txtSenha.getText();
-				if (senha.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "senha não foi preenchido!");
-					return;
-				} else {
-					
-					funcionario.setSenha(senha);
-				}
-				
+			
 				String text = textCPF.getText();
 				if (text.trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "CPF não foi preenchido!");
@@ -242,6 +194,9 @@ public class TelaFuncionario extends JFrame {
 					JOptionPane.showMessageDialog(null, "DATA não foi preenchido!");
 					return;
 				} else {
+					text = text.replace("/", "");
+					text = text.replace("/", "");
+					
 					DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato da data
 					LocalDate dataNasc = LocalDate.parse(data, formato);
 					funcionario.setDataNac(dataNasc);
@@ -266,7 +221,7 @@ public class TelaFuncionario extends JFrame {
 				}
 			}
 		});
-		btnCadastratar.setBounds(66, 223, 276, 53);
+		btnCadastratar.setBounds(66, 230, 276, 53);
 		btnCadastratar.setForeground(new Color(255, 255, 255));
 		btnCadastratar.setBackground(new Color(47, 79, 79));
 		btnCadastratar.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -292,12 +247,12 @@ public class TelaFuncionario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table.getSelectedRow();
 
-				long matricula = (long) table.getValueAt(selectedRow, 1);
+				long cpf = (long) table.getValueAt(selectedRow, 1);
 
 				FuncionarioDAO dao = FuncionarioDAO.getinstancia();
 
 				Funcionario f = new Funcionario();
-				f.setMatricula(matricula);
+				f.setCpf(cpf);
 				boolean retorno = dao.deletar(f);
 
 				if (retorno == true) {
@@ -356,7 +311,7 @@ public class TelaFuncionario extends JFrame {
 
 		JScrollPane scrollPane_1 = new JScrollPane(table_1);
 		panel_1.add(scrollPane_1);
-
+		
 		JLabel lblNewLabel_6 = new JLabel("");
 		lblNewLabel_6.setIcon(new ImageIcon(TelaFuncionario.class.getResource("/imgs/FundoDeTela.jpg")));
 		lblNewLabel_6.setBounds(0, 85, 1924, 1061);
@@ -372,19 +327,14 @@ public class TelaFuncionario extends JFrame {
 		tableModel.setRowCount(0);
 
 		for (Funcionario funcionario : funcionarios) {
-			Object[] rowData = { funcionario.getMatricula(), funcionario.getNomeCompleto(), funcionario.getCpf(),
-					funcionario.getDataNac(), funcionario.getCargo() };
+			Object[] rowData = { funcionario.getCpf(), funcionario.getNomeCompleto(),
+					funcionario.getCargo(), funcionario.getDataNac() };
 			tableModel.addRow(rowData);
 		}
 	}
 
 	public void atualizarTabela() {
 
-		/*
-		 * String nome = txtNome.getText(); String cpf = txtCPF.getText(); Pessoa p =
-		 * new Pessoa(); p.setNome(nome); p.setCpf(cpf); listaPessoas.add(p);
-		 * atualizarJTable(); limparCampos();
-		 */
 		dao = FuncionarioDAO.getinstancia();
 		ArrayList<Funcionario> funcionarios = dao.listar();
 

@@ -1,37 +1,24 @@
 package modelo;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Funcionario {
 
-	private Long Matricula;
+	
 	private Long Cpf;
 	private String nomeCompleto;
 	private LocalDate dataNac;
 	private String cargo;
-	private String senha;
+	
 
 	public Funcionario() {
-		this.senha = "usuario";
+	
 	}
-
-	public Funcionario(Long matricula, Long cpf, String nomeCompleto, LocalDate dataNac, String cargo, String senha) {
-
-		Matricula = matricula;
-		Cpf = cpf;
+	public Funcionario(Long cpf, String nomeCompleto, LocalDate dataNac, String cargo) {
+		this.Cpf = cpf;
 		this.nomeCompleto = nomeCompleto;
 		this.dataNac = dataNac;
 		this.cargo = cargo;
-		this.senha = "Usuario";
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public String getNomeCompleto() {
@@ -64,15 +51,6 @@ public class Funcionario {
 
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
-	}
-
-	public Long getMatricula() {
-
-		return Matricula;
-	}
-
-	public void setMatricula(Long matricula) {
-		Matricula = matricula;
 	}
 
 }

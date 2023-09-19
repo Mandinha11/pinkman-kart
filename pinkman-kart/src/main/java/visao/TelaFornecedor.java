@@ -338,11 +338,6 @@ public class TelaFornecedor extends JFrame {
 
 	public void atualizarTabela() {
 
-		/*
-		 * String nome = txtNome.getText(); String cpf = txtCPF.getText(); Pessoa p =
-		 * new Pessoa(); p.setNome(nome); p.setCpf(cpf); listaPessoas.add(p);
-		 * atualizarJTable(); limparCampos();
-		 */
 		dao = FornecedorDAO.getinstancia();
 		ArrayList<Fornecedor> fornecedores = dao.Listar();
 

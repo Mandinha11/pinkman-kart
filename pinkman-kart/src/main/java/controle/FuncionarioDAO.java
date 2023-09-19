@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 
 import modelo.Funcionario;
@@ -28,19 +27,19 @@ public class FuncionarioDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 
-				Funcionario f = new Funcionario();
+				
+				Long cpf = rs.getLong("cpf");
+				String nomeCompleto = rs.getString("nome_completo");
 				String cargo = rs.getString("cargo");
 				Date dataNac = rs.getDate("data_nascimento");
-				long cpf = rs.getLong("cpf");
-				String nomeCompleto = rs.getString("nome_completo");
-				Long matricula = rs.getLong("matricula");
-
-				f.setMatricula(matricula);
-				f.setCargo(cargo);
-				f.setNomeCompleto(nomeCompleto);
-				f.setCpf(cpf);
-
+				
 				LocalDate dataNascConvertida = dataNac.toLocalDate();
+				
+				Funcionario f = new Funcionario();
+				
+				f.setCpf(cpf);
+				f.setNomeCompleto(nomeCompleto);
+				f.setCargo(cargo);
 				f.setDataNac(dataNascConvertida);
 
 				funcionarios.add(f);
@@ -69,19 +68,19 @@ public class FuncionarioDAO {
 		Conexao con = Conexao.getInstancia();
 		Connection conn = con.conectar();
 
-		String query = "INSERT INTO funcionarios (matricula, cpf, nome_completo, data_nascimento, cargo, senha) VALUES (? ,?, ?, ?, ?, ?)";
+		String query = "INSERT INTO funcionarios (cpf, nome_completo, data_nascimento, cargo) VALUES (?, ?, ?, ?)";
 
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setLong(1, f.getMatricula());
-			ps.setLong(2, f.getCpf());
-			ps.setString(3, f.getNomeCompleto());
+			ps.setLong(1, f.getCpf());
+			ps.setString(2, f.getNomeCompleto());
+			ps.setString(3, f.getCargo());
 			ps.setDate(4, Date.valueOf(f.getDataNac()));
-			ps.setString(5, f.getCargo());
-			ps.setString(6, f.getSenha());
+		
 			ps.executeUpdate();
+			
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -99,17 +98,15 @@ public class FuncionarioDAO {
 
 		Connection conn = con.conectar();
 
-		String query = "UPDATE funcionarios SET cargo = ?, matricula = ?";
+		String query = "UPDATE funcionarios SET cargo = ?, cpf = ?";
 
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
 			ps.setString(1, f.getCargo());
-			ps.setLong(2, f.getMatricula());
+			ps.setLong(2, f.getCpf());
 			ps.executeUpdate();
-
-			;
 
 			return true;
 
@@ -129,18 +126,14 @@ public class FuncionarioDAO {
 
 		Connection conn = con.conectar();
 
-		String query = "DELETE FROM funcionarios WHERE matricula = ?";
+		String query = "DELETE FROM funcionarios WHERE cpf = ?";
 
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setLong(1, f.getMatricula());
-
+			ps.setLong(1, f.getCpf());
 			ps.executeUpdate();
-
-			con.fecharConexao();
-
 			return true;
 
 		} catch (SQLException e) {
