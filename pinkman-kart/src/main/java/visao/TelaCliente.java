@@ -133,8 +133,8 @@ public class TelaCliente extends JFrame {
 						return;
 
 					} else {
-						DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato da
-																								// data
+						DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyyy"); // Define o formato da
+																						// data
 						LocalDate dataNasc = LocalDate.parse(data, formato);
 						cliente.setDataNac(dataNasc);
 
@@ -311,10 +311,10 @@ public class TelaCliente extends JFrame {
 		panel_3.add(scrollPane, BorderLayout.NORTH);
 
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
+				new String[] { "Id Cliente","Nome Completo", "CPF", "Data Nasc", "Telefone" });
 
 		table.setModel(
-				new DefaultTableModel(new Object[][] {}, new String[] { "Nome", "CPf", "Data Nac", "Telefone" }));
+				new DefaultTableModel(new Object[][] {}, new String[] { "id_cliente","Nome", "CPf", "Data Nac", "Telefone" }));
 
 		atualizarTabela();
 
@@ -400,12 +400,12 @@ public class TelaCliente extends JFrame {
 		ArrayList<Cliente> clientes = clienteDAO.listar();
 
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
+				new String[] {"Nome Completo", "CPF", "Data Nasc", "Telefone" });
 
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		for (Cliente cliente : clientes) {
-			Object[] linha = { cliente.getNomeCompleto(), cliente.getCpf(), cliente.getDataNac().format(formato),
+			Object[] linha = {cliente.getNomeCompleto(), cliente.getCpf(), cliente.getDataNac().format(formato),
 					cliente.getTelefone() };
 			modelo.addRow(linha);
 

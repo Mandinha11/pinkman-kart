@@ -38,12 +38,15 @@ public class ClienteDAO {
 				
 				Cliente cl = new Cliente();
 				
+				int id_cliente = rs.getInt("id_cliente");
 				long telefone = rs.getLong("Telefone");
 				Date dataNac = rs.getDate("data_nascimento");
 				long cpf = rs.getLong("cpf");
 				String nomeCompleto = rs.getString("nome_completo");
 
-				//Cliente cl = new Cliente();
+				
+				
+			//	cl.setId_cliente(id_cliente);
 				cl.setTelefone(telefone);
 				cl.setNomeCompleto(nomeCompleto);
 				cl.setCpf(cpf);
@@ -76,16 +79,16 @@ public class ClienteDAO {
 		if (c != null) {
 			Conexao con = Conexao.getInstancia();
 			Connection conn = con.conectar();
-			String query = "INSERT INTO clientes (id_cliente, nome_completo, data_nascimento, cpf, telefone) VALUES (?, ?, ?, ?, ?)";
+			String query = "INSERT INTO clientes (nome_completo, data_nascimento, cpf, telefone) VALUES ( ?, ?, ?, ?)";
 
 			try {
 
 				PreparedStatement ps = conn.prepareStatement(query);
-
-				ps.setString(2, c.getNomeCompleto());
-				ps.setDate(3, Date.valueOf(c.getDataNac()));
-				ps.setLong(4, c.getCpf());
-				ps.setLong(5, c.getTelefone());
+				
+				ps.setString(1, c.getNomeCompleto());
+				ps.setDate(2, Date.valueOf(c.getDataNac()));
+				ps.setLong(3, c.getCpf());
+				ps.setLong(4, c.getTelefone());
 
 				ps.executeUpdate();
 
