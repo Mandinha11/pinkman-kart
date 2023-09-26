@@ -76,8 +76,9 @@ public class FuncionarioDAO {
 
 			ps.setLong(1, f.getCpf());
 			ps.setString(2, f.getNomeCompleto());
-			ps.setString(3, f.getCargo());
-			ps.setDate(4, Date.valueOf(f.getDataNac()));
+			ps.setDate(3, Date.valueOf(f.getDataNac()));
+			ps.setString(4, f.getCargo());
+			
 		
 			ps.executeUpdate();
 			
