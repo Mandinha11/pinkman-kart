@@ -52,8 +52,8 @@ public class MensagemErro extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		JLabel lblMsgErro = new JLabel("");
-		lblMsgErro.setBounds(293, 94, 318, 104);
-		lblMsgErro.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
+		lblMsgErro.setBounds(267, 94, 377, 104);
+		lblMsgErro.setFont(new Font("Segoe UI Semibold", Font.BOLD, 24));
 		lblMsgErro.setForeground(new Color(255, 255, 255));
 		contentPane.add(lblMsgErro);
 

@@ -117,7 +117,14 @@ public class TelaCliente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				Cliente cliente = new Cliente();
-
+				
+				if (textNomeCompleto.getText().trim().length() == 0) {
+					new MensagemErro("Nome não preenchido !").setVisible(true);
+					return;
+				} else {
+					cliente.setNomeCompleto(textNomeCompleto.getText());
+				}
+			
 				String data = txtData.getText();
 				if (data.trim().length() == 0) {
 					new MensagemErro("Data não preenchida !").setVisible(true);
@@ -169,12 +176,7 @@ public class TelaCliente extends JFrame {
 
 				}
 
-				if (textNomeCompleto.getText().trim().length() == 0) {
-					new MensagemErro("Nome não preenchido !").setVisible(true);
-					return;
-				} else {
-					cliente.setNomeCompleto(textNomeCompleto.getText());
-				}
+
 
 				ClienteDAO clienteDao = ClienteDAO.getinstancia();
 				if (clienteDao.inserir(cliente) == true) {
@@ -298,6 +300,8 @@ public class TelaCliente extends JFrame {
 				 */
 				int selectedRow = table.getSelectedRow();
 				String cpf = (String) table.getValueAt(selectedRow, 1);
+				
+				
 
 				// fazer uma consulta no banco procurando um cliente por CPF ou no arraylist
 

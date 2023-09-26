@@ -122,7 +122,7 @@ public class ClienteDAO {
 
 			ps.executeUpdate();
 
-			return true;
+			//return true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -146,10 +146,9 @@ public class ClienteDAO {
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setLong(1, c.getCpf());
 			ps.executeUpdate();
-
-			con.fecharConexao();
-
+			
 			return true;
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();

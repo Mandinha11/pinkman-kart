@@ -100,11 +100,14 @@ public class TelaFornecedor extends JFrame {
 				Fornecedor fornecedor = new Fornecedor();
 
 				String text = txtCEP.getText();
+				
 				if (text.trim().length() == 0) {
 					new MensagemErro("CEP não preenchido !").setVisible(true);
 					return;
 				} else {
 					text = text.replace("-", "");
+					text = text.trim();
+					
 					fornecedor.setCep(Long.valueOf(text));
 
 				}
@@ -131,13 +134,14 @@ public class TelaFornecedor extends JFrame {
 					cnpj = cnpj.replace("/", "");
 					cnpj = cnpj.replace(".", "");
 					cnpj = cnpj.replace("-", "");
+					cnpj = cnpj.trim();
 
 					fornecedor.setCnpj(Long.valueOf(cnpj));
 
 				}
 
 				if (txtNomeEmpresa.getText().trim().length() == 0) {
-					new MensagemErro("Nome da Empresa não preenchido !").setVisible(true);
+					new MensagemErro("Empresa não preenchido !").setVisible(true);
 					return;
 				} else {
 					fornecedor.setNomeEmpresa(txtNomeEmpresa.getText());
@@ -191,10 +195,10 @@ public class TelaFornecedor extends JFrame {
 					// Remove a linha selecionada
 					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 					tableModel.removeRow(selectedRow);
-					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
+					new MensagemAcerto("Excluido com sucesso !").setVisible(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Erro ao excluir!");
+					new MensagemErro("Não foi possivel excluir!").setVisible(true);
 				}
 
 			}
