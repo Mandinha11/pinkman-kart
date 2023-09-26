@@ -430,13 +430,14 @@ public class TelaKarts extends JFrame {
 		panel_4.add(scrollPane);
 
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"ID_Kart", "Cor", "Modelo", "Marca", "Ano", "Quantidade", "Data_Entrada", "Pre\u00E7o", "Fornecedor_CNPJ"
-			}
-		));
+			
+				modelo = new DefaultTableModel(new Object[][] {},
+						new String[] { "ID_kart","cor","Modelo","Marca","Ano","Quantidade","Data_Entrada","Preço", "fornecedor_CNPJ" });
+				table.setModel(
+						new DefaultTableModel(new Object[][] {}, new String[] { "ID_kart","cor","Modelo","Marca","Ano","Quantidade","Data_Entrada","Preço", "fornecedor_CNPJ" }));
+
+				atualizarTabela();
+		
 		table.getColumnModel().getColumn(6).setPreferredWidth(77);
 		table.getColumnModel().getColumn(8).setPreferredWidth(96);
 		scrollPane.setViewportView(table);
@@ -519,10 +520,12 @@ public class TelaKarts extends JFrame {
 		ArrayList<Karts> karts = dao.listar();
 
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "ID_kart","cor","Modelo","Marca","Ano","Quantidade","Data_Entrada","Preço", "CNPJ" });
+				new String[] { "ID_kart","cor","Modelo","Marca","Ano","Quantidade","Data_Entrada","Preço", "fornecedor_CNPJ" });
+		
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		for (Karts Karts : karts) {
-			Object[] linha = { Karts.getId(), Karts.getcor(),Karts.getmodelo(),Karts.getmarca(),Karts.getano(),Karts.getdataEntrada(), 
+			Object[] linha = { Karts.getId(), Karts.getcor(),Karts.getmodelo(),Karts.getmarca(),Karts.getano(),Karts.getdataEntrada().format(formato), 
 					Karts.getpreco(), Karts.CNPJ() };
 			modelo.addRow(linha);
 

@@ -34,7 +34,7 @@ public class KartsDAO {
 				long quantidade = rs.getLong("quantidade");
 				Date dataentrada = rs.getDate("data_entrada");
 				long preco = rs.getLong("preco");
-				long CNPJ = rs.getInt("CNPJ");
+				long CNPJ = rs.getLong("fornecedor_CNPJ");
 				
 				Karts k = new Karts();
 				k.setId(idkarts);
