@@ -26,6 +26,8 @@ import controle.FornecedorDAO;
 import modelo.Fornecedor;
 import javax.swing.JScrollPane;
 import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaFornecedor extends JFrame {
 
@@ -168,10 +170,27 @@ public class TelaFornecedor extends JFrame {
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				// TODO atualizar dados dos campos
+				DefaultTableModel tblModel = (DefaultTableModel)table.getModel();
+				if(table.getRowCount()== 1) {
+					String nomeEmpresa = txtNomeEmpresa.getText();
+					String cep = txtCEP.getText();
+					String cnpj = txtCNPJ.getText();
+					String telefone = txtTelefone.getText();
+					
+				tblModel.setValueAt(nomeEmpresa,table.getSelectedRow(),0);
+				tblModel.setValueAt(cep,table.getSelectedRow(),1);
+				tblModel.setValueAt(cnpj,table.getSelectedRow(),2);
+				tblModel.setValueAt(telefone,table.getSelectedRow(),3);
 				
-				
-				
+				new MensagemAcerto("Atualizado com sucesso !").setVisible(true);
+					
+			}else {
+				if(table.getRowCount()==0) {
+					new MensagemErro("Não foi possivel Atualizar").setVisible(true);
+				}else {
+					new MensagemErro("Não foi possivel Atualizar!").setVisible(true);
+				}
+			}
 			}
 		});
 		contentPane.add(btnAtualizar);
@@ -323,6 +342,25 @@ public class TelaFornecedor extends JFrame {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JScrollPane scrollPane_1 = new JScrollPane(table);
+		scrollPane_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				DefaultTableModel tblModel = (DefaultTableModel)table.getModel();
+				
+				String tblnome_empresa = tblModel.getValueAt(table.getSelectedRow(),0).toString();
+				String tblcep = tblModel.getValueAt(table.getSelectedRow(),1).toString();
+				String tblcnpj = tblModel.getValueAt(table.getSelectedRow(),2).toString();
+				String tbltelefone = tblModel.getValueAt(table.getSelectedRow(),3).toString();
+				
+				txtNomeEmpresa.setText(tblnome_empresa);
+				txtTelefone.setText(tbltelefone);
+				txtCEP.setText(tblcep);
+				txtCNPJ.setText(tbltelefone);
+				
+				
+			}
+		});
 		panel.add(scrollPane_1);
 
 		JLabel lblNewLabel = new JLabel("");

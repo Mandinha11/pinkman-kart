@@ -89,7 +89,7 @@ public class FornecedorDAO {
 
 		Connection conn = con.conectar();
 
-		String query = "UPDATE fornecedor SET nome_empresa = ?, cnpj = ?";
+		String query = "UPDATE fornecedor SET nome_empresa = ?, telefone = ?";
 
 		try {
 
