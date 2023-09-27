@@ -228,9 +228,53 @@ public class TelaFuncionario extends JFrame {
 
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        // Verifica se uma linha foi selecionada na tabela
+		        int selectedRow = table_1.getSelectedRow();
+		        if (selectedRow == -1) {
+		            JOptionPane.showMessageDialog(null, "Selecione um funcionário na tabela para atualizar.");
+		            return;
+		        }
+
+		        // Obtém os valores da linha selecionada
+		        long cpf = (long) table_1.getValueAt(selectedRow, 0);
+		        String nome = (String) table_1.getValueAt(selectedRow, 1);
+		        String cargo = (String) table_1.getValueAt(selectedRow, 2);
+		        String dataNascimento = (String) table_1.getValueAt(selectedRow, 3);
+
+		        // Converte a data de nascimento para o formato correto
+		        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		        LocalDate dataNasc = LocalDate.parse(dataNascimento, formato);
+
+		        // Preenche o objeto Funcionario com os valores da linha selecionada
+		        Funcionario funcionario = new Funcionario();
+		        funcionario.setCpf(cpf);
+		        funcionario.setNomeCompleto(nome);
+		        funcionario.setCargo(cargo);
+		        funcionario.setDataNac(dataNasc);
+
+		        // Abre uma janela de diálogo para editar as informações
+		        EditarFuncionarioDialog dialog = new EditarFuncionarioDialog(funcionario);
+		        dialog.setVisible(true);
+
+		        // Verifica se as informações foram alteradas no diálogo
+		        if (dialog.isInformacoesAlteradas()) {
+		            // Atualiza os valores do funcionário com as alterações
+		            funcionario = dialog.getFuncionarioAtualizado();
+
+		            // Chama o método alterar do FuncionarioDAO para atualizar o funcionário
+		            FuncionarioDAO dao = FuncionarioDAO.getinstancia();
+		            boolean retorno = dao.alterar(funcionario);
+
+		            if (retorno) {
+		                JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso!");
+		                // Atualiza a tabela após a alteração
+		                atualizarTabela();
+		            } else {
+		                JOptionPane.showMessageDialog(null, "Erro ao atualizar o funcionário.");
+		            }
+		        }
+		    }
 		});
 		btnAtualizar.setBounds(66, 314, 276, 53);
 		btnAtualizar.setForeground(new Color(255, 255, 255));

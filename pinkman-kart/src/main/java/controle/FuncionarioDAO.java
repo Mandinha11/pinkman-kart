@@ -94,33 +94,31 @@ public class FuncionarioDAO {
 	}
 
 	public boolean alterar(Funcionario f) {
-		
-		//
-		Conexao con = Conexao.getInstancia();
+	    Conexao con = Conexao.getInstancia();
+	    Connection conn = con.conectar();
 
-		Connection conn = con.conectar();
+	    String query = "UPDATE funcionarios SET nome_completo = ?, data_nascimento = ?, cargo = ? WHERE cpf = ?";
 
-		String query = "UPDATE funcionarios SET  nome_completo = ?, data_nascimento = ?, cargo = ? WHERE cpf = ?";
+	    try {
+	        PreparedStatement ps = conn.prepareStatement(query);
 
-		try {
+	        ps.setString(1, f.getNomeCompleto());
+	        ps.setDate(2, Date.valueOf(f.getDataNac()));
+	        ps.setString(3, f.getCargo());
+	        ps.setLong(4, f.getCpf());
 
-			PreparedStatement ps = conn.prepareStatement(query);
+	        int rowsUpdated = ps.executeUpdate();
 
-			ps.setString(2, f.getNomeCompleto());
-			ps.setDate(3, Date.valueOf(f.getDataNac()));
-			ps.setString(4, f.getCargo());
-			
-			return true;
+	        return rowsUpdated > 0;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		} finally {
-			con.fecharConexao();
-		}
-
-		return false;
+	    return false;
 	}
+
 
 	public boolean deletar(Funcionario f) {
 
