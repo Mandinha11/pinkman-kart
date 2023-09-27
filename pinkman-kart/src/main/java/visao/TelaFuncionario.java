@@ -37,7 +37,6 @@ public class TelaFuncionario extends JFrame {
 	private JTextField textCPF;
 	private JTextField textNomeCompleto;
 	private JTable tableFunc;
-	private JTable table;
 	private JTable table_1;
 	private JComboBox<String> boxCargo;
 	private FuncionarioDAO dao;
@@ -245,9 +244,9 @@ public class TelaFuncionario extends JFrame {
 		btnExcluir.setBackground(new Color(47, 79, 79));
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selectedRow = table.getSelectedRow();
+				int selectedRow = table_1.getSelectedRow();
 
-				long cpf = (long) table.getValueAt(selectedRow, 1);
+				long cpf = (long) table_1.getValueAt(selectedRow, 0);
 
 				FuncionarioDAO dao = FuncionarioDAO.getinstancia();
 
@@ -257,7 +256,7 @@ public class TelaFuncionario extends JFrame {
 
 				if (retorno == true) {
 					// Remove a linha selecionado
-					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					DefaultTableModel tableModel = (DefaultTableModel) table_1.getModel();
 					tableModel.removeRow(selectedRow);
 					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
 
