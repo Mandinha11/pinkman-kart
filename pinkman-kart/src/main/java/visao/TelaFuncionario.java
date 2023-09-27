@@ -226,17 +226,17 @@ public class TelaFuncionario extends JFrame {
 		btnCadastratar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(btnCadastratar);
 
-		JButton btnListar = new JButton("Listar");
-		btnListar.addActionListener(new ActionListener() {
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listarFuncionarios();
+				
 			}
 		});
-		btnListar.setBounds(66, 314, 276, 53);
-		btnListar.setForeground(new Color(255, 255, 255));
-		btnListar.setBackground(new Color(47, 79, 79));
-		btnListar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		contentPane.add(btnListar);
+		btnAtualizar.setBounds(66, 314, 276, 53);
+		btnAtualizar.setForeground(new Color(255, 255, 255));
+		btnAtualizar.setBackground(new Color(47, 79, 79));
+		btnAtualizar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		contentPane.add(btnAtualizar);
 
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBounds(66, 407, 276, 53);
@@ -318,19 +318,7 @@ public class TelaFuncionario extends JFrame {
 
 	}
 
-	private void listarFuncionarios() {
-		FuncionarioDAO funcionarioDAO = FuncionarioDAO.getinstancia();
-		ArrayList<Funcionario> funcionarios = funcionarioDAO.listar();
-
-		DefaultTableModel tableModel = (DefaultTableModel) tableFunc.getModel();
-		tableModel.setRowCount(0);
-
-		for (Funcionario funcionario : funcionarios) {
-			Object[] rowData = { funcionario.getCpf(), funcionario.getNomeCompleto(),
-					funcionario.getCargo(), funcionario.getDataNac() };
-			tableModel.addRow(rowData);
-		}
-	}
+	
 
 	public void atualizarTabela() {
 
