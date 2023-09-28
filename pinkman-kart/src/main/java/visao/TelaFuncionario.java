@@ -179,6 +179,8 @@ public class TelaFuncionario extends JFrame {
 					text = text.replace(".", "");
 					text = text.replace(".", "");
 					text = text.replace("-", "");
+					text = text.trim();
+					
 					funcionario.setCpf(Long.valueOf(text));
 				}
 				String txt = textNomeCompleto.getText();
@@ -194,9 +196,9 @@ public class TelaFuncionario extends JFrame {
 					JOptionPane.showMessageDialog(null, "DATA não foi preenchido!");
 					return;
 				} else {
-					text = text.replace("/", "");
-					text = text.replace("/", "");
-					text = text.trim();
+					data = data.replace("/", "");
+					data = data.replace("/", "");
+					data = data.trim();
 					
 					if(data.trim().isEmpty()) {
 						JOptionPane.showMessageDialog(null, "DATA não foi preenchido!");
@@ -204,7 +206,7 @@ public class TelaFuncionario extends JFrame {
 			
 					}else {
 					
-					DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato da data
+					DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyyy"); // Define o formato da data
 					LocalDate dataNasc = LocalDate.parse(data, formato);
 					funcionario.setDataNac(dataNasc);
 					}
