@@ -228,7 +228,7 @@ public class TelaFornecedor extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table_1.getSelectedRow();
 
-				long cnpj = (long) table_1.getValueAt(selectedRow, 1);
+				long cnpj = (long) table_1.getValueAt(selectedRow, 3);
 
 				FornecedorDAO dao = FornecedorDAO.getinstancia();
 
