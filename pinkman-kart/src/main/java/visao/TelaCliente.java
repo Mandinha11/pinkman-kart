@@ -338,10 +338,12 @@ public class TelaCliente extends JFrame {
 		        }
 
 		        // Obtém os valores da linha selecionada
-		        long cpf = (long) table_1.getValueAt(selectedRow, 0);
-		        String nome = (String) table_1.getValueAt(selectedRow, 1);
-		        Long telefone = (long) table_1.getValueAt(selectedRow, 2);
-		        String dataNascimento = (String) table_1.getValueAt(selectedRow, 3);
+		        
+		        String nome = (String) table_1.getValueAt(selectedRow, 0);
+		        long cpf = (long) table_1.getValueAt(selectedRow, 1);
+		        String dataNascimento = (String) table_1.getValueAt(selectedRow, 2);
+		        Long telefone = (long) table_1.getValueAt(selectedRow, 3);
+		        
 
 		        // Converte a data de nascimento para o formato correto
 		        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");

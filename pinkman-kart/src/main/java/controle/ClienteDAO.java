@@ -93,7 +93,7 @@ public class ClienteDAO {
 
 				ps.executeUpdate();
 
-				return true;
+				
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -107,22 +107,24 @@ public class ClienteDAO {
 
 	}
 
-	public Boolean Alterar(Cliente c) {
+	public Boolean alterar(Cliente c) {
 		
 		Conexao con = Conexao.getInstancia();
 
 		Connection conn = con.conectar();
 
-		String query = "UPDATE clientes SET cpf = ?, nome_completo = ?, telefone = ?, data_nascimento = ? WHERE id_cliente = ?";
+		String query = "UPDATE clientes SET nome_completo = ?, telefone = ?, data_nascimento = ? WHERE cpf = ?";
 
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 				
-			ps.setLong(4, c.getCpf());
+			
 			ps.setString(1, c.getNomeCompleto());
 		    ps.setLong(2, c.getTelefone());
 			ps.setDate(3, Date.valueOf(c.getDataNac()));
+			
+			ps.setLong(4, c.getCpf());
 			
 			int rowsUpdated = ps.executeUpdate();
 		      
@@ -161,5 +163,7 @@ public class ClienteDAO {
 		}
 		return false;
 	}
+
+	
 
 }
