@@ -188,6 +188,7 @@ public class TelaFuncionario extends JFrame {
 				} else {
 					funcionario.setNomeCompleto(String.valueOf(txt));
 				}
+				
 				String data = textDataNac.getText();
 				if (data.trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "DATA não foi preenchido!");
@@ -195,10 +196,18 @@ public class TelaFuncionario extends JFrame {
 				} else {
 					text = text.replace("/", "");
 					text = text.replace("/", "");
+					text = text.trim();
+					
+					if(data.trim().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "DATA não foi preenchido!");
+						return;
+			
+					}else {
 					
 					DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato da data
 					LocalDate dataNasc = LocalDate.parse(data, formato);
 					funcionario.setDataNac(dataNasc);
+					}
 				}
 				
 				 String cargo = (String) boxCargo.getSelectedItem();
@@ -213,10 +222,10 @@ public class TelaFuncionario extends JFrame {
 				FuncionarioDAO dao = FuncionarioDAO.getinstancia();
 
 				if (dao.inserir(funcionario) == true) {
-					JOptionPane.showMessageDialog(null, "Boa");
+					JOptionPane.showMessageDialog(null, "Cadastrado");
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(null, "Deu não");
+					JOptionPane.showMessageDialog(null, "Erro ao Cadastrar");
 				}
 			}
 		});

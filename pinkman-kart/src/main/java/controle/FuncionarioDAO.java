@@ -65,6 +65,8 @@ public class FuncionarioDAO {
 
 	public boolean inserir(Funcionario f) {
 
+		if(f != null) {
+			
 		Conexao con = Conexao.getInstancia();
 		Connection conn = con.conectar();
 
@@ -88,11 +90,12 @@ public class FuncionarioDAO {
 		} finally {
 			con.fecharConexao();
 		}
+		}
 
 		return false;
 
 	}
-
+	
 	public boolean alterar(Funcionario f) {
 	    Conexao con = Conexao.getInstancia();
 	    Connection conn = con.conectar();
