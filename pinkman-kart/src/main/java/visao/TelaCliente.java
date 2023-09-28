@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -28,7 +29,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import controle.ClienteDAO;
+import controle.FuncionarioDAO;
 import modelo.Cliente;
+import modelo.Funcionario;
 
 public class TelaCliente extends JFrame {
 
@@ -36,7 +39,7 @@ public class TelaCliente extends JFrame {
 	private JTextField textNomeCompleto;
 	private JTextField textCPF;
 	private JTextField textTelefone;
-	private JTable table;
+	private JTable table_1;
 	private ClienteDAO clienteDAO;
 	private DefaultTableModel modelo;
 	private ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
@@ -288,18 +291,18 @@ public class TelaCliente extends JFrame {
 		/**
 		 * Tabela
 		 */
-		table = new JTable();
-		table.setBackground(new Color(255, 255, 255));
+		table_1 = new JTable();
+		table_1.setBackground(new Color(255, 255, 255));
 		panel_3.setLayout(new BorderLayout());
-		JScrollPane scrollPane = new JScrollPane(table);
+		JScrollPane scrollPane = new JScrollPane(table_1);
 		scrollPane.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				/*
 				 * Selecionou uma linha da tabela
 				 */
-				int selectedRow = table.getSelectedRow();
-				String cpf = (String) table.getValueAt(selectedRow, 1);
+				int selectedRow = table_1.getSelectedRow();
+				String cpf = (String) table_1.getValueAt(selectedRow, 1);
 				
 				
 
@@ -317,7 +320,7 @@ public class TelaCliente extends JFrame {
 		modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "Id Cliente","Nome Completo", "CPF", "Data Nasc", "Telefone" });
 
-		table.setModel(
+		table_1.setModel(
 				new DefaultTableModel(new Object[][] {}, new String[] { "id_cliente","Nome", "CPf", "Data Nac", "Telefone" }));
 
 		atualizarTabela();
@@ -327,13 +330,51 @@ public class TelaCliente extends JFrame {
 		btnAtualizar.setForeground(new Color(255, 255, 255));
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Verifica se uma linha foi selecionada na tabela
+		        int selectedRow = table_1.getSelectedRow();
+		        if (selectedRow == -1) {
+		            JOptionPane.showMessageDialog(null, "Selecione um funcionário na tabela para atualizar.");
+		            return;
+		        }
 
-				// Pega os dados digitados nos campos
-				// Atualiza no usuario selecionado no banco
+		        // Obtém os valores da linha selecionada
+		        long cpf = (long) table_1.getValueAt(selectedRow, 0);
+		        String nome = (String) table_1.getValueAt(selectedRow, 1);
+		        Long telefone = (long) table_1.getValueAt(selectedRow, 2);
+		        String dataNascimento = (String) table_1.getValueAt(selectedRow, 3);
 
-				atualizarTabela();
-				contentPane.add(btnAtualizar);
-			}
+		        // Converte a data de nascimento para o formato correto
+		        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		        LocalDate dataNasc = LocalDate.parse(dataNascimento, formato);
+
+		        // Preenche o objeto Cliente com os valores da linha selecionada
+		        Cliente cliente = new Cliente();
+		        cliente.setCpf(cpf);
+		        cliente.setNomeCompleto(nome);
+		        cliente.setTelefone(telefone);
+		        cliente.setDataNac(dataNasc);
+
+		      
+		        EditarClienteDialog dialog = new EditarClienteDialog(cliente);
+		        dialog.setVisible(true);
+
+		        
+		        if (dialog.isInformacoesAlteradas()) {
+		         
+		            cliente = dialog.getClienteAtualizado();
+		           
+		            ClienteDAO dao = ClienteDAO.getinstancia();
+		            boolean retorno = dao.alterar(cliente);
+
+		            if (retorno) {
+		                JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
+		                // Atualiza a tabela após a alteração
+		                atualizarTabela();
+		            } else {
+		                JOptionPane.showMessageDialog(null, "Erro ao atualizar o cliente.");
+		            }
+		        }
+		    }
 
 		});
 
@@ -347,9 +388,9 @@ public class TelaCliente extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int selectedRow = table.getSelectedRow();
+				int selectedRow = table_1.getSelectedRow();
 
-				long cpf = (long) table.getValueAt(selectedRow, 1);
+				long cpf = (long) table_1.getValueAt(selectedRow, 1);
 
 				ClienteDAO dao = ClienteDAO.getinstancia();
 
@@ -359,7 +400,7 @@ public class TelaCliente extends JFrame {
 
 				if (retorno == true) {
 
-					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					DefaultTableModel tableModel = (DefaultTableModel) table_1.getModel();
 					tableModel.removeRow(selectedRow);
 					new MensagemAcerto("Excluido com sucesso !").setVisible(true);
 				} else {
@@ -414,6 +455,6 @@ public class TelaCliente extends JFrame {
 			modelo.addRow(linha);
 
 		}
-		table.setModel(modelo);
+		table_1.setModel(modelo);
 	}
 }
