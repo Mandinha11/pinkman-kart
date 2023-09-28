@@ -12,6 +12,7 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 import modelo.Cliente;
+import modelo.Funcionario;
 
 public class ClienteDAO {
 
@@ -107,30 +108,35 @@ public class ClienteDAO {
 	}
 
 	public Boolean Alterar(Cliente c) {
+		
 		Conexao con = Conexao.getInstancia();
 
 		Connection conn = con.conectar();
 
-		String query = "UPDATE clientes SET nome_completo = ?, telefone = ?";
+		String query = "UPDATE clientes SET cpf = ?, nome_completo = ?, telefone = ?, data_nascimento = ? WHERE id_cliente = ?";
 
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
-
+				
+			ps.setLong(4, c.getCpf());
 			ps.setString(1, c.getNomeCompleto());
-			ps.setLong(2, c.getTelefone());
+		    ps.setLong(2, c.getTelefone());
+			ps.setDate(3, Date.valueOf(c.getDataNac()));
+			
+			int rowsUpdated = ps.executeUpdate();
+		       
 
-			ps.executeUpdate();
+			int rowsUpdated = ps.executeUpdate();
 
-			//return true;
+	        return rowsUpdated > 0;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		} finally {
-			con.fecharConexao();
-		}
-		return false;
+	    return false;
 	}
 
 	public Boolean Deletar(Cliente c) {
