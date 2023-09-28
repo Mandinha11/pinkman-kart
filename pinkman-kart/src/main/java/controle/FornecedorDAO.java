@@ -1,11 +1,13 @@
 package controle;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import modelo.Cliente;
 import modelo.Fornecedor;
 
 public class FornecedorDAO {
@@ -83,34 +85,35 @@ public class FornecedorDAO {
 		return false;
 	}
 
-	public Boolean Alterar(Fornecedor f) {
-
+public Boolean alterar(Fornecedor f) {
+		
 		Conexao con = Conexao.getInstancia();
 
 		Connection conn = con.conectar();
 
-		String query = "UPDATE fornecedor SET nome_empresa = ?, telefone = ?";
+		String query = "UPDATE fornecedor SET nome_empresa = ?, telefone = ?, cep = ? WHERE cnpj = ?";
 
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
-
+				
+			
 			ps.setString(1, f.getNomeEmpresa());
-			ps.setLong(2, f.getTelefone());
+		    ps.setLong(2, f.getTelefone());
+			ps.setLong(3, f.getCep());
+			ps.setLong(4, f.getCnpj());
+			
+			
+			int rowsUpdated = ps.executeUpdate();
+		      
+	        return rowsUpdated > 0;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
 
-			ps.executeUpdate();
-
-			return true;
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		} finally {
-			con.fecharConexao();
-		}
-
-		return false;
-
+	    return false;
 	}
 
 	public Boolean Deletar(Fornecedor f) {
