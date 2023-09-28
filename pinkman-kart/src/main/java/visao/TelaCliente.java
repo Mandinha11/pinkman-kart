@@ -369,11 +369,13 @@ public class TelaCliente extends JFrame {
 		            boolean retorno = dao.alterar(cliente);
 
 		            if (retorno) {
-		                JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
+		            	new MensagemAcerto("Cliente atualizado com sucesso!").setVisible(true);
+		              
 		                // Atualiza a tabela após a alteração
 		                atualizarTabela();
 		            } else {
-		                JOptionPane.showMessageDialog(null, "Erro ao atualizar o cliente.");
+		            	new MensagemErro("Erro ao atualizar o cliente. !").setVisible(true);
+		            
 		            }
 		        }
 		    }

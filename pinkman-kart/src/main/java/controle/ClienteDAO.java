@@ -93,7 +93,7 @@ public class ClienteDAO {
 
 				ps.executeUpdate();
 
-				
+				return true;
 
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -43,7 +43,10 @@ public class EditarClienteDialog extends JDialog {
             cliente.getDataNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
         );
         panel.add(textFieldDataNascimento);
-
+        
+        setLocationRelativeTo(null);
+		setUndecorated(true);
+		
         JButton buttonSalvar = new JButton("Salvar");
         buttonSalvar.addActionListener(new ActionListener() {
             @Override
@@ -80,4 +83,7 @@ public class EditarClienteDialog extends JDialog {
     public Cliente getClienteAtualizado() {
         return cliente;
     }
+  
+
 }
+
