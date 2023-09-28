@@ -125,10 +125,7 @@ public class ClienteDAO {
 			ps.setDate(3, Date.valueOf(c.getDataNac()));
 			
 			int rowsUpdated = ps.executeUpdate();
-		       
-
-			int rowsUpdated = ps.executeUpdate();
-
+		      
 	        return rowsUpdated > 0;
 	    } catch (SQLException e) {
 	        e.printStackTrace();
