@@ -36,18 +36,16 @@ public class ClienteDAO {
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				
+
 				Cliente cl = new Cliente();
-				
+
 				int id_cliente = rs.getInt("id_cliente");
 				long telefone = rs.getLong("Telefone");
 				Date dataNac = rs.getDate("data_nascimento");
 				long cpf = rs.getLong("cpf");
 				String nomeCompleto = rs.getString("nome_completo");
 
-				
-				
-			//	cl.setId_cliente(id_cliente);
+				// cl.setId_cliente(id_cliente);
 				cl.setTelefone(telefone);
 				cl.setNomeCompleto(nomeCompleto);
 				cl.setCpf(cpf);
@@ -85,8 +83,12 @@ public class ClienteDAO {
 			try {
 
 				PreparedStatement ps = conn.prepareStatement(query);
+
+				String nome = c.getNomeCompleto();
+				if (!nome.isEmpty()) {
+					ps.setString(1, nome);
+				}
 				
-				ps.setString(1, c.getNomeCompleto());
 				ps.setDate(2, Date.valueOf(c.getDataNac()));
 				ps.setLong(3, c.getCpf());
 				ps.setLong(4, c.getTelefone());
@@ -108,7 +110,7 @@ public class ClienteDAO {
 	}
 
 	public Boolean alterar(Cliente c) {
-		
+
 		Conexao con = Conexao.getInstancia();
 
 		Connection conn = con.conectar();
@@ -118,24 +120,23 @@ public class ClienteDAO {
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
-				
-			
-			ps.setString(1, c.getNomeCompleto());
-		    ps.setLong(2, c.getTelefone());
-			ps.setDate(3, Date.valueOf(c.getDataNac()));
-			
-			ps.setLong(4, c.getCpf());
-			
-			int rowsUpdated = ps.executeUpdate();
-		      
-	        return rowsUpdated > 0;
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    } finally {
-	        con.fecharConexao();
-	    }
 
-	    return false;
+			ps.setString(1, c.getNomeCompleto());
+			ps.setLong(2, c.getTelefone());
+			ps.setDate(3, Date.valueOf(c.getDataNac()));
+
+			ps.setLong(4, c.getCpf());
+
+			int rowsUpdated = ps.executeUpdate();
+
+			return rowsUpdated > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+
+		return false;
 	}
 
 	public Boolean Deletar(Cliente c) {
@@ -151,9 +152,8 @@ public class ClienteDAO {
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setLong(1, c.getCpf());
 			ps.executeUpdate();
-			
+
 			return true;
-			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -163,7 +163,5 @@ public class ClienteDAO {
 		}
 		return false;
 	}
-
-	
 
 }

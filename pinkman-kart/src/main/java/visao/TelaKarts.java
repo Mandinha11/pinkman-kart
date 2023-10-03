@@ -525,8 +525,8 @@ public class TelaKarts extends JFrame {
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		for (Karts Karts : karts) {
-			Object[] linha = { Karts.getId(), Karts.getCor(),Karts.getModelo(),Karts.getMarca(),Karts.getAno(),Karts.getDataEntrada().format(formato), 
-					Karts.getPreco(), Karts.getCNPJ() };
+			Object[] linha = { Karts.getId(), Karts.getcor(),Karts.getmodelo(),Karts.getmarca(),Karts.getano(),Karts.getquantidade(),Karts.getdataEntrada().format(formato), 
+					Karts.getpreco(), Karts.CNPJ() };
 			modelo.addRow(linha);
 
 		}

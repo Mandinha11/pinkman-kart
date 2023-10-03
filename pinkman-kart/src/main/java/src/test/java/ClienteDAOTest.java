@@ -8,21 +8,24 @@ import controle.ClienteDAO;
 import modelo.Cliente;
 
 public class ClienteDAOTest {
-	
-	//annotation
+
+	// annotation
 	@Test
 	public void testMetodoInserirCliente() {
 		Cliente c = new Cliente();
-		
+
 		c.setNomeCompleto("Amanda");
-		
+		c.setCpf(null);
+		c.setDataNac(null);
+		c.setNomeEmpressa(null);
+		c.setTelefone(null);
+
 		ClienteDAO dao = new ClienteDAO();
-			//Integer idClienteInserido = dao.inserir(c);
-			boolean inseriuOk = dao.inserir(null);
-			assertEquals(false, inseriuOk);
-			
-		
+
+		// Integer idClienteInserido = dao.inserir(c);
+		boolean inseriuOk = dao.inserir(null);
+		assertEquals(false, inseriuOk);
+
 	}
-	
 
 }
