@@ -19,91 +19,88 @@ public class Karts {
 	public Karts(){
 		
 	}
-	
-	public String getmodelo() {
+
+	public String getModelo() {
 		return modelo;
 	}
-	public void setmodelo(String modelo) {
+
+	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
-	
-	public String getmarca() {
+
+	public String getMarca() {
 		return marca;
 	}
-	public void setmarca(String marca) {
+
+	public void setMarca(String marca) {
 		this.marca = marca;
 	}
-	
-	
-	public Long getpreco() {
+
+	public Long getPreco() {
 		return preco;
 	}
-	public void setpreco(Long preco) {
+
+	public void setPreco(Long preco) {
 		this.preco = preco;
 	}
-	
-	
-	public Long getano() {
+
+	public Long getAno() {
 		return ano;
 	}
-	public void setano(Long ano) {
+
+	public void setAno(Long ano) {
 		this.ano = ano;
 	}
-	
-	
-	public Long getquantidade() {
+
+	public Long getQuantidade() {
 		return quantidade;
 	}
-	public void setquantidade(Long quantidade) {
+
+	public void setQuantidade(Long quantidade) {
 		this.quantidade = quantidade;
 	}
-	
-	public String getcor() {
+
+	public String getCor() {
 		return cor;
 	}
-	public void setcor(String cor) {
+
+	public void setCor(String cor) {
 		this.cor = cor;
 	}
-	
-	public String getmotor() {
-		return motor;
-	}
-	public void setmotor(String motor) {
-		this.motor = motor;
-	}
-	
-	public LocalDate getdataEntrada() {
+
+	public LocalDate getDataEntrada() {
 		return dataEntrada;
 	}
-	public void setdataEntrada(LocalDate dataEntrada) {
+
+	public void setDataEntrada(LocalDate dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
-	
+
 	public Long getId() {
 		return Id;
 	}
-	public void setId(Long Id) {
-		this.Id = Id;
+
+	public void setId(Long id) {
+		Id = id;
 	}
 
-	public void setCNPJ(Long CNPJ) {
-		this.CNPJ = CNPJ;
-		
-	}
-	public Long CNPJ() {
-		return CNPJ;
+	public String getMotor() {
+		return motor;
 	}
 
-	public void setCNPJ(Long CNPJ) {
-		this.CNPJ = CNPJ;
-		
+	public void setMotor(String motor) {
+		this.motor = motor;
 	}
+
 	public Long getCNPJ() {
 		return CNPJ;
 	}
+
+	public void setCNPJ(Long cNPJ) {
+		CNPJ = CNPJ;
+	}
+	
 	
 
+
 }
-
-
-

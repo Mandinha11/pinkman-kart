@@ -36,13 +36,13 @@ public class KartsDAO {
 				
 				Karts k = new Karts();
 				k.setId(idkarts);
-				k.setcor(cor);
-				k.setmodelo(modelo);
-				k.setmarca(marca);
-				k.setano(ano);
-				k.setquantidade(quantidade);
-				k.setdataEntrada(dataentrada.toLocalDate());
-				k.setpreco(preco);
+				k.setCor(cor);
+				k.setModelo(modelo);
+				k.setMarca(marca);
+				k.setAno(ano);
+				k.setQuantidade(quantidade);
+				k.setDataEntrada(dataentrada.toLocalDate());
+				k.setPreco(preco);
 				k.setCNPJ(CNPJ);
 				
 				Karts.add(k);
@@ -88,14 +88,14 @@ public class KartsDAO {
 				
 				
 				ps.setLong(1, k.getId());
-				ps.setString(2, k.getcor());
-				ps.setString(3, k.getmodelo());
-				ps.setString(4, k.getmarca());
-				ps.setLong(5, k.getano());
-				ps.setLong(6, k.getquantidade());
-				ps.setLong(8, k.getpreco());
-				ps.setDate(7,Date.valueOf(k.getdataEntrada()));
-				ps.setLong(9, k.CNPJ());
+				ps.setString(2, k.getCor());
+				ps.setString(3, k.getModelo());
+				ps.setString(4, k.getMarca());
+				ps.setLong(5, k.getAno());
+				ps.setLong(6, k.getQuantidade());
+				ps.setLong(8, k.getPreco());
+				ps.setDate(7,Date.valueOf(k.getDataEntrada()));
+				ps.setLong(9, k.getCNPJ());
 				System.out.println(ps);
 				System.out.println(ps.toString());
 				ps.executeUpdate();
@@ -123,7 +123,7 @@ public class KartsDAO {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setString(1, k.getcor());
+			ps.setString(1, k.getCor());
 
 			ps.executeUpdate();
 
