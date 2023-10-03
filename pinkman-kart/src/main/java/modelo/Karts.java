@@ -13,7 +13,6 @@ public class Karts {
 	private String cor;
 	private LocalDate dataEntrada;
 	private Long Id;
-	private String motor;
 	private Long CNPJ;
 	
 	public Karts(){
@@ -82,14 +81,6 @@ public class Karts {
 
 	public void setId(Long id) {
 		Id = id;
-	}
-
-	public String getMotor() {
-		return motor;
-	}
-
-	public void setMotor(String motor) {
-		this.motor = motor;
 	}
 
 	public Long getCNPJ() {
