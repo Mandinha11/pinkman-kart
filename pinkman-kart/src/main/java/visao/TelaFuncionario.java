@@ -1,6 +1,5 @@
 package visao;
 
-import java.util.Date;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -8,13 +7,15 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,11 +28,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
-import controle.FornecedorDAO;
 import controle.FuncionarioDAO;
-import modelo.Fornecedor;
 import modelo.Funcionario;
-import java.awt.Component;
 
 public class TelaFuncionario extends JFrame {
 
@@ -39,14 +37,12 @@ public class TelaFuncionario extends JFrame {
 	private JTextField textCPF;
 	private JTextField textNomeCompleto;
 	private JTable tableFunc;
-	private JTable table;
 	private JTable table_1;
 	private JComboBox<String> boxCargo;
-	private JComboBox<String> boxMes;
-	private JComboBox<String> boxDia;
-	private JComboBox<String> boxAno;
 	private FuncionarioDAO dao;
 	private DefaultTableModel modelo;
+	private JTextField textDataNac;
+
 	/**
 	 * Launch the application.
 	 */
@@ -68,7 +64,7 @@ public class TelaFuncionario extends JFrame {
 	 * CONSTRUTOR
 	 */
 	public TelaFuncionario() {
-		
+
 		setTitle("Funcionario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 2093, 1226);
@@ -130,80 +126,17 @@ public class TelaFuncionario extends JFrame {
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNewLabel_2.setBounds(23, 11, 160, 26);
 		PnDataDeNascimento.add(lblNewLabel_2);
-
-		JLabel lblNewLabel_3 = new JLabel("Dia");
-		lblNewLabel_3.setForeground(new Color(255, 255, 255));
-		lblNewLabel_3.setBounds(193, 14, 31, 26);
-		PnDataDeNascimento.add(lblNewLabel_3);
-
-		boxDia = new JComboBox<>();
-		boxDia.setBounds(234, 14, 47, 26);
-		PnDataDeNascimento.add(boxDia);
-		boxDia.addItem("01");
-		boxDia.addItem("02");
-		boxDia.addItem("03");
-		boxDia.addItem("04");
-		boxDia.addItem("05");
-		boxDia.addItem("06");
-		boxDia.addItem("07");
-		boxDia.addItem("08");
-		boxDia.addItem("09");
-		boxDia.addItem("10");
-		boxDia.addItem("11");
-		boxDia.addItem("12");
-		boxDia.addItem("13");
-		boxDia.addItem("14");
-		boxDia.addItem("15");
-		boxDia.addItem("16");
-		boxDia.addItem("17");
-		boxDia.addItem("18");
-		boxDia.addItem("19");
-		boxDia.addItem("20");
-		boxDia.addItem("21");
-		boxDia.addItem("22");
-		boxDia.addItem("23");
-		boxDia.addItem("24");
-		boxDia.addItem("25");
-		boxDia.addItem("26");
-		boxDia.addItem("27");
-		boxDia.addItem("28");
-		boxDia.addItem("29");
-		boxDia.addItem("30");
-		boxDia.addItem("31");
-
-		JLabel lblNewLabel_4 = new JLabel("Mês");
-		lblNewLabel_4.setForeground(new Color(255, 255, 255));
-		lblNewLabel_4.setBounds(291, 14, 27, 26);
-		PnDataDeNascimento.add(lblNewLabel_4);
-
-		boxMes = new JComboBox<>();
-		boxMes.setBounds(328, 14, 47, 26);
-		PnDataDeNascimento.add(boxMes);
-
-		boxMes.addItem("01");
-		boxMes.addItem("02");
-		boxMes.addItem("03");
-		boxMes.addItem("04");
-		boxMes.addItem("05");
-		boxMes.addItem("06");
-		boxMes.addItem("07");
-		boxMes.addItem("08");
-		boxMes.addItem("09");
-		boxMes.addItem("10");
-		boxMes.addItem("11");
-		boxMes.addItem("12");
-		
-		JLabel lblNewLabel_5 = new JLabel("Ano");
-		lblNewLabel_5.setForeground(new Color(255, 255, 255));
-		lblNewLabel_5.setBounds(385, 13, 27, 28);
-		PnDataDeNascimento.add(lblNewLabel_5);
-
-		JComboBox<Integer> boxAno = new JComboBox<>();
-		boxAno.setBounds(422, 14, 68, 26);
-		PnDataDeNascimento.add(boxAno);
-		for (int i = 1923; i <= 2023; i++) {
-			boxAno.addItem(i);
+		MaskFormatter mascaraData = null;
+		try {
+			mascaraData = new MaskFormatter("##/##/####");
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
+		textDataNac = new JFormattedTextField((AbstractFormatter) null);
+		textDataNac = new JFormattedTextField(mascaraData);
+		textDataNac.setColumns(10);
+		textDataNac.setBounds(189, 11, 299, 26);
+		PnDataDeNascimento.add(textDataNac);
 
 		JPanel PnCargo = new JPanel();
 		PnCargo.setBounds(1095, 127, 518, 48);
@@ -236,8 +169,8 @@ public class TelaFuncionario extends JFrame {
 		btnCadastratar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Funcionario Funcionario = new Funcionario();
-
+				Funcionario funcionario = new Funcionario();
+			
 				String text = textCPF.getText();
 				if (text.trim().length() == 0) {
 					new MensagemErro("CPF não preenchido !").setVisible(true);
@@ -246,23 +179,24 @@ public class TelaFuncionario extends JFrame {
 					text = text.replace(".", "");
 					text = text.replace(".", "");
 					text = text.replace("-", "");
-					Funcionario.setCpf(Long.valueOf(text));
+					text = text.trim();
+					
+					funcionario.setCpf(Long.valueOf(text));
 				}
 				String txt = textNomeCompleto.getText();
 				if (txt.trim().length() == 0) {
 					new MensagemErro("Nome não preenchido !").setVisible(true);
 					return;
 				} else {
-					Funcionario.setNomeCompleto(String.valueOf(txt));
+					funcionario.setNomeCompleto(String.valueOf(txt));
 				}
 				String dia = (String) boxDia.getSelectedItem();
 				String mes = (String) boxMes.getSelectedItem();
 				String ano = (String) boxAno.getSelectedItem();
 
 				if (dia == null || mes == null || ano == null) {
-				    
-					new MensagemErro("Data não preenchido !").setVisible(true);
-					return;
+				    JOptionPane.showMessageDialog(null, "Data não preenchida corretamente!");
+				    return;
 				}
 
 				String dataString = dia + mes + ano; 
@@ -277,37 +211,82 @@ public class TelaFuncionario extends JFrame {
 				    Funcionario.setDataNac(dataNascimento);
 				} catch (ParseException e1) {
 				    e1.printStackTrace();
-				    new MensagemErro("Data de Nascimento não preenchido !").setVisible(true);
+				    JOptionPane.showMessageDialog(null, "Formato de data inválido!");
 				    return; 
 				}
+				 
 
 				FuncionarioDAO dao = FuncionarioDAO.getinstancia();
 
-				if (dao.inserir(Funcionario) == true) {
-					JOptionPane.showMessageDialog(null, "Boa");
+				if (dao.inserir(funcionario) == true) {
+					JOptionPane.showMessageDialog(null, "Cadastrado");
 					atualizarTabela();
 				} else {
-					new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
+					JOptionPane.showMessageDialog(null, "Deu não");
 				}
 			}
 		});
-		btnCadastratar.setBounds(66, 223, 276, 53);
+		btnCadastratar.setBounds(66, 230, 276, 53);
 		btnCadastratar.setForeground(new Color(255, 255, 255));
 		btnCadastratar.setBackground(new Color(47, 79, 79));
 		btnCadastratar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(btnCadastratar);
 
-		JButton btnListar = new JButton("Listar");
-		btnListar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				listarFuncionarios();
-			}
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Verifica se uma linha foi selecionada na tabela
+		        int selectedRow = table_1.getSelectedRow();
+		        if (selectedRow == -1) {
+		            JOptionPane.showMessageDialog(null, "Selecione um funcionário na tabela para atualizar.");
+		            return;
+		        }
+
+		        // Obtém os valores da linha selecionada
+		        long cpf = (long) table_1.getValueAt(selectedRow, 0);
+		        String nome = (String) table_1.getValueAt(selectedRow, 1);
+		        String cargo = (String) table_1.getValueAt(selectedRow, 2);
+		        String dataNascimento = (String) table_1.getValueAt(selectedRow, 3);
+
+		        // Converte a data de nascimento para o formato correto
+		        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		        LocalDate dataNasc = LocalDate.parse(dataNascimento, formato);
+
+		        // Preenche o objeto Funcionario com os valores da linha selecionada
+		        Funcionario funcionario = new Funcionario();
+		        funcionario.setCpf(cpf);
+		        funcionario.setNomeCompleto(nome);
+		        funcionario.setCargo(cargo);
+		        funcionario.setDataNac(dataNasc);
+
+		        // Abre uma janela de diálogo para editar as informações
+		        EditarFuncionarioDialog dialog = new EditarFuncionarioDialog(funcionario);
+		        dialog.setVisible(true);
+
+		        // Verifica se as informações foram alteradas no diálogo
+		        if (dialog.isInformacoesAlteradas()) {
+		            // Atualiza os valores do funcionário com as alterações
+		            funcionario = dialog.getFuncionarioAtualizado();
+
+		            // Chama o método alterar do FuncionarioDAO para atualizar o funcionário
+		            FuncionarioDAO dao = FuncionarioDAO.getinstancia();
+		            boolean retorno = dao.alterar(funcionario);
+
+		            if (retorno) {
+		                JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso!");
+		                // Atualiza a tabela após a alteração
+		                atualizarTabela();
+		            } else {
+		                JOptionPane.showMessageDialog(null, "Erro ao atualizar o funcionário.");
+		            }
+		        }
+		    }
 		});
-		btnListar.setBounds(66, 314, 276, 53);
-		btnListar.setForeground(new Color(255, 255, 255));
-		btnListar.setBackground(new Color(47, 79, 79));
-		btnListar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		contentPane.add(btnListar);
+		btnAtualizar.setBounds(66, 314, 276, 53);
+		btnAtualizar.setForeground(new Color(255, 255, 255));
+		btnAtualizar.setBackground(new Color(47, 79, 79));
+		btnAtualizar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		contentPane.add(btnAtualizar);
 
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBounds(66, 407, 276, 53);
@@ -315,19 +294,19 @@ public class TelaFuncionario extends JFrame {
 		btnExcluir.setBackground(new Color(47, 79, 79));
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selectedRow = table.getSelectedRow();
+				int selectedRow = table_1.getSelectedRow();
 
-				long matricula = (long) table.getValueAt(selectedRow, 1);
+				long cpf = (long) table_1.getValueAt(selectedRow, 0);
 
 				FuncionarioDAO dao = FuncionarioDAO.getinstancia();
 
 				Funcionario f = new Funcionario();
-				f.setMatricula(matricula);
+				f.setCpf(cpf);
 				boolean retorno = dao.deletar(f);
 
 				if (retorno == true) {
-					// Remove a linha selecionada
-					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					// Remove a linha selecionado
+					DefaultTableModel tableModel = (DefaultTableModel) table_1.getModel();
 					tableModel.removeRow(selectedRow);
 					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
 
@@ -364,73 +343,51 @@ public class TelaFuncionario extends JFrame {
 		contentPane.add(lblNewLabel_1);
 
 		JPanel panel_1 = new JPanel();
-		
-		panel_1.setBounds(464, 223, 1408, 756);
-		
-		
+
+		panel_1.setBounds(464, 223, 1151, 466);
+
 		table_1 = new JTable();
 		panel_1.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel_1, "cell 0 4 6 8,grow");
 		panel_1.add(table_1);
 
-		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "CPF", "Nome", "Cargo", "Data" });
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-					 "CPF", "Nome", "Cargo", "Data"
-			}
-		));
+		modelo = new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome", "Cargo", "Data" });
+		table_1.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome", "Cargo", "Data" }));
 
 		atualizarTabela();
 
 		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
-		 
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane(table_1);
 		panel_1.add(scrollPane_1);
-
+		
 		JLabel lblNewLabel_6 = new JLabel("");
 		lblNewLabel_6.setIcon(new ImageIcon(TelaFuncionario.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel_6.setBounds(-159, 0, 1924, 1061);
+		lblNewLabel_6.setBounds(0, 85, 1924, 1061);
 		contentPane.add(lblNewLabel_6);
 
 	}
 
 	
-	private void listarFuncionarios() {
-	    FuncionarioDAO funcionarioDAO = FuncionarioDAO.getinstancia();
-	    ArrayList<Funcionario> funcionarios = funcionarioDAO.listar();
-	    
-	    
-	    DefaultTableModel tableModel = (DefaultTableModel) tableFunc.getModel();
-	    tableModel.setRowCount(0); 
-	    
-	    for (Funcionario funcionario : funcionarios) {
-	        Object[] rowData = { funcionario.getMatricula(), funcionario.getNomeCompleto(), funcionario.getCpf(), funcionario.getDataNac(), funcionario.getCargo() };
-	        tableModel.addRow(rowData);
-	    }
-	}
+
 	public void atualizarTabela() {
 
-		/*
-		 * String nome = txtNome.getText(); String cpf = txtCPF.getText(); Pessoa p =
-		 * new Pessoa(); p.setNome(nome); p.setCpf(cpf); listaPessoas.add(p);
-		 * atualizarJTable(); limparCampos();
-		 */
 		dao = FuncionarioDAO.getinstancia();
 		ArrayList<Funcionario> funcionarios = dao.listar();
 
-		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "CPF", "Nome", "Cargo", "Data" });
-
+		modelo = new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome", "Cargo", "Data" });
+		
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		for (Funcionario funcionario : funcionarios) {
-			Object[] linha = { funcionario.getCpf(), funcionario.getNomeCompleto(),funcionario.getCargo(),
-					funcionario.getDataNac() };
+			Object[] linha = { 
+					funcionario.getCpf(), 
+					funcionario.getNomeCompleto(), 
+					funcionario.getCargo(),
+					funcionario.getDataNac().format(formato) 
+			};
 			modelo.addRow(linha);
 		}
 
-		table.setModel(modelo);
+		table_1.setModel(modelo);
 	}
 }

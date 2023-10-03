@@ -93,6 +93,14 @@ public class Karts {
 	public Long CNPJ() {
 		return CNPJ;
 	}
+
+	public void setCNPJ(Long CNPJ) {
+		this.CNPJ = CNPJ;
+		
+	}
+	public Long getCNPJ() {
+		return CNPJ;
+	}
 	
 
 }

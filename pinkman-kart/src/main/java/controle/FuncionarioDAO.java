@@ -5,24 +5,21 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-import modelo.Cliente;
 import modelo.Funcionario;
 
 public class FuncionarioDAO {
-	
+
 	private static FuncionarioDAO instancia;
-	
+
 	public ArrayList<Funcionario> listar() {
-
 		Conexao c = Conexao.getInstancia();
-
 		Connection con = c.conectar();
 
-		ArrayList<Funcionario> funcionarios = new ArrayList();
-
-		String query = "SELECT * FROM funcionario";
+		String query = "SELECT * FROM funcionarios";
+		ArrayList<Funcionario> funcionarios = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
@@ -31,33 +28,32 @@ public class FuncionarioDAO {
 			while (rs.next()) {
 
 				
-				String cargo = rs.getString("cargo");
-				Date dataNac = rs.getDate("data_de_nascimento");
-				long cpf = rs.getLong("cpf");
+				Long cpf = rs.getLong("cpf");
 				String nomeCompleto = rs.getString("nome_completo");
-				String matricula = rs.getString("matricula");
-
+				String cargo = rs.getString("cargo");
+				Date dataNac = rs.getDate("data_nascimento");
+				
+				LocalDate dataNascConvertida = dataNac.toLocalDate();
+				
 				Funcionario f = new Funcionario();
 				
-				f.setCargo(cargo);
-				f.setNomeCompleto(nomeCompleto);
 				f.setCpf(cpf);
-				f.setDataNac(dataNac);
+				f.setNomeCompleto(nomeCompleto);
+				f.setCargo(cargo);
+				f.setDataNac(dataNascConvertida);
 
 				funcionarios.add(f);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			c.fecharConexao();
 		}
 
 		return funcionarios;
 
 	}
-	
-	
 
 	public static FuncionarioDAO getinstancia() {
 
@@ -66,113 +62,157 @@ public class FuncionarioDAO {
 		}
 		return instancia;
 	}
-	
+
 	public boolean inserir(Funcionario f) {
-		if (f != null) {
 
-			Conexao con = Conexao.getInstancia();
-
-			Connection conn = con.conectar();
-
-			String query = "INSERT INTO funcionarios (matricula, cpf, nome_completo, data_nascimento, cargo, senha) VALUES (? ,?, ?, ?, ?, ?)";
-
-			try {
-
-				PreparedStatement ps = conn.prepareStatement(query);
-				
-				ps.setLong(1, f.getMatricula());
-				ps.setLong(2, f.getCpf());
-				ps.setString(3, f.getNomeCompleto());
-				ps.setDate(4, (Date) f.getDataNac());
-				ps.setString(5, f.getCargo());
-				
-
-				ps.executeUpdate();
-
-				con.fecharConexao();
-
-				return true;
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally{
-				con.fecharConexao();
-			}
-
-		}
-
-		return false;
-
-	}
-
-	public boolean alterar(Funcionario f) {
-		
+		if(f != null) {
+			
 		Conexao con = Conexao.getInstancia();
-
 		Connection conn = con.conectar();
 
-		String query = "UPDATE funcionarios SET cargo = ?, matricula = ?";
-		
+		String query = "INSERT INTO funcionarios (cpf, nome_completo, data_nascimento, cargo) VALUES (?, ?, ?, ?)";
+
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setString(1, f.getCargo());
-
+			ps.setLong(1, f.getCpf());
+			ps.setString(2, f.getNomeCompleto());
+			ps.setDate(3, Date.valueOf(f.getDataNac()));
+			ps.setString(4, f.getCargo());
+			
+		
 			ps.executeUpdate();
-
-			con.fecharConexao();
 			
 			return true;
-			
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-	
-		}finally {
+		} finally {
 			con.fecharConexao();
+		}
 		}
 
 		return false;
+
 	}
+	
+	public boolean alterar(Funcionario f) {
+	    Conexao con = Conexao.getInstancia();
+	    Connection conn = con.conectar();
+
+	    String query = "UPDATE funcionarios SET nome_completo = ?, data_nascimento = ?, cargo = ? WHERE cpf = ?";
+
+	    try {
+	        PreparedStatement ps = conn.prepareStatement(query);
+
+	        ps.setString(1, f.getNomeCompleto());
+	        ps.setDate(2, Date.valueOf(f.getDataNac()));
+	        ps.setString(3, f.getCargo());
+	        ps.setLong(4, f.getCpf());
+
+	        int rowsUpdated = ps.executeUpdate();
+
+	        return rowsUpdated > 0;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
+
+	    return false;
+	}
+
 
 	public boolean deletar(Funcionario f) {
-		
+
 		Conexao con = Conexao.getInstancia();
-		
+
 		Connection conn = con.conectar();
 
-		String query = "DELETE FROM funcionarios WHERE matricula = ?";
-		
+		String query = "DELETE FROM funcionarios WHERE cpf = ?";
+
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setLong(1, f.getMatricula());
-			
-
+			ps.setLong(1, f.getCpf());
 			ps.executeUpdate();
-
-			con.fecharConexao();
-			
 			return true;
-			
-		}
-		catch (SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-	
-		}finally {
+
+		} finally {
 			con.fecharConexao();
 		}
 
 		return false;
 	}
 
+	public ArrayList<Funcionario> consultarTodosFuncionario() {
+		Conexao con = Conexao.getInstancia();
+		Connection conn = con.conectar();
+		
+		int valida = 0;
+		ArrayList<Funcionario> listaFuncionario = new ArrayList<>();
+		try {
+			PreparedStatement ps = conn.prepareStatement("select funcionarios.* from funcionario \r\n");
+					
 
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Funcionario f= new Funcionario();
+				
+				f.setCpf(rs.getLong("cpf"));
+				f.setNomeCompleto(rs.getString("nome_completo"));
+				f.setCargo(rs.getString("cargo"));
+				f.setDataNac(rs.getDate("data_nascimento").toLocalDate());
+				
+				listaFuncionario.add(f);
+			}
+			return listaFuncionario;
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		return null;
+
+	}
+	public Funcionario consultaFuncionairoCPF(Long cpf) {
+		Conexao con = Conexao.getInstancia();
+		Connection conn = con.conectar();
+
+		Funcionario funcionarioSelect = new Funcionario();
+		int valida = 0;
+		
+		try {
+			PreparedStatement ps = conn.prepareStatement("select funcionario.* from funcionarios\r\n"
+					+ "where cpf = ?; ");
+			ps.setLong(1, cpf);
 	
 
+			ResultSet rs = ps.executeQuery();
 
+			
+			while (rs.next()) {
+
+				funcionarioSelect.setCpf(rs.getLong("cpf"));
+				funcionarioSelect.setNomeCompleto(rs.getString("nome_completo"));
+				funcionarioSelect.setDataNac(rs.getDate("data_nascimento").toLocalDate());
+				
+				funcionarioSelect.setCargo(rs.getString("cargo"));
+
+			}
+			return funcionarioSelect;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		return funcionarioSelect;
+
+	}
 }
-
-
