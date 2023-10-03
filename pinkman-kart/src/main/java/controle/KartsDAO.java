@@ -33,7 +33,7 @@ public class KartsDAO {
 				long quantidade = rs.getLong("quantidade");
 				long dataentrada = rs.getLong("data_entrada");
 				long preco = rs.getLong("preco");
-				long fornecedorcnpj = rs.getInt("fornecedor_cnpj");
+				long cnpj = rs.getInt("fornecedor_cnpj");
 				
 				Karts k = new Karts();
 				k.setId(idkarts);
@@ -44,7 +44,7 @@ public class KartsDAO {
 				k.setquantidade(quantidade);
 				k.setdataEntrada(dataentrada);
 				k.setpreco(preco);
-				k.setforneCNPJ(fornecedorcnpj);
+				k.setCNPJ(cnpj);
 				
 				Karts.add(k);
 				
@@ -87,16 +87,15 @@ public class KartsDAO {
 				
 				PreparedStatement ps = conn.prepareStatement(query);
 				
-				ps.setString(1, k.getmodelo());
-				ps.setString(2, k.getmarca());
-				ps.setLong(3, k.getpreco());
-				ps.setLong(4, k.getano());
-				ps.setLong(5, k.getquantidade());
-				ps.setString(6, k.getcor());
+				ps.setLong(1, k.getId());
+				ps.setString(2, k.getcor());
+				ps.setString(3, k.getmodelo());
+				ps.setString(4, k.getmarca());
+				ps.setLong(5, k.getano());
+				ps.setLong(6, k.getquantidade());
 				ps.setLong(7, k.getdataEntrada());
-				ps.setLong(8, k.getId());
-				ps.setString(9, k.getmotor());
-				ps.setLong(10, k.getforneCNPJ());
+				ps.setLong(8, k.getpreco());
+				ps.setLong(9, k.getCNPJ());
 				
 				ps.executeUpdate();
 				
