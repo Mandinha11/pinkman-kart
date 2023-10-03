@@ -7,7 +7,7 @@ public class Vendas {
 	private String cliente;
 	private Long preco;
 	private Long data;
-	private Long matricula;
+	
 	
 	
 	public Vendas(){
@@ -43,12 +43,7 @@ public class Vendas {
 	public void setdata(Long data) {
 		this.data = data;
 	}
-	public Long getmatricula() {
-		return matricula;
-	}
-	public void setmatricula(Long matricula) {
-		this.matricula = matricula;
-	}
+	
 
 	public void setIdVendas(Long idVendas) {
 		this.idVendas = idVendas;

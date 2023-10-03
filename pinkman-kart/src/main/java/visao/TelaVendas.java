@@ -40,11 +40,9 @@ public class TelaVendas extends JFrame {
 	private JTextField txtKart;
 	private JTextField txtCliente;
 	private JTextField txtPreco;
-	private JTextField txtMatricula;
 	private VendasDAO dao;
 	private DefaultTableModel modelo;
 	private JTextField txtData;
-	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -85,10 +83,6 @@ public class TelaVendas extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(1587, 0, -1585, 807);
 		panel.add(scrollPane);
-		
-		table = new JTable();
-		table.setBounds(1586, 0, -1579, 807);
-		panel.add(table);
 		
 		JButton btnCadastra = new JButton("Cadastrar");
 		btnCadastra.setForeground(new Color(255, 255, 255));
@@ -136,13 +130,7 @@ public class TelaVendas extends JFrame {
 					 vendas.setkarts(txtKart.getText());
 				 }
 				 
-				 if (txtMatricula.getText().trim().length() == 0) {
-					 JOptionPane.showMessageDialog(null, "Matricula do Funcionario não preenchido!!");
-					 return;
-				 }
-				 else {
-				vendas.setmatricula(Long.valueOf(txtMatricula.getText()));
-				 }
+				
 				VendasDAO VendasDao = VendasDAO.getinstancia();
 				if(VendasDao.Inserir(vendas)== true) {
 					JOptionPane.showMessageDialog(null,"Venda Cadastrada com sucesso");
@@ -253,23 +241,6 @@ public class TelaVendas extends JFrame {
 		lblNewLabel.setBounds(10, 16, 121, 24);
 		panel_1_2_1.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-
-		JPanel panel_1_2_2 = new JPanel();
-		panel_1_2_2.setLayout(null);
-		panel_1_2_2.setBackground(new Color(0, 85, 125));
-		panel_1_2_2.setBounds(1362, 31, 507, 55);
-		contentPane.add(panel_1_2_2);
-		
-		txtMatricula = new JTextField();
-		txtMatricula.setColumns(10);
-		txtMatricula.setBounds(193, 16, 304, 28);
-		panel_1_2_2.add(txtMatricula);
-		
-		JLabel lblMatriculaFuncionario = new JLabel("Matricula Funcionario:");
-		lblMatriculaFuncionario.setForeground(new Color(255, 255, 255));
-		lblMatriculaFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblMatriculaFuncionario.setBounds(10, 18, 156, 20);
-		panel_1_2_2.add(lblMatriculaFuncionario);
 		
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.setBackground(new Color(0, 0, 0));
@@ -323,10 +294,10 @@ public class TelaVendas extends JFrame {
 				ArrayList <Vendas> Vendas = dao.listar();
 				
 				modelo = new DefaultTableModel(new Object[][] {},
-					new String[] {"cliente", "preço","kart","matricula"});
+					new String[] {"cliente", "preço","kart"});
 				
 				for(Vendas vendas : Vendas ) {
-					Object[] linha = {vendas.getcliente(), vendas.getdata(), vendas.getkarts(), vendas.getmatricula()};
+					Object[] linha = {vendas.getcliente(), vendas.getdata(), vendas.getkarts()};
 					modelo.addRow(linha);
 				}
 				table.setModel(modelo);

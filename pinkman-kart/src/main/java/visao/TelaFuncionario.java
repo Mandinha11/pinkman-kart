@@ -173,7 +173,7 @@ public class TelaFuncionario extends JFrame {
 			
 				String text = textCPF.getText();
 				if (text.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "CPF não foi preenchido!");
+					new MensagemErro("CPF não preenchido !").setVisible(true);
 					return;
 				} else {
 					text = text.replace(".", "");
@@ -185,7 +185,7 @@ public class TelaFuncionario extends JFrame {
 				}
 				String txt = textNomeCompleto.getText();
 				if (txt.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Nome não preenchido!");
+					new MensagemErro("Nome não preenchido !").setVisible(true);
 					return;
 				} else {
 					funcionario.setNomeCompleto(String.valueOf(txt));
@@ -193,7 +193,7 @@ public class TelaFuncionario extends JFrame {
 				
 				String data = textDataNac.getText();
 				if (data.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "DATA não foi preenchido!");
+					new MensagemErro("Data não preenchido !").setVisible(true);
 					return;
 				} else {
 					data = data.replace("/", "");
@@ -201,7 +201,7 @@ public class TelaFuncionario extends JFrame {
 					data = data.trim();
 					
 					if(data.trim().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "DATA não foi preenchido!");
+						new MensagemErro("Data não preenchido !").setVisible(true);
 						return;
 			
 					}else {
@@ -214,7 +214,7 @@ public class TelaFuncionario extends JFrame {
 				
 				 String cargo = (String) boxCargo.getSelectedItem();
 				if (cargo.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Cargo não preenchido");
+					new MensagemErro("Cargo não preenchido !").setVisible(true);
 					return;
 				} else {
 					funcionario.setCargo(cargo);
@@ -224,10 +224,10 @@ public class TelaFuncionario extends JFrame {
 				FuncionarioDAO dao = FuncionarioDAO.getinstancia();
 
 				if (dao.inserir(funcionario) == true) {
-					JOptionPane.showMessageDialog(null, "Cadastrado");
+					new MensagemAcerto("Cadastrado !").setVisible(true);
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(null, "Erro ao Cadastrar");
+					new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
 				}
 			}
 		});
@@ -278,11 +278,11 @@ public class TelaFuncionario extends JFrame {
 		            boolean retorno = dao.alterar(funcionario);
 
 		            if (retorno) {
-		                JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso!");
+		            	new MensagemAcerto("Funcionario atualizado com sucesso!").setVisible(true);
 		                // Atualiza a tabela após a alteração
 		                atualizarTabela();
 		            } else {
-		                JOptionPane.showMessageDialog(null, "Erro ao atualizar o funcionário.");
+		            	new MensagemErro("Erro ao atualizar o cliente. !").setVisible(true);
 		            }
 		        }
 		    }
@@ -313,10 +313,10 @@ public class TelaFuncionario extends JFrame {
 					// Remove a linha selecionado
 					DefaultTableModel tableModel = (DefaultTableModel) table_1.getModel();
 					tableModel.removeRow(selectedRow);
-					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
+					new MensagemAcerto("Excluido com sucesso !").setVisible(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Erro ao excluir!");
+					new MensagemErro("Não foi possivel excluir!").setVisible(true);
 				}
 
 			}

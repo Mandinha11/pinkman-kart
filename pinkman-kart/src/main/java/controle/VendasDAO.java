@@ -41,7 +41,7 @@ public class VendasDAO {
 			v.setcliente (cliente);
 			v.setpreco (preco);
 			v.setdata(data);
-			v.setmatricula(matricula);
+			
 			
 			vendas.add(v);
 		 		}
@@ -78,7 +78,7 @@ public class VendasDAO {
 
 			Connection conn = con.conectar();
 
-			String query = "INSERT INTO vendas (id_vendas, data_venda, funcionarios_matricula, clientes_id_cliente, valor_total, quantidade, karts_id_kart) VALUES(?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO vendas (id_vendas, data_venda, clientes_id_cliente, valor_total, quantidade, karts_id_kart) VALUES( ?, ?, ?, ?, ?, ?)";
 			
 			try {
 				PreparedStatement ps = conn.prepareStatement(query);
@@ -86,7 +86,6 @@ public class VendasDAO {
 				ps.setString(1, v.getkarts());
 				ps.setLong(2, v.getdata());
 				ps.setLong(3, v.getpreco());
-				ps.setLong(4, v.getmatricula());
 				ps.setString(5, v.getcliente());
 				
 				ps.executeUpdate();
