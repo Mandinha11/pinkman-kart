@@ -28,17 +28,24 @@ public class EditarClienteDialog extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel();
+        panel.setBackground(new Color(0, 128, 128));
         panel.setLayout(new GridLayout(4, 2));
 
-        panel.add(new JLabel("Nome:"));
+        JLabel label = new JLabel("Nome:");
+        label.setFont(new Font("Tahoma", Font.BOLD, 14));
+        panel.add(label);
         textFieldNome = new JTextField(cliente.getNomeCompleto());
         panel.add(textFieldNome);
 
-        panel.add(new JLabel("Telefone:"));
+        JLabel label_1 = new JLabel("Telefone:");
+        label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+        panel.add(label_1);
         textFieldTelefone = new JTextField(cliente.getTelefone().toString());
         panel.add(textFieldTelefone);
 
-        panel.add(new JLabel("Data de Nascimento:"));
+        JLabel label_2 = new JLabel("Data de Nascimento:");
+        label_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+        panel.add(label_2);
         textFieldDataNascimento = new JTextField(
             cliente.getDataNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
         );
@@ -56,7 +63,7 @@ public class EditarClienteDialog extends JDialog {
         });
         panel.add(buttonSalvar);
 
-        add(panel);
+        getContentPane().add(panel);
     }
 
     private void salvarAlteracoes() {
