@@ -225,10 +225,11 @@ public class TelaFornecedor extends JFrame {
 		btnExcluir.setForeground(new Color(255, 255, 255));
 		btnExcluir.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		btnExcluir.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table_1.getSelectedRow();
 
-				long cnpj = (long) table_1.getValueAt(selectedRow, 3);
+				long cnpj = (long) table_1.getValueAt(selectedRow, 2);
 
 				FornecedorDAO dao = FornecedorDAO.getinstancia();
 
