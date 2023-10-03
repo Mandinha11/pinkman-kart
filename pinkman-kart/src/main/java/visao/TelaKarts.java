@@ -526,7 +526,7 @@ public class TelaKarts extends JFrame {
 
 		for (Karts Karts : karts) {
 			Object[] linha = { Karts.getId(),Karts.getCor(),Karts.getModelo(),Karts.getMarca(),Karts.getAno(),Karts.getQuantidade(),Karts.getDataEntrada().format(formato), 
-					Karts.getAno(), Karts.getCNPJ() };
+					Karts.getPreco(), Karts.getCNPJ() };
 			modelo.addRow(linha);
 
 		}
