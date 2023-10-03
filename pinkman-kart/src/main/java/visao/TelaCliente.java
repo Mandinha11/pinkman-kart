@@ -1,3 +1,4 @@
+
 package visao;
 
 import java.awt.BorderLayout;
@@ -6,15 +7,15 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,12 +29,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
-import com.mysql.cj.protocol.a.LocalDateTimeValueEncoder;
-
 import controle.ClienteDAO;
-import controle.FornecedorDAO;
+import controle.FuncionarioDAO;
 import modelo.Cliente;
-import modelo.Fornecedor;
+import modelo.Funcionario;
 
 public class TelaCliente extends JFrame {
 
@@ -41,12 +40,12 @@ public class TelaCliente extends JFrame {
 	private JTextField textNomeCompleto;
 	private JTextField textCPF;
 	private JTextField textTelefone;
-	private JTable table;
+	private JTable table_1;
 	private ClienteDAO clienteDAO;
 	private DefaultTableModel modelo;
 	private ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
+	private static Cliente clienteSelecionado;
 	private JTextField txtData;
-	private Cliente pessoaSelecionada;
 
 	/**
 	 * Launch the application.
@@ -81,6 +80,37 @@ public class TelaCliente extends JFrame {
 
 		setContentPane(contentPane);
 
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(380, 107, 506, 45);
+		panel_2.setLayout(null);
+		panel_2.setToolTipText("");
+		panel_2.setBackground(new Color(0, 85, 125));
+		contentPane.add(panel_2);
+
+		JLabel lblNewLabel_2 = new JLabel("Data de Nascimento:");
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
+		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblNewLabel_2.setBounds(10, 11, 191, 25);
+		panel_2.add(lblNewLabel_2);
+
+		JLabel lblDataNasc = new JLabel("Data De Nascimento:");
+		lblNewLabel_2.setBounds(10, 11, 191, 25);
+		panel_2.add(lblNewLabel_2);
+		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
+
+		MaskFormatter mascaraDataNac = null;
+		try {
+			mascaraDataNac = new MaskFormatter("##/##/####");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		txtData = new JFormattedTextField(mascaraDataNac);
+		txtData.setBounds(176, 11, 320, 25);
+		panel_2.add(txtData);
+		txtData.setColumns(10);
+
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setForeground(new Color(255, 255, 255));
 		btnCadastrar.setBackground(new Color(0, 0, 0));
@@ -91,26 +121,40 @@ public class TelaCliente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				Cliente cliente = new Cliente();
-
+				
+				if (textNomeCompleto.getText().trim().length() == 0) {
+					new MensagemErro("Nome não preenchido !").setVisible(true);
+					return;
+				} else {
+					cliente.setNomeCompleto(textNomeCompleto.getText());
+				}
+			
 				String data = txtData.getText();
 				if (data.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Data de Nascimento não preenchido!!");
+					new MensagemErro("Data não preenchida !").setVisible(true);
 					return;
+
 				} else {
 					data = data.replace("/", "");
 					data = data.trim();
 
-					String dia = data.substring(0, 1);
-					String mes = data.substring(2, 3);
-					String ano = data.substring(4, 7);
+					if (data.trim().isEmpty()) {
 
-					cliente.setDataNac(LocalDate.of(Integer.valueOf(ano), Integer.valueOf(mes), Integer.valueOf(dia)));
+						new MensagemErro("Data não preenchida !").setVisible(true);
+						return;
 
+					} else {
+						DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyyy"); // Define o formato da
+																						// data
+						LocalDate dataNasc = LocalDate.parse(data, formato);
+						cliente.setDataNac(dataNasc);
+
+					}
 				}
 
 				String cpf = textCPF.getText();
 				if (cpf.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "CPF não preenchido!!");
+					new MensagemErro("CPF não preenchido !").setVisible(true);
 					return;
 				} else {
 					cpf = cpf.replace(".", "");
@@ -123,7 +167,7 @@ public class TelaCliente extends JFrame {
 
 				String tel = textTelefone.getText();
 				if (tel.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Telefone não preenchido!!");
+					new MensagemErro("Telefone não preenchido !").setVisible(true);
 					return;
 				} else {
 					tel = tel.replace("-", "");
@@ -136,19 +180,14 @@ public class TelaCliente extends JFrame {
 
 				}
 
-				if (textNomeCompleto.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Nome da Pessoa não preenchido!!");
-					return;
-				} else {
-					cliente.setNomeCompleto(textNomeCompleto.getText());
-				}
+
 
 				ClienteDAO clienteDao = ClienteDAO.getinstancia();
 				if (clienteDao.inserir(cliente) == true) {
-					JOptionPane.showMessageDialog(btnCadastrar, "Cadastrado");
+					new MensagemAcerto("Cadastrado !").setVisible(true);
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(btnCadastrar, "Não foi posivel Cadastrar");
+					new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
 				}
 
 			}
@@ -220,38 +259,6 @@ public class TelaCliente extends JFrame {
 		panel_1.add(textCPF);
 		textCPF.setColumns(10);
 
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(380, 107, 506, 45);
-		panel_2.setLayout(null);
-		panel_2.setToolTipText("");
-		panel_2.setBackground(new Color(0, 85, 125));
-		contentPane.add(panel_2);
-
-		JLabel lblNewLabel_2 = new JLabel("Data de Nascimento:");
-		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		lblNewLabel_2.setBounds(10, 11, 191, 25);
-		panel_2.add(lblNewLabel_2);
-
-		JLabel lblDataNasc = new JLabel("Data De Nascimento:");
-		lblNewLabel_2.setBounds(10, 11, 191, 25);
-		panel_2.add(lblNewLabel_2);
-		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-
-		txtData = new JTextField();
-		txtData.setBounds(176, 11, 320, 25);
-		panel_2.add(txtData);
-		txtData.setColumns(10);
-
-		MaskFormatter mascaraDataNac = null;
-		try {
-			mascaraDataNac = new MaskFormatter("##/##/####");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		txtData = new JFormattedTextField(mascaraDataNac);
-
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBounds(1048, 107, 506, 45);
 		panel_1_1.setLayout(null);
@@ -281,85 +288,128 @@ public class TelaCliente extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(351, 278, 1461, 772);
 		contentPane.add(panel_3);
-		
+
 		/**
 		 * Tabela
 		 */
-		table = new JTable();
-		table.setBackground(new Color(255, 255, 255));
+		table_1 = new JTable();
+		table_1.setBackground(new Color(255, 255, 255));
 		panel_3.setLayout(new BorderLayout());
-		panel_3.add(new JScrollPane(table), BorderLayout.NORTH);
-		int posicaoCliente = table.getSelectedRow();
-		
-		pessoaSelecionada = listaCliente.get(posicaoCliente);
-		//txtData.setText(pessoaSelecionada.getDataNac());
-		//textCPF.setText(pessoaSelecionada.getCpf());
-	//	textTelefone.setText(pessoaSelecionada.getTelefone());
-		textNomeCompleto.setText(pessoaSelecionada.getNomeCompleto());
-		
-		
-		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
+		JScrollPane scrollPane = new JScrollPane(table_1);
+		scrollPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				/*
+				 * Selecionou uma linha da tabela
+				 */
+				int selectedRow = table_1.getSelectedRow();
+				String cpf = (String) table_1.getValueAt(selectedRow, 1);
+				
+				
 
-		table.setModel(
-				new DefaultTableModel(new Object[][] {}, new String[] { "Nome", "CPf", "Data Nac", "Telefone" }));
+				// fazer uma consulta no banco procurando um cliente por CPF ou no arraylist
+
+//				clienteSelecionado = // cliente encontrado
+
+//				textNomeCompleto.setText(clienteSelecionado.getNome...);
+//				txtData.setText();
+//				textTelefone.setText();
+			}
+		});
+		panel_3.add(scrollPane, BorderLayout.NORTH);
+
+		modelo = new DefaultTableModel(new Object[][] {},
+				new String[] { "Id Cliente","Nome Completo", "CPF", "Data Nasc", "Telefone" });
+
+		table_1.setModel(
+				new DefaultTableModel(new Object[][] {}, new String[] { "id_cliente","Nome", "CPf", "Data Nac", "Telefone" }));
 
 		atualizarTabela();
 
-		JButton btnListar = new JButton("Atualizar");
-		btnListar.setBackground(new Color(0, 0, 0));
-		btnListar.setForeground(new Color(255, 255, 255));
-		btnListar.addActionListener(new ActionListener() {
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.setBackground(new Color(0, 0, 0));
+		btnAtualizar.setForeground(new Color(255, 255, 255));
+		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				int posicao = listaCliente.indexOf(pessoaSelecionada);
-				
-			//	String novoCPF = textCPF.getText();
-				String novoNome = textNomeCompleto.getText();
-				
-				pessoaSelecionada.setNomeCompleto(novoNome);
-				//pessoaSelecionada.setCpf(novoCPF);
-				
-				listaCliente.set(posicao, pessoaSelecionada);
-				atualizarTabela();
-				limparCampos();
-				
-				contentPane.add(btnListar);
-				}
-			
-		});
-		
-		
-		btnListar.setBounds(51, 319, 242, 57);
-		btnListar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		contentPane.add(btnListar);
+				// Verifica se uma linha foi selecionada na tabela
+		        int selectedRow = table_1.getSelectedRow();
+		        if (selectedRow == -1) {
+		            JOptionPane.showMessageDialog(null, "Selecione um funcionário na tabela para atualizar.");
+		            return;
+		        }
 
-		// Amanda
-		
-		
+		        // Obtém os valores da linha selecionada
+		        
+		        String nome = (String) table_1.getValueAt(selectedRow, 0);
+		        long cpf = (long) table_1.getValueAt(selectedRow, 1);
+		        String dataNascimento = (String) table_1.getValueAt(selectedRow, 2);
+		        Long telefone = (long) table_1.getValueAt(selectedRow, 3);
+		        
+
+		        // Converte a data de nascimento para o formato correto
+		        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		        LocalDate dataNasc = LocalDate.parse(dataNascimento, formato);
+
+		        // Preenche o objeto Cliente com os valores da linha selecionada
+		        Cliente cliente = new Cliente();
+		        cliente.setCpf(cpf);
+		        cliente.setNomeCompleto(nome);
+		        cliente.setTelefone(telefone);
+		        cliente.setDataNac(dataNasc);
+
+		      
+		        EditarClienteDialog dialog = new EditarClienteDialog(cliente);
+		        dialog.setVisible(true);
+
+		        
+		        if (dialog.isInformacoesAlteradas()) {
+		         
+		            cliente = dialog.getClienteAtualizado();
+		           
+		            ClienteDAO dao = ClienteDAO.getinstancia();
+		            boolean retorno = dao.alterar(cliente);
+
+		            if (retorno) {
+		            	new MensagemAcerto("Cliente atualizado com sucesso!").setVisible(true);
+		              
+		                // Atualiza a tabela após a alteração
+		                atualizarTabela();
+		            } else {
+		            	new MensagemErro("Erro ao atualizar o cliente. !").setVisible(true);
+		            
+		            }
+		        }
+		    }
+
+		});
+
+		btnAtualizar.setBounds(51, 319, 242, 57);
+		btnAtualizar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		contentPane.add(btnAtualizar);
+
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setForeground(new Color(255, 255, 255));
 		btnExcluir.setBackground(new Color(0, 0, 0));
 		btnExcluir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int selectedRow = table.getSelectedRow();
-				
-				long cpf = (long) table.getValueAt(selectedRow, 1);
-				
+				int selectedRow = table_1.getSelectedRow();
+
+				long cpf = (long) table_1.getValueAt(selectedRow, 1);
+
 				ClienteDAO dao = ClienteDAO.getinstancia();
-				
+
 				Cliente c = new Cliente();
 				c.setCpf(cpf);
 				boolean retorno = dao.Deletar(c);
-				
+
 				if (retorno == true) {
-					
-					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+
+					DefaultTableModel tableModel = (DefaultTableModel) table_1.getModel();
 					tableModel.removeRow(selectedRow);
-					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
+					new MensagemAcerto("Excluido com sucesso !").setVisible(true);
 				} else {
-					JOptionPane.showMessageDialog(null, "Erro ao excluir!");
+					new MensagemErro("Não foi possivel excluir!").setVisible(true);
 				}
 
 			}
@@ -400,16 +450,16 @@ public class TelaCliente extends JFrame {
 		ArrayList<Cliente> clientes = clienteDAO.listar();
 
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
+				new String[] {"Nome Completo", "CPF", "Data Nasc", "Telefone" });
 
-		// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		for (Cliente cliente : clientes) {
-			Object[] linha = { cliente.getNomeCompleto(), cliente.getCpf(), cliente.getDataNac(),
+			Object[] linha = {cliente.getNomeCompleto(), cliente.getCpf(), cliente.getDataNac().format(formato),
 					cliente.getTelefone() };
 			modelo.addRow(linha);
 
 		}
-		table.setModel(modelo);
+		table_1.setModel(modelo);
 	}
 }

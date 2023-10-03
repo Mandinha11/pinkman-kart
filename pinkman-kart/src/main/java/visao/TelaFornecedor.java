@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -22,10 +24,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import controle.ClienteDAO;
 import controle.FornecedorDAO;
+import modelo.Cliente;
 import modelo.Fornecedor;
 import javax.swing.JScrollPane;
 import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaFornecedor extends JFrame {
 
@@ -34,8 +40,8 @@ public class TelaFornecedor extends JFrame {
 	private JTextField txtTelefone;
 	private JTextField txtNomeEmpresa;
 	private JTextField txtCEP;
-	private JTable table;
-	private FornecedorDAO dao;
+	private JTable table_1;
+	private FornecedorDAO fornecedorDAO;
 	private DefaultTableModel modelo;
 
 	/**
@@ -100,17 +106,20 @@ public class TelaFornecedor extends JFrame {
 				Fornecedor fornecedor = new Fornecedor();
 
 				String text = txtCEP.getText();
+				
 				if (text.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "CEP não preenchido!!");
+					new MensagemErro("CEP não preenchido !").setVisible(true);
 					return;
 				} else {
 					text = text.replace("-", "");
+					text = text.trim();
+					
 					fornecedor.setCep(Long.valueOf(text));
 
 				}
 				String tel = txtTelefone.getText();
 				if (tel.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Telefone não preenchido!!");
+					new MensagemErro("Telefone não preenchido !").setVisible(true);
 					return;
 				} else {
 					tel = tel.replace("-", "");
@@ -125,19 +134,20 @@ public class TelaFornecedor extends JFrame {
 
 				String cnpj = txtCNPJ.getText();
 				if (cnpj.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "CNPJ não preenchido!!");
+					new MensagemErro("CNPJ não preenchido !").setVisible(true);
 					return;
 				} else {
 					cnpj = cnpj.replace("/", "");
 					cnpj = cnpj.replace(".", "");
 					cnpj = cnpj.replace("-", "");
+					cnpj = cnpj.trim();
 
 					fornecedor.setCnpj(Long.valueOf(cnpj));
 
 				}
 
 				if (txtNomeEmpresa.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Nome da Empresa não preenchido!!");
+					new MensagemErro("Empresa não preenchido !").setVisible(true);
 					return;
 				} else {
 					fornecedor.setNomeEmpresa(txtNomeEmpresa.getText());
@@ -145,10 +155,10 @@ public class TelaFornecedor extends JFrame {
 
 				FornecedorDAO fornecedorDao = FornecedorDAO.getinstancia();
 				if (fornecedorDao.inserir(fornecedor) == true) {
-					JOptionPane.showMessageDialog(btnCadastrar, "Cadastrado");
+					new MensagemAcerto("Cadastrado !").setVisible(true);
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(btnCadastrar, "Não foi possivel Cadastrar");
+					new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
 				}
 
 			}
@@ -163,12 +173,51 @@ public class TelaFornecedor extends JFrame {
 		btnAtualizar.setBackground(new Color(0, 0, 0));
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				// TODO atualizar dados dos campos
-				
-				
-				
-			}
+				// Verifica se uma linha foi selecionada na tabela
+		        int selectedRow = table_1.getSelectedRow();
+		        if (selectedRow == -1) {
+		            JOptionPane.showMessageDialog(null, "Selecione um fornecedor na tabela para atualizar.");
+		            return;
+		        }
+
+		        // Obtém os valores da linha selecionada
+		        
+		        String nome_empresa = (String) table_1.getValueAt(selectedRow, 0);
+		        Long cep = (long) table_1.getValueAt(selectedRow, 1);
+		        Long cnpj = (long) table_1.getValueAt(selectedRow, 2);
+		        Long telefone = (long) table_1.getValueAt(selectedRow, 3);
+		        
+		        // Preenche o objeto Cliente com os valores da linha selecionada
+		        Fornecedor fornecedor = new Fornecedor();
+		       
+		        fornecedor.setNomeEmpresa(nome_empresa);
+		        fornecedor.setCep(cep);
+		        fornecedor.setCnpj(cnpj);
+		        fornecedor.setTelefone(telefone);
+		        
+		        EditarFornecedorDialog dialog = new EditarFornecedorDialog(fornecedor);
+		        dialog.setVisible(true);
+
+		        
+		        if (dialog.isInformacoesAlteradas()) {
+		         
+		            fornecedor = dialog.getFornecedorAtualizado();
+		           
+		            FornecedorDAO dao = FornecedorDAO.getinstancia();
+		            boolean retorno = dao.alterar(fornecedor);
+
+		            if (retorno) {
+		            	new MensagemAcerto("Fornecedor atualizado com sucesso!").setVisible(true);
+		              
+		                // Atualiza a tabela após a alteração
+		                atualizarTabela();
+		            } else {
+		            	new MensagemErro("Erro ao atualizar o Fornecedor. !").setVisible(true);
+		            
+		            }
+		        }
+		    }
+
 		});
 		contentPane.add(btnAtualizar);
 
@@ -177,9 +226,9 @@ public class TelaFornecedor extends JFrame {
 		btnExcluir.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selectedRow = table.getSelectedRow();
+				int selectedRow = table_1.getSelectedRow();
 
-				long cnpj = (long) table.getValueAt(selectedRow, 1);
+				long cnpj = (long) table_1.getValueAt(selectedRow, 3);
 
 				FornecedorDAO dao = FornecedorDAO.getinstancia();
 
@@ -189,12 +238,12 @@ public class TelaFornecedor extends JFrame {
 
 				if (retorno == true) {
 					// Remove a linha selecionada
-					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					DefaultTableModel tableModel = (DefaultTableModel) table_1.getModel();
 					tableModel.removeRow(selectedRow);
-					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
+					new MensagemAcerto("Excluido com sucesso !").setVisible(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Erro ao excluir!");
+					new MensagemErro("Não foi possivel excluir!").setVisible(true);
 				}
 
 			}
@@ -299,14 +348,14 @@ public class TelaFornecedor extends JFrame {
 		lblTelefone.setForeground(new Color(255, 255, 255));
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 17));
 
-		table = new JTable();
+		table_1 = new JTable();
 		panel.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel, "cell 0 4 6 8,grow");
-		panel.add(table);
+		panel.add(table_1);
 
 		modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "Nome da Empresa", "CNPJ", "CEP", "Telefone" });
-		table.setModel(new DefaultTableModel(
+		table_1.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
@@ -318,7 +367,25 @@ public class TelaFornecedor extends JFrame {
 
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JScrollPane scrollPane_1 = new JScrollPane(table);
+		JScrollPane scrollPane_1 = new JScrollPane(table_1);
+		scrollPane_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				DefaultTableModel tblModel = (DefaultTableModel)table_1.getModel();
+				
+				String tblnome_empresa = tblModel.getValueAt(table_1.getSelectedRow(),0).toString();
+				String tblcep = tblModel.getValueAt(table_1.getSelectedRow(),1).toString();
+				String tbltelefone = tblModel.getValueAt(table_1.getSelectedRow(),2).toString();
+				
+				txtNomeEmpresa.setText(tblnome_empresa);
+				txtTelefone.setText(tbltelefone);
+				txtCEP.setText(tblcep);
+				
+				
+				
+			}
+		});
 		panel.add(scrollPane_1);
 
 		JLabel lblNewLabel = new JLabel("");
@@ -338,23 +405,19 @@ public class TelaFornecedor extends JFrame {
 
 	public void atualizarTabela() {
 
-		/*
-		 * String nome = txtNome.getText(); String cpf = txtCPF.getText(); Pessoa p =
-		 * new Pessoa(); p.setNome(nome); p.setCpf(cpf); listaPessoas.add(p);
-		 * atualizarJTable(); limparCampos();
-		 */
-		dao = FornecedorDAO.getinstancia();
-		ArrayList<Fornecedor> fornecedores = dao.Listar();
+		fornecedorDAO = FornecedorDAO.getinstancia();
+		ArrayList<Fornecedor> fornecedor = fornecedorDAO.Listar();
 
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "Nome da Empresa", "CNPJ", "CPF", "Telefone" });
+				new String[] {"Nome Empresa", "CEP", "CNPJ", "Telefone" });
 
-		for (Fornecedor fornecedor : fornecedores) {
-			Object[] linha = { fornecedor.getNomeEmpresa(), fornecedor.getCnpj(), fornecedor.getCep(),
-					fornecedor.getTelefone() };
+
+		for (Fornecedor f : fornecedor) {
+			Object[] linha = {f.getNomeEmpresa(), f.getCep(), f.getCnpj(),
+					f.getTelefone()};
 			modelo.addRow(linha);
-		}
 
-		table.setModel(modelo);
+		}
+		table_1.setModel(modelo);
 	}
 }

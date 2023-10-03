@@ -12,6 +12,7 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 import modelo.Cliente;
+import modelo.Funcionario;
 
 public class ClienteDAO {
 
@@ -35,18 +36,24 @@ public class ClienteDAO {
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-
+				
+				Cliente cl = new Cliente();
+				
+				int id_cliente = rs.getInt("id_cliente");
 				long telefone = rs.getLong("Telefone");
 				Date dataNac = rs.getDate("data_nascimento");
 				long cpf = rs.getLong("cpf");
 				String nomeCompleto = rs.getString("nome_completo");
 
-				Cliente cl = new Cliente();
+				
+				
+			//	cl.setId_cliente(id_cliente);
 				cl.setTelefone(telefone);
 				cl.setNomeCompleto(nomeCompleto);
 				cl.setCpf(cpf);
 
-//				cl.setDataNac(fromDateToLocalDate(dataNac));
+				LocalDate dataNascConvertida = dataNac.toLocalDate();
+				cl.setDataNac(dataNascConvertida);
 
 				clientes.add(cl);
 			}
@@ -73,16 +80,16 @@ public class ClienteDAO {
 		if (c != null) {
 			Conexao con = Conexao.getInstancia();
 			Connection conn = con.conectar();
-			String query = "INSERT INTO clientes (id_cliente, nome_completo, data_nascimento, cpf, telefone) VALUES (?, ?, ?, ?, ?)";
+			String query = "INSERT INTO clientes (nome_completo, data_nascimento, cpf, telefone) VALUES ( ?, ?, ?, ?)";
 
 			try {
 
 				PreparedStatement ps = conn.prepareStatement(query);
-
-				ps.setString(2, c.getNomeCompleto());
-				ps.setDate(3, Date.valueOf(c.getDataNac()));
-				ps.setLong(4, c.getCpf());
-				ps.setLong(5, c.getTelefone());
+				
+				ps.setString(1, c.getNomeCompleto());
+				ps.setDate(2, Date.valueOf(c.getDataNac()));
+				ps.setLong(3, c.getCpf());
+				ps.setLong(4, c.getTelefone());
 
 				ps.executeUpdate();
 
@@ -100,31 +107,35 @@ public class ClienteDAO {
 
 	}
 
-	public Boolean Alterar(Cliente c) {
+	public Boolean alterar(Cliente c) {
+		
 		Conexao con = Conexao.getInstancia();
 
 		Connection conn = con.conectar();
 
-		String query = "UPDATE cliente SET nome_completo = ?, telefone = ?";
+		String query = "UPDATE clientes SET nome_completo = ?, telefone = ?, data_nascimento = ? WHERE cpf = ?";
 
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
-
+				
+			
 			ps.setString(1, c.getNomeCompleto());
-			ps.setLong(2, c.getTelefone());
+		    ps.setLong(2, c.getTelefone());
+			ps.setDate(3, Date.valueOf(c.getDataNac()));
+			
+			ps.setLong(4, c.getCpf());
+			
+			int rowsUpdated = ps.executeUpdate();
+		      
+	        return rowsUpdated > 0;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
 
-			ps.executeUpdate();
-
-			return true;
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		} finally {
-			con.fecharConexao();
-		}
-		return false;
+	    return false;
 	}
 
 	public Boolean Deletar(Cliente c) {
@@ -133,17 +144,16 @@ public class ClienteDAO {
 
 		Connection conn = con.conectar();
 
-		String query = "DELETE FROM cliente WHERE cpf = ?";
+		String query = "DELETE FROM clientes WHERE cpf = ?";
 
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setLong(1, c.getCpf());
 			ps.executeUpdate();
-
-			con.fecharConexao();
-
+			
 			return true;
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -153,5 +163,7 @@ public class ClienteDAO {
 		}
 		return false;
 	}
+
+	
 
 }

@@ -3,7 +3,7 @@ package modelo;
 import java.time.LocalDate;
 
 public class Cliente {
-
+	
 	private String nomeCompleto;
 	private Long cpf;
 	private LocalDate dataNac;

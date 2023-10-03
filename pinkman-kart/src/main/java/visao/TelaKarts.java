@@ -109,6 +109,77 @@ public class TelaKarts extends JFrame {
 				Karts karts = new Karts();
 
 				KartsDAO kartsdao = KartsDAO.getinstancia();
+<<<<<<< HEAD
+				
+				
+			
+					String preco = txtPreco_1.getText();
+				 if (txtPreco_1.getText().trim().length() == 0) {
+					 JOptionPane.showMessageDialog(null, "Preço não preenchido!!");
+					 return;
+				 }
+				 else {
+					 preco = preco.replace("R$", "");
+					 preco = preco.replace(".", "");
+					 preco = preco.replace(".", "");
+					 preco = preco.replace(",", "");
+					 preco = preco.trim();
+					 
+				karts.setpreco(Long.valueOf(txtPreco.getText()));
+				 }
+			
+				 if (txtMarca.getText().trim().length() == 0) {
+					 new MensagemErro("Marca não preenchido !").setVisible(true);
+					 return;
+				 }
+				 else {
+				karts.setmarca(String.valueOf(txtMarca.getText()));
+				 }
+				 
+				 if (txtModelo.getText().trim().length() == 0) {
+					 new MensagemErro("Modelo não preenchido !").setVisible(true);
+					 return;
+				 }
+				 else {
+				karts.setmodelo(String.valueOf(txtModelo.getText()));
+				 }
+				
+				 
+				 if (txtId.getText().trim().length() == 0) {
+					 new MensagemErro("Id kart não preenchido !").setVisible(true);
+					 return;
+				 }
+				 else {
+				karts.setId(Long.valueOf(txtId.getText()));
+				 }
+				 String CNPJ = txtCNPJ.getText();
+				 if (txtCNPJ.getText().trim().length() == 0) {
+					 new MensagemErro("CNPJ não preenchido !").setVisible(true);
+					 return;
+				 }
+				 else {
+					 
+					 CNPJ = CNPJ.replace(".", "");
+					 CNPJ = CNPJ.replace(".", "");
+					 CNPJ = CNPJ.replace("/", "");
+					 CNPJ = CNPJ.replace("0", "");
+					 CNPJ = CNPJ.replace("0", "");
+					 CNPJ = CNPJ.replace("0", "");
+					 CNPJ = CNPJ.replace("-", "");
+					 CNPJ = CNPJ.trim();
+				karts.setforneCNPJ(Long.valueOf(txtFornecedor.getText()));
+				 }
+				 
+				 KartsDAO kartDao = KartsDAO.getinstancia();
+				 if(kartDao.Inserir(karts)== true) {
+					 JOptionPane.showMessageDialog(btnCadastrar, "Cadastro feito");
+					 atualizarTabela();
+				 }else {
+					 new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
+				 }
+				 
+				 
+=======
 
 				String preco = txtPreco_1.getText();
 				if (txtPreco_1.getText().trim().length() == 0) {
@@ -209,6 +280,7 @@ public class TelaKarts extends JFrame {
 					JOptionPane.showMessageDialog(btnCadastrar, "Erro no cadastro ");
 				}
 
+>>>>>>> main
 			}
 
 		});
