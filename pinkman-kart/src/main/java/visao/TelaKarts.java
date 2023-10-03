@@ -133,21 +133,21 @@ public class TelaKarts extends JFrame {
 				} else {
 					
 
-					karts.setpreco(Long.valueOf(preco));
+					karts.setPreco(Long.valueOf(preco));
 				}
 
 				if (txtMarca.getText().trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "Marca não preenchido!");
 					return;
 				} else {
-					karts.setmarca(String.valueOf(txtMarca.getText()));
+					karts.setMarca(String.valueOf(txtMarca.getText()));
 				}
 
 				if (txtModelo.getText().trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "Modelo não preenchido!!");
 					return;
 				} else {
-					karts.setmodelo(String.valueOf(txtModelo.getText()));
+					karts.setModelo(String.valueOf(txtModelo.getText()));
 				}
 
 				if (txtId.getText().trim().length() == 0) {
@@ -160,7 +160,7 @@ public class TelaKarts extends JFrame {
 					JOptionPane.showMessageDialog(null, "Ano não preenchido ");
 					return;
 				}else {
-					karts.setano(Long.valueOf(txtAno.getText()));
+					karts.setAno(Long.valueOf(txtAno.getText()));
 				}
 				String CNPJ = txtCNPJ.getText();
 				CNPJ = CNPJ.replace(".", "");
@@ -201,7 +201,7 @@ public class TelaKarts extends JFrame {
 						DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyyy"); // Define o formato da
 						// data
 						LocalDate dataEntradaformatada = LocalDate.parse(DataEntrada, formato);
-						karts.setdataEntrada(dataEntradaformatada);
+						karts.setDataEntrada(dataEntradaformatada);
 					}
 				}
 
@@ -211,13 +211,13 @@ public class TelaKarts extends JFrame {
 					JOptionPane.showMessageDialog(null, "Quantidade não foi Preenchida");
 					return;
 				}else {
-					karts.setquantidade(Long.valueOf(textQuantidade));
+					karts.setQuantidade(Long.valueOf(textQuantidade));
 				}
 				String Cor = txtCor.getText();
 					if(txtCor.getText().trim().length() == 0) {
 						JOptionPane.showMessageDialog(null, "A Cor não foi Preenchida");
 					}else {
-						karts.setcor(String.valueOf(Cor));
+						karts.setCor(String.valueOf(Cor));
 					}
 
 				KartsDAO kartDao = KartsDAO.getinstancia();
@@ -525,8 +525,8 @@ public class TelaKarts extends JFrame {
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		for (Karts Karts : karts) {
-			Object[] linha = { Karts.getId(), Karts.getcor(),Karts.getmodelo(),Karts.getmarca(),Karts.getano(),Karts.getdataEntrada().format(formato), 
-					Karts.getpreco(), Karts.CNPJ() };
+			Object[] linha = { Karts.getId(), Karts.getCor(),Karts.getModelo(),Karts.getMarca(),Karts.getAno(),Karts.getDataEntrada().format(formato), 
+					Karts.getPreco(), Karts.getCNPJ() };
 			modelo.addRow(linha);
 
 		}

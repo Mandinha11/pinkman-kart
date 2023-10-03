@@ -15,8 +15,8 @@ public class FornecedorDAO {
 	private static FornecedorDAO instancia;
 
 	public ArrayList<Fornecedor> Listar() {
-
 		Conexao c = Conexao.getInstancia();
+		
 
 		Connection con = c.conectar();
 
