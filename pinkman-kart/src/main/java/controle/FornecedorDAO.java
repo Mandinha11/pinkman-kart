@@ -117,17 +117,22 @@ public Boolean alterar(Fornecedor f) {
 	}
 
 	public Boolean Deletar(Fornecedor f) {
+		
 		Conexao con = Conexao.getInstancia();
 
 		Connection conn = con.conectar();
 
 		String query = "DELETE FROM fornecedor WHERE cnpj = ?";
 
+		
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
+			
 			ps.setLong(1, f.getCnpj());
-			ps.executeUpdate();
-			return true;
+			
+			int rows = ps.executeUpdate();
+			
+			return rows==1;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
