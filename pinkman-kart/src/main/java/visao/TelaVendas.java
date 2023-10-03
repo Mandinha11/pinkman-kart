@@ -26,11 +26,13 @@ import javax.swing.JFormattedTextField;
 
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
 
 public class TelaVendas extends JFrame {
 
@@ -38,8 +40,11 @@ public class TelaVendas extends JFrame {
 	private JTextField txtKart;
 	private JTextField txtCliente;
 	private JTextField txtPreco;
-	private JTable table;
 	private JTextField txtMatricula;
+	private VendasDAO dao;
+	private DefaultTableModel modelo;
+	private JTextField txtData;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -75,11 +80,14 @@ public class TelaVendas extends JFrame {
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(281, 187, 1588, 807);
 		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(1587, 0, -1585, 807);
+		panel.add(scrollPane);
 		
 		table = new JTable();
-		table.setToolTipText("");
-		table.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		table.setBackground(new Color(0, 0, 0));
+		table.setBounds(1586, 0, -1579, 807);
 		panel.add(table);
 		
 		JButton btnCadastra = new JButton("Cadastrar");
@@ -93,11 +101,18 @@ public class TelaVendas extends JFrame {
 				
 				VendasDAO vendasDao = VendasDAO.getinstancia();
 				
+				
+					String text = txtCliente.getText();
 				 if (txtCliente.getText().trim().length() == 0) {
-					 JOptionPane.showMessageDialog(null, "Nome do cliente não preenchido!!");
+					 JOptionPane.showMessageDialog(null, "CNPJ do cliente não preenchido!!");
 					 return;
 			        }
 				 else {
+					 	text = text.replace(".","");
+					 	text = text.replace(".","");
+					 	text = text.replace("-","");
+					 	text = text.trim();
+					 	
 					 vendas.setcliente(txtCliente.getText());
 				 }
 				
@@ -128,9 +143,17 @@ public class TelaVendas extends JFrame {
 				 else {
 				vendas.setmatricula(Long.valueOf(txtMatricula.getText()));
 				 }
-				
+				VendasDAO VendasDao = VendasDAO.getinstancia();
+				if(VendasDao.Inserir(vendas)== true) {
+					JOptionPane.showMessageDialog(null,"Venda Cadastrada com sucesso");
+					atualizarTabela();
+				}else {
+					JOptionPane.showMessageDialog(null,"Erro ao Cadastrar a venda");
+				}
 				 
 			}
+
+			
 		});
 		btnCadastra.setBounds(36, 187, 187, 49);
 		contentPane.add(btnCadastra);
@@ -162,81 +185,13 @@ public class TelaVendas extends JFrame {
 		panel_1.add(lblData);
 		lblData.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JComboBox<String> boxDia = new JComboBox<>();
-		boxDia.setBounds(108, 19, 72, 22);
-		panel_1.add(boxDia);
-		boxDia.addItem("01");
-		boxDia.addItem("02");
-		boxDia.addItem("03");
-		boxDia.addItem("04");
-		boxDia.addItem("05");
-		boxDia.addItem("06");
-		boxDia.addItem("07");
-		boxDia.addItem("08");
-		boxDia.addItem("09");
-		boxDia.addItem("10");
-		boxDia.addItem("11");
-		boxDia.addItem("12");
-		boxDia.addItem("13");
-		boxDia.addItem("14");
-		boxDia.addItem("15");
-		boxDia.addItem("16");
-		boxDia.addItem("17");
-		boxDia.addItem("18");
-		boxDia.addItem("19");
-		boxDia.addItem("20");
-		boxDia.addItem("21");
-		boxDia.addItem("22");
-		boxDia.addItem("23");
-		boxDia.addItem("24");
-		boxDia.addItem("25");
-		boxDia.addItem("26");
-		boxDia.addItem("27");
-		boxDia.addItem("28");
-		boxDia.addItem("29");
-		boxDia.addItem("30");
-		boxDia.addItem("31");
-		
-		JComboBox<String> boxMes = new JComboBox<>();
-		boxMes.setBounds(243, 19, 72, 22);
-		panel_1.add(boxMes);
-		boxMes.addItem("01");
-		boxMes.addItem("02");
-		boxMes.addItem("03");
-		boxMes.addItem("04");
-		boxMes.addItem("05");
-		boxMes.addItem("06");
-		boxMes.addItem("07");
-		boxMes.addItem("08");
-		boxMes.addItem("09");
-		boxMes.addItem("10");
-		boxMes.addItem("11");
-		boxMes.addItem("12");
-		
-		JComboBox<Integer> boxAno = new JComboBox<>();
-		boxAno.setBounds(375, 19, 72, 22);
-		panel_1.add(boxAno);
+		txtData = new JTextField();
+		txtData.setColumns(10);
+		txtData.setBounds(151, 16, 304, 28);
+		panel_1.add(txtData);
 		for(int i =1923; i<=2023; i++) {
-			boxAno.addItem(i);
+		
 		}
-		
-		JLabel lblNewLabel_3 = new JLabel("Dia");
-		lblNewLabel_3.setForeground(new Color(255, 255, 255));
-		lblNewLabel_3.setBounds(70, 14, 28, 28);
-		panel_1.add(lblNewLabel_3);
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 15));
-		
-		JLabel lblNewLabel_2 = new JLabel("Mês");
-		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setBounds(199, 21, 34, 14);
-		panel_1.add(lblNewLabel_2);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
-		
-		JLabel lblNewLabel_4 = new JLabel("Ano");
-		lblNewLabel_4.setForeground(new Color(255, 255, 255));
-		lblNewLabel_4.setBounds(329, 21, 36, 14);
-		panel_1.add(lblNewLabel_4);
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
@@ -316,11 +271,11 @@ public class TelaVendas extends JFrame {
 		lblMatriculaFuncionario.setBounds(10, 18, 156, 20);
 		panel_1_2_2.add(lblMatriculaFuncionario);
 		
-		JButton btnListar = new JButton("Listar");
-		btnListar.setBackground(new Color(0, 0, 0));
-		btnListar.setForeground(new Color(255, 255, 255));
-		btnListar.setBounds(36, 274, 187, 49);
-		contentPane.add(btnListar);
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.setBackground(new Color(0, 0, 0));
+		btnAtualizar.setForeground(new Color(255, 255, 255));
+		btnAtualizar.setBounds(36, 274, 187, 49);
+		contentPane.add(btnAtualizar);
 		
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBackground(new Color(0, 0, 0));
@@ -328,11 +283,22 @@ public class TelaVendas extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 int selectedRow = table.getSelectedRow();
-	                if (selectedRow != -1) {
+				 
+				 String kart = (String) table.getValueAt(selectedRow, 1);
+				 
+				 	VendasDAO dao = VendasDAO.getinstancia();
+				 	
+				 	Vendas v = new Vendas();
+				 	v.setkarts(kart);
+				 	boolean retorno = dao.Deletar(v);
+				 
+	                if (retorno == true) {
 	                    // Remove a linha selecionada
 	                    DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 	                    tableModel.removeRow(selectedRow);
-	                    JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
+	                    JOptionPane.showMessageDialog(null, "Linha Excluída com Sucesso!");
+	                }else {
+	                	JOptionPane.showMessageDialog(null, "Erro na Exclução da Linha");
 	                }
 			}
 		});
@@ -351,4 +317,18 @@ public class TelaVendas extends JFrame {
 		contentPane.add(lblNewLabel_5);
 
 	}
+	private void atualizarTabela() {
+				// TODO Auto-generated method stub
+				dao = VendasDAO.getinstancia();
+				ArrayList <Vendas> Vendas = dao.listar();
+				
+				modelo = new DefaultTableModel(new Object[][] {},
+					new String[] {"cliente", "preço","kart","matricula"});
+				
+				for(Vendas vendas : Vendas ) {
+					Object[] linha = {vendas.getcliente(), vendas.getdata(), vendas.getkarts(), vendas.getmatricula()};
+					modelo.addRow(linha);
+				}
+				table.setModel(modelo);
+			}
 }
