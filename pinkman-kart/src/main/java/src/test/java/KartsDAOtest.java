@@ -14,14 +14,14 @@ public class KartsDAOtest {
 	
 	public void testMetodoInserirKarts() {
 		Karts k = new Karts();
-		k.setano(null);
+		k.setAno(null);
 		k.setCNPJ(null);
-		k.setcor(null);
-		k.setdataEntrada(null);
-		k.setmarca(null);
-		k.setmodelo(null);
-		k.setpreco(null);
-		k.setquantidade(null);
+		k.setCor(null);
+		k.setDataEntrada(null);
+		k.setMarca(null);
+		k.setModelo(null);
+		k.setPreco(null);
+		k.setQuantidade(null);
 		k.setId(null);
 		
 		
