@@ -377,11 +377,11 @@ public class TelaFornecedor extends JFrame {
 				String tblnome_empresa = tblModel.getValueAt(table_1.getSelectedRow(),0).toString();
 				String tblcep = tblModel.getValueAt(table_1.getSelectedRow(),1).toString();
 				String tbltelefone = tblModel.getValueAt(table_1.getSelectedRow(),2).toString();
-				
+				String tblcnpj = tblModel.getValueAt(table_1.getSelectedRow(),3).toString();
 				txtNomeEmpresa.setText(tblnome_empresa);
 				txtTelefone.setText(tbltelefone);
 				txtCEP.setText(tblcep);
-				
+				txtCNPJ.setText(tblcnpj);
 				
 				
 			}

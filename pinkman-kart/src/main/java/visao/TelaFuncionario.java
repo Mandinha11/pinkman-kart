@@ -173,7 +173,7 @@ public class TelaFuncionario extends JFrame {
 			
 				String text = textCPF.getText();
 				if (text.trim().length() == 0) {
-					new MensagemErro("CPF não preenchido !").setVisible(true);
+					JOptionPane.showMessageDialog(null, "CPF não foi preenchido!");
 					return;
 				} else {
 					text = text.replace(".", "");
@@ -185,34 +185,39 @@ public class TelaFuncionario extends JFrame {
 				}
 				String txt = textNomeCompleto.getText();
 				if (txt.trim().length() == 0) {
-					new MensagemErro("Nome não preenchido !").setVisible(true);
+					JOptionPane.showMessageDialog(null, "Nome não preenchido!");
 					return;
 				} else {
 					funcionario.setNomeCompleto(String.valueOf(txt));
 				}
-				String dia = (String) boxDia.getSelectedItem();
-				String mes = (String) boxMes.getSelectedItem();
-				String ano = (String) boxAno.getSelectedItem();
-
-				if (dia == null || mes == null || ano == null) {
-				    JOptionPane.showMessageDialog(null, "Data não preenchida corretamente!");
-				    return;
+				
+				String data = textDataNac.getText();
+				if (data.trim().length() == 0) {
+					JOptionPane.showMessageDialog(null, "DATA não foi preenchido!");
+					return;
+				} else {
+					data = data.replace("/", "");
+					data = data.replace("/", "");
+					data = data.trim();
+					
+					if(data.trim().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "DATA não foi preenchido!");
+						return;
+			
+					}else {
+					
+					DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyyy"); // Define o formato da data
+					LocalDate dataNasc = LocalDate.parse(data, formato);
+					funcionario.setDataNac(dataNasc);
+					}
 				}
-
-				String dataString = dia + mes + ano; 
-
-				try {
-				    
-				    SimpleDateFormat sdf = new SimpleDateFormat("MMyyyy");
-
-				    java.util.Date dataNascimento = sdf.parse(dataString);
-
-				    
-				    Funcionario.setDataNac(dataNascimento);
-				} catch (ParseException e1) {
-				    e1.printStackTrace();
-				    JOptionPane.showMessageDialog(null, "Formato de data inválido!");
-				    return; 
+				
+				 String cargo = (String) boxCargo.getSelectedItem();
+				if (cargo.trim().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Cargo não preenchido");
+					return;
+				} else {
+					funcionario.setCargo(cargo);
 				}
 				 
 
@@ -222,7 +227,7 @@ public class TelaFuncionario extends JFrame {
 					JOptionPane.showMessageDialog(null, "Cadastrado");
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(null, "Deu não");
+					JOptionPane.showMessageDialog(null, "Erro ao Cadastrar");
 				}
 			}
 		});
