@@ -113,7 +113,7 @@ public class TelaVendas extends JFrame {
 				
 					String text = txtClienteCPF.getText();
 				 if (txtClienteCPF.getText().trim().length() == 0) {
-					 JOptionPane.showMessageDialog(null, "CNPJ do cliente não preenchido!!");
+					 JOptionPane.showMessageDialog(null, "CPF do cliente não preenchido!!");
 					 return;
 			        }
 				 else {
@@ -125,8 +125,6 @@ public class TelaVendas extends JFrame {
 					 vendas.setclienteCPF(Long.valueOf(txtClienteCPF.getText()));
 				 }
 				
-				
-				 
 				 
 				 if (txtValorDaVenda.getText().trim().length() == 0) {
 					 JOptionPane.showMessageDialog(null, "Preço não preenchido!!");
@@ -144,6 +142,19 @@ public class TelaVendas extends JFrame {
 				 else {
 					 vendas.setidKarts(Long.valueOf(txtidKart.getText()));
 				 }
+				 String cpf = txtFuncionarioCPF.getText();
+					if (cpf.trim().length() == 0) {
+						JOptionPane.showMessageDialog(null, "CPF não preenchido!!");
+						return;
+					} else {
+						cpf = cpf.replace(".", "");
+						cpf = cpf.replace(".", "");
+						cpf = cpf.replace("-", "");
+
+						vendas.setFuncionarioCPF(Long.valueOf(cpf));
+
+					}
+				 
 				 
 				VendasDAO VendasDao = VendasDAO.getinstancia();
 				if(VendasDao.Inserir(vendas)== true) {

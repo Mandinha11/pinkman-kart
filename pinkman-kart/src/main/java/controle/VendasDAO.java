@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 import javax.xml.crypto.Data;
@@ -17,32 +18,42 @@ import modelo.Vendas;
 
 public class VendasDAO {
 	
+	private static VendasDAO instancia;
+	
+	private static LocalDate fromDateToLocalDate(Date date) {
+		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	}
+	
 	public ArrayList <Vendas> listar (){
 		
 		Conexao c = Conexao.getInstancia();
 		
 		Connection con = c.conectar();
 		
-		ArrayList<Vendas> vendas = new ArrayList();
 		String query = "SELECT * FROM vendas";
+		ArrayList<Vendas> vendas = new ArrayList();
+		
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
 		while(rs.next()) {
 			
-		
-			Long idKart = rs.getLong("idKart");
-			Long clienteCPF = rs.getLong("cliente");
+			Vendas v = new Vendas();
+			
+			long idKart = rs.getLong("idKart");
+			long clienteCPF = rs.getLong("cliente");
 			long ValorDaVenda = rs.getLong("preco");
 			Date dataVendas = rs.getDate("data");
 			
-			Vendas v = new Vendas();
+			
+			
 			
 			v.setidKarts (idKart);
 			v.setclienteCPF(clienteCPF);
 			v.setValorDaVenda (ValorDaVenda);
-			v.setdataVendas(dataVendas.toLocalDate());
-		
+			
+			LocalDate dataVendaConvertida = dataVendas.toLocalDate();
+			v.setdataVendas(dataVendaConvertida);
 			
 			vendas.add(v);
 		 		}
@@ -60,8 +71,7 @@ public class VendasDAO {
 	}
 
 	
-	private static VendasDAO instancia;
-	
+
 
 	public static VendasDAO getinstancia() {
 
@@ -72,7 +82,7 @@ public class VendasDAO {
 		return instancia;
 	}
 
-	public boolean Inserir(Vendas v) {
+	public boolean inserir(Vendas v) {
 		if(v!=null) {
 			
 			Conexao con = Conexao.getInstancia();
@@ -83,6 +93,7 @@ public class VendasDAO {
 			
 			try {
 				PreparedStatement ps = conn.prepareStatement(query);
+				
 				
 				ps.setLong(1, v.getidkarts());
 				ps.setDate(2,Date.valueOf(v.getdataVendas()));
@@ -106,7 +117,7 @@ public class VendasDAO {
 			
 	}
 
-	public boolean Alterar(Vendas v) {
+	public boolean alterar(Vendas v) {
 		
 		Conexao con = Conexao.getInstancia();
 
