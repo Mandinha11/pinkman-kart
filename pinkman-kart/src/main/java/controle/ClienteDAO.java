@@ -39,7 +39,7 @@ public class ClienteDAO {
 
 				Cliente cl = new Cliente();
 
-				int id_cliente = rs.getInt("id_cliente");
+				
 				long telefone = rs.getLong("Telefone");
 				Date dataNac = rs.getDate("data_nascimento");
 				long cpf = rs.getLong("cpf");
