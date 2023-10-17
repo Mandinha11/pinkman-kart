@@ -14,13 +14,13 @@ public class FornecedorDAOTets {
 	public void testMetodoInserir() {
 	Fornecedor f = new Fornecedor();
 	
-	f.setCep(null);
-	f.setCnpj(null);
-	f.setNomeEmpresa(null);
-	f.setTelefone(null);
+	f.setCep(891110446l);
+	f.setCnpj(174564548789l);
+	f.setNomeEmpresa("AmandaAL");
+	f.setTelefone(47965879963l);
 	
 	FornecedorDAO dao = new FornecedorDAO() ;
-	Boolean InseriuOk = dao.inserir(f);
+	boolean InseriuOk = dao.inserir(f);
 	assertEquals(true, InseriuOk);
 	
 	}

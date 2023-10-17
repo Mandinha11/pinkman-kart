@@ -2,6 +2,8 @@ package src.test.java;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import controle.ClienteDAO;
@@ -15,16 +17,14 @@ public class ClienteDAOTest {
 		Cliente c = new Cliente();
 
 		c.setNomeCompleto("Amanda");
-		c.setCpf(null);
-		c.setDataNac(null);
-		c.setNomeEmpressa(null);
-		c.setTelefone(null);
+		c.setCpf(16904602356l);
+		c.setDataNac(LocalDate.of(2005, 11, 11));
+		c.setNomeEmpressa("Julia");
+		c.setTelefone(4798687793l);
 
 		ClienteDAO dao = new ClienteDAO();
-
-		// Integer idClienteInserido = dao.inserir(c);
-		boolean inseriuOk = dao.inserir(null);
-		assertEquals(false, inseriuOk);
+		
+		assertEquals(true, dao.inserir(c));
 
 	}
 
