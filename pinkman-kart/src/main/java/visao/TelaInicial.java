@@ -20,8 +20,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
+import controle.LoginDao;
 import modelo.Funcionario;
 import net.miginfocom.swing.MigLayout;
 import java.awt.SystemColor;
@@ -39,8 +41,14 @@ public class TelaInicial extends JFrame {
 	private JPasswordField textSenha;
 
 	/**
-	 * Launch the application.
-	 */
+	 *  public void run() {
+	                JFrame frame = new JFrame("Tela de Login");
+	                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	                frame.getContentPane().add(new TelaInicial());
+	                frame.pack();
+	                frame.setVisible(true);
+	            }
+	        });	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -100,35 +108,22 @@ public class TelaInicial extends JFrame {
 		contentPane.add(textSenha, "cell 2 3,growx,aligny bottom");
 		contentPane.add(btnEntrar, "cell 2 4,growx,aligny top");
 		
-		btnEntrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-            /*
-             */
-				
-				String senha = textSenha.getText();
-				long cpf = Long.valueOf(textLogin.getText());
-      
-                try {
-                    Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/diagramas_karts",
-                        "root", "root");
+		 btnEntrar.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                String login = textLogin.getText();
+	                Long senha = Long.valueOf(new String(textSenha.getPassword())); // Obtenha a senha como uma String
 
-                    PreparedStatement st = (PreparedStatement) connection 
-                    		.prepareStatement("SELECT cpf, nome_completo FROM funcionarios WHERE cpf=? AND nome_completo=?");
+	                LoginDao loginDao = new LoginDao();
+	                boolean autenticado = loginDao.autenticarLogin(login, senha);
 
-                    st.setLong(1, cpf);
-                    st.setString(2, senha);
-                    ResultSet rs = st.executeQuery();
-                    if (rs.next()) {
-                        JOptionPane.showMessageDialog(btnEntrar, "Você entrou com sucesso!");
-                    } else {
-                        JOptionPane.showMessageDialog(btnEntrar, "Usuário ou senha incorretos!");
-                    }
-                } catch (SQLException sqlException) {
-                    sqlException.printStackTrace();
-                }
-            }
-        });
-		
-		
-	}
+	                if (autenticado) {
+	                    JOptionPane.showMessageDialog(btnEntrar, "Você entrou com sucesso!");
+	                } else {
+	                    JOptionPane.showMessageDialog(btnEntrar, "Usuário ou senha incorretos!");
+	                }
+	            }
+	        });
+	    }
+
 }
+

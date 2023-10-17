@@ -1,55 +1,33 @@
 package controle;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import modelo.Funcionario;
+public class LoginDao {
+    // Método para autenticar o login
+    public boolean autenticarLogin(String login, Long senha) {
+        try {
+        	Conexao con = Conexao.getInstancia();
+        	Connection conn = con.conectar();
+            PreparedStatement st = conn.prepareStatement("SELECT nome_completo, cpf FROM funcionarios WHERE nome_completo=? AND cpf=?");
+            st.setString(1, login);  // Defina o nome do funcionário
+            st.setLong(2, senha);  // Defina o CPF como senha
+            ResultSet rs = st.executeQuery();
 
-public class LoginDao implements InterfaceLogin{
+            if (rs.next()) {
+                // Usuário autenticado
+            	conn.close();
+                return true;
+            }
 
-	private Conexao con;
+            conn.close();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
 
-	@Override
-	public Funcionario consultarLogin(Funcionario usuario) {
-
-		try {
-
-			con = Conexao.getInstancia();
-			Connection c = con.conectar();
-			PreparedStatement ps = c.prepareStatement("select * from funcionarios where nome_completo = ? and cpf = ?");
-			ps.setString(1, usuario.getNomeCompleto());
-			ps.setLong(2, usuario.getCpf());
-
-			ResultSet rs = ps.executeQuery();
-			Funcionario usuarioConectado = new Funcionario();
-			while (rs.next()) {
-				
-				String login = rs.getString("nome_completo");
-				Long senha = rs.getLong("cpf");
-				
-				usuarioConectado.setNomeCompleto(login);
-				usuarioConectado.setCpf(senha);
-				
-
-				return usuarioConectado;
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			con.fecharConexao();
-		}
-		return null;
-	}
-
-	@Override
-	public Funcionario consultaFuncionario(Funcionario usuario) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
+        return false;
+    }
 }
