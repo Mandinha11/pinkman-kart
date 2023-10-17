@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controle.Conexao;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -17,10 +20,12 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JToolBar;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -61,7 +66,8 @@ public class TelaSelecao extends JFrame {
 	 */
 	public TelaSelecao() {
 		
-		
+		Conexao con = Conexao.getInstancia();
+    	Connection conn = con.conectar();
 		setTitle("Seleção");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 2217, 1100);
@@ -82,6 +88,10 @@ public class TelaSelecao extends JFrame {
 				TelaInicial ti = new TelaInicial();
 				ti.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				ti.setVisible(true);
+				con.fecharConexao();
+				if(con.fecharConexao() == true) {
+					JOptionPane.showMessageDialog(btnVoltar, "Logout efetuado com sucesso!");
+				}
 			}
 		});
 		contentPane.setLayout(null);
