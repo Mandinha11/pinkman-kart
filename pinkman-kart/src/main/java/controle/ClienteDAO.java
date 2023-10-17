@@ -109,7 +109,7 @@ public class ClienteDAO {
 
 	}
 
-	public Boolean alterar(Cliente c) {
+	public boolean alterar(Cliente c) {
 
 		Conexao con = Conexao.getInstancia();
 
@@ -139,7 +139,7 @@ public class ClienteDAO {
 		return false;
 	}
 
-	public Boolean Deletar(Cliente c) {
+	public boolean deletar(Cliente c) {
 
 		Conexao con = Conexao.getInstancia();
 

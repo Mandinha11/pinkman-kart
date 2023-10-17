@@ -401,7 +401,7 @@ public class TelaCliente extends JFrame {
 
 				Cliente c = new Cliente();
 				c.setCpf(cpf);
-				boolean retorno = dao.Deletar(c);
+				boolean retorno = dao.deletar(c);
 
 				if (retorno == true) {
 

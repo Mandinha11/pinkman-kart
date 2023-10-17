@@ -17,9 +17,8 @@ public class ClienteDAOTest {
 		Cliente c = new Cliente();
 
 		c.setNomeCompleto("Amanda");
-		c.setCpf(16904602356l);
+		c.setCpf(23904602356l);
 		c.setDataNac(LocalDate.of(2005, 11, 11));
-		c.setNomeEmpressa("Julia");
 		c.setTelefone(4798687793l);
 
 		ClienteDAO dao = new ClienteDAO();
@@ -27,5 +26,28 @@ public class ClienteDAOTest {
 		assertEquals(true, dao.inserir(c));
 
 	}
+	//Arrumar esse
+		public void testMetodoAlterarCliente() {
+			
+			Cliente c = new Cliente();
 
+			ClienteDAO dao = new ClienteDAO();
+			
+			assertEquals(true, dao.alterar(c));
+
+		}
+	public void testMetodoDeletarCliente() {
+		Cliente c = new Cliente();
+
+		c.setNomeCompleto("Amanda");
+		c.setCpf(23904602356l);
+		c.setDataNac(LocalDate.of(2005, 11, 11));
+		c.setTelefone(4798687793l);
+
+		ClienteDAO dao = new ClienteDAO();
+		
+		assertEquals(true, dao.deletar(c));
+
+	}
+	
 }

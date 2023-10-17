@@ -74,8 +74,10 @@ public class FornecedorDAO {
 			ps.setString(2, f.getNomeEmpresa());
 			ps.setLong(3, f.getCep());
 			ps.setLong(4, f.getTelefone());
+			
 			ps.executeUpdate();
 			return true;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -116,7 +118,7 @@ public Boolean alterar(Fornecedor f) {
 	    return false;
 	}
 
-	public Boolean Deletar(Fornecedor f) {
+	public boolean Deletar(Fornecedor f) {
 		
 		Conexao con = Conexao.getInstancia();
 
