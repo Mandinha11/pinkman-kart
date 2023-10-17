@@ -20,8 +20,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
+import controle.Conexao;
+import controle.LoginDao;
 import modelo.Funcionario;
 import net.miginfocom.swing.MigLayout;
 import java.awt.SystemColor;
@@ -39,8 +42,14 @@ public class TelaInicial extends JFrame {
 	private JPasswordField textSenha;
 
 	/**
-	 * Launch the application.
-	 */
+	 *  public void run() {
+	                JFrame frame = new JFrame("Tela de Login");
+	                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	                frame.getContentPane().add(new TelaInicial());
+	                frame.pack();
+	                frame.setVisible(true);
+	            }
+	        });	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -90,37 +99,41 @@ public class TelaInicial extends JFrame {
 		contentPane.add(textLogin, "cell 2 2,growx,aligny bottom");
 		textLogin.setColumns(10);
 
+		
+		
 		JButton btnEntrar = new JButton("Logar");
 		btnEntrar.setForeground(new Color(255, 255, 255));
 		btnEntrar.setFont(new Font("Segoe UI Semibold", Font.BOLD, 16));
 		btnEntrar.setBackground(new Color(0, 0, 0));
-		btnEntrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                String cpf = textLogin.getText();
-                String senha = textSenha.getText();
-                try {
-                    Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/diagramas_karts",
-                        "root", "root");
-
-                    PreparedStatement st = (PreparedStatement) connection 
-                    		.prepareStatement("SELECT cpf, senha FROM funcionarios WHERE cpf=? AND senha=?");
-
-                    st.setString(1, cpf);
-                    st.setString(2, senha);
-                    ResultSet rs = st.executeQuery();
-                    if (rs.next()) {
-                        JOptionPane.showMessageDialog(btnEntrar, "Você entrou com sucesso!");
-                    } else {
-                        JOptionPane.showMessageDialog(btnEntrar, "Usuário ou senha incorretos!");
-                    }
-                } catch (SQLException sqlException) {
-                    sqlException.printStackTrace();
-                }
-            }
-        });
-		
 		textSenha = new JPasswordField();
 		contentPane.add(textSenha, "cell 2 3,growx,aligny bottom");
 		contentPane.add(btnEntrar, "cell 2 4,growx,aligny top");
-	}
+		
+		 btnEntrar.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                String login = textLogin.getText();
+	                Long senha = Long.valueOf(new String(textSenha.getPassword())); // Obtenha a senha como uma String
+
+	                LoginDao loginDao = new LoginDao();
+	                boolean autenticado = loginDao.autenticarLogin(login, senha);
+
+	                if (autenticado) {	            
+	                    dispose();
+	    				TelaSelecao tela = new TelaSelecao();
+	    				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	    				tela.setVisible(true);
+	    				Conexao con = Conexao.getInstancia();
+	    	        	Connection conn = con.conectar();
+	    	        	con.conectar();
+	    	        
+	    				JOptionPane.showMessageDialog(btnEntrar, "Você entrou com sucesso!");
+	                
+	                } else {
+	                    JOptionPane.showMessageDialog(btnEntrar, "Usuário ou senha incorretos!");
+	                }
+	            }
+	        });
+	    }
+
 }
+
