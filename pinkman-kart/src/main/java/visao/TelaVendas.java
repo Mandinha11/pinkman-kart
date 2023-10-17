@@ -33,17 +33,18 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
+import java.awt.BorderLayout;
 
 public class TelaVendas extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtKart;
-	private JTextField txtCliente;
-	private JTextField txtPreco;
-	private JTextField txtMatricula;
+	private JTextField txtidKart;
+	private JTextField txtClienteCPF;
+	private JTextField txtValorDaVenda;
+	private JTextField txtFuncionarioCPF;
 	private VendasDAO dao;
 	private DefaultTableModel modelo;
-	private JTextField txtData;
+	private JTextField txtDataDaVenda;
 	private JTable table;
 
 	/**
@@ -80,15 +81,23 @@ public class TelaVendas extends JFrame {
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(281, 187, 1588, 807);
 		contentPane.add(panel);
-		panel.setLayout(null);
+		panel.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(1587, 0, -1585, 807);
 		panel.add(scrollPane);
 		
 		table = new JTable();
-		table.setBounds(1586, 0, -1579, 807);
-		panel.add(table);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID_Karts", "Data_da_Venda", "Cliente_CPF", "Valor_da_Venda", "Funcionario_CPF"
+			}
+		));
+		table.getColumnModel().getColumn(1).setPreferredWidth(87);
+		table.getColumnModel().getColumn(3).setPreferredWidth(88);
+		table.getColumnModel().getColumn(4).setPreferredWidth(90);
+		scrollPane.setViewportView(table);
 		
 		JButton btnCadastra = new JButton("Cadastrar");
 		btnCadastra.setForeground(new Color(255, 255, 255));
@@ -102,8 +111,8 @@ public class TelaVendas extends JFrame {
 				VendasDAO vendasDao = VendasDAO.getinstancia();
 				
 				
-					String text = txtCliente.getText();
-				 if (txtCliente.getText().trim().length() == 0) {
+					String text = txtClienteCPF.getText();
+				 if (txtClienteCPF.getText().trim().length() == 0) {
 					 JOptionPane.showMessageDialog(null, "CNPJ do cliente não preenchido!!");
 					 return;
 			        }
@@ -113,36 +122,29 @@ public class TelaVendas extends JFrame {
 					 	text = text.replace("-","");
 					 	text = text.trim();
 					 	
-					 vendas.setcliente(txtCliente.getText());
+					 vendas.setclienteCPF(Long.valueOf(txtClienteCPF.getText()));
 				 }
 				
 				
 				 
 				 
-				 if (txtPreco.getText().trim().length() == 0) {
+				 if (txtValorDaVenda.getText().trim().length() == 0) {
 					 JOptionPane.showMessageDialog(null, "Preço não preenchido!!");
 					 return;
 				 }
 				 else {
-				vendas.setpreco(Long.valueOf(txtPreco.getText()));
+				vendas.setValorDaVenda(Long.valueOf(txtValorDaVenda.getText()));
 				 }
 				
 				
-				 if (txtKart.getText().trim().length() == 0) {
+				 if (txtidKart.getText().trim().length() == 0) {
 					 JOptionPane.showMessageDialog(null, "Kart não preenchido!!");
 					 return;
 			        }
 				 else {
-					 vendas.setkarts(txtKart.getText());
+					 vendas.setidKarts(Long.valueOf(txtidKart.getText()));
 				 }
 				 
-				 if (txtMatricula.getText().trim().length() == 0) {
-					 JOptionPane.showMessageDialog(null, "Matricula do Funcionario não preenchido!!");
-					 return;
-				 }
-				 else {
-				vendas.setmatricula(Long.valueOf(txtMatricula.getText()));
-				 }
 				VendasDAO VendasDao = VendasDAO.getinstancia();
 				if(VendasDao.Inserir(vendas)== true) {
 					JOptionPane.showMessageDialog(null,"Venda Cadastrada com sucesso");
@@ -175,20 +177,20 @@ public class TelaVendas extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(0, 85, 125));
-		panel_1.setBounds(281, 31, 483, 55);
+		panel_1.setBounds(281, 104, 483, 55);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblData = new JLabel("Data:");
+		JLabel lblData = new JLabel("Data da Venda:");
 		lblData.setForeground(new Color(255, 255, 255));
-		lblData.setBounds(10, 16, 48, 24);
+		lblData.setBounds(10, 16, 119, 24);
 		panel_1.add(lblData);
 		lblData.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		txtData = new JTextField();
-		txtData.setColumns(10);
-		txtData.setBounds(151, 16, 304, 28);
-		panel_1.add(txtData);
+		txtDataDaVenda = new JTextField();
+		txtDataDaVenda.setColumns(10);
+		txtDataDaVenda.setBounds(151, 16, 304, 28);
+		panel_1.add(txtDataDaVenda);
 		for(int i =1923; i<=2023; i++) {
 		
 		}
@@ -196,13 +198,13 @@ public class TelaVendas extends JFrame {
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
 		panel_1_1.setBackground(new Color(0, 85, 125));
-		panel_1_1.setBounds(281, 104, 483, 55);
+		panel_1_1.setBounds(281, 31, 483, 55);
 		contentPane.add(panel_1_1);
 		
-		txtKart = new JTextField();
-		txtKart.setColumns(10);
-		txtKart.setBounds(153, 16, 304, 28);
-		panel_1_1.add(txtKart);
+		txtidKart = new JTextField();
+		txtidKart.setColumns(10);
+		txtidKart.setBounds(153, 16, 304, 28);
+		panel_1_1.add(txtidKart);
 		
 		JLabel lblKartVendido = new JLabel("Id Kart:");
 		lblKartVendido.setForeground(new Color(255, 255, 255));
@@ -223,12 +225,12 @@ public class TelaVendas extends JFrame {
 			e.printStackTrace();
 		}
 		
-		txtCliente = new JFormattedTextField(mascaraCPF);
+		txtClienteCPF = new JFormattedTextField(mascaraCPF);
 		
 		
-		txtCliente.setColumns(10);
-		txtCliente.setBounds(153, 16, 304, 28);
-		panel_1_2.add(txtCliente);
+		txtClienteCPF.setColumns(10);
+		txtClienteCPF.setBounds(153, 16, 304, 28);
+		panel_1_2.add(txtClienteCPF);
 		
 		JLabel lblComprador = new JLabel("Cliente CPF:");
 		lblComprador.setForeground(new Color(255, 255, 255));
@@ -242,10 +244,10 @@ public class TelaVendas extends JFrame {
 		panel_1_2_1.setBounds(850, 104, 483, 55);
 		contentPane.add(panel_1_2_1);
 		
-		txtPreco = new JTextField();
-		txtPreco.setColumns(10);
-		txtPreco.setBounds(153, 16, 304, 28);
-		panel_1_2_1.add(txtPreco);
+		txtValorDaVenda = new JTextField();
+		txtValorDaVenda.setColumns(10);
+		txtValorDaVenda.setBounds(153, 16, 304, 28);
+		panel_1_2_1.add(txtValorDaVenda);
 		
 		JLabel lblNewLabel = new JLabel("Valor Da Venda:");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
@@ -260,12 +262,12 @@ public class TelaVendas extends JFrame {
 		panel_1_2_2.setBounds(1362, 31, 507, 55);
 		contentPane.add(panel_1_2_2);
 		
-		txtMatricula = new JTextField();
-		txtMatricula.setColumns(10);
-		txtMatricula.setBounds(193, 16, 304, 28);
-		panel_1_2_2.add(txtMatricula);
+		txtFuncionarioCPF = new JTextField();
+		txtFuncionarioCPF.setColumns(10);
+		txtFuncionarioCPF.setBounds(193, 16, 304, 28);
+		panel_1_2_2.add(txtFuncionarioCPF);
 		
-		JLabel lblMatriculaFuncionario = new JLabel("Matricula Funcionario:");
+		JLabel lblMatriculaFuncionario = new JLabel("Funcionario CPF:");
 		lblMatriculaFuncionario.setForeground(new Color(255, 255, 255));
 		lblMatriculaFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMatriculaFuncionario.setBounds(10, 18, 156, 20);
@@ -284,12 +286,12 @@ public class TelaVendas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				 int selectedRow = table.getSelectedRow();
 				 
-				 String kart = (String) table.getValueAt(selectedRow, 1);
+				 Long kart = (Long) table.getValueAt(selectedRow, 1);
 				 
 				 	VendasDAO dao = VendasDAO.getinstancia();
 				 	
 				 	Vendas v = new Vendas();
-				 	v.setkarts(kart);
+				 	v.setValorDaVenda(kart);
 				 	boolean retorno = dao.Deletar(v);
 				 
 	                if (retorno == true) {
@@ -323,10 +325,10 @@ public class TelaVendas extends JFrame {
 				ArrayList <Vendas> Vendas = dao.listar();
 				
 				modelo = new DefaultTableModel(new Object[][] {},
-					new String[] {"cliente", "preço","kart","matricula"});
+					new String[] {"Id_Karts", "Data_da_venda","Cliente_CPF","Valor_da_Venda","Funcionario_CPF" });
 				
 				for(Vendas vendas : Vendas ) {
-					Object[] linha = {vendas.getcliente(), vendas.getdata(), vendas.getkarts(), vendas.getmatricula()};
+					Object[] linha = {vendas.getidkarts(), vendas.getdataVendas(), vendas.getclienteCPF(), vendas.getValorDaVenda(), vendas.getFuncionarioCPF()};
 					modelo.addRow(linha);
 				}
 				table.setModel(modelo);

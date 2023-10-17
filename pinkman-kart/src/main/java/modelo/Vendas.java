@@ -1,67 +1,65 @@
 package modelo;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
+import javax.xml.crypto.Data;
+
 public class Vendas {
 	
-	private Long idVendas;
-	private String kart;
-	private String cliente;
-	private Long preco;
-	private Long data;
-	private Long matricula;
+	private Long FuncionarioCPF;
+	private Long clienteCPF;
+	private Long ValorDaVenda;
+	private LocalDate dataVendas;
+	private Long idKarts;
 	
 	
 	public Vendas(){
 		
 	}
 	
-	public String getkarts() {
-		return kart;
-	}
-	public void setkarts(String karts) {
-		this.kart = karts;
-	}
-	
-	public String getcliente() {
-		return cliente;
-	}
-	public void setcliente(String cliente) {
-		this.cliente = cliente;
-	}
-	
-	
-	public Long getpreco() {
-		return preco;
-	}
-	public void setpreco(Long preco) {
-		this.preco = preco;
-	}
-	
-	
-	public Long getdata() {
-		return data;
-	}
-	public void setdata(Long data) {
-		this.data = data;
-	}
-	public Long getmatricula() {
-		return matricula;
-	}
-	public void setmatricula(Long matricula) {
-		this.matricula = matricula;
+	public void setidKarts(Long idKarts) {
+		this.idKarts = idKarts;
 	}
 
-	public void setIdVendas(Long idVendas) {
-		this.idVendas = idVendas;
+	public Long getidkarts() {
+		return idKarts;
+	}
+	public void setFuncionarioCPF(Long FuncionarioCPF) {
+		this.FuncionarioCPF = FuncionarioCPF;
+	}
+	public Long getFuncionarioCPF() {
+		return FuncionarioCPF;
 	}
 
-	public long getIdVendas() {
-		
-		return idVendas;
-	}
-	
-	
+	public void setValorDaVenda(Long ValorDaVenda) {
+		this.ValorDaVenda = ValorDaVenda;
 		
 	}
+	public Long getValorDaVenda() {
+		return ValorDaVenda;
+	}
+
+	public void setclienteCPF(Long clienteCPF) {
+		this.clienteCPF = clienteCPF;
+	}
+	public Long getclienteCPF() {
+		return clienteCPF;
+		
+	}
+
+
+
+	public void setdataVendas(LocalDate dataVendas) {
+	this.dataVendas = dataVendas;
+		
+	}
+	public LocalDate getdataVendas() {
+		return dataVendas;
+	}
+	
+}
+
 	
 	
 	

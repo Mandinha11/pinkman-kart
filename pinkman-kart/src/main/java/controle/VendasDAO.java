@@ -1,10 +1,14 @@
 package controle;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+
+import javax.xml.crypto.Data;
 
 import modelo.Karts;
 import modelo.Vendas;
@@ -27,21 +31,18 @@ public class VendasDAO {
 		while(rs.next()) {
 			
 		
-			long idVendas = rs.getLong("idVendas");
-			String kart = rs.getString("kart");
-			String cliente = rs.getString("cliente");
-			long preco = rs.getLong("preco");
-			long data = rs.getLong("data");
-			long matricula = rs.getLong("matricula");
-			
+			Long idKart = rs.getLong("idKart");
+			Long clienteCPF = rs.getLong("cliente");
+			long ValorDaVenda = rs.getLong("preco");
+			Date dataVendas = rs.getDate("data");
 			
 			Vendas v = new Vendas();
-			v.setIdVendas (idVendas);
-			v.setkarts (kart);
-			v.setcliente (cliente);
-			v.setpreco (preco);
-			v.setdata(data);
-			v.setmatricula(matricula);
+			
+			v.setidKarts (idKart);
+			v.setclienteCPF(clienteCPF);
+			v.setValorDaVenda (ValorDaVenda);
+			v.setdataVendas(dataVendas.toLocalDate());
+		
 			
 			vendas.add(v);
 		 		}
@@ -71,23 +72,23 @@ public class VendasDAO {
 		return instancia;
 	}
 
-	public Boolean Inserir(Vendas v) {
+	public boolean Inserir(Vendas v) {
 		if(v!=null) {
 			
 			Conexao con = Conexao.getInstancia();
 
 			Connection conn = con.conectar();
 
-			String query = "INSERT INTO vendas (id_vendas, data_venda, funcionarios_matricula, clientes_id_cliente, valor_total, quantidade, karts_id_kart) VALUES(?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO vendas (karts_id_kart,data_da_venda, valor_total, Cliente_CPF, FuncionarioCPF ) VALUES(?, ?, ?, ?, ?,)";
 			
 			try {
 				PreparedStatement ps = conn.prepareStatement(query);
 				
-				ps.setString(1, v.getkarts());
-				ps.setLong(2, v.getdata());
-				ps.setLong(3, v.getpreco());
-				ps.setLong(4, v.getmatricula());
-				ps.setString(5, v.getcliente());
+				ps.setLong(1, v.getidkarts());
+				ps.setDate(2,Date.valueOf(v.getdataVendas()));
+				ps.setLong(3, v.getValorDaVenda());
+				ps.setLong(5, v.getclienteCPF());
+				ps.setLong(4, v.getFuncionarioCPF());
 				
 				ps.executeUpdate();
 				
@@ -105,19 +106,19 @@ public class VendasDAO {
 			
 	}
 
-	public Boolean Alterar(Vendas v) {
+	public boolean Alterar(Vendas v) {
 		
 		Conexao con = Conexao.getInstancia();
 
 		Connection conn = con.conectar();
 
-		String query = "UPDATE vendas SET data_vendas = ?, id_vendas = ?";
+		String query = "UPDATE vendas SET data_vendas = ?,";
 		
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setLong(1, v.getdata());
+			ps.setDate(1,Date.valueOf(v.getdataVendas()));
 
 			ps.executeUpdate();
 
@@ -136,19 +137,19 @@ public class VendasDAO {
 		return false;
 	}
 
-	public Boolean Deletar(Vendas v) {
+	public boolean Deletar(Vendas v) {
 		
 Conexao con = Conexao.getInstancia();
 		
 		Connection conn = con.conectar();
 
-		String query = "DELETE FROM vendas WHERE id_vendas = ?";
+		String query = "DELETE FROM vendas WHERE valor_total = ?";
 		
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setLong(1, v.getIdVendas());
+			ps.setLong(1, v.getValorDaVenda());
 			
 
 			ps.executeUpdate();
