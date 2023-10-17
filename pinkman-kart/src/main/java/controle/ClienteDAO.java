@@ -39,7 +39,7 @@ public class ClienteDAO {
 
 				Cliente cl = new Cliente();
 
-				int id_cliente = rs.getInt("id_cliente");
+				
 				long telefone = rs.getLong("Telefone");
 				Date dataNac = rs.getDate("data_nascimento");
 				long cpf = rs.getLong("cpf");
@@ -109,7 +109,7 @@ public class ClienteDAO {
 
 	}
 
-	public Boolean alterar(Cliente c) {
+	public boolean alterar(Cliente c) {
 
 		Conexao con = Conexao.getInstancia();
 
@@ -139,7 +139,7 @@ public class ClienteDAO {
 		return false;
 	}
 
-	public Boolean Deletar(Cliente c) {
+	public boolean deletar(Cliente c) {
 
 		Conexao con = Conexao.getInstancia();
 
