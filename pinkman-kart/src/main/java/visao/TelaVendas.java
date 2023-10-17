@@ -33,6 +33,8 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 public class TelaVendas extends JFrame {
 
@@ -43,6 +45,7 @@ public class TelaVendas extends JFrame {
 	private VendasDAO dao;
 	private DefaultTableModel modelo;
 	private JTextField txtData;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -73,16 +76,6 @@ public class TelaVendas extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(281, 187, 1588, 807);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(1587, 0, -1585, 807);
-		panel.add(scrollPane);
 		
 		JButton btnCadastra = new JButton("Cadastrar");
 		btnCadastra.setForeground(new Color(255, 255, 255));
@@ -143,7 +136,7 @@ public class TelaVendas extends JFrame {
 
 			
 		});
-		btnCadastra.setBounds(36, 187, 187, 49);
+		btnCadastra.setBounds(36, 224, 187, 49);
 		contentPane.add(btnCadastra);
 		
 		JButton btnNewButton_2 = new JButton("Voltar");
@@ -163,7 +156,7 @@ public class TelaVendas extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(0, 85, 125));
-		panel_1.setBounds(281, 31, 483, 55);
+		panel_1.setBounds(281, 104, 483, 55);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -184,7 +177,7 @@ public class TelaVendas extends JFrame {
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
 		panel_1_1.setBackground(new Color(0, 85, 125));
-		panel_1_1.setBounds(281, 104, 483, 55);
+		panel_1_1.setBounds(281, 31, 483, 55);
 		contentPane.add(panel_1_1);
 		
 		txtKart = new JTextField();
@@ -245,7 +238,7 @@ public class TelaVendas extends JFrame {
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.setBackground(new Color(0, 0, 0));
 		btnAtualizar.setForeground(new Color(255, 255, 255));
-		btnAtualizar.setBounds(36, 274, 187, 49);
+		btnAtualizar.setBounds(36, 310, 187, 49);
 		contentPane.add(btnAtualizar);
 		
 		JButton btnExcluir = new JButton("Excluir");
@@ -273,7 +266,7 @@ public class TelaVendas extends JFrame {
 	                }
 			}
 		});
-		btnExcluir.setBounds(36, 363, 187, 49);
+		btnExcluir.setBounds(36, 401, 187, 49);
 		contentPane.add(btnExcluir);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
@@ -282,10 +275,31 @@ public class TelaVendas extends JFrame {
 		lblNewLabel_1.setBounds(42, 814, 181, 180);
 		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_5 = new JLabel("New label");
-		lblNewLabel_5.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel_5.setBounds(-13, 0, 1948, 1053);
-		contentPane.add(lblNewLabel_5);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
+		panel.setBounds(281, 224, 1589, 788);
+		contentPane.add(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID_kart", "Data_da_Venda", "Cliente_CPF", "Valor_da_Venda"
+			}
+		));
+		table.getColumnModel().getColumn(1).setPreferredWidth(87);
+		table.getColumnModel().getColumn(3).setPreferredWidth(89);
+		scrollPane.setViewportView(table);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
+		lblNewLabel_2.setBounds(0, 0, 1924, 1053);
+		contentPane.add(lblNewLabel_2);
 
 	}
 	private void atualizarTabela() {
