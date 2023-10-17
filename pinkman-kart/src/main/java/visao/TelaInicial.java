@@ -90,22 +90,32 @@ public class TelaInicial extends JFrame {
 		contentPane.add(textLogin, "cell 2 2,growx,aligny bottom");
 		textLogin.setColumns(10);
 
+		
+		
 		JButton btnEntrar = new JButton("Logar");
 		btnEntrar.setForeground(new Color(255, 255, 255));
 		btnEntrar.setFont(new Font("Segoe UI Semibold", Font.BOLD, 16));
 		btnEntrar.setBackground(new Color(0, 0, 0));
+		textSenha = new JPasswordField();
+		contentPane.add(textSenha, "cell 2 3,growx,aligny bottom");
+		contentPane.add(btnEntrar, "cell 2 4,growx,aligny top");
+		
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                String cpf = textLogin.getText();
-                String senha = textSenha.getText();
+            /*
+             */
+				
+				String senha = textSenha.getText();
+				long cpf = Long.valueOf(textLogin.getText());
+      
                 try {
                     Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/diagramas_karts",
                         "root", "root");
 
                     PreparedStatement st = (PreparedStatement) connection 
-                    		.prepareStatement("SELECT cpf, senha FROM funcionarios WHERE cpf=? AND senha=?");
+                    		.prepareStatement("SELECT cpf, nome_completo FROM funcionarios WHERE cpf=? AND nome_completo=?");
 
-                    st.setString(1, cpf);
+                    st.setLong(1, cpf);
                     st.setString(2, senha);
                     ResultSet rs = st.executeQuery();
                     if (rs.next()) {
@@ -119,8 +129,6 @@ public class TelaInicial extends JFrame {
             }
         });
 		
-		textSenha = new JPasswordField();
-		contentPane.add(textSenha, "cell 2 3,growx,aligny bottom");
-		contentPane.add(btnEntrar, "cell 2 4,growx,aligny top");
+		
 	}
 }
