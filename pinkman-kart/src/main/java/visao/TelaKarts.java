@@ -164,16 +164,11 @@ public class TelaKarts extends JFrame {
 				}
 				String CNPJ = txtCNPJ.getText();
 				CNPJ = CNPJ.replace(".", "");
-				System.out.println();
 				CNPJ = CNPJ.replace(".", "");
-				System.out.println();
 				CNPJ = CNPJ.replace("/", "");
-				System.out.println();
 				CNPJ = CNPJ.replace("-", "");
-				System.out.println();
 				CNPJ = CNPJ.trim();
 				
-				System.out.println();
 				if (CNPJ.trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "CNPJ do Fornecedor não preenchido!!");
 					return;
@@ -525,8 +520,13 @@ public class TelaKarts extends JFrame {
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		for (Karts Karts : karts) {
+<<<<<<< HEAD
 			Object[] linha = { Karts.getId(),Karts.getCor(),Karts.getModelo(),Karts.getMarca(),Karts.getAno(),Karts.getQuantidade(),Karts.getDataEntrada().format(formato), 
 					Karts.getPreco(), Karts.getCNPJ() };
+=======
+			Object[] linha = { Karts.getId(), Karts.getcor(),Karts.getmodelo(),Karts.getmarca(),Karts.getano(),Karts.getquantidade(),Karts.getdataEntrada().format(formato), 
+					Karts.getpreco(), Karts.CNPJ() };
+>>>>>>> TelaKarts-Vendas
 			modelo.addRow(linha);
 
 		}
