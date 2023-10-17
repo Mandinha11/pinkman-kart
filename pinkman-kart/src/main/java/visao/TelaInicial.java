@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
+import controle.Conexao;
 import controle.LoginDao;
 import modelo.Funcionario;
 import net.miginfocom.swing.MigLayout;
@@ -116,8 +117,17 @@ public class TelaInicial extends JFrame {
 	                LoginDao loginDao = new LoginDao();
 	                boolean autenticado = loginDao.autenticarLogin(login, senha);
 
-	                if (autenticado) {
-	                    JOptionPane.showMessageDialog(btnEntrar, "Você entrou com sucesso!");
+	                if (autenticado) {	            
+	                    dispose();
+	    				TelaSelecao tela = new TelaSelecao();
+	    				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	    				tela.setVisible(true);
+	    				Conexao con = Conexao.getInstancia();
+	    	        	Connection conn = con.conectar();
+	    	        	con.conectar();
+	    	        
+	    				JOptionPane.showMessageDialog(btnEntrar, "Você entrou com sucesso!");
+	                
 	                } else {
 	                    JOptionPane.showMessageDialog(btnEntrar, "Usuário ou senha incorretos!");
 	                }
