@@ -52,7 +52,7 @@ public class MensagemErro extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		JLabel lblMsgErro = new JLabel("");
-		lblMsgErro.setBounds(267, 94, 377, 104);
+		lblMsgErro.setBounds(267, 66, 377, 104);
 		lblMsgErro.setFont(new Font("Segoe UI Semibold", Font.BOLD, 24));
 		lblMsgErro.setForeground(new Color(255, 255, 255));
 		contentPane.add(lblMsgErro);
@@ -62,7 +62,9 @@ public class MensagemErro extends JFrame {
 		}
 
 		JButton btnOk = new JButton("OK");
-		btnOk.setBounds(355, 209, 189, 23);
+		btnOk.setForeground(Color.WHITE);
+		btnOk.setBackground(Color.BLACK);
+		btnOk.setBounds(355, 197, 200, 33);
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -70,6 +72,11 @@ public class MensagemErro extends JFrame {
 			}
 		});
 		contentPane.add(btnOk);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon(MensagemErro.class.getResource("/imgs/azulFundo.png")));
+		lblNewLabel_1.setBounds(0, -14, 654, 351);
+		contentPane.add(lblNewLabel_1);
 		
 		setLocationRelativeTo(null);
 		setUndecorated(true);

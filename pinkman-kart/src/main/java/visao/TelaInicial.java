@@ -126,10 +126,12 @@ public class TelaInicial extends JFrame {
 	    	        	Connection conn = con.conectar();
 	    	        	con.conectar();
 	    	        
-	    				JOptionPane.showMessageDialog(btnEntrar, "Você entrou com sucesso!");
+	    	        	new MensagemAcerto("Você entrou com sucesso!").setVisible(true);
+	    				
 	                
 	                } else {
-	                    JOptionPane.showMessageDialog(btnEntrar, "Usuário ou senha incorretos!");
+	                	new MensagemErro("Usuário ou senha incorretos!").setVisible(true);
+	                    
 	                }
 	            }
 	        });

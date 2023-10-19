@@ -90,7 +90,8 @@ public class TelaSelecao extends JFrame {
 				ti.setVisible(true);
 				con.fecharConexao();
 				if(con.fecharConexao() == true) {
-					JOptionPane.showMessageDialog(btnVoltar, "Logout efetuado com sucesso!");
+					new MensagemAcerto("Logout efetuado com sucesso!").setVisible(true);
+					
 				}
 			}
 		});
