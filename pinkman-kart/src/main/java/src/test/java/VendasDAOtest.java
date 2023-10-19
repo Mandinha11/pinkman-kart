@@ -23,7 +23,7 @@ public class VendasDAOtest {
 		v.setFuncionarioCPF(12345678900l);
 		
 		VendasDAO dao = new VendasDAO(); 
-		boolean inseriuOK = dao.Inserir(v);
+		boolean inseriuOK = dao.inserir(v);
 		assertEquals(true, inseriuOK);
 		
 	}

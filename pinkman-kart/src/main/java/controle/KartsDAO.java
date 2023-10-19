@@ -26,7 +26,7 @@ public class KartsDAO {
 				PreparedStatement ps = con.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				long idkarts = rs.getLong("id_kart");
+				long idkarts = rs.getInt("id_kart");
 				String cor = rs.getString("cor");
 				String modelo = rs.getString("modelo");
 				String marca = rs.getString("marca");
@@ -75,7 +75,7 @@ public class KartsDAO {
 		return instancia;
 	}
 
-	public Boolean Inserir(Karts k) {
+	public boolean Inserir(Karts k) {
 		if (k != null) {
 			
 			Conexao con = Conexao.getInstancia();
@@ -114,7 +114,7 @@ public class KartsDAO {
 		return false;
 	}
 
-	public Boolean Alterar(Karts k) {
+	public boolean Alterar(Karts k) {
 		Conexao con = Conexao.getInstancia();
 
 		Connection conn = con.conectar();
@@ -142,13 +142,13 @@ public class KartsDAO {
 		return false;
 	}
 
-	public Boolean Deletar(Karts k) {
+	public boolean Deletar(Karts k) {
 		
 		Conexao con = Conexao.getInstancia();
 		
 		Connection conn = con.conectar();
 
-		String query = "DELETE FROM kart WHERE id_kart = ?";
+		String query = "DELETE FROM karts WHERE id_kart = ?";
 		
 		try {
 

@@ -91,7 +91,7 @@ public class TelaVendas extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"ID_Karts", "Data_da_Venda", "Cliente_CPF", "Valor_da_Venda", "Funcionario_CPF"
+				"ID_Karts", "Data_da_Venda","Cliente_CPF", "Valor_da_Venda", "Funcionario_CPF"
 			}
 		));
 		table.getColumnModel().getColumn(1).setPreferredWidth(87);
@@ -136,7 +136,7 @@ public class TelaVendas extends JFrame {
 				
 				
 				 if (txtidKart.getText().trim().length() == 0) {
-					 JOptionPane.showMessageDialog(null, "Kart não preenchido!!");
+					 JOptionPane.showMessageDialog(null, "ID_Kart não preenchido!!");
 					 return;
 			        }
 				 else {
@@ -157,7 +157,7 @@ public class TelaVendas extends JFrame {
 				 
 				 
 				VendasDAO VendasDao = VendasDAO.getinstancia();
-				if(VendasDao.Inserir(vendas)== true) {
+				if(VendasDao.inserir(vendas)== true) {
 					JOptionPane.showMessageDialog(null,"Venda Cadastrada com sucesso");
 					atualizarTabela();
 				}else {

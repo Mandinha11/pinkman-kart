@@ -7,14 +7,14 @@ public class Karts {
 	
 	private String modelo;
 	private String marca;
-	private Long preco;
-	private Long ano;
-	private Long quantidade;
+	private long preco;
+	private long ano;
+	private long quantidade;
 	private String cor;
 	private LocalDate dataEntrada;
-	private Long Id;
+	private long Id;
 	private String motor;
-	private Long CNPJ;
+	private long CNPJ;
 	
 	public Karts(){
 		
@@ -35,26 +35,26 @@ public class Karts {
 	}
 	
 	
-	public Long getpreco() {
+	public long getpreco() {
 		return preco;
 	}
-	public void setpreco(Long preco) {
+	public void setpreco(long preco) {
 		this.preco = preco;
 	}
 	
 	
-	public Long getano() {
+	public long getano() {
 		return ano;
 	}
-	public void setano(Long ano) {
+	public void setano(long ano) {
 		this.ano = ano;
 	}
 	
 	
-	public Long getquantidade() {
+	public long getquantidade() {
 		return quantidade;
 	}
-	public void setquantidade(Long quantidade) {
+	public void setquantidade(long quantidade) {
 		this.quantidade = quantidade;
 	}
 	
@@ -79,18 +79,18 @@ public class Karts {
 		this.dataEntrada = dataEntrada;
 	}
 	
-	public Long getId() {
+	public long getId() {
 		return Id;
 	}
-	public void setId(Long Id) {
+	public void setId(long Id) {
 		this.Id = Id;
 	}
 
-	public void setCNPJ(Long CNPJ) {
+	public void setCNPJ(long CNPJ) {
 		this.CNPJ = CNPJ;
 		
 	}
-	public Long CNPJ() {
+	public long CNPJ() {
 		return CNPJ;
 	}
 	
