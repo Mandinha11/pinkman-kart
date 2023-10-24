@@ -31,6 +31,7 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
@@ -183,7 +184,14 @@ public class TelaVendas extends JFrame {
 		panel_1.add(lblData);
 		lblData.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		txtDataDaVenda = new JTextField();
+		MaskFormatter mascaraData = null;
+		try {
+			mascaraData = new MaskFormatter("##/##/####");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		txtDataDaVenda =  new JFormattedTextField((AbstractFormatter) null);
+		txtDataDaVenda = new JFormattedTextField(mascaraData);
 		txtDataDaVenda.setColumns(10);
 		txtDataDaVenda.setBounds(151, 16, 304, 28);
 		panel_1.add(txtDataDaVenda);
