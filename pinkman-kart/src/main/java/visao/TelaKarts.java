@@ -272,12 +272,12 @@ public class TelaKarts extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table.getSelectedRow();
-				long id = (long) table.getValueAt(selectedRow, 1);
+				long idkarts = (long) table.getValueAt(selectedRow, 1);
 
 				KartsDAO dao = KartsDAO.getinstancia();
 
 				Karts k = new Karts();
-				k.setId(id);
+				k.setId(idkarts);
 				boolean retorno = dao.Deletar(k);
 				if (retorno == true) {
 					// Remove a linha selecionada

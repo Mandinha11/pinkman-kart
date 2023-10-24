@@ -49,7 +49,6 @@ public class TelaVendas extends JFrame {
 	private JTextField txtPreco;
 =======
 	private JTextField txtidKart;
-	private JTextField txtClienteCPF;
 	private JTextField txtValorDaVenda;
 	private JTextField txtFuncionarioCPF;
 >>>>>>> TelaKarts-Vendas
@@ -104,12 +103,11 @@ public class TelaVendas extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"ID_Karts", "Data_da_Venda", "Cliente_CPF", "Valor_da_Venda", "Funcionario_CPF"
+				"Valor_total", "Data_da_Venda", "Funcionario_CPF", "ID_kart"
 			}
 		));
 		table.getColumnModel().getColumn(1).setPreferredWidth(87);
-		table.getColumnModel().getColumn(3).setPreferredWidth(88);
-		table.getColumnModel().getColumn(4).setPreferredWidth(90);
+		table.getColumnModel().getColumn(2).setPreferredWidth(90);
 		scrollPane.setViewportView(table);
 		
 >>>>>>> TelaKarts-Vendas
@@ -125,19 +123,6 @@ public class TelaVendas extends JFrame {
 				VendasDAO vendasDao = VendasDAO.getinstancia();
 				
 				
-					String text = txtClienteCPF.getText();
-				 if (txtClienteCPF.getText().trim().length() == 0) {
-					 JOptionPane.showMessageDialog(null, "CPF do cliente não preenchido!!");
-					 return;
-			        }
-				 else {
-					 	text = text.replace(".","");
-					 	text = text.replace(".","");
-					 	text = text.replace("-","");
-					 	text = text.trim();
-					 	
-					 vendas.setclienteCPF(Long.valueOf(txtClienteCPF.getText()));
-				 }
 				
 				 
 				 if (txtValorDaVenda.getText().trim().length() == 0) {
@@ -150,7 +135,7 @@ public class TelaVendas extends JFrame {
 				
 				
 				 if (txtidKart.getText().trim().length() == 0) {
-					 JOptionPane.showMessageDialog(null, "Kart não preenchido!!");
+					 JOptionPane.showMessageDialog(null, "ID_Kart não preenchido!!");
 					 return;
 			        }
 				 else {
@@ -175,7 +160,7 @@ public class TelaVendas extends JFrame {
 =======
 >>>>>>> TelaKarts-Vendas
 				VendasDAO VendasDao = VendasDAO.getinstancia();
-				if(VendasDao.Inserir(vendas)== true) {
+				if(VendasDao.inserir(vendas)== true) {
 					JOptionPane.showMessageDialog(null,"Venda Cadastrada com sucesso");
 					atualizarTabela();
 				}else {
@@ -227,7 +212,7 @@ public class TelaVendas extends JFrame {
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
 		panel_1_1.setBackground(new Color(0, 85, 125));
-		panel_1_1.setBounds(281, 31, 483, 55);
+		panel_1_1.setBounds(822, 31, 483, 55);
 		contentPane.add(panel_1_1);
 		
 		txtidKart = new JTextField();
@@ -241,12 +226,6 @@ public class TelaVendas extends JFrame {
 		panel_1_1.add(lblKartVendido);
 		lblKartVendido.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JPanel panel_1_2 = new JPanel();
-		panel_1_2.setLayout(null);
-		panel_1_2.setBackground(new Color(0, 85, 125));
-		panel_1_2.setBounds(850, 31, 483, 55);
-		contentPane.add(panel_1_2);
-		
 		MaskFormatter mascaraCPF = null;
 		try {
 			mascaraCPF = new MaskFormatter("###.###.###-##");
@@ -254,23 +233,10 @@ public class TelaVendas extends JFrame {
 			e.printStackTrace();
 		}
 		
-		txtClienteCPF = new JFormattedTextField(mascaraCPF);
-		
-		
-		txtClienteCPF.setColumns(10);
-		txtClienteCPF.setBounds(153, 16, 304, 28);
-		panel_1_2.add(txtClienteCPF);
-		
-		JLabel lblComprador = new JLabel("Cliente CPF:");
-		lblComprador.setForeground(new Color(255, 255, 255));
-		lblComprador.setBounds(10, 18, 133, 20);
-		panel_1_2.add(lblComprador);
-		lblComprador.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
 		JPanel panel_1_2_1 = new JPanel();
 		panel_1_2_1.setLayout(null);
 		panel_1_2_1.setBackground(new Color(0, 85, 125));
-		panel_1_2_1.setBounds(850, 104, 483, 55);
+		panel_1_2_1.setBounds(281, 31, 483, 55);
 		contentPane.add(panel_1_2_1);
 		
 		txtValorDaVenda = new JTextField();
@@ -290,12 +256,12 @@ public class TelaVendas extends JFrame {
 		JPanel panel_1_2_2 = new JPanel();
 		panel_1_2_2.setLayout(null);
 		panel_1_2_2.setBackground(new Color(0, 85, 125));
-		panel_1_2_2.setBounds(1362, 31, 507, 55);
+		panel_1_2_2.setBounds(822, 104, 483, 55);
 		contentPane.add(panel_1_2_2);
 		
 		txtFuncionarioCPF = new JTextField();
 		txtFuncionarioCPF.setColumns(10);
-		txtFuncionarioCPF.setBounds(193, 16, 304, 28);
+		txtFuncionarioCPF.setBounds(155, 16, 304, 28);
 		panel_1_2_2.add(txtFuncionarioCPF);
 		
 		JLabel lblMatriculaFuncionario = new JLabel("Funcionario CPF:");
@@ -378,17 +344,10 @@ public class TelaVendas extends JFrame {
 				ArrayList <Vendas> Vendas = dao.listar();
 				
 				modelo = new DefaultTableModel(new Object[][] {},
-<<<<<<< HEAD
-					new String[] {"cliente", "preço","kart"});
+					new String[] {"Id_Karts", "Data_da_venda","Valor_da_Venda","Funcionario_CPF" });
 				
 				for(Vendas vendas : Vendas ) {
-					Object[] linha = {vendas.getcliente(), vendas.getdata(), vendas.getkarts()};
-=======
-					new String[] {"Id_Karts", "Data_da_venda","Cliente_CPF","Valor_da_Venda","Funcionario_CPF" });
-				
-				for(Vendas vendas : Vendas ) {
-					Object[] linha = {vendas.getidkarts(), vendas.getdataVendas(), vendas.getclienteCPF(), vendas.getValorDaVenda(), vendas.getFuncionarioCPF()};
->>>>>>> TelaKarts-Vendas
+					Object[] linha = {vendas.getidkarts(), vendas.getdataVendas(), vendas.getValorDaVenda(), vendas.getFuncionarioCPF()};
 					modelo.addRow(linha);
 				}
 				table.setModel(modelo);

@@ -16,7 +16,6 @@ public class Vendas {
 	
 =======
 	private Long FuncionarioCPF;
-	private Long clienteCPF;
 	private Long ValorDaVenda;
 	private LocalDate dataVendas;
 	private Long idKarts;
@@ -51,16 +50,6 @@ public class Vendas {
 <<<<<<< HEAD
 	
 =======
-
-	public void setclienteCPF(Long clienteCPF) {
-		this.clienteCPF = clienteCPF;
-	}
-	public Long getclienteCPF() {
-		return clienteCPF;
-		
-	}
->>>>>>> TelaKarts-Vendas
-
 
 
 	public void setdataVendas(LocalDate dataVendas) {

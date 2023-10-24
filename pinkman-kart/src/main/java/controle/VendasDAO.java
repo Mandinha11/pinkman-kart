@@ -41,9 +41,9 @@ public class VendasDAO {
 			Vendas v = new Vendas();
 			
 			long idKart = rs.getLong("idKart");
-			long clienteCPF = rs.getLong("cliente");
 			long ValorDaVenda = rs.getLong("preco");
 			Date dataVendas = rs.getDate("data");
+			long funcionarioCPF = rs.getLong("fornecedorCPF");
 			
 <<<<<<< HEAD
 			Vendas v = new Vendas();
@@ -58,8 +58,8 @@ public class VendasDAO {
 			
 			
 			v.setidKarts (idKart);
-			v.setclienteCPF(clienteCPF);
 			v.setValorDaVenda (ValorDaVenda);
+			v.setFuncionarioCPF(funcionarioCPF);
 			
 			LocalDate dataVendaConvertida = dataVendas.toLocalDate();
 			v.setdataVendas(dataVendaConvertida);
@@ -99,11 +99,7 @@ public class VendasDAO {
 
 			Connection conn = con.conectar();
 
-<<<<<<< HEAD
-			String query = "INSERT INTO vendas (id_vendas, data_venda, clientes_id_cliente, valor_total, quantidade, karts_id_kart) VALUES( ?, ?, ?, ?, ?, ?)";
-=======
-			String query = "INSERT INTO vendas (karts_id_kart,data_da_venda, valor_total, Cliente_CPF, FuncionarioCPF ) VALUES(?, ?, ?, ?, ?,)";
->>>>>>> TelaKarts-Vendas
+			String query = "NSERT INTO vendas (valor_total, data_venda, funcionarios_cpf, karts_id_kart) VALUES ( ? ,? ,? ,?)";
 			
 			try {
 				PreparedStatement ps = conn.prepareStatement(query);
@@ -118,7 +114,6 @@ public class VendasDAO {
 				ps.setLong(1, v.getidkarts());
 				ps.setDate(2,Date.valueOf(v.getdataVendas()));
 				ps.setLong(3, v.getValorDaVenda());
-				ps.setLong(5, v.getclienteCPF());
 				ps.setLong(4, v.getFuncionarioCPF());
 >>>>>>> TelaKarts-Vendas
 				
