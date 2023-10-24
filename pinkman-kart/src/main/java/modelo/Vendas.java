@@ -8,7 +8,6 @@ import javax.xml.crypto.Data;
 public class Vendas {
 	
 	private Long FuncionarioCPF;
-	private Long clienteCPF;
 	private Long ValorDaVenda;
 	private LocalDate dataVendas;
 	private Long idKarts;
@@ -39,15 +38,6 @@ public class Vendas {
 	public Long getValorDaVenda() {
 		return ValorDaVenda;
 	}
-
-	public void setclienteCPF(Long clienteCPF) {
-		this.clienteCPF = clienteCPF;
-	}
-	public Long getclienteCPF() {
-		return clienteCPF;
-		
-	}
-
 
 
 	public void setdataVendas(LocalDate dataVendas) {

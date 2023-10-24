@@ -18,7 +18,6 @@ public class VendasDAOtest {
 		
 		v.setidKarts(1l);
 		v.setdataVendas (LocalDate.of(2000,12, 24));
-		v.setclienteCPF(456545874l);
 		v.setValorDaVenda(4555555l);
 		v.setFuncionarioCPF(12345678900l);
 		
