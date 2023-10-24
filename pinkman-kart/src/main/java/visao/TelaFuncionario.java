@@ -368,7 +368,7 @@ public class TelaFuncionario extends JFrame {
 		
 		JLabel lblNewLabel_6 = new JLabel("");
 		lblNewLabel_6.setIcon(new ImageIcon(TelaFuncionario.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel_6.setBounds(0, 85, 1924, 1061);
+		lblNewLabel_6.setBounds(0, 0, 1924, 1146);
 		contentPane.add(lblNewLabel_6);
 
 	}

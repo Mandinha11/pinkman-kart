@@ -29,32 +29,44 @@ public class EditarClienteDialog extends JDialog {
 
         JPanel panel = new JPanel();
         panel.setBackground(new Color(0, 128, 128));
-        panel.setLayout(new GridLayout(4, 2));
+        panel.setLayout(null);
 
         JLabel label = new JLabel("Nome:");
+        label.setBounds(0, 0, 200, 50);
         label.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(label);
         textFieldNome = new JTextField(cliente.getNomeCompleto());
+        textFieldNome.setBackground(SystemColor.control);
+        textFieldNome.setBounds(200, 11, 190, 39);
         panel.add(textFieldNome);
 
         JLabel label_1 = new JLabel("Telefone:");
+        label_1.setBounds(0, 50, 200, 50);
         label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(label_1);
         textFieldTelefone = new JTextField(cliente.getTelefone().toString());
+        textFieldTelefone.setBackground(SystemColor.control);
+        textFieldTelefone.setBounds(200, 58, 190, 38);
         panel.add(textFieldTelefone);
 
         JLabel label_2 = new JLabel("Data de Nascimento:");
+        label_2.setBounds(0, 100, 200, 50);
         label_2.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(label_2);
         textFieldDataNascimento = new JTextField(
             cliente.getDataNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
         );
+        textFieldDataNascimento.setBackground(SystemColor.control);
+        textFieldDataNascimento.setBounds(200, 108, 190, 38);
         panel.add(textFieldDataNascimento);
         
         setLocationRelativeTo(null);
 		setUndecorated(true);
 		
         JButton buttonSalvar = new JButton("Salvar");
+        buttonSalvar.setForeground(Color.WHITE);
+        buttonSalvar.setBackground(Color.BLACK);
+        buttonSalvar.setBounds(10, 150, 190, 39);
         buttonSalvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,6 +76,11 @@ public class EditarClienteDialog extends JDialog {
         panel.add(buttonSalvar);
 
         getContentPane().add(panel);
+        
+        JLabel lblNewLabel = new JLabel("New label");
+        lblNewLabel.setIcon(new ImageIcon(EditarClienteDialog.class.getResource("/imgs/fundoAzul.jpg")));
+        lblNewLabel.setBounds(-300, -44, 1444, 243);
+        panel.add(lblNewLabel);
     }
 
     private void salvarAlteracoes() {
@@ -90,7 +107,5 @@ public class EditarClienteDialog extends JDialog {
     public Cliente getClienteAtualizado() {
         return cliente;
     }
-  
-
 }
 

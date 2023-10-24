@@ -17,6 +17,7 @@ public class EditarFuncionarioDialog extends JDialog {
     private JTextField textFieldNome;
     private JTextField textFieldCargo;
     private JTextField textFieldDataNascimento;
+    private JLabel lblNewLabel;
 
     public EditarFuncionarioDialog(Funcionario funcionario) {
         this.funcionario = funcionario;
@@ -27,23 +28,44 @@ public class EditarFuncionarioDialog extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 2));
+        panel.setLayout(null);
 
-        panel.add(new JLabel("Nome:"));
+        JLabel label = new JLabel("Nome:");
+        label.setFont(new Font("Tahoma", Font.BOLD, 14));
+        label.setBounds(0, 0, 200, 50);
+        panel.add(label);
         textFieldNome = new JTextField(funcionario.getNomeCompleto());
+        textFieldNome.setBackground(SystemColor.control);
+        textFieldNome.setBounds(200, 11, 190, 39);
         panel.add(textFieldNome);
 
-        panel.add(new JLabel("Cargo:"));
+        JLabel label_1 = new JLabel("Cargo:");
+        label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+        label_1.setBounds(0, 50, 200, 50);
+        panel.add(label_1);
         textFieldCargo = new JTextField(funcionario.getCargo());
+        textFieldCargo.setBackground(SystemColor.control);
+        textFieldCargo.setBounds(200, 61, 190, 39);
         panel.add(textFieldCargo);
 
-        panel.add(new JLabel("Data de Nascimento:"));
+        JLabel label_2 = new JLabel("Data de Nascimento:");
+        label_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+        label_2.setBounds(0, 100, 200, 50);
+        panel.add(label_2);
         textFieldDataNascimento = new JTextField(
             funcionario.getDataNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
         );
+        textFieldDataNascimento.setBackground(SystemColor.control);
+        textFieldDataNascimento.setBounds(200, 111, 190, 39);
         panel.add(textFieldDataNascimento);
+        
+        setLocationRelativeTo(null);
+		setUndecorated(true);
 
         JButton buttonSalvar = new JButton("Salvar");
+        buttonSalvar.setBackground(SystemColor.desktop);
+        buttonSalvar.setForeground(SystemColor.textHighlightText);
+        buttonSalvar.setBounds(10, 150, 177, 39);
         buttonSalvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,7 +74,12 @@ public class EditarFuncionarioDialog extends JDialog {
         });
         panel.add(buttonSalvar);
 
-        add(panel);
+        getContentPane().add(panel);
+        
+        lblNewLabel = new JLabel("New label");
+        lblNewLabel.setIcon(new ImageIcon(EditarFuncionarioDialog.class.getResource("/imgs/fundoAzul.jpg")));
+        lblNewLabel.setBounds(-311, 0, 711, 200);
+        panel.add(lblNewLabel);
     }
 
     private void salvarAlteracoes() {

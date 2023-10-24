@@ -18,6 +18,7 @@ public class EditarFornecedorDialog extends JDialog {
     private JTextField textFieldNomeEmpresa;
     private JTextField textFieldCep;
     private JTextField textFieldTelefone;
+    private JLabel lblNewLabel;
    
 
     public EditarFornecedorDialog(Fornecedor fornecedor) {
@@ -29,19 +30,34 @@ public class EditarFornecedorDialog extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 2));
+        panel.setLayout(null);
 
-        panel.add(new JLabel("Nome empresa:"));
+        JLabel label = new JLabel("Nome empresa:");
+        label.setFont(new Font("Tahoma", Font.BOLD, 14));
+        label.setBounds(0, 0, 200, 50);
+        panel.add(label);
         textFieldNomeEmpresa = new JTextField(fornecedor.getNomeEmpresa());
+        textFieldNomeEmpresa.setBackground(SystemColor.control);
+        textFieldNomeEmpresa.setBounds(200, 11, 190, 39);
         panel.add(textFieldNomeEmpresa);
 
-        panel.add(new JLabel("Cep:"));
+        JLabel label_1 = new JLabel("Cep:");
+        label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+        label_1.setBounds(0, 50, 200, 50);
+        panel.add(label_1);
         textFieldCep = new JTextField(fornecedor.getCep().toString());
+        textFieldCep.setBackground(SystemColor.control);
+        textFieldCep.setBounds(200, 62, 190, 38);
         panel.add(textFieldCep);
         
         
-        panel.add(new JLabel("Telefone:"));
+        JLabel label_2 = new JLabel("Telefone:");
+        label_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+        label_2.setBounds(0, 100, 200, 50);
+        panel.add(label_2);
         textFieldTelefone = new JTextField(fornecedor.getTelefone().toString());
+        textFieldTelefone.setBackground(SystemColor.control);
+        textFieldTelefone.setBounds(200, 112, 190, 38);
         panel.add(textFieldTelefone);
         
         
@@ -50,6 +66,9 @@ public class EditarFornecedorDialog extends JDialog {
         setUndecorated(true);
 		
         JButton buttonSalvar = new JButton("Salvar");
+        buttonSalvar.setBackground(Color.BLACK);
+        buttonSalvar.setForeground(Color.WHITE);
+        buttonSalvar.setBounds(10, 150, 176, 39);
         buttonSalvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,7 +77,12 @@ public class EditarFornecedorDialog extends JDialog {
         });
         panel.add(buttonSalvar);
 
-        add(panel);
+        getContentPane().add(panel);
+        
+        lblNewLabel = new JLabel("New label");
+        lblNewLabel.setIcon(new ImageIcon(EditarFornecedorDialog.class.getResource("/imgs/fundoAzul.jpg")));
+        lblNewLabel.setBounds(-286, 0, 702, 200);
+        panel.add(lblNewLabel);
     }
 
     private void salvarAlteracoes() {
