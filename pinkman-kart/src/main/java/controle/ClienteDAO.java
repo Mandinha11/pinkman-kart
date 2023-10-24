@@ -125,7 +125,7 @@ public class ClienteDAO implements IClienteDAO{
 			ps.setString(1, c.getNomeCompleto());
 			ps.setLong(2, c.getTelefone());
 			ps.setDate(3, Date.valueOf(c.getDataNac()));
-
+			System.out.println(c.getCpf());
 			ps.setLong(4, c.getCpf());
 
 			int rowsUpdated = ps.executeUpdate();
@@ -152,6 +152,7 @@ public class ClienteDAO implements IClienteDAO{
 
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setLong(1, c.getCpf());
+			System.out.println(ps);
 			ps.executeUpdate();
 
 			return true;

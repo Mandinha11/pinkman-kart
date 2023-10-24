@@ -22,8 +22,8 @@ public class VendasDAOtest {
 		v.setFuncionarioCPF(12345678900l);
 		
 		VendasDAO dao = new VendasDAO(); 
-		boolean inseriuOK = dao.inserir(v);
-		assertEquals(true, inseriuOK);
+		
+		assertEquals(true, dao.inserir(v));
 		
 	}
 

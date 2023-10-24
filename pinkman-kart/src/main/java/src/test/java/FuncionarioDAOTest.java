@@ -23,7 +23,7 @@ public class FuncionarioDAOTest {
 		
 		FuncionarioDAO dao = new FuncionarioDAO();
 		
-		assertEquals(false, dao.inserir(f));
+		assertEquals(true, dao.inserir(f));
 		
 	}
 
