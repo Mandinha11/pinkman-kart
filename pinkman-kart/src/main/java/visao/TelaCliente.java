@@ -48,24 +48,6 @@ public class TelaCliente extends JFrame {
 	private JTextField txtData;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCliente frame = new TelaCliente();
-					frame.setVisible(true);
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 
@@ -121,14 +103,14 @@ public class TelaCliente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				Cliente cliente = new Cliente();
-				
+
 				if (textNomeCompleto.getText().trim().length() == 0) {
 					new MensagemErro("Nome não preenchido !").setVisible(true);
 					return;
 				} else {
 					cliente.setNomeCompleto(textNomeCompleto.getText());
 				}
-			
+
 				String data = txtData.getText();
 				if (data.trim().length() == 0) {
 					new MensagemErro("Data não preenchida !").setVisible(true);
@@ -145,7 +127,7 @@ public class TelaCliente extends JFrame {
 
 					} else {
 						DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyyy"); // Define o formato da
-																						// data
+						// data
 						LocalDate dataNasc = LocalDate.parse(data, formato);
 						cliente.setDataNac(dataNasc);
 
@@ -179,8 +161,6 @@ public class TelaCliente extends JFrame {
 					cliente.setTelefone(Long.valueOf(tel));
 
 				}
-
-
 
 				ClienteDAO clienteDao = ClienteDAO.getinstancia();
 				if (clienteDao.inserir(cliente) == true) {
@@ -304,8 +284,6 @@ public class TelaCliente extends JFrame {
 				 */
 				int selectedRow = table_1.getSelectedRow();
 				String cpf = (String) table_1.getValueAt(selectedRow, 1);
-				
-				
 
 				// fazer uma consulta no banco procurando um cliente por CPF ou no arraylist
 
@@ -319,10 +297,10 @@ public class TelaCliente extends JFrame {
 		panel_3.add(scrollPane, BorderLayout.NORTH);
 
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "Id Cliente","Nome Completo", "CPF", "Data Nasc", "Telefone" });
+				new String[] { "Id Cliente", "Nome Completo", "CPF", "Data Nasc", "Telefone" });
 
-		table_1.setModel(
-				new DefaultTableModel(new Object[][] {}, new String[] { "id_cliente","Nome", "CPf", "Data Nac", "Telefone" }));
+		table_1.setModel(new DefaultTableModel(new Object[][] {},
+				new String[] { "id_cliente", "Nome", "CPf", "Data Nac", "Telefone" }));
 
 		atualizarTabela();
 
@@ -332,54 +310,51 @@ public class TelaCliente extends JFrame {
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Verifica se uma linha foi selecionada na tabela
-		        int selectedRow = table_1.getSelectedRow();
-		        if (selectedRow == -1) {
-		            JOptionPane.showMessageDialog(null, "Selecione um funcionário na tabela para atualizar.");
-		            return;
-		        }
+				int selectedRow = table_1.getSelectedRow();
+				if (selectedRow == -1) {
+					JOptionPane.showMessageDialog(null, "Selecione um funcionário na tabela para atualizar.");
+					return;
+				}
 
-		        // Obtém os valores da linha selecionada
-		        
-		        String nome = (String) table_1.getValueAt(selectedRow, 0);
-		        long cpf = (long) table_1.getValueAt(selectedRow, 1);
-		        String dataNascimento = (String) table_1.getValueAt(selectedRow, 2);
-		        Long telefone = (long) table_1.getValueAt(selectedRow, 3);
-		        
+				// Obtém os valores da linha selecionada
 
-		        // Converte a data de nascimento para o formato correto
-		        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		        LocalDate dataNasc = LocalDate.parse(dataNascimento, formato);
+				String nome = (String) table_1.getValueAt(selectedRow, 0);
+				long cpf = (long) table_1.getValueAt(selectedRow, 1);
+				String dataNascimento = (String) table_1.getValueAt(selectedRow, 2);
+				Long telefone = (long) table_1.getValueAt(selectedRow, 3);
 
-		        // Preenche o objeto Cliente com os valores da linha selecionada
-		        Cliente cliente = new Cliente();
-		        cliente.setCpf(cpf);
-		        cliente.setNomeCompleto(nome);
-		        cliente.setTelefone(telefone);
-		        cliente.setDataNac(dataNasc);
+				// Converte a data de nascimento para o formato correto
+				DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				LocalDate dataNasc = LocalDate.parse(dataNascimento, formato);
 
-		      
-		        EditarClienteDialog dialog = new EditarClienteDialog(cliente);
-		        dialog.setVisible(true);
+				// Preenche o objeto Cliente com os valores da linha selecionada
+				Cliente cliente = new Cliente();
+				cliente.setCpf(cpf);
+				cliente.setNomeCompleto(nome);
+				cliente.setTelefone(telefone);
+				cliente.setDataNac(dataNasc);
 
-		        
-		        if (dialog.isInformacoesAlteradas()) {
-		         
-		            cliente = dialog.getClienteAtualizado();
-		           
-		            ClienteDAO dao = ClienteDAO.getinstancia();
-		            boolean retorno = dao.alterar(cliente);
+				EditarClienteDialog dialog = new EditarClienteDialog(cliente);
+				dialog.setVisible(true);
 
-		            if (retorno) {
-		            	new MensagemAcerto("Cliente atualizado com sucesso!").setVisible(true);
-		              
-		                // Atualiza a tabela após a alteração
-		                atualizarTabela();
-		            } else {
-		            	new MensagemErro("Erro ao atualizar o cliente. !").setVisible(true);
-		            
-		            }
-		        }
-		    }
+				if (dialog.isInformacoesAlteradas()) {
+
+					cliente = dialog.getClienteAtualizado();
+
+					ClienteDAO dao = ClienteDAO.getinstancia();
+					boolean retorno = dao.alterar(cliente);
+
+					if (retorno) {
+						new MensagemAcerto("Cliente atualizado com sucesso!").setVisible(true);
+
+						// Atualiza a tabela após a alteração
+						atualizarTabela();
+					} else {
+						new MensagemErro("Erro ao atualizar o cliente. !").setVisible(true);
+
+					}
+				}
+			}
 
 		});
 
@@ -450,12 +425,12 @@ public class TelaCliente extends JFrame {
 		ArrayList<Cliente> clientes = clienteDAO.listar();
 
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] {"Nome Completo", "CPF", "Data Nasc", "Telefone" });
+				new String[] { "Nome Completo", "CPF", "Data Nasc", "Telefone" });
 
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		for (Cliente cliente : clientes) {
-			Object[] linha = {cliente.getNomeCompleto(), cliente.getCpf(), cliente.getDataNac().format(formato),
+			Object[] linha = { cliente.getNomeCompleto(), cliente.getCpf(), cliente.getDataNac().format(formato),
 					cliente.getTelefone() };
 			modelo.addRow(linha);
 
