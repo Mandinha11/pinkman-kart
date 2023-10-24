@@ -6,7 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import javax.swing.text.NumberFormatter;
 
 import controle.ClienteDAO;
 import controle.KartsDAO;
@@ -25,8 +27,10 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.JTable;
@@ -216,20 +220,24 @@ public class TelaVendas extends JFrame {
 		panel_1_1.add(lblKartVendido);
 		lblKartVendido.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		MaskFormatter mascaraCPF = null;
-		try {
-			mascaraCPF = new MaskFormatter("###.###.###-##");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 		
 		JPanel panel_1_2_1 = new JPanel();
 		panel_1_2_1.setLayout(null);
 		panel_1_2_1.setBackground(new Color(0, 85, 125));
 		panel_1_2_1.setBounds(281, 31, 483, 55);
 		contentPane.add(panel_1_2_1);
-		
-		txtValorDaVenda = new JTextField();
+		/*
+		 
+		 */
+		MaskFormatter mascaraVenda = null;
+		try {
+			mascaraVenda = new MaskFormatter("###.#");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		txtValorDaVenda =  new JFormattedTextField(mascaraVenda);
+
+
 		txtValorDaVenda.setColumns(10);
 		txtValorDaVenda.setBounds(153, 16, 304, 28);
 		panel_1_2_1.add(txtValorDaVenda);
@@ -246,8 +254,23 @@ public class TelaVendas extends JFrame {
 		panel_1_2_2.setBackground(new Color(0, 85, 125));
 		panel_1_2_2.setBounds(822, 104, 483, 55);
 		contentPane.add(panel_1_2_2);
-		
-		txtFuncionarioCPF = new JTextField();
+		/*
+		MaskFormatter mascaraCPF = null;
+		try {
+			mascaraCPF = new MaskFormatter("###.###.###-##");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		textCPF = new JFormattedTextField(mascaraCPF);
+		 */
+		MaskFormatter mascaraCPF = null;
+		try {
+			mascaraCPF = new MaskFormatter("###.###.###-##");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		txtFuncionarioCPF =  new JFormattedTextField(mascaraCPF);
 		txtFuncionarioCPF.setColumns(10);
 		txtFuncionarioCPF.setBounds(155, 16, 304, 28);
 		panel_1_2_2.add(txtFuncionarioCPF);
@@ -318,4 +341,5 @@ public class TelaVendas extends JFrame {
 				}
 				table.setModel(modelo);
 			}
+	 
 }
