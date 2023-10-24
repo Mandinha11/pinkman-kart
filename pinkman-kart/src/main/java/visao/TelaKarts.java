@@ -272,7 +272,7 @@ public class TelaKarts extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table.getSelectedRow();
-				long idkarts = (long) table.getValueAt(selectedRow, 1);
+				long idkarts = (long) table.getValueAt(selectedRow, 0);
 
 				KartsDAO dao = KartsDAO.getinstancia();
 
