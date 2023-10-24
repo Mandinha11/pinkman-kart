@@ -9,8 +9,9 @@ import java.util.ArrayList;
 
 import modelo.Cliente;
 import modelo.Fornecedor;
+import modelo.IFornecedorDAO;
 
-public class FornecedorDAO {
+public class FornecedorDAO implements IFornecedorDAO{
 
 	private static FornecedorDAO instancia;
 
@@ -87,7 +88,7 @@ public class FornecedorDAO {
 		return false;
 	}
 
-public Boolean alterar(Fornecedor f) {
+	public boolean alterar(Fornecedor f) {
 		
 		Conexao con = Conexao.getInstancia();
 

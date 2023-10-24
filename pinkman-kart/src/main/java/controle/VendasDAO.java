@@ -11,12 +11,13 @@ import java.util.ArrayList;
 
 import javax.xml.crypto.Data;
 
+import modelo.IVendasDAO;
 import modelo.Karts;
 import modelo.Vendas;
 
 
 
-public class VendasDAO {
+public class VendasDAO implements IVendasDAO{
 	
 	private static VendasDAO instancia;
 	

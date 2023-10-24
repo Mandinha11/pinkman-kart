@@ -1,6 +1,4 @@
-package controle;
-
-import modelo.Funcionario;
+package modelo;
 
 public interface InterfaceLogin {
 	
