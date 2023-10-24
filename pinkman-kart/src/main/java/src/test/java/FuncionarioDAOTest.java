@@ -16,26 +16,31 @@ public class FuncionarioDAOTest {
 		
 		Funcionario f = new Funcionario();
 		
-		f.setCargo(null);
+		f.setCargo("Funcionario");
 		f.setCpf(2934546485l);
 		f.setDataNac(LocalDate.of(2005, 11, 11));
-		f.setNomeCompleto(null);
+		f.setNomeCompleto("Nala");
 		
 		FuncionarioDAO dao = new FuncionarioDAO();
 		
 		assertEquals(false, dao.inserir(f));
 		
 	}
-	//Arrumar esse
+
 		public void testMedotoAlterarFuncionario() {
 			
 			Funcionario f = new Funcionario();
 			
+			f.setCargo("Caixa");
+			f.setDataNac(LocalDate.of(2005, 11, 11));
+			f.setNomeCompleto("Diega");
+			
 			FuncionarioDAO dao = new FuncionarioDAO();
-			boolean inseriuOk  = dao.alterar(f);
-			assertEquals(true, inseriuOk);
+			
+			assertEquals(true, dao.alterar(f));
 			
 		}
+		
 	public void testMedotoDeltarFuncionario() {
 			
 			Funcionario f = new Funcionario();
@@ -46,8 +51,8 @@ public class FuncionarioDAOTest {
 			f.setNomeCompleto("Henry");
 			
 			FuncionarioDAO dao = new FuncionarioDAO();
-			boolean inseriuOk  = dao.deletar(f);
-			assertEquals(true, inseriuOk);
+			
+			assertEquals(true, dao.deletar(f));
 			
 		}
 

@@ -23,7 +23,7 @@ public class FornecedorDAOTets {
 	assertEquals(true, dao.inserir(f));
 	
 	}
-	//Arrumar esse
+	
 	public void testMetodoAlterarFornecedor() {
 		
 		Fornecedor f = new Fornecedor();

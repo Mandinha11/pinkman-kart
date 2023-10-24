@@ -7,9 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import modelo.IKartDAO;
 import modelo.Karts;
 
-public class KartsDAO {
+public class KartsDAO implements IKartDAO {
 		
 
 	public ArrayList <Karts> listar (){

@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginDao {
+import modelo.ILoginDAO;
+
+public class LoginDao implements ILoginDAO{
     // Método para autenticar o login
     public boolean autenticarLogin(String login, Long senha) {
         try {

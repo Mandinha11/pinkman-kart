@@ -9,8 +9,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import modelo.Funcionario;
+import modelo.IFuncionarioDAO;
 
-public class FuncionarioDAO {
+public class FuncionarioDAO implements IFuncionarioDAO {
 
 	private static FuncionarioDAO instancia;
 

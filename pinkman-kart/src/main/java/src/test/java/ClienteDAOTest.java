@@ -25,9 +25,9 @@ public class ClienteDAOTest {
 		
 		assertEquals(true, dao.inserir(c));
 		
-
+	
 	}
-	//Arrumar esse
+
 		public void testMetodoAlterarCliente() {
 			
 			Cliente c = new Cliente();

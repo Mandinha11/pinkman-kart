@@ -13,8 +13,9 @@ import java.util.ArrayList;
 
 import modelo.Cliente;
 import modelo.Funcionario;
+import modelo.IClienteDAO;
 
-public class ClienteDAO {
+public class ClienteDAO implements IClienteDAO{
 
 	private static ClienteDAO instancia;
 
