@@ -17,9 +17,9 @@ public class ClienteDAOTest {
 		Cliente c = new Cliente();
 
 		c.setNomeCompleto("Amanda");
-		c.setCpf(23904602356l);
+		c.setCpf(24904602356l);
 		c.setDataNac(LocalDate.of(2005, 11, 11));
-		c.setTelefone(4798687793l);
+		c.setTelefone(4698687793l);
 
 		ClienteDAO dao = new ClienteDAO();
 		
@@ -30,19 +30,25 @@ public class ClienteDAOTest {
 		public void testMetodoAlterarCliente() {
 			
 			Cliente c = new Cliente();
-
+			
+			c.setNomeCompleto("Ana");
+			c.setDataNac(LocalDate.of(2008, 11, 11));
+			c.setTelefone(7798687793l);
+			
 			ClienteDAO dao = new ClienteDAO();
 			
 			assertEquals(true, dao.alterar(c));
 
 		}
+		
+		
 	public void testMetodoDeletarCliente() {
 		Cliente c = new Cliente();
 
 		c.setNomeCompleto("Amanda");
 		c.setCpf(23904602356l);
 		c.setDataNac(LocalDate.of(2005, 11, 11));
-		c.setTelefone(4798687793l);
+		c.setTelefone(4698687793l);
 
 		ClienteDAO dao = new ClienteDAO();
 		

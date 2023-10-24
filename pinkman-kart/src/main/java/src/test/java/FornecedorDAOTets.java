@@ -20,8 +20,7 @@ public class FornecedorDAOTets {
 	f.setTelefone(47965879963l);
 	
 	FornecedorDAO dao = new FornecedorDAO() ;
-	boolean InseriuOk = dao.inserir(f);
-	assertEquals(true, InseriuOk);
+	assertEquals(true, dao.inserir(f));
 	
 	}
 	//Arrumar esse
@@ -30,8 +29,8 @@ public class FornecedorDAOTets {
 		Fornecedor f = new Fornecedor();
 
 		FornecedorDAO dao = new FornecedorDAO() ;
-		boolean InseriuOk = dao.inserir(f);
-		assertEquals(true, InseriuOk);
+		
+		assertEquals(true, dao.alterar(f));
 		
 		}
 	
@@ -44,8 +43,8 @@ public class FornecedorDAOTets {
 		f.setTelefone(47965879963l);
 		
 		FornecedorDAO dao = new FornecedorDAO() ;
-		boolean InseriuOk = dao.Deletar(f);
-		assertEquals(true, InseriuOk);
+		
+		assertEquals(true, dao.Deletar(f));
 		
 		}
 
