@@ -7,19 +7,19 @@ import javax.xml.crypto.Data;
 
 public class Vendas {
 	
-<<<<<<< HEAD
+
 	private Long idVendas;
 	private String kart;
 	private String cliente;
 	private Long preco;
 	private Long data;
 	
-=======
+
 	private Long FuncionarioCPF;
 	private Long ValorDaVenda;
 	private LocalDate dataVendas;
 	private Long idKarts;
->>>>>>> TelaKarts-Vendas
+
 	
 	
 	public Vendas(){
@@ -47,9 +47,6 @@ public class Vendas {
 	public Long getValorDaVenda() {
 		return ValorDaVenda;
 	}
-<<<<<<< HEAD
-	
-=======
 
 
 	public void setdataVendas(LocalDate dataVendas) {

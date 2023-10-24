@@ -133,7 +133,7 @@ public class TelaKarts extends JFrame {
 				} else {
 					
 
-					karts.setPreco(Long.valueOf(preco));
+					karts.setpreco(Long.valueOf(preco));
 				}
 
 				if (txtMarca.getText().trim().length() == 0) {
@@ -160,7 +160,7 @@ public class TelaKarts extends JFrame {
 					JOptionPane.showMessageDialog(null, "Ano não preenchido ");
 					return;
 				}else {
-					karts.setAno(Long.valueOf(txtAno.getText()));
+					karts.setano(Long.valueOf(txtAno.getText()));
 				}
 				String CNPJ = txtCNPJ.getText();
 				CNPJ = CNPJ.replace(".", "");
@@ -206,7 +206,7 @@ public class TelaKarts extends JFrame {
 					JOptionPane.showMessageDialog(null, "Quantidade não foi Preenchida");
 					return;
 				}else {
-					karts.setQuantidade(Long.valueOf(textQuantidade));
+					karts.setquantidade(Long.valueOf(textQuantidade));
 				}
 				String Cor = txtCor.getText();
 					if(txtCor.getText().trim().length() == 0) {
@@ -520,13 +520,11 @@ public class TelaKarts extends JFrame {
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		for (Karts Karts : karts) {
-<<<<<<< HEAD
-			Object[] linha = { Karts.getId(),Karts.getCor(),Karts.getModelo(),Karts.getMarca(),Karts.getAno(),Karts.getQuantidade(),Karts.getDataEntrada().format(formato), 
-					Karts.getPreco(), Karts.getCNPJ() };
-=======
-			Object[] linha = { Karts.getId(), Karts.getcor(),Karts.getmodelo(),Karts.getmarca(),Karts.getano(),Karts.getquantidade(),Karts.getdataEntrada().format(formato), 
+
+
+			Object[] linha = { Karts.getId(), Karts.getCor(),Karts.getModelo(),Karts.getMarca(),Karts.getano(),Karts.getquantidade(),Karts.getDataEntrada().format(formato), 
 					Karts.getpreco(), Karts.CNPJ() };
->>>>>>> TelaKarts-Vendas
+
 			modelo.addRow(linha);
 
 		}

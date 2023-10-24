@@ -44,18 +44,7 @@ public class VendasDAO {
 			long ValorDaVenda = rs.getLong("preco");
 			Date dataVendas = rs.getDate("data");
 			long funcionarioCPF = rs.getLong("fornecedorCPF");
-			
-<<<<<<< HEAD
-			Vendas v = new Vendas();
-			v.setIdVendas (idVendas);
-			v.setkarts (kart);
-			v.setcliente (cliente);
-			v.setpreco (preco);
-			v.setdata(data);
-			
-=======
-			
-			
+				
 			
 			v.setidKarts (idKart);
 			v.setValorDaVenda (ValorDaVenda);
@@ -63,7 +52,7 @@ public class VendasDAO {
 			
 			LocalDate dataVendaConvertida = dataVendas.toLocalDate();
 			v.setdataVendas(dataVendaConvertida);
->>>>>>> TelaKarts-Vendas
+
 			
 			vendas.add(v);
 		 		}
@@ -104,18 +93,13 @@ public class VendasDAO {
 			try {
 				PreparedStatement ps = conn.prepareStatement(query);
 				
-<<<<<<< HEAD
-				ps.setString(1, v.getkarts());
-				ps.setLong(2, v.getdata());
-				ps.setLong(3, v.getpreco());
-				ps.setString(5, v.getcliente());
-=======
-				
+
+		
 				ps.setLong(1, v.getidkarts());
 				ps.setDate(2,Date.valueOf(v.getdataVendas()));
 				ps.setLong(3, v.getValorDaVenda());
 				ps.setLong(4, v.getFuncionarioCPF());
->>>>>>> TelaKarts-Vendas
+
 				
 				ps.executeUpdate();
 				

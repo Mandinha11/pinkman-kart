@@ -33,25 +33,25 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
-<<<<<<< HEAD
+
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
-=======
+
 import java.awt.BorderLayout;
->>>>>>> TelaKarts-Vendas
+
 
 public class TelaVendas extends JFrame {
 
 	private JPanel contentPane;
-<<<<<<< HEAD
+
 	private JTextField txtKart;
 	private JTextField txtCliente;
 	private JTextField txtPreco;
-=======
+
 	private JTextField txtidKart;
 	private JTextField txtValorDaVenda;
 	private JTextField txtFuncionarioCPF;
->>>>>>> TelaKarts-Vendas
+
 	private VendasDAO dao;
 	private DefaultTableModel modelo;
 	private JTextField txtDataDaVenda;
@@ -87,8 +87,7 @@ public class TelaVendas extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-<<<<<<< HEAD
-=======
+
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(281, 187, 1588, 807);
@@ -110,7 +109,6 @@ public class TelaVendas extends JFrame {
 		table.getColumnModel().getColumn(2).setPreferredWidth(90);
 		scrollPane.setViewportView(table);
 		
->>>>>>> TelaKarts-Vendas
 		JButton btnCadastra = new JButton("Cadastrar");
 		btnCadastra.setForeground(new Color(255, 255, 255));
 		btnCadastra.setBackground(new Color(0, 0, 0));
@@ -155,10 +153,7 @@ public class TelaVendas extends JFrame {
 					}
 				 
 				 
-<<<<<<< HEAD
-				
-=======
->>>>>>> TelaKarts-Vendas
+
 				VendasDAO VendasDao = VendasDAO.getinstancia();
 				if(VendasDao.inserir(vendas)== true) {
 					JOptionPane.showMessageDialog(null,"Venda Cadastrada com sucesso");
@@ -250,8 +245,7 @@ public class TelaVendas extends JFrame {
 		lblNewLabel.setBounds(10, 16, 121, 24);
 		panel_1_2_1.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-<<<<<<< HEAD
-=======
+
 
 		JPanel panel_1_2_2 = new JPanel();
 		panel_1_2_2.setLayout(null);
@@ -269,7 +263,7 @@ public class TelaVendas extends JFrame {
 		lblMatriculaFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMatriculaFuncionario.setBounds(10, 18, 156, 20);
 		panel_1_2_2.add(lblMatriculaFuncionario);
->>>>>>> TelaKarts-Vendas
+
 		
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.setBackground(new Color(0, 0, 0));
@@ -311,14 +305,14 @@ public class TelaVendas extends JFrame {
 		lblNewLabel_1.setBounds(42, 814, 181, 180);
 		contentPane.add(lblNewLabel_1);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(281, 224, 1589, 788);
-		contentPane.add(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		JPanel panel1 = new JPanel();
+		panel1.setBackground(new Color(255, 255, 255));
+		panel1.setBounds(281, 224, 1589, 788);
+		contentPane.add(panel1);
+		panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
 		
-		JScrollPane scrollPane = new JScrollPane();
-		panel.add(scrollPane);
+		JScrollPane scrollPane1 = new JScrollPane();
+		panel1.add(scrollPane1);
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
@@ -330,7 +324,7 @@ public class TelaVendas extends JFrame {
 		));
 		table.getColumnModel().getColumn(1).setPreferredWidth(87);
 		table.getColumnModel().getColumn(3).setPreferredWidth(89);
-		scrollPane.setViewportView(table);
+		scrollPane1.setViewportView(table);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));

@@ -90,7 +90,7 @@ public class Karts {
 		return CNPJ;
 	}
 
-	public void setCNPJ(Long cNPJ) {
+	public void setCNPJ1(Long cNPJ) {
 		CNPJ = CNPJ;
 	}
 	

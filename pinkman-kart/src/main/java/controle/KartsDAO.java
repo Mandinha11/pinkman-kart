@@ -39,10 +39,10 @@ public class KartsDAO {
 				k.setCor(cor);
 				k.setModelo(modelo);
 				k.setMarca(marca);
-				k.setAno(ano);
-				k.setQuantidade(quantidade);
+				k.setano(ano);
+				k.setquantidade(quantidade);
 				k.setDataEntrada(dataentrada.toLocalDate());
-				k.setPreco(preco);
+				k.setpreco(preco);
 				k.setCNPJ(CNPJ);
 				
 				Karts.add(k);
@@ -91,11 +91,11 @@ public class KartsDAO {
 				ps.setString(2, k.getCor());
 				ps.setString(3, k.getModelo());
 				ps.setString(4, k.getMarca());
-				ps.setLong(5, k.getAno());
-				ps.setLong(6, k.getQuantidade());
-				ps.setLong(8, k.getPreco());
+				ps.setLong(5, k.getano());
+				ps.setLong(6, k.getquantidade());
+				ps.setLong(8, k.getpreco());
 				ps.setDate(7,Date.valueOf(k.getDataEntrada()));
-				ps.setLong(9, k.getCNPJ());
+				ps.setLong(9, k.CNPJ());
 				System.out.println(ps);
 				System.out.println(ps.toString());
 				ps.executeUpdate();
