@@ -58,24 +58,6 @@ public class TelaKarts extends JFrame {
 	private JTextField txtDataEntrada;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaKarts frame = new TelaKarts();
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					frame.setVisible(true);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public TelaKarts() {
@@ -124,14 +106,12 @@ public class TelaKarts extends JFrame {
 				preco = preco.replace(",", "");
 				System.out.println(preco);
 				preco = preco.trim();
-				
-				
+
 				System.out.println(preco);
 				if (preco.trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "Preço não preenchido!!");
 					return;
 				} else {
-					
 
 					karts.setpreco(Long.valueOf(preco));
 				}
@@ -156,10 +136,10 @@ public class TelaKarts extends JFrame {
 				} else {
 					karts.setId(Long.valueOf(txtId.getText()));
 				}
-				if(txtAno.getText().trim().length() == 0) {
+				if (txtAno.getText().trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "Ano não preenchido ");
 					return;
-				}else {
+				} else {
 					karts.setano(Long.valueOf(txtAno.getText()));
 				}
 				String CNPJ = txtCNPJ.getText();
@@ -168,28 +148,27 @@ public class TelaKarts extends JFrame {
 				CNPJ = CNPJ.replace("/", "");
 				CNPJ = CNPJ.replace("-", "");
 				CNPJ = CNPJ.trim();
-				
+
 				if (CNPJ.trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "CNPJ do Fornecedor não preenchido!!");
 					return;
 				} else {
 
-		
 					karts.setCNPJ(Long.valueOf(CNPJ));
 				}
-				
+
 				String DataEntrada = txtDataEntrada.getText();
 				if (DataEntrada.trim().length() == 0) {
-					//new MensagemErro("Data não preenchida !").setVisible(true);
+					// new MensagemErro("Data não preenchida !").setVisible(true);
 					return;
 
 				} else {
 					DataEntrada = DataEntrada.replace("/", "");
 					DataEntrada = DataEntrada.trim();
-					
+
 					if (DataEntrada.trim().isEmpty()) {
 
-						//new MensagemErro("Data não preenchida !").setVisible(true);
+						// new MensagemErro("Data não preenchida !").setVisible(true);
 						return;
 
 					} else {
@@ -200,25 +179,22 @@ public class TelaKarts extends JFrame {
 					}
 				}
 
-				
 				String textQuantidade = txtQuantidade.getText();
-				if(txtQuantidade.getText().trim().length()==0) {
+				if (txtQuantidade.getText().trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "Quantidade não foi Preenchida");
 					return;
-				}else {
+				} else {
 					karts.setquantidade(Long.valueOf(textQuantidade));
 				}
 				String Cor = txtCor.getText();
-					if(txtCor.getText().trim().length() == 0) {
-						JOptionPane.showMessageDialog(null, "A Cor não foi Preenchida");
-					}else {
-						karts.setCor(String.valueOf(Cor));
-					}
+				if (txtCor.getText().trim().length() == 0) {
+					JOptionPane.showMessageDialog(null, "A Cor não foi Preenchida");
+				} else {
+					karts.setCor(String.valueOf(Cor));
+				}
 
 				KartsDAO kartDao = KartsDAO.getinstancia();
-				
-				
-				
+
 				if (kartDao.Inserir(karts) == true) {
 					JOptionPane.showMessageDialog(btnCadastrar, "Cadastro feito");
 					atualizarTabela();
@@ -248,23 +224,22 @@ public class TelaKarts extends JFrame {
 		} catch (ParseException e2) {
 			e2.printStackTrace();
 		}
-		
+
 		txtAno = new JTextField();
 		MaskFormatter formatter1 = null;
 		try {
-			formatter1 =  new MaskFormatter ("####");
+			formatter1 = new MaskFormatter("####");
 		} catch (ParseException e3) {
 			e3.printStackTrace();
 		}
-		
+
 		txtDataEntrada = new JTextField();
-		MaskFormatter formatter2= null;
+		MaskFormatter formatter2 = null;
 		try {
-			formatter2  = new MaskFormatter ("##/##/####");
-		}catch (ParseException e4) {
+			formatter2 = new MaskFormatter("##/##/####");
+		} catch (ParseException e4) {
 			e4.printStackTrace();
 		}
-		
 
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBackground(new Color(0, 0, 0));
@@ -325,15 +300,15 @@ public class TelaKarts extends JFrame {
 		panel_1_1.add(lblDataEntrada);
 		lblDataEntrada.setForeground(new Color(255, 255, 255));
 		lblDataEntrada.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		
+
 		MaskFormatter mascaraDataEntrada = null;
 		try {
 			mascaraDataEntrada = new MaskFormatter("##/##/####");
-		}catch (ParseException e4) {
+		} catch (ParseException e4) {
 			e4.printStackTrace();
 		}
 		txtDataEntrada = new JFormattedTextField(mascaraDataEntrada);
-		
+
 		txtDataEntrada.setColumns(10);
 		txtDataEntrada.setBounds(154, 20, 259, 30);
 		panel_1_1.add(txtDataEntrada);
@@ -425,14 +400,14 @@ public class TelaKarts extends JFrame {
 		panel_4.add(scrollPane);
 
 		table = new JTable();
-			
-				modelo = new DefaultTableModel(new Object[][] {},
-						new String[] { "ID_kart","cor","Modelo","Marca","Ano","Quantidade","Data_Entrada","Preço", "fornecedor_CNPJ" });
-				table.setModel(
-						new DefaultTableModel(new Object[][] {}, new String[] { "ID_kart","cor","Modelo","Marca","Ano","Quantidade","Data_Entrada","Preço", "fornecedor_CNPJ" }));
 
-				atualizarTabela();
-		
+		modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID_kart", "cor", "Modelo", "Marca", "Ano",
+				"Quantidade", "Data_Entrada", "Preço", "fornecedor_CNPJ" });
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID_kart", "cor", "Modelo", "Marca",
+				"Ano", "Quantidade", "Data_Entrada", "Preço", "fornecedor_CNPJ" }));
+
+		atualizarTabela();
+
 		table.getColumnModel().getColumn(6).setPreferredWidth(77);
 		table.getColumnModel().getColumn(8).setPreferredWidth(96);
 		scrollPane.setViewportView(table);
@@ -475,7 +450,6 @@ public class TelaKarts extends JFrame {
 
 		txtAno = new JFormattedTextField(mascaraAno);
 
-		
 		txtAno.setColumns(10);
 		txtAno.setBounds(153, 17, 260, 30);
 		panel_1_5.add(txtAno);
@@ -514,16 +488,15 @@ public class TelaKarts extends JFrame {
 		dao = KartsDAO.getinstancia();
 		ArrayList<Karts> karts = dao.listar();
 
-		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "ID_kart","cor","Modelo","Marca","Ano","Quantidade","Data_Entrada","Preço", "fornecedor_CNPJ" });
-		
+		modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID_kart", "cor", "Modelo", "Marca", "Ano",
+				"Quantidade", "Data_Entrada", "Preço", "fornecedor_CNPJ" });
+
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		for (Karts Karts : karts) {
 
-
-			Object[] linha = { Karts.getId(), Karts.getCor(),Karts.getModelo(),Karts.getMarca(),Karts.getano(),Karts.getquantidade(),Karts.getDataEntrada().format(formato), 
-					Karts.getpreco(), Karts.CNPJ() };
+			Object[] linha = { Karts.getId(), Karts.getCor(), Karts.getModelo(), Karts.getMarca(), Karts.getano(),
+					Karts.getquantidade(), Karts.getDataEntrada().format(formato), Karts.getpreco(), Karts.CNPJ() };
 
 			modelo.addRow(linha);
 

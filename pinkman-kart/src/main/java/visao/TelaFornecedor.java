@@ -45,24 +45,6 @@ public class TelaFornecedor extends JFrame {
 	private DefaultTableModel modelo;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaFornecedor frame = new TelaFornecedor();
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					frame.setVisible(true);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 
@@ -106,14 +88,14 @@ public class TelaFornecedor extends JFrame {
 				Fornecedor fornecedor = new Fornecedor();
 
 				String text = txtCEP.getText();
-				
+
 				if (text.trim().length() == 0) {
 					new MensagemErro("CEP não preenchido !").setVisible(true);
 					return;
 				} else {
 					text = text.replace("-", "");
 					text = text.trim();
-					
+
 					fornecedor.setCep(Long.valueOf(text));
 
 				}
@@ -174,49 +156,48 @@ public class TelaFornecedor extends JFrame {
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Verifica se uma linha foi selecionada na tabela
-		        int selectedRow = table_1.getSelectedRow();
-		        if (selectedRow == -1) {
-		            JOptionPane.showMessageDialog(null, "Selecione um fornecedor na tabela para atualizar.");
-		            return;
-		        }
+				int selectedRow = table_1.getSelectedRow();
+				if (selectedRow == -1) {
+					JOptionPane.showMessageDialog(null, "Selecione um fornecedor na tabela para atualizar.");
+					return;
+				}
 
-		        // Obtém os valores da linha selecionada
-		        
-		        String nome_empresa = (String) table_1.getValueAt(selectedRow, 0);
-		        Long cep = (long) table_1.getValueAt(selectedRow, 1);
-		        Long cnpj = (long) table_1.getValueAt(selectedRow, 2);
-		        Long telefone = (long) table_1.getValueAt(selectedRow, 3);
-		        
-		        // Preenche o objeto Cliente com os valores da linha selecionada
-		        Fornecedor fornecedor = new Fornecedor();
-		       
-		        fornecedor.setNomeEmpresa(nome_empresa);
-		        fornecedor.setCep(cep);
-		        fornecedor.setCnpj(cnpj);
-		        fornecedor.setTelefone(telefone);
-		        
-		        EditarFornecedorDialog dialog = new EditarFornecedorDialog(fornecedor);
-		        dialog.setVisible(true);
+				// Obtém os valores da linha selecionada
 
-		        
-		        if (dialog.isInformacoesAlteradas()) {
-		         
-		            fornecedor = dialog.getFornecedorAtualizado();
-		           
-		            FornecedorDAO dao = FornecedorDAO.getinstancia();
-		            boolean retorno = dao.alterar(fornecedor);
+				String nome_empresa = (String) table_1.getValueAt(selectedRow, 0);
+				Long cep = (long) table_1.getValueAt(selectedRow, 1);
+				Long cnpj = (long) table_1.getValueAt(selectedRow, 2);
+				Long telefone = (long) table_1.getValueAt(selectedRow, 3);
 
-		            if (retorno) {
-		            	new MensagemAcerto("Fornecedor atualizado com sucesso!").setVisible(true);
-		              
-		                // Atualiza a tabela após a alteração
-		                atualizarTabela();
-		            } else {
-		            	new MensagemErro("Erro ao atualizar o Fornecedor. !").setVisible(true);
-		            
-		            }
-		        }
-		    }
+				// Preenche o objeto Cliente com os valores da linha selecionada
+				Fornecedor fornecedor = new Fornecedor();
+
+				fornecedor.setNomeEmpresa(nome_empresa);
+				fornecedor.setCep(cep);
+				fornecedor.setCnpj(cnpj);
+				fornecedor.setTelefone(telefone);
+
+				EditarFornecedorDialog dialog = new EditarFornecedorDialog(fornecedor);
+				dialog.setVisible(true);
+
+				if (dialog.isInformacoesAlteradas()) {
+
+					fornecedor = dialog.getFornecedorAtualizado();
+
+					FornecedorDAO dao = FornecedorDAO.getinstancia();
+					boolean retorno = dao.alterar(fornecedor);
+
+					if (retorno) {
+						new MensagemAcerto("Fornecedor atualizado com sucesso!").setVisible(true);
+
+						// Atualiza a tabela após a alteração
+						atualizarTabela();
+					} else {
+						new MensagemErro("Erro ao atualizar o Fornecedor. !").setVisible(true);
+
+					}
+				}
+			}
 
 		});
 		contentPane.add(btnAtualizar);
@@ -356,35 +337,29 @@ public class TelaFornecedor extends JFrame {
 
 		modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "Nome da Empresa", "CNPJ", "CEP", "Telefone" });
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-					 "Nome da empresa","CNPJ", "CEP","Telefone"
-			}
-		));
+		table_1.setModel(new DefaultTableModel(new Object[][] {},
+				new String[] { "Nome da empresa", "CNPJ", "CEP", "Telefone" }));
 
 		atualizarTabela();
 
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane(table_1);
 		scrollPane_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				DefaultTableModel tblModel = (DefaultTableModel)table_1.getModel();
-				
-				String tblnome_empresa = tblModel.getValueAt(table_1.getSelectedRow(),0).toString();
-				String tblcep = tblModel.getValueAt(table_1.getSelectedRow(),1).toString();
-				String tbltelefone = tblModel.getValueAt(table_1.getSelectedRow(),2).toString();
-				String tblcnpj = tblModel.getValueAt(table_1.getSelectedRow(),3).toString();
+
+				DefaultTableModel tblModel = (DefaultTableModel) table_1.getModel();
+
+				String tblnome_empresa = tblModel.getValueAt(table_1.getSelectedRow(), 0).toString();
+				String tblcep = tblModel.getValueAt(table_1.getSelectedRow(), 1).toString();
+				String tbltelefone = tblModel.getValueAt(table_1.getSelectedRow(), 2).toString();
+				String tblcnpj = tblModel.getValueAt(table_1.getSelectedRow(), 3).toString();
 				txtNomeEmpresa.setText(tblnome_empresa);
 				txtTelefone.setText(tbltelefone);
 				txtCEP.setText(tblcep);
 				txtCNPJ.setText(tblcnpj);
-				
-				
+
 			}
 		});
 		panel.add(scrollPane_1);
@@ -409,13 +384,10 @@ public class TelaFornecedor extends JFrame {
 		fornecedorDAO = FornecedorDAO.getinstancia();
 		ArrayList<Fornecedor> fornecedor = fornecedorDAO.Listar();
 
-		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] {"Nome Empresa", "CEP", "CNPJ", "Telefone" });
-
+		modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Nome Empresa", "CEP", "CNPJ", "Telefone" });
 
 		for (Fornecedor f : fornecedor) {
-			Object[] linha = {f.getNomeEmpresa(), f.getCep(), f.getCnpj(),
-					f.getTelefone()};
+			Object[] linha = { f.getNomeEmpresa(), f.getCep(), f.getCnpj(), f.getTelefone() };
 			modelo.addRow(linha);
 
 		}

@@ -6,31 +6,20 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import controle.Conexao;
 import controle.LoginDao;
-import modelo.Funcionario;
 import net.miginfocom.swing.MigLayout;
-import java.awt.SystemColor;
-import javax.swing.JToolBar;
-import javax.swing.UIManager;
-import javax.swing.JPasswordField;
 
 public class TelaInicial extends JFrame {
 
@@ -42,14 +31,11 @@ public class TelaInicial extends JFrame {
 	private JPasswordField textSenha;
 
 	/**
-	 *  public void run() {
-	                JFrame frame = new JFrame("Tela de Login");
-	                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	                frame.getContentPane().add(new TelaInicial());
-	                frame.pack();
-	                frame.setVisible(true);
-	            }
-	        });	 */
+	 * public void run() { JFrame frame = new JFrame("Tela de Login");
+	 * frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	 * frame.getContentPane().add(new TelaInicial()); frame.pack();
+	 * frame.setVisible(true); } });
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -76,8 +62,9 @@ public class TelaInicial extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow][53px][221px,grow][grow]", "[grow][grow][24px][24px][23px,grow]"));
-		
+		contentPane
+				.setLayout(new MigLayout("", "[grow][53px][221px,grow][grow]", "[grow][grow][24px][24px][23px,grow]"));
+
 		Icon logoPinkmanKart = new ImageIcon("imgs/PinkmanKartLogo.png");
 		JLabel lblLogoPinkmanKart = new JLabel("");
 		lblLogoPinkmanKart.setIcon(new ImageIcon(TelaInicial.class.getResource("/imgs/PinkmanKartLogo.png")));
@@ -99,8 +86,6 @@ public class TelaInicial extends JFrame {
 		contentPane.add(textLogin, "cell 2 2,growx,aligny bottom");
 		textLogin.setColumns(10);
 
-		
-		
 		JButton btnEntrar = new JButton("Logar");
 		btnEntrar.setForeground(new Color(255, 255, 255));
 		btnEntrar.setFont(new Font("Segoe UI Semibold", Font.BOLD, 16));
@@ -108,34 +93,32 @@ public class TelaInicial extends JFrame {
 		textSenha = new JPasswordField();
 		contentPane.add(textSenha, "cell 2 3,growx,aligny bottom");
 		contentPane.add(btnEntrar, "cell 2 4,growx,aligny top");
-		
-		 btnEntrar.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	                String login = textLogin.getText();
-	                Long senha = Long.valueOf(new String(textSenha.getPassword())); // Obtenha a senha como uma String
 
-	                LoginDao loginDao = new LoginDao();
-	                boolean autenticado = loginDao.autenticarLogin(login, senha);
+		btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String login = textLogin.getText();
+				Long senha = Long.valueOf(new String(textSenha.getPassword())); // Obtenha a senha como uma String
 
-	                if (autenticado) {	            
-	                    dispose();
-	    				TelaSelecao tela = new TelaSelecao();
-	    				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	    				tela.setVisible(true);
-	    				Conexao con = Conexao.getInstancia();
-	    	        	Connection conn = con.conectar();
-	    	        	con.conectar();
-	    	        
-	    	        	new MensagemAcerto("Você entrou com sucesso!").setVisible(true);
-	    				
-	                
-	                } else {
-	                	new MensagemErro("Usuário ou senha incorretos!").setVisible(true);
-	                    
-	                }
-	            }
-	        });
-	    }
+				LoginDao loginDao = new LoginDao();
+				boolean autenticado = loginDao.autenticarLogin(login, senha);
+
+				if (autenticado) {
+					dispose();
+					TelaSelecao tela = new TelaSelecao();
+					tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					tela.setVisible(true);
+					Conexao con = Conexao.getInstancia();
+					Connection conn = con.conectar();
+					con.conectar();
+
+					new MensagemAcerto("Você entrou com sucesso!").setVisible(true);
+
+				} else {
+					new MensagemErro("Usuário ou senha incorretos!").setVisible(true);
+
+				}
+			}
+		});
+	}
 
 }
-

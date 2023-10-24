@@ -44,23 +44,6 @@ public class TelaFuncionario extends JFrame {
 	private JTextField textDataNac;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaFuncionario frame = new TelaFuncionario();
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * CONSTRUTOR
 	 */
 	public TelaFuncionario() {
@@ -170,7 +153,7 @@ public class TelaFuncionario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				Funcionario funcionario = new Funcionario();
-			
+
 				String text = textCPF.getText();
 				if (text.trim().length() == 0) {
 					new MensagemErro("CPF não preenchido !").setVisible(true);
@@ -180,7 +163,7 @@ public class TelaFuncionario extends JFrame {
 					text = text.replace(".", "");
 					text = text.replace("-", "");
 					text = text.trim();
-					
+
 					funcionario.setCpf(Long.valueOf(text));
 				}
 				String txt = textNomeCompleto.getText();
@@ -190,7 +173,7 @@ public class TelaFuncionario extends JFrame {
 				} else {
 					funcionario.setNomeCompleto(String.valueOf(txt));
 				}
-				
+
 				String data = textDataNac.getText();
 				if (data.trim().length() == 0) {
 					new MensagemErro("Data não preenchido !").setVisible(true);
@@ -199,27 +182,26 @@ public class TelaFuncionario extends JFrame {
 					data = data.replace("/", "");
 					data = data.replace("/", "");
 					data = data.trim();
-					
-					if(data.trim().isEmpty()) {
+
+					if (data.trim().isEmpty()) {
 						new MensagemErro("Data não preenchido !").setVisible(true);
 						return;
-			
-					}else {
-					
-					DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyyy"); // Define o formato da data
-					LocalDate dataNasc = LocalDate.parse(data, formato);
-					funcionario.setDataNac(dataNasc);
+
+					} else {
+
+						DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyyy"); // Define o formato da data
+						LocalDate dataNasc = LocalDate.parse(data, formato);
+						funcionario.setDataNac(dataNasc);
 					}
 				}
-				
-				 String cargo = (String) boxCargo.getSelectedItem();
+
+				String cargo = (String) boxCargo.getSelectedItem();
 				if (cargo.trim().length() == 0) {
 					new MensagemErro("Cargo não preenchido !").setVisible(true);
 					return;
 				} else {
 					funcionario.setCargo(cargo);
 				}
-				 
 
 				FuncionarioDAO dao = FuncionarioDAO.getinstancia();
 
@@ -239,53 +221,53 @@ public class TelaFuncionario extends JFrame {
 
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        // Verifica se uma linha foi selecionada na tabela
-		        int selectedRow = table_1.getSelectedRow();
-		        if (selectedRow == -1) {
-		            JOptionPane.showMessageDialog(null, "Selecione um funcionário na tabela para atualizar.");
-		            return;
-		        }
+			public void actionPerformed(ActionEvent e) {
+				// Verifica se uma linha foi selecionada na tabela
+				int selectedRow = table_1.getSelectedRow();
+				if (selectedRow == -1) {
+					JOptionPane.showMessageDialog(null, "Selecione um funcionário na tabela para atualizar.");
+					return;
+				}
 
-		        // Obtém os valores da linha selecionada
-		        long cpf = (long) table_1.getValueAt(selectedRow, 0);
-		        String nome = (String) table_1.getValueAt(selectedRow, 1);
-		        String cargo = (String) table_1.getValueAt(selectedRow, 2);
-		        String dataNascimento = (String) table_1.getValueAt(selectedRow, 3);
+				// Obtém os valores da linha selecionada
+				long cpf = (long) table_1.getValueAt(selectedRow, 0);
+				String nome = (String) table_1.getValueAt(selectedRow, 1);
+				String cargo = (String) table_1.getValueAt(selectedRow, 2);
+				String dataNascimento = (String) table_1.getValueAt(selectedRow, 3);
 
-		        // Converte a data de nascimento para o formato correto
-		        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		        LocalDate dataNasc = LocalDate.parse(dataNascimento, formato);
+				// Converte a data de nascimento para o formato correto
+				DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				LocalDate dataNasc = LocalDate.parse(dataNascimento, formato);
 
-		        // Preenche o objeto Funcionario com os valores da linha selecionada
-		        Funcionario funcionario = new Funcionario();
-		        funcionario.setCpf(cpf);
-		        funcionario.setNomeCompleto(nome);
-		        funcionario.setCargo(cargo);
-		        funcionario.setDataNac(dataNasc);
+				// Preenche o objeto Funcionario com os valores da linha selecionada
+				Funcionario funcionario = new Funcionario();
+				funcionario.setCpf(cpf);
+				funcionario.setNomeCompleto(nome);
+				funcionario.setCargo(cargo);
+				funcionario.setDataNac(dataNasc);
 
-		        // Abre uma janela de diálogo para editar as informações
-		        EditarFuncionarioDialog dialog = new EditarFuncionarioDialog(funcionario);
-		        dialog.setVisible(true);
+				// Abre uma janela de diálogo para editar as informações
+				EditarFuncionarioDialog dialog = new EditarFuncionarioDialog(funcionario);
+				dialog.setVisible(true);
 
-		        // Verifica se as informações foram alteradas no diálogo
-		        if (dialog.isInformacoesAlteradas()) {
-		            // Atualiza os valores do funcionário com as alterações
-		            funcionario = dialog.getFuncionarioAtualizado();
+				// Verifica se as informações foram alteradas no diálogo
+				if (dialog.isInformacoesAlteradas()) {
+					// Atualiza os valores do funcionário com as alterações
+					funcionario = dialog.getFuncionarioAtualizado();
 
-		            // Chama o método alterar do FuncionarioDAO para atualizar o funcionário
-		            FuncionarioDAO dao = FuncionarioDAO.getinstancia();
-		            boolean retorno = dao.alterar(funcionario);
+					// Chama o método alterar do FuncionarioDAO para atualizar o funcionário
+					FuncionarioDAO dao = FuncionarioDAO.getinstancia();
+					boolean retorno = dao.alterar(funcionario);
 
-		            if (retorno) {
-		            	new MensagemAcerto("Funcionario atualizado com sucesso!").setVisible(true);
-		                // Atualiza a tabela após a alteração
-		                atualizarTabela();
-		            } else {
-		            	new MensagemErro("Erro ao atualizar o cliente. !").setVisible(true);
-		            }
-		        }
-		    }
+					if (retorno) {
+						new MensagemAcerto("Funcionario atualizado com sucesso!").setVisible(true);
+						// Atualiza a tabela após a alteração
+						atualizarTabela();
+					} else {
+						new MensagemErro("Erro ao atualizar o cliente. !").setVisible(true);
+					}
+				}
+			}
 		});
 		btnAtualizar.setBounds(66, 314, 276, 53);
 		btnAtualizar.setForeground(new Color(255, 255, 255));
@@ -365,7 +347,7 @@ public class TelaFuncionario extends JFrame {
 
 		JScrollPane scrollPane_1 = new JScrollPane(table_1);
 		panel_1.add(scrollPane_1);
-		
+
 		JLabel lblNewLabel_6 = new JLabel("");
 		lblNewLabel_6.setIcon(new ImageIcon(TelaFuncionario.class.getResource("/imgs/FundoDeTela.jpg")));
 		lblNewLabel_6.setBounds(0, 0, 1924, 1146);
@@ -373,23 +355,17 @@ public class TelaFuncionario extends JFrame {
 
 	}
 
-	
-
 	public void atualizarTabela() {
 
 		dao = FuncionarioDAO.getinstancia();
 		ArrayList<Funcionario> funcionarios = dao.listar();
 
 		modelo = new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome", "Cargo", "Data" });
-		
+
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		for (Funcionario funcionario : funcionarios) {
-			Object[] linha = { 
-					funcionario.getCpf(), 
-					funcionario.getNomeCompleto(), 
-					funcionario.getCargo(),
-					funcionario.getDataNac().format(formato) 
-			};
+			Object[] linha = { funcionario.getCpf(), funcionario.getNomeCompleto(), funcionario.getCargo(),
+					funcionario.getDataNac().format(formato) };
 			modelo.addRow(linha);
 		}
 
