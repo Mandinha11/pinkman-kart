@@ -41,8 +41,8 @@ public class VendasDAO implements IVendasDAO{
 			
 			Vendas v = new Vendas();
 			
-			long idKart = rs.getLong("idKart");
-			long ValorDaVenda = rs.getLong("preco");
+			Integer idKart = rs.getInt("idKart");
+			Float ValorDaVenda = rs.getFloat("preco");
 			Date dataVendas = rs.getDate("data");
 			long funcionarioCPF = rs.getLong("fornecedorCPF");
 				
@@ -95,10 +95,10 @@ public class VendasDAO implements IVendasDAO{
 				PreparedStatement ps = conn.prepareStatement(query);
 				
 
-		
-				ps.setLong(1, v.getidkarts());
+				
+				ps.setInt(1, v.getidkarts());
 				ps.setDate(2,Date.valueOf(v.getdataVendas()));
-				ps.setLong(3, v.getValorDaVenda());
+				ps.setFloat(3, v.getValorDaVenda());
 				ps.setLong(4, v.getFuncionarioCPF());
 
 				
@@ -161,7 +161,7 @@ Conexao con = Conexao.getInstancia();
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setLong(1, v.getValorDaVenda());
+			ps.setFloat(1, v.getValorDaVenda());
 			
 
 			ps.executeUpdate();

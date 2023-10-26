@@ -87,6 +87,8 @@ public class TelaFornecedor extends JFrame {
 
 				Fornecedor fornecedor = new Fornecedor();
 
+				
+				
 				String text = txtCEP.getText();
 
 				if (text.trim().length() == 0) {
@@ -381,8 +383,8 @@ public class TelaFornecedor extends JFrame {
 
 	public void atualizarTabela() {
 
-		fornecedorDAO = FornecedorDAO.getinstancia();
-		ArrayList<Fornecedor> fornecedor = fornecedorDAO.Listar();
+		dao = FornecedorDAO.getinstancia();
+		ArrayList<Fornecedor> fornecedores = dao.Listar();
 
 		modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Nome Empresa", "CEP", "CNPJ", "Telefone" });
 

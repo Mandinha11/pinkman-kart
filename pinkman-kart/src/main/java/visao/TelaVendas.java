@@ -1,48 +1,32 @@
 package visao;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
-import javax.swing.text.NumberFormatter;
-
-import controle.ClienteDAO;
-import controle.KartsDAO;
-import controle.VendasDAO;
-import modelo.Cliente;
-import modelo.Karts;
-import modelo.Vendas;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.awt.event.ActionEvent;
-import java.awt.SystemColor;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFormattedTextField.AbstractFormatter;
-import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-
-import java.awt.BorderLayout;
+import controle.VendasDAO;
+import modelo.Vendas;
 
 public class TelaVendas extends JFrame {
 
@@ -98,20 +82,22 @@ public class TelaVendas extends JFrame {
 
 				Vendas vendas = new Vendas();
 
-				VendasDAO vendasDao = VendasDAO.getinstancia();
-
-				if (txtValorDaVenda.getText().trim().length() == 0) {
+				String v = txtValorDaVenda.getText();
+				if (v.trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "Preço não preenchido!!");
 					return;
 				} else {
-					vendas.setValorDaVenda(Long.valueOf(txtValorDaVenda.getText()));
+					v = v.replace(".", "");
+
+					vendas.setValorDaVenda(Float.valueOf(v));
 				}
 
-				if (txtidKart.getText().trim().length() == 0) {
+				String id = txtidKart.getText();
+				if (id.trim().length() == 0) {
 					JOptionPane.showMessageDialog(null, "ID_Kart não preenchido!!");
 					return;
 				} else {
-					vendas.setidKarts(Long.valueOf(txtidKart.getText()));
+					vendas.setidKarts(Integer.valueOf(id));
 				}
 				String cpf = txtFuncionarioCPF.getText();
 				if (cpf.trim().length() == 0) {
@@ -125,13 +111,24 @@ public class TelaVendas extends JFrame {
 					vendas.setFuncionarioCPF(Long.valueOf(cpf));
 
 				}
+				
+				String DataDaVenda = txtDataDaVenda.getText();
+				if(DataDaVenda.trim().length()== 0) {
+					JOptionPane.showMessageDialog(null,"Data Não foi preenchida!");
+					return;
+				}else {
+					DataDaVenda = DataDaVenda.replace("/", "");
+					DataDaVenda = DataDaVenda.replace("/", "");
+
+					
+				}
 
 				VendasDAO VendasDao = VendasDAO.getinstancia();
 				if (VendasDao.inserir(vendas) == true) {
 					JOptionPane.showMessageDialog(null, "Venda Cadastrada com sucesso");
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(null, "Erro ao Cadastrar a venda");
+					JOptionPane.showMessageDialog(btnCadastra, "Erro ao Cadastrar a venda");
 				}
 
 			}
@@ -273,7 +270,7 @@ public class TelaVendas extends JFrame {
 				VendasDAO dao = VendasDAO.getinstancia();
 
 				Vendas v = new Vendas();
-				v.setValorDaVenda(kart);
+				v.setValorDaVenda(456f);
 				boolean retorno = dao.Deletar(v);
 
 				if (retorno == true) {
@@ -294,6 +291,11 @@ public class TelaVendas extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/CarrinhoDeCompras.png")));
 		lblNewLabel_1.setBounds(42, 814, 181, 180);
 		contentPane.add(lblNewLabel_1);
+
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
+		lblNewLabel_5.setBounds(-13, 0, 1948, 1053);
+		contentPane.add(lblNewLabel_5);
 
 		JPanel panel1 = new JPanel();
 		panel1.setBackground(new Color(255, 255, 255));
@@ -324,7 +326,7 @@ public class TelaVendas extends JFrame {
 		ArrayList<Vendas> Vendas = dao.listar();
 
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "Id_Karts", "Data_da_venda", "Valor_da_Venda", "Funcionario_CPF" });
+				new String[] { "karts_id_kart", "data_venda", "valor_total", "funcionarios_cpf" });
 
 		for (Vendas vendas : Vendas) {
 			Object[] linha = { vendas.getidkarts(), vendas.getdataVendas(), vendas.getValorDaVenda(),

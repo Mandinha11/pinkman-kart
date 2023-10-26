@@ -16,9 +16,9 @@ public class VendasDAOtest {
 	public void testMetodoInserirVendas() {
 		Vendas v = new Vendas();
 		
-		v.setidKarts(1l);
+		v.setidKarts(1);
 		v.setdataVendas (LocalDate.of(2000,12, 24));
-		v.setValorDaVenda(4555555l);
+		v.setValorDaVenda(4555555f);
 		v.setFuncionarioCPF(12345678900l);
 		
 		VendasDAO dao = new VendasDAO(); 

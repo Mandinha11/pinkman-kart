@@ -16,21 +16,20 @@ public class Vendas {
 	
 
 	private Long FuncionarioCPF;
-	private Long ValorDaVenda;
+	private Float ValorDaVenda;
 	private LocalDate dataVendas;
-	private Long idKarts;
-
+	private Integer idKarts;
 	
 	
 	public Vendas(){
 		
 	}
 	
-	public void setidKarts(Long idKarts) {
+	public void setidKarts(Integer idKarts) {
 		this.idKarts = idKarts;
 	}
 
-	public Long getidkarts() {
+	public Integer getidkarts() {
 		return idKarts;
 	}
 	public void setFuncionarioCPF(Long FuncionarioCPF) {
@@ -40,11 +39,11 @@ public class Vendas {
 		return FuncionarioCPF;
 	}
 
-	public void setValorDaVenda(Long ValorDaVenda) {
+	public void setValorDaVenda(Float ValorDaVenda) {
 		this.ValorDaVenda = ValorDaVenda;
 		
 	}
-	public Long getValorDaVenda() {
+	public Float getValorDaVenda() {
 		return ValorDaVenda;
 	}
 
