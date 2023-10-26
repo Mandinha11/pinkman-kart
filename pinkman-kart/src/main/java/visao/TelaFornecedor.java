@@ -35,6 +35,7 @@ import java.awt.event.MouseEvent;
 
 public class TelaFornecedor extends JFrame {
 
+	private FornecedorDAO dao;
 	private JPanel contentPane;
 	private JTextField txtCNPJ;
 	private JTextField txtTelefone;
@@ -384,7 +385,7 @@ public class TelaFornecedor extends JFrame {
 	public void atualizarTabela() {
 
 		dao = FornecedorDAO.getinstancia();
-		ArrayList<Fornecedor> fornecedores = dao.Listar();
+		ArrayList<Fornecedor> fornecedor = dao.Listar();
 
 		modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Nome Empresa", "CEP", "CNPJ", "Telefone" });
 

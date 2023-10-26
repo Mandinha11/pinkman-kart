@@ -38,7 +38,7 @@ public class VendasDAO implements IVendasDAO{
 			PreparedStatement ps = con.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
 		while(rs.next()) {
-			Vendas A = new Vendas();
+			
 			Vendas v = new Vendas();
 			
 			Integer idKart = rs.getInt("idKart");
