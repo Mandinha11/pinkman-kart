@@ -38,14 +38,14 @@ public class VendasDAO implements IVendasDAO{
 			PreparedStatement ps = con.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
 		while(rs.next()) {
-			
+			Vendas A = new Vendas();
 			Vendas v = new Vendas();
 			
 			Integer idKart = rs.getInt("idKart");
 			Float ValorDaVenda = rs.getFloat("preco");
 			Date dataVendas = rs.getDate("data");
 			long funcionarioCPF = rs.getLong("fornecedorCPF");
-				
+			
 			
 			v.setidKarts (idKart);
 			v.setValorDaVenda (ValorDaVenda);
@@ -69,7 +69,7 @@ public class VendasDAO implements IVendasDAO{
 			return vendas;
 		
 	}
-
+	
 	
 
 
