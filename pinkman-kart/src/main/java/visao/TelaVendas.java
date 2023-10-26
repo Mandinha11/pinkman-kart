@@ -122,6 +122,17 @@ public class TelaVendas extends JFrame {
 					vendas.setFuncionarioCPF(Long.valueOf(cpf));
 
 				}
+				
+				String DataDaVenda = txtDataDaVenda.getText();
+				if(DataDaVenda.trim().length()== 0) {
+					JOptionPane.showMessageDialog(null,"Data Não foi preenchida!");
+					return;
+				}else {
+					DataDaVenda = DataDaVenda.replace("/", "");
+					DataDaVenda = DataDaVenda.replace("/", "");
+
+					
+				}
 
 				VendasDAO VendasDao = VendasDAO.getinstancia();
 				if (VendasDao.inserir(vendas) == true) {
