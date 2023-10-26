@@ -7,12 +7,6 @@ import javax.xml.crypto.Data;
 
 public class Vendas {
 	
-
-	private Long idVendas;
-	private String kart;
-	private String cliente;
-	private Long preco;
-	private Long data;
 	
 
 	private Long FuncionarioCPF;

@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -44,7 +46,7 @@ public class TelaVendas extends JFrame {
 	private VendasDAO dao;
 	private DefaultTableModel modelo;
 	private JTextField txtDataDaVenda;
-	private JTable table;
+	private JTable table_1;
 
 	/**
 	 * Create the frame.
@@ -63,17 +65,24 @@ public class TelaVendas extends JFrame {
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(281, 187, 1588, 807);
 		contentPane.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
-
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane);
-
-		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "Valor_total", "Data_da_Venda", "Funcionario_CPF", "ID_kart" }));
-		table.getColumnModel().getColumn(1).setPreferredWidth(87);
-		table.getColumnModel().getColumn(2).setPreferredWidth(90);
-		scrollPane.setViewportView(table);
+		
+		table_1 = new JTable();
+		
+		modelo = new DefaultTableModel(new Object[][] {}, new String[] {"Valor_Da_Venda", "Data_venda", "funcionarios_cpf","id_kart"
+				
+		});
+		
+		table_1.setModel(new DefaultTableModel (new Object[][] {},new String[] {"Valor_Da_Venda", "Data_venda", "funcionarios_cpf","id_kart"
+			}
+		));
+		table_1.getColumnModel().getColumn(0).setPreferredWidth(90);
+		table_1.getColumnModel().getColumn(1).setPreferredWidth(88);
+		table_1.getColumnModel().getColumn(2).setPreferredWidth(90);
+		scrollPane.setViewportView(table_1);
 
 		JButton btnCadastra = new JButton("Cadastrar");
 		btnCadastra.setForeground(new Color(255, 255, 255));
@@ -113,13 +122,23 @@ public class TelaVendas extends JFrame {
 
 				}
 				
-				String DataDaVenda = txtDataDaVenda.getText();
-				if(DataDaVenda.trim().length()== 0) {
+				String dataVendas = txtDataDaVenda.getText();
+				if(dataVendas.trim().length()== 0) {
 					JOptionPane.showMessageDialog(null,"Data Não foi preenchida!");
 					return;
 				}else {
-					DataDaVenda = DataDaVenda.replace("/", "");
-					DataDaVenda = DataDaVenda.replace("/", "");
+					dataVendas = dataVendas.replace("/", "");
+					dataVendas = dataVendas.replace("/", "");
+					
+					if(dataVendas.trim().length()== 0){
+						return;
+						
+					}else {
+						DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyyy");
+						
+						LocalDate dataVendasformatada = LocalDate.parse(dataVendas, formato);
+						vendas.setdataVendas(dataVendasformatada);
+					}
 
 					
 				}
@@ -264,19 +283,19 @@ public class TelaVendas extends JFrame {
 		btnExcluir.setForeground(new Color(255, 255, 255));
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selectedRow = table.getSelectedRow();
+				int selectedRow = table_1.getSelectedRow();
 
-				Long kart = (Long) table.getValueAt(selectedRow, 1);
+				float ValorDaVenda = (float) table_1.getValueAt(selectedRow, 0);
 
 				VendasDAO dao = VendasDAO.getinstancia();
 
 				Vendas v = new Vendas();
-				v.setValorDaVenda(456f);
+				v.setValorDaVenda(ValorDaVenda);
 				boolean retorno = dao.Deletar(v);
 
 				if (retorno == true) {
 					// Remove a linha selecionada
-					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					DefaultTableModel tableModel = (DefaultTableModel) table_1.getModel();
 					tableModel.removeRow(selectedRow);
 					JOptionPane.showMessageDialog(null, "Linha Excluída com Sucesso!");
 				} else {
@@ -298,22 +317,6 @@ public class TelaVendas extends JFrame {
 		lblNewLabel_5.setBounds(-13, 0, 1948, 1053);
 		contentPane.add(lblNewLabel_5);
 
-		JPanel panel1 = new JPanel();
-		panel1.setBackground(new Color(255, 255, 255));
-		panel1.setBounds(281, 224, 1589, 788);
-		contentPane.add(panel1);
-		panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
-
-		JScrollPane scrollPane1 = new JScrollPane();
-		panel1.add(scrollPane1);
-
-		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "ID_kart", "Data_da_Venda", "Cliente_CPF", "Valor_da_Venda" }));
-		table.getColumnModel().getColumn(1).setPreferredWidth(87);
-		table.getColumnModel().getColumn(3).setPreferredWidth(89);
-		scrollPane1.setViewportView(table);
-
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
 		lblNewLabel_2.setBounds(0, 0, 1924, 1053);
@@ -327,14 +330,13 @@ public class TelaVendas extends JFrame {
 		ArrayList<Vendas> Vendas = dao.listar();
 
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "karts_id_kart", "data_venda", "valor_total", "funcionarios_cpf" });
+				new String[] { "Valor_Da_Venda", "Data_venda", "funcionarios_cpf","id_kart" });
 
 		for (Vendas vendas : Vendas) {
-			Object[] linha = { vendas.getidkarts(), vendas.getdataVendas(), vendas.getValorDaVenda(),
-					vendas.getFuncionarioCPF() };
+			Object[] linha = {vendas.getValorDaVenda(), vendas.getdataVendas(),
+					vendas.getFuncionarioCPF(), vendas.getidkarts()};
 			modelo.addRow(linha);
 		}
-		table.setModel(modelo);
+		table_1.setModel(modelo);
 	}
-
 }
