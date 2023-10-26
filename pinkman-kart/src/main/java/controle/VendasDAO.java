@@ -43,7 +43,7 @@ public class VendasDAO {
 			Integer idKart = rs.getInt("idKart");
 			Float ValorDaVenda = rs.getFloat("preco");
 			Date dataVendas = rs.getDate("data");
-			long funcionarioCPF = rs.getLong("funcionarioCPF");
+			long funcionarioCPF = rs.getLong("fornecedorCPF");
 			
 			
 			
