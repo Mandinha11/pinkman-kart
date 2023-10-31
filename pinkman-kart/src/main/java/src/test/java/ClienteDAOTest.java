@@ -18,6 +18,14 @@ public class ClienteDAOTest {
 	// annotation
 	@Test
 	@Order(1)
+	public void testMetodoListarCliente() {
+		Cliente c =new Cliente();
+		ArrayList<Clientes>
+	}
+	
+	
+	@Test
+	@Order(1)
 	public void testMetodoInserirCliente() {
 		Cliente c = new Cliente();
 

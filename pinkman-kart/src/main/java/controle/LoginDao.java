@@ -8,28 +8,31 @@ import java.sql.SQLException;
 
 import modelo.ILoginDAO;
 
-public class LoginDao implements ILoginDAO{
-    // Método para autenticar o login
-    public boolean autenticarLogin(String login, Long senha) {
-        try {
-        	Conexao con = Conexao.getInstancia();
-        	Connection conn = con.conectar();
-            PreparedStatement st = conn.prepareStatement("SELECT nome_completo, cpf FROM funcionarios WHERE nome_completo=? AND cpf=?");
-            st.setString(1, login);  // Defina o nome do funcionário
-            st.setLong(2, senha);  // Defina o CPF como senha
-            ResultSet rs = st.executeQuery();
+public class LoginDao implements ILoginDAO {
+	// Método para autenticar o login
+	public boolean autenticarLogin(String login, Long senha) {
 
-            if (rs.next()) {
-                // Usuário autenticado
-            	conn.close();
-                return true;
-            }
+		Conexao con = Conexao.getInstancia();
 
-            conn.close();
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
+		try {
+			Connection conn = con.conectar();
+			PreparedStatement st = conn
+					.prepareStatement("SELECT nome_completo, cpf FROM funcionarios WHERE nome_completo=? AND cpf=?");
+			st.setString(1, login); // Defina o nome do funcionário
+			st.setLong(2, senha); // Defina o CPF como senha
+			ResultSet rs = st.executeQuery();
 
-        return false;
-    }
+			if (rs.next()) {
+				// Usuário autenticado
+				return true;
+			}
+
+		} catch (SQLException sqlException) {
+			sqlException.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+
+		return false;
+	}
 }
