@@ -109,7 +109,7 @@ public class TelaKarts extends JFrame {
 
 				System.out.println(preco);
 				if (preco.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Preço não preenchido!!");
+					new MensagemErro("Preço não preenchido !").setVisible(true);
 					return;
 				} else {
 
@@ -117,27 +117,27 @@ public class TelaKarts extends JFrame {
 				}
 
 				if (txtMarca.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Marca não preenchido!");
+					new MensagemErro("Marca não preenchido!").setVisible(true);
 					return;
 				} else {
 					karts.setMarca(String.valueOf(txtMarca.getText()));
 				}
 
 				if (txtModelo.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Modelo não preenchido!!");
+					new MensagemErro("Modelo não preenchido!").setVisible(true);
 					return;
 				} else {
 					karts.setModelo(String.valueOf(txtModelo.getText()));
 				}
 
 				if (txtId.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Id Kart não preenchido!!");
+					new MensagemErro("Id Kart não preenchido!").setVisible(true);
 					return;
 				} else {
 					karts.setId(Long.valueOf(txtId.getText()));
 				}
 				if (txtAno.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Ano não preenchido ");
+					new MensagemErro("Ano não preenchido!").setVisible(true);
 					return;
 				} else {
 					karts.setano(Long.valueOf(txtAno.getText()));
@@ -150,7 +150,7 @@ public class TelaKarts extends JFrame {
 				CNPJ = CNPJ.trim();
 
 				if (CNPJ.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "CNPJ do Fornecedor não preenchido!!");
+					new MensagemErro("CNPJ do Fornecedor não preenchido!").setVisible(true);
 					return;
 				} else {
 
@@ -159,7 +159,7 @@ public class TelaKarts extends JFrame {
 
 				String DataEntrada = txtDataEntrada.getText();
 				if (DataEntrada.trim().length() == 0) {
-					// new MensagemErro("Data não preenchida !").setVisible(true);
+					 new MensagemErro("Data não preenchida !").setVisible(true);
 					return;
 
 				} else {
@@ -168,7 +168,7 @@ public class TelaKarts extends JFrame {
 
 					if (DataEntrada.trim().isEmpty()) {
 
-						// new MensagemErro("Data não preenchida !").setVisible(true);
+						 new MensagemErro("Data não preenchida !").setVisible(true);
 						return;
 
 					} else {
@@ -181,14 +181,14 @@ public class TelaKarts extends JFrame {
 
 				String textQuantidade = txtQuantidade.getText();
 				if (txtQuantidade.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Quantidade não foi Preenchida");
+					 new MensagemErro("Quantidade não foi Preenchida!").setVisible(true);
 					return;
 				} else {
 					karts.setquantidade(Long.valueOf(textQuantidade));
 				}
 				String Cor = txtCor.getText();
 				if (txtCor.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "A Cor não foi Preenchida");
+					 new MensagemErro("A Cor não foi Preenchida!").setVisible(true);
 				} else {
 					karts.setCor(String.valueOf(Cor));
 				}
@@ -196,10 +196,10 @@ public class TelaKarts extends JFrame {
 				KartsDAO kartDao = KartsDAO.getinstancia();
 
 				if (kartDao.Inserir(karts) == true) {
-					JOptionPane.showMessageDialog(btnCadastrar, "Cadastro feito");
+					new MensagemAcerto("Cadastrado !").setVisible(true);
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(btnCadastrar, "Erro no cadastro ");
+					new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
 				}
 
 			}
@@ -258,9 +258,9 @@ public class TelaKarts extends JFrame {
 					// Remove a linha selecionada
 					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 					tableModel.removeRow(selectedRow);
-					JOptionPane.showMessageDialog(null, "Linha excluída com sucesso!");
+					new MensagemAcerto("Excluido com sucesso !").setVisible(true);
 				} else {
-					JOptionPane.showMessageDialog(null, "Erro ao tentar Excluir");
+					new MensagemErro("Não foi possivel excluir!").setVisible(true);
 				}
 			}
 		});
