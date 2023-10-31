@@ -107,8 +107,8 @@ public class VendasDAO implements IVendasDAO{
 			return true;
 			
 		}
-		catch (SQLException e) {
-			e.printStackTrace();
+			catch (SQLException e) {
+				e.printStackTrace();
 			}finally {
 				con.fecharConexao();
 			}
@@ -123,7 +123,7 @@ public class VendasDAO implements IVendasDAO{
 
 		Connection conn = con.conectar();
 
-		String query = "UPDATE vendas SET data_vendas = ?,";
+		String query = "UPDATE vendas SET data_venda = ?,";
 		
 		try {
 
@@ -131,10 +131,10 @@ public class VendasDAO implements IVendasDAO{
 
 			ps.setDate(1,Date.valueOf(v.getdataVendas()));
 
-			ps.executeUpdate();
-
+			int rowsUpdated = ps.executeUpdate();
 			
-			return true;
+			
+			return rowsUpdated > 0;
 			
 		}
 		catch (SQLException e) {
@@ -150,17 +150,17 @@ public class VendasDAO implements IVendasDAO{
 
 	public boolean Deletar(Vendas v) {
 		
-Conexao con = Conexao.getInstancia();
+		Conexao con = Conexao.getInstancia();
 		
 		Connection conn = con.conectar();
 
-		String query = "DELETE FROM vendas WHERE valor_total = ?";
+		String query = "DELETE FROM vendas WHERE karts_id_kart = ?";
 		
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setFloat(1, v.getValorDaVenda());
+			ps.setInt(1, v.getidkarts());
 			
 
 			ps.executeUpdate();
