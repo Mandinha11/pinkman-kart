@@ -112,18 +112,17 @@ public class KartsDAO implements IKartDAO {
 
 		Connection conn = con.conectar();
 
-		String query = "UPDATE karts SET cor = ?, id_kart In (?)";
+		String query = "UPDATE karts SET cor = ?, id_kart In ?";
 
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
-
+			
 			ps.setString(1, k.getCor());
 
-			ps.executeUpdate();
+			int rowsUpdated = ps.executeUpdate();
 
-			return true;
-
+			return rowsUpdated > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
 

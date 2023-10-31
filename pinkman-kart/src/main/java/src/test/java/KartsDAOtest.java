@@ -1,8 +1,10 @@
 package src.test.java;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -15,6 +17,7 @@ import modelo.Karts;
 public class KartsDAOtest {
 	
 	// annotation
+
 	
 
 	@Test
@@ -48,5 +51,29 @@ public class KartsDAOtest {
 		boolean DeletarOk = dao.Deletar(k);
 		assertEquals(true, DeletarOk);
 }
+	
+	@Test 
+	@Order(3)
+	
+	public void testMetodoAlterarKarts() {
+		Karts k = new Karts();
+		
+		k.setCor("Preto");
+		
+		KartsDAO dao = new KartsDAO();
+		boolean AlterarOK = dao.Alterar(k);
+		assertEquals(true, AlterarOK);
+		
+	}
+	@Test
+	@Order(4)
+	
+	
+	public void testMetodoListarKarts() {
+		KartsDAO kr = new KartsDAO();
+		ArrayList<Karts> ListarKart = kr.listar();
+		assertNotNull(ListarKart);
+		
+	}
 	
 }
