@@ -383,12 +383,12 @@ public class TelaFornecedor extends JFrame {
 
 	public void atualizarTabela() {
 
-		dao = FornecedorDAO.getinstancia();
-		ArrayList<Fornecedor> fornecedores = dao.Listar();
+		fornecedorDAO = FornecedorDAO.getinstancia();
+		ArrayList<Fornecedor> fornecedores = fornecedorDAO.Listar();
 
 		modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Nome Empresa", "CEP", "CNPJ", "Telefone" });
 
-		for (Fornecedor f : fornecedor) {
+		for (Fornecedor f : fornecedores) {
 			Object[] linha = { f.getNomeEmpresa(), f.getCep(), f.getCnpj(), f.getTelefone() };
 			modelo.addRow(linha);
 
