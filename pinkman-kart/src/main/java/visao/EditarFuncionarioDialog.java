@@ -17,7 +17,6 @@ public class EditarFuncionarioDialog extends JDialog {
     private JTextField textFieldNome;
     private JTextField textFieldCargo;
     private JTextField textFieldDataNascimento;
-    private JLabel lblNewLabel;
 
     public EditarFuncionarioDialog(Funcionario funcionario) {
         this.funcionario = funcionario;
@@ -76,9 +75,9 @@ public class EditarFuncionarioDialog extends JDialog {
 
         getContentPane().add(panel);
         
-        lblNewLabel = new JLabel("New label");
-        lblNewLabel.setIcon(new ImageIcon(EditarFuncionarioDialog.class.getResource("/imgs/fundoAzul.jpg")));
-        lblNewLabel.setBounds(-311, 0, 711, 200);
+        JLabel lblNewLabel = new JLabel("New label");
+        lblNewLabel.setIcon(new ImageIcon(EditarFuncionarioDialog.class.getResource("/imgs/alt.jpg")));
+        lblNewLabel.setBounds(-52, 0, 452, 200);
         panel.add(lblNewLabel);
     }
 

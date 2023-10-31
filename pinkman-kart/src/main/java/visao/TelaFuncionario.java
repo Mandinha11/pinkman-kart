@@ -215,7 +215,7 @@ public class TelaFuncionario extends JFrame {
 		});
 		btnCadastratar.setBounds(66, 230, 276, 53);
 		btnCadastratar.setForeground(new Color(255, 255, 255));
-		btnCadastratar.setBackground(new Color(47, 79, 79));
+		btnCadastratar.setBackground(new Color(0, 0, 0));
 		btnCadastratar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(btnCadastratar);
 
@@ -271,14 +271,14 @@ public class TelaFuncionario extends JFrame {
 		});
 		btnAtualizar.setBounds(66, 314, 276, 53);
 		btnAtualizar.setForeground(new Color(255, 255, 255));
-		btnAtualizar.setBackground(new Color(47, 79, 79));
+		btnAtualizar.setBackground(new Color(0, 0, 0));
 		btnAtualizar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(btnAtualizar);
 
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBounds(66, 407, 276, 53);
 		btnExcluir.setForeground(new Color(255, 255, 255));
-		btnExcluir.setBackground(new Color(47, 79, 79));
+		btnExcluir.setBackground(new Color(0, 0, 0));
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table_1.getSelectedRow();

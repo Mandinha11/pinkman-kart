@@ -46,7 +46,7 @@ public class EditarClienteDialog extends JDialog {
         panel.add(label_1);
         textFieldTelefone = new JTextField(cliente.getTelefone().toString());
         textFieldTelefone.setBackground(SystemColor.control);
-        textFieldTelefone.setBounds(200, 58, 190, 38);
+        textFieldTelefone.setBounds(200, 61, 190, 38);
         panel.add(textFieldTelefone);
 
         JLabel label_2 = new JLabel("Data de Nascimento:");
@@ -78,8 +78,8 @@ public class EditarClienteDialog extends JDialog {
         getContentPane().add(panel);
         
         JLabel lblNewLabel = new JLabel("New label");
-        lblNewLabel.setIcon(new ImageIcon(EditarClienteDialog.class.getResource("/imgs/fundoAzul.jpg")));
-        lblNewLabel.setBounds(-300, -44, 1444, 243);
+        lblNewLabel.setIcon(new ImageIcon(EditarClienteDialog.class.getResource("/imgs/alt.jpg")));
+        lblNewLabel.setBounds(-89, -12, 489, 212);
         panel.add(lblNewLabel);
     }
 

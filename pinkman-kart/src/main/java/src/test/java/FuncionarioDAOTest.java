@@ -48,7 +48,7 @@ public class FuncionarioDAOTest {
 			f.setCargo("Caixa");
 			f.setCpf(2934546485l);
 			f.setDataNac(LocalDate.of(2005, 11, 11));
-			f.setNomeCompleto("Henry");
+			f.setNomeCompleto("Diega");
 			
 			FuncionarioDAO dao = new FuncionarioDAO();
 			

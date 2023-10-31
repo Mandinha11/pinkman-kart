@@ -67,7 +67,7 @@ public class MensagemAcerto extends JFrame {
 		
 		JLabel lblMsgAcerto = new JLabel("");
 		lblMsgAcerto.setForeground(new Color(255, 255, 255));
-		lblMsgAcerto.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 24));
+		lblMsgAcerto.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 21));
 		lblMsgAcerto.setBounds(278, 84, 357, 60);
 		contentPane.add(lblMsgAcerto);
 		

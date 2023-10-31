@@ -18,7 +18,6 @@ public class EditarFornecedorDialog extends JDialog {
     private JTextField textFieldNomeEmpresa;
     private JTextField textFieldCep;
     private JTextField textFieldTelefone;
-    private JLabel lblNewLabel;
    
 
     public EditarFornecedorDialog(Fornecedor fornecedor) {
@@ -79,9 +78,9 @@ public class EditarFornecedorDialog extends JDialog {
 
         getContentPane().add(panel);
         
-        lblNewLabel = new JLabel("New label");
-        lblNewLabel.setIcon(new ImageIcon(EditarFornecedorDialog.class.getResource("/imgs/fundoAzul.jpg")));
-        lblNewLabel.setBounds(-286, 0, 702, 200);
+        JLabel lblNewLabel = new JLabel("New label");
+        lblNewLabel.setIcon(new ImageIcon(EditarFornecedorDialog.class.getResource("/imgs/alt.jpg")));
+        lblNewLabel.setBounds(-71, 0, 471, 200);
         panel.add(lblNewLabel);
     }
 
