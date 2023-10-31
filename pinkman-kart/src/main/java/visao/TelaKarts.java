@@ -13,6 +13,7 @@ import javax.swing.text.MaskFormatter;
 
 import com.google.protobuf.Empty;
 
+import controle.ClienteDAO;
 import controle.KartsDAO;
 
 import modelo.Karts;
@@ -480,6 +481,50 @@ public class TelaKarts extends JFrame {
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int selectedRow = table.getSelectedRow();
+				if (selectedRow == -1) {
+					JOptionPane.showMessageDialog(null, "Selecione um funcionário na tabela para atualizar.");
+					return;
+				}
+				String Cor = (String) table.getValueAt(selectedRow, 1);
+				String modelo = (String) table.getValueAt(selectedRow, 2);
+				String marca = (String) table.getValueAt(selectedRow, 3);
+				long ano = (long) table.getValueAt(selectedRow, 4);
+				long quantidade = (long) table.getValueAt(selectedRow, 5);
+				String dataEntrada = (String) table.getValueAt(selectedRow, 6);
+				long preco = (long) table.getValueAt(selectedRow, 7);
+				
+				DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				LocalDate DataEntrada = LocalDate.parse(dataEntrada, formato);
+				
+				Karts karts = new Karts();
+				karts.setCor(Cor);
+				karts.setModelo(modelo);
+				karts.setMarca(marca);
+				karts.setano(ano);
+				karts.setquantidade(quantidade);
+				karts.setDataEntrada(DataEntrada);
+				karts.setpreco(preco);
+				
+				EditarKartsDialog dialog = new EditarKartsDialog(karts);
+				dialog.setVisible(true);
+				
+				if (dialog.isInformacoesAlteradas()) {
+					karts = dialog.getKartsAtualizado();
+					
+					KartsDAO dao = KartsDAO.getinstancia();
+					boolean retorno = dao.Alterar(karts);
+					
+					if (retorno) {
+						new MensagemAcerto("Cliente atualizado com sucesso!").setVisible(true);
+						
+						
+						atualizarTabela();
+					}else {
+						new MensagemErro("Erro ao atualizar o cliente. !").setVisible(true);
+
+					}
+				}
 			}
 		});
 		btnAlterar.setForeground(Color.WHITE);
