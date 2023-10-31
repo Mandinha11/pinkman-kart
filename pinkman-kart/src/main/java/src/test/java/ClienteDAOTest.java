@@ -1,8 +1,10 @@
 package src.test.java;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -19,13 +21,15 @@ public class ClienteDAOTest {
 	@Test
 	@Order(1)
 	public void testMetodoListarCliente() {
-		Cliente c =new Cliente();
-		ArrayList<Clientes>
+		ClienteDAO cl =new ClienteDAO();
+		ArrayList<Cliente> ListarClin = cl.listar();
+		assertNotNull(ListarClin);
+		
 	}
 	
 	
 	@Test
-	@Order(1)
+	@Order(2)
 	public void testMetodoInserirCliente() {
 		Cliente c = new Cliente();
 
@@ -41,7 +45,7 @@ public class ClienteDAOTest {
 	
 	}
 	@Test
-	@Order(2)
+	@Order(3)
 	
 		public void testMetodoAlterarCliente() {
 			
@@ -59,7 +63,7 @@ public class ClienteDAOTest {
 		}
 		
 	@Test
-	@Order(3)
+	@Order(4)
 	public void testMetodoDeletarCliente() {
 		Cliente c = new Cliente();
 
