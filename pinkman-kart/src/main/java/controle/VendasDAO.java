@@ -36,7 +36,7 @@ public class VendasDAO implements IVendasDAO{
 		
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
-		ResultSet rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 		while(rs.next()) {
 			
 			Vendas v = new Vendas();
@@ -95,12 +95,11 @@ public class VendasDAO implements IVendasDAO{
 				PreparedStatement ps = conn.prepareStatement(query);
 				
 
-				
-				ps.setInt(1, v.getidkarts());
+				ps.setFloat(1, v.getValorDaVenda());
 				ps.setDate(2,Date.valueOf(v.getdataVendas()));
-				ps.setFloat(3, v.getValorDaVenda());
-				ps.setLong(4, v.getFuncionarioCPF());
-
+				ps.setLong(3, v.getFuncionarioCPF());
+				ps.setInt(4, v.getidkarts());
+				
 				
 				ps.executeUpdate();
 				
