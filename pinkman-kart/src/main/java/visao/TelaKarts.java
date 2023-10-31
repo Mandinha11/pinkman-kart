@@ -88,7 +88,7 @@ public class TelaKarts extends JFrame {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBackground(new Color(0, 0, 0));
 		btnCadastrar.setForeground(new Color(255, 255, 255));
-		btnCadastrar.setBounds(54, 612, 390, 41);
+		btnCadastrar.setBounds(98, 556, 271, 41);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -264,7 +264,7 @@ public class TelaKarts extends JFrame {
 				}
 			}
 		});
-		btnExcluir.setBounds(524, 612, 386, 41);
+		btnExcluir.setBounds(394, 556, 271, 41);
 		btnExcluir.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		contentPane.add(btnExcluir);
 
@@ -458,7 +458,7 @@ public class TelaKarts extends JFrame {
 		panel_1_6.setForeground(new Color(255, 255, 255));
 		panel_1_6.setBackground(new Color(0, 85, 125));
 		panel_1_6.setLayout(null);
-		panel_1_6.setBounds(307, 473, 423, 61);
+		panel_1_6.setBounds(98, 452, 423, 61);
 		contentPane.add(panel_1_6);
 
 		txtPreco_1 = new JFormattedTextField(formatter);
@@ -476,7 +476,18 @@ public class TelaKarts extends JFrame {
 
 		lblNewLabel_2.setBounds(343, 733, 301, 217);
 		contentPane.add(lblNewLabel_2);
-
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnAlterar.setForeground(Color.WHITE);
+		btnAlterar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		btnAlterar.setBackground(Color.BLACK);
+		btnAlterar.setBounds(692, 556, 271, 41);
+		contentPane.add(btnAlterar);
+		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/FundoDeTela.jpg")));
 		lblNewLabel_1.setBounds(0, 0, 1924, 1061);
