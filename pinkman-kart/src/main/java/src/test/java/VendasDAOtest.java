@@ -43,7 +43,7 @@ public class VendasDAOtest {
 	}
 	public void testMedotoDeletarVendas() {
 		
-Vendas v = new Vendas();
+		Vendas v = new Vendas();
 		
 		v.setdataVendas(LocalDate.of(2023,9,27));
 		v.setFuncionarioCPF(12345678900l);
@@ -55,4 +55,5 @@ Vendas v = new Vendas();
 		assertEquals(true, dao.Deletar(v));
 		
 	}
+
 }
