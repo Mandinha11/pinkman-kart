@@ -68,10 +68,10 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 
 		if(f != null) {
 			
-		Conexao con = Conexao.getInstancia();
-		Connection conn = con.conectar();
+			Conexao con = Conexao.getInstancia();
+			Connection conn = con.conectar();
 
-		String query = "INSERT INTO funcionarios (cpf, nome_completo, data_nascimento, cargo) VALUES (?, ?, ?, ?)";
+			String query = "INSERT INTO funcionarios (cpf, nome_completo, data_nascimento, cargo) VALUES (?, ?, ?, ?)";
 
 		try {
 

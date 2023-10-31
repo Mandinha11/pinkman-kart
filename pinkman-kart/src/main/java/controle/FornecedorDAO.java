@@ -94,7 +94,7 @@ public class FornecedorDAO implements IFornecedorDAO{
 
 		Connection conn = con.conectar();
 
-		String query = "UPDATE fornecedor SET nome_empresa = ?, telefone = ?, cep = ? WHERE cnpj = ?";
+		String query = "UPDATE fornecedor SET nome_empresa = ?, telefone = ?, cep = ?";
 
 		try {
 
@@ -104,7 +104,6 @@ public class FornecedorDAO implements IFornecedorDAO{
 			ps.setString(1, f.getNomeEmpresa());
 		    ps.setLong(2, f.getTelefone());
 			ps.setLong(3, f.getCep());
-			ps.setLong(4, f.getCnpj());
 			
 			
 			int rowsUpdated = ps.executeUpdate();

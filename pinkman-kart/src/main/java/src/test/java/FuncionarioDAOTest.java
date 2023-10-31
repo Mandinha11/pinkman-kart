@@ -41,7 +41,7 @@ public class FuncionarioDAOTest {
 			
 		}
 		
-	public void testMedotoDeltarFuncionario() {
+		public void testMedotoDeltarFuncionario() {
 			
 			Funcionario f = new Funcionario();
 			
