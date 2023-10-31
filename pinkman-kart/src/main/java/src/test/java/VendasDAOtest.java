@@ -6,7 +6,9 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import controle.FuncionarioDAO;
 import controle.VendasDAO;
+import modelo.Funcionario;
 import modelo.Vendas;
 
 public class VendasDAOtest {
@@ -16,15 +18,41 @@ public class VendasDAOtest {
 	public void testMetodoInserirVendas() {
 		Vendas v = new Vendas();
 		
-		v.setidKarts(1);
-		v.setdataVendas (LocalDate.of(2000,12, 24));
-		v.setValorDaVenda(4555555f);
+		v.setdataVendas(LocalDate.of(2023,9,27));
 		v.setFuncionarioCPF(12345678900l);
-		
-		VendasDAO dao = new VendasDAO(); 
+		v.setidKarts(1);
+		v.setValorDaVenda(5000f);
+	
+		VendasDAO dao = new VendasDAO();
 		
 		assertEquals(true, dao.inserir(v));
+	}
+	
+	public void testMedotoAlterarVendas() {
+		
+		Vendas v = new Vendas();
+		
+		v.setdataVendas(LocalDate.of(2023,9,27));
+		
+	
+		VendasDAO dao = new VendasDAO();
+		
+		
+		assertEquals(true, dao.alterar(v));
 		
 	}
-
+	public void testMedotoDeletarVendas() {
+		
+Vendas v = new Vendas();
+		
+		v.setdataVendas(LocalDate.of(2023,9,27));
+		v.setFuncionarioCPF(12345678900l);
+		v.setidKarts(1);
+		v.setValorDaVenda(5000f);
+	
+		VendasDAO dao = new VendasDAO();
+		
+		assertEquals(true, dao.Deletar(v));
+		
+	}
 }
