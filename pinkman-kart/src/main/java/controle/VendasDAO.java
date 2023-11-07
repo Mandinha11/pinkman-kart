@@ -42,7 +42,7 @@ public class VendasDAO implements IVendasDAO{
 			Vendas v = new Vendas();
 			
 			Integer idKart = rs.getInt("idKart");
-			Float ValorDaVenda = rs.getFloat("preco");
+			float ValorDaVenda = rs.getFloat("preco");
 			Date dataVendas = rs.getDate("data");
 			long funcionarioCPF = rs.getLong("fornecedorCPF");
 				
@@ -89,7 +89,7 @@ public class VendasDAO implements IVendasDAO{
 
 			Connection conn = con.conectar();
 
-			String query = "NSERT INTO vendas (valor_total, data_venda, funcionarios_cpf, karts_id_kart) VALUES ( ? ,? ,? ,?)";
+			String query = "INSERT INTO vendas (valor_total, data_venda, funcionarios_cpf, karts_id_kart) VALUES ( ? ,? ,? ,?)";
 			
 			try {
 				PreparedStatement ps = conn.prepareStatement(query);

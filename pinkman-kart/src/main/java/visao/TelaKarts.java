@@ -506,11 +506,11 @@ public class TelaKarts extends JFrame {
 				karts.setDataEntrada(DataEntrada);
 				karts.setpreco(preco);
 				
-				EditarKartsDialog dialog = new EditarKartsDialog(karts);
-				dialog.setVisible(true);
+			//	EditarKartsDialog dialog = new EditarKartsDialog(karts);
+			//	dialog.setVisible(true);
 				
-				if (dialog.isInformacoesAlteradas()) {
-					karts = dialog.getKartsAtualizado();
+				//if (dialog.isInformacoesAlteradas()) {
+				//	karts = dialog.getKartsAtualizado();
 					
 					KartsDAO dao = KartsDAO.getinstancia();
 					boolean retorno = dao.Alterar(karts);
@@ -525,7 +525,7 @@ public class TelaKarts extends JFrame {
 
 					}
 				}
-			}
+			//}
 		});
 		btnAlterar.setForeground(Color.WHITE);
 		btnAlterar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));

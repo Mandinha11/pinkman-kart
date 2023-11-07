@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -115,12 +117,26 @@ public class TelaVendas extends JFrame {
 				
 				String DataDaVenda = txtDataDaVenda.getText();
 				if(DataDaVenda.trim().length()== 0) {
-					JOptionPane.showMessageDialog(null,"Data Não foi preenchida!");
+					new MensagemErro("Data não preenchida !").setVisible(true);
 					return;
 				}else {
+		
+					DataDaVenda = DataDaVenda.trim();
 					DataDaVenda = DataDaVenda.replace("/", "");
 					DataDaVenda = DataDaVenda.replace("/", "");
+					if (DataDaVenda.trim().isEmpty()) {
+						new MensagemErro("Data não preenchida !").setVisible(true);
+						return;
 
+					} else{
+						DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyyy"); // Define o formato da
+						// data
+						LocalDate data = LocalDate.parse(DataDaVenda, formato);
+						vendas.setdataVendas(data);
+
+					}
+				
+					
 					
 				}
 

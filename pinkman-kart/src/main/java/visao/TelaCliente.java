@@ -266,7 +266,7 @@ public class TelaCliente extends JFrame {
 		textTelefone.setColumns(10);
 
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(351, 278, 1461, 772);
+		panel_3.setBounds(340, 278, 1488, 447);
 		contentPane.add(panel_3);
 
 		/**
