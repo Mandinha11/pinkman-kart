@@ -252,24 +252,26 @@ public class TelaVendas extends JFrame {
 		btnExcluir.setBackground(new Color(0, 0, 0));
 		btnExcluir.setForeground(new Color(255, 255, 255));
 		btnExcluir.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table.getSelectedRow();
 
-				Float valorTotal = (Float) table.getValueAt(selectedRow, 1);
+				int idVenda = (Integer) table.getValueAt(selectedRow, 1);
 
 				VendasDAO dao = VendasDAO.getinstancia();
 
 				Vendas v = new Vendas();
-				v.setValorDaVenda(valorTotal);
+				v.setIdVenda(idVenda);
 				boolean retorno = dao.Deletar(v);
 
 				if (retorno == true) {
-					// Remove a linha selecionada
-					atualizarTabela();
+					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					tableModel.removeRow(selectedRow);
 					new MensagemAcerto("Excluido com sucesso !").setVisible(true);
 				} else {
 					new MensagemErro("Não foi possivel excluir!").setVisible(true);
 				}
+
 			}
 		});
 		btnExcluir.setBounds(36, 401, 187, 49);
