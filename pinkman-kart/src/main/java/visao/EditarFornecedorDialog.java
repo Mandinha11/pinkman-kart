@@ -52,6 +52,7 @@ public class EditarFornecedorDialog extends JDialog {
 		 * 
 		 * txtCEP = new JFormattedTextField(mascaraCEP);
 		 */
+		
 		MaskFormatter mascaraCEP = null;
 		try {
 			mascaraCEP = new MaskFormatter("#####-###");
@@ -67,7 +68,7 @@ public class EditarFornecedorDialog extends JDialog {
 		textFieldCep.setText(i);
 
 		panel.add(textFieldCep);
-
+		
 		JLabel label_2 = new JLabel("Telefone:");
 		label_2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_2.setBounds(0, 100, 200, 50);
@@ -102,6 +103,7 @@ public class EditarFornecedorDialog extends JDialog {
 	}
 
 	private void salvarAlteracoes() {
+		
 		String text = textFieldCep.getText();
 
 		if (text.trim().length() == 0) {
@@ -118,7 +120,7 @@ public class EditarFornecedorDialog extends JDialog {
 		// Atualiza as informações do funcionário com os novos valores
 		fornecedor.setNomeEmpresa(textFieldNomeEmpresa.getText());
 		fornecedor.setTelefone(Long.valueOf(textFieldTelefone.getText()));
-		fornecedor.setCep(Long.valueOf(textFieldCep.getText()));
+		//fornecedor.setCep(Long.valueOf(textFieldCep.getText()));
 
 		// Indica que as informações foram alteradas
 		informacoesAlteradas = true;
