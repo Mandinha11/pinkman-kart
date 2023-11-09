@@ -6,180 +6,150 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 
-import javax.xml.crypto.Data;
-
 import modelo.IVendasDAO;
-import modelo.Karts;
 import modelo.Vendas;
 
+public class VendasDAO implements IVendasDAO {
 
-
-public class VendasDAO implements IVendasDAO{
-	
 	private static VendasDAO instancia;
-	
-	private static LocalDate fromDateToLocalDate(Date date) {
-		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-	}
-	
-	public ArrayList <Vendas> listar (){
-		
+
+	public ArrayList<Vendas> listar() {
+
 		Conexao c = Conexao.getInstancia();
-		
+
 		Connection con = c.conectar();
-		
+
 		String query = "SELECT * FROM vendas";
-		ArrayList<Vendas> vendas = new ArrayList();
-		
+		ArrayList<Vendas> vendas = new ArrayList<>();
+
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
-		while(rs.next()) {
-			
-			Vendas v = new Vendas();
-			
-			Integer idKart = rs.getInt("idKart");
-			float ValorDaVenda = rs.getFloat("preco");
-			Date dataVendas = rs.getDate("data");
-			long funcionarioCPF = rs.getLong("fornecedorCPF");
-				
-			
-			v.setidKarts (idKart);
-			v.setValorDaVenda (ValorDaVenda);
-			v.setFuncionarioCPF(funcionarioCPF);
-			
-			LocalDate dataVendaConvertida = dataVendas.toLocalDate();
-			v.setdataVendas(dataVendaConvertida);
+			while (rs.next()) {
 
-			
-			vendas.add(v);
-		 		}
+				Vendas v = new Vendas();
+
+				Integer idKart = rs.getInt("karts_id_kart");
+				float ValorDaVenda = rs.getFloat("valor_total");
+				Date dataVendas = rs.getDate("data_venda");
+				long funcionarioCPF = rs.getLong("funcionarios_cpf");
+
+				v.setIdKarts(idKart);
+				v.setValorDaVenda(ValorDaVenda);
+				v.setFuncionarioCPF(funcionarioCPF);
+				LocalDate dataVendaConvertida = dataVendas.toLocalDate();
+				v.setDataVendas(dataVendaConvertida);
+				vendas.add(v);
 			}
-			
+		}
+
 		catch (SQLException e) {
 			e.printStackTrace();
-			
-		}finally {
+
+		} finally {
 			c.fecharConexao();
 		}
-			
-			return vendas;
-		
+
+		return vendas;
+
 	}
-
-	
-
 
 	public static VendasDAO getinstancia() {
 
 		if (instancia == null) {
 			instancia = new VendasDAO();
-			
+
 		}
 		return instancia;
 	}
 
 	public boolean inserir(Vendas v) {
-		if(v!=null) {
-			
+		if (v != null) {
+
 			Conexao con = Conexao.getInstancia();
 
 			Connection conn = con.conectar();
 
 			String query = "INSERT INTO vendas (valor_total, data_venda, funcionarios_cpf, karts_id_kart) VALUES ( ? ,? ,? ,?)";
-			
+
 			try {
 				PreparedStatement ps = conn.prepareStatement(query);
-				
 
 				ps.setFloat(1, v.getValorDaVenda());
-				ps.setDate(2,Date.valueOf(v.getdataVendas()));
+				ps.setDate(2, Date.valueOf(v.getDataVendas()));
 				ps.setLong(3, v.getFuncionarioCPF());
-				ps.setInt(4, v.getidkarts());
-				
-				
+				ps.setInt(4, v.getIdKarts());
+
 				ps.executeUpdate();
-				
-		
-			return true;
-			
-		}
-			catch (SQLException e) {
+
+				return true;
+
+			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally {
+			} finally {
 				con.fecharConexao();
 			}
 		}
-			return false;
-			
+		return false;
+
 	}
 
 	public boolean alterar(Vendas v) {
-		
+
 		Conexao con = Conexao.getInstancia();
 
 		Connection conn = con.conectar();
 
 		String query = "UPDATE vendas SET data_venda = ?,";
-		
+
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setDate(1,Date.valueOf(v.getdataVendas()));
+			ps.setDate(1, Date.valueOf(v.getDataVendas()));
 
 			int rowsUpdated = ps.executeUpdate();
-			
-			
+
 			return rowsUpdated > 0;
-			
-		}
-		catch (SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-	
-		}finally {
+
+		} finally {
 			con.fecharConexao();
 		}
 
-		
 		return false;
 	}
 
 	public boolean Deletar(Vendas v) {
-		
+
 		Conexao con = Conexao.getInstancia();
-		
+
 		Connection conn = con.conectar();
 
 		String query = "DELETE FROM vendas WHERE karts_id_kart = ?";
-		
+
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setInt(1, v.getidkarts());
-			
+			ps.setInt(1, v.getIdKarts());
 
 			ps.executeUpdate();
 
-			
 			return true;
-			
-		}
-		catch (SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-	
-		}finally {
+
+		} finally {
 			con.fecharConexao();
 		}
-		
+
 		return false;
 	}
 
 }
-
-
-

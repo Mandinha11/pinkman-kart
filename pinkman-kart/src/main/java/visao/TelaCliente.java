@@ -3,7 +3,6 @@ package visao;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,9 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import controle.ClienteDAO;
-import controle.FuncionarioDAO;
 import modelo.Cliente;
-import modelo.Funcionario;
 
 public class TelaCliente extends JFrame {
 
@@ -40,11 +37,11 @@ public class TelaCliente extends JFrame {
 	private JTextField textNomeCompleto;
 	private JTextField textCPF;
 	private JTextField textTelefone;
-	private JTable table_1;
+	private JTable table;
 	private ClienteDAO clienteDAO;
 	private DefaultTableModel modelo;
 	private ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
-	private static Cliente clienteSelecionado;
+	//private static Cliente clienteSelecionado;
 	private JTextField txtData;
 
 	/**
@@ -260,30 +257,29 @@ public class TelaCliente extends JFrame {
 		}
 
 		textTelefone = new JFormattedTextField(mascaraTel);
-
 		textTelefone.setBounds(179, 11, 317, 23);
 		panel_1_1.add(textTelefone);
 		textTelefone.setColumns(10);
 
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(340, 278, 1488, 447);
-		contentPane.add(panel_3);
-
 		/**
 		 * Tabela
 		 */
-		table_1 = new JTable();
-		table_1.setBackground(new Color(255, 255, 255));
-		panel_3.setLayout(new BorderLayout());
-		JScrollPane scrollPane = new JScrollPane(table_1);
+		JPanel panelTabela = new JPanel();
+		panelTabela.setBounds(340, 278, 1488, 447);
+		contentPane.add(panelTabela);
+
+		table = new JTable();
+		table.setBackground(new Color(255, 255, 255));
+		panelTabela.setLayout(new BorderLayout());
+		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				/*
 				 * Selecionou uma linha da tabela
 				 */
-				int selectedRow = table_1.getSelectedRow();
-				String cpf = (String) table_1.getValueAt(selectedRow, 1);
+				int selectedRow = table.getSelectedRow();
+				String cpf = (String) table.getValueAt(selectedRow, 1);
 
 				// fazer uma consulta no banco procurando um cliente por CPF ou no arraylist
 
@@ -294,14 +290,11 @@ public class TelaCliente extends JFrame {
 //				textTelefone.setText();
 			}
 		});
-		panel_3.add(scrollPane, BorderLayout.NORTH);
+		panelTabela.add(scrollPane, BorderLayout.NORTH);
 
 		modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "Id Cliente", "Nome Completo", "CPF", "Data Nasc", "Telefone" });
-
-		table_1.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "id_cliente", "Nome", "CPf", "Data Nac", "Telefone" }));
-
+		table.setModel(modelo);
 		atualizarTabela();
 
 		JButton btnAtualizar = new JButton("Atualizar");
@@ -310,7 +303,7 @@ public class TelaCliente extends JFrame {
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Verifica se uma linha foi selecionada na tabela
-				int selectedRow = table_1.getSelectedRow();
+				int selectedRow = table.getSelectedRow();
 				if (selectedRow == -1) {
 					JOptionPane.showMessageDialog(null, "Selecione um funcionário na tabela para atualizar.");
 					return;
@@ -318,10 +311,10 @@ public class TelaCliente extends JFrame {
 
 				// Obtém os valores da linha selecionada
 
-				String nome = (String) table_1.getValueAt(selectedRow, 0);
-				long cpf = (long) table_1.getValueAt(selectedRow, 1);
-				String dataNascimento = (String) table_1.getValueAt(selectedRow, 2);
-				Long telefone = (long) table_1.getValueAt(selectedRow, 3);
+				String nome = (String) table.getValueAt(selectedRow, 0);
+				long cpf = (long) table.getValueAt(selectedRow, 1);
+				String dataNascimento = (String) table.getValueAt(selectedRow, 2);
+				Long telefone = (long) table.getValueAt(selectedRow, 3);
 
 				// Converte a data de nascimento para o formato correto
 				DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -368,9 +361,9 @@ public class TelaCliente extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int selectedRow = table_1.getSelectedRow();
+				int selectedRow = table.getSelectedRow();
 
-				long cpf = (long) table_1.getValueAt(selectedRow, 1);
+				long cpf = (long) table.getValueAt(selectedRow, 1);
 
 				ClienteDAO dao = ClienteDAO.getinstancia();
 
@@ -379,8 +372,7 @@ public class TelaCliente extends JFrame {
 				boolean retorno = dao.deletar(c);
 
 				if (retorno == true) {
-
-					DefaultTableModel tableModel = (DefaultTableModel) table_1.getModel();
+					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 					tableModel.removeRow(selectedRow);
 					new MensagemAcerto("Excluido com sucesso !").setVisible(true);
 				} else {
@@ -416,7 +408,6 @@ public class TelaCliente extends JFrame {
 		textCPF.setText("");
 		textTelefone.setText("");
 		txtData.setText("");
-
 	}
 
 	public void atualizarTabela() {
@@ -435,6 +426,6 @@ public class TelaCliente extends JFrame {
 			modelo.addRow(linha);
 
 		}
-		table_1.setModel(modelo);
+		table.setModel(modelo);
 	}
 }

@@ -2,7 +2,6 @@ package visao;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +10,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -29,24 +27,21 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import controle.VendasDAO;
+import modelo.Cliente;
 import modelo.Vendas;
 
 public class TelaVendas extends JFrame {
 
 	private JPanel contentPane;
-
-	private JTextField txtKart;
-	private JTextField txtCliente;
-	private JTextField txtPreco;
-
 	private JTextField txtidKart;
 	private JTextField txtValorDaVenda;
 	private JTextField txtFuncionarioCPF;
 
 	private VendasDAO dao;
-	private DefaultTableModel modelo;
 	private JTextField txtDataDaVenda;
 	private JTable table;
+	private DefaultTableModel modelo;
+	private ArrayList<Vendas> listar = new ArrayList<Vendas>();
 
 	/**
 	 * Create the frame.
@@ -59,23 +54,13 @@ public class TelaVendas extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(null); //ver o que é
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(281, 187, 1588, 807);
 		contentPane.add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
-
-		JScrollPane scrollPane = new JScrollPane();
-		panel.add(scrollPane);
-
-		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "Valor_total", "Data_da_Venda", "Funcionario_CPF", "ID_kart" }));
-		table.getColumnModel().getColumn(1).setPreferredWidth(87);
-		table.getColumnModel().getColumn(2).setPreferredWidth(90);
-		scrollPane.setViewportView(table);
 
 		JButton btnCadastra = new JButton("Cadastrar");
 		btnCadastra.setForeground(new Color(255, 255, 255));
@@ -100,7 +85,7 @@ public class TelaVendas extends JFrame {
 					JOptionPane.showMessageDialog(null, "ID_Kart não preenchido!!");
 					return;
 				} else {
-					vendas.setidKarts(Integer.valueOf(id));
+					vendas.setIdKarts(Integer.valueOf(id));
 				}
 				String cpf = txtFuncionarioCPF.getText();
 				if (cpf.trim().length() == 0) {
@@ -114,38 +99,35 @@ public class TelaVendas extends JFrame {
 					vendas.setFuncionarioCPF(Long.valueOf(cpf));
 
 				}
-				
+
 				String DataDaVenda = txtDataDaVenda.getText();
-				if(DataDaVenda.trim().length()== 0) {
+				if (DataDaVenda.trim().length() == 0) {
 					new MensagemErro("Data não preenchida !").setVisible(true);
 					return;
-				}else {
-		
+				} else {
+
 					DataDaVenda = DataDaVenda.trim();
-					DataDaVenda = DataDaVenda.replace("/", "");
 					DataDaVenda = DataDaVenda.replace("/", "");
 					if (DataDaVenda.trim().isEmpty()) {
 						new MensagemErro("Data não preenchida !").setVisible(true);
 						return;
 
-					} else{
+					} else {
 						DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyyy"); // Define o formato da
 						// data
 						LocalDate data = LocalDate.parse(DataDaVenda, formato);
-						vendas.setdataVendas(data);
+						vendas.setDataVendas(data);
 
 					}
-				
-					
-					
+
 				}
 
 				VendasDAO VendasDao = VendasDAO.getinstancia();
 				if (VendasDao.inserir(vendas) == true) {
-					JOptionPane.showMessageDialog(null, "Venda Cadastrada com sucesso");
+					new MensagemAcerto("Cadastrado !").setVisible(true);
 					atualizarTabela();
 				} else {
-					JOptionPane.showMessageDialog(btnCadastra, "Erro ao Cadastrar a venda");
+					new MensagemErro("Não foi possivel cadastrar !").setVisible(true);
 				}
 
 			}
@@ -154,10 +136,10 @@ public class TelaVendas extends JFrame {
 		btnCadastra.setBounds(36, 224, 187, 49);
 		contentPane.add(btnCadastra);
 
-		JButton btnNewButton_2 = new JButton("Voltar");
-		btnNewButton_2.setBackground(new Color(167, 10, 10));
-		btnNewButton_2.setForeground(new Color(255, 255, 255));
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setBackground(new Color(167, 10, 10));
+		btnVoltar.setForeground(new Color(255, 255, 255));
+		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				dispose();
@@ -166,20 +148,20 @@ public class TelaVendas extends JFrame {
 				ts.setVisible(true);
 			}
 		});
-		btnNewButton_2.setBounds(10, 11, 121, 28);
-		contentPane.add(btnNewButton_2);
+		btnVoltar.setBounds(10, 11, 121, 28);
+		contentPane.add(btnVoltar);
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(0, 85, 125));
-		panel_1.setBounds(281, 104, 483, 55);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel panel_dataVenda = new JPanel();
+		panel_dataVenda.setBackground(new Color(0, 85, 125));
+		panel_dataVenda.setBounds(281, 104, 483, 55);
+		contentPane.add(panel_dataVenda);
+		panel_dataVenda.setLayout(null);
 
-		JLabel lblData = new JLabel("Data da Venda:");
-		lblData.setForeground(new Color(255, 255, 255));
-		lblData.setBounds(10, 16, 119, 24);
-		panel_1.add(lblData);
-		lblData.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		JLabel LabelDataVnda = new JLabel("Data da Venda:");
+		LabelDataVnda.setForeground(new Color(255, 255, 255));
+		LabelDataVnda.setBounds(10, 16, 119, 24);
+		panel_dataVenda.add(LabelDataVnda);
+		LabelDataVnda.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 		MaskFormatter mascaraData = null;
 		try {
@@ -187,43 +169,40 @@ public class TelaVendas extends JFrame {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		txtDataDaVenda = new JFormattedTextField((AbstractFormatter) null);
+		//txtDataDaVenda = new JFormattedTextField((AbstractFormatter) null);
 		txtDataDaVenda = new JFormattedTextField(mascaraData);
 		txtDataDaVenda.setColumns(10);
 		txtDataDaVenda.setBounds(151, 16, 304, 28);
-		panel_1.add(txtDataDaVenda);
-		for (int i = 1923; i <= 2023; i++) {
+		panel_dataVenda.add(txtDataDaVenda);
 
-		}
-
-		JPanel panel_1_1 = new JPanel();
-		panel_1_1.setLayout(null);
-		panel_1_1.setBackground(new Color(0, 85, 125));
-		panel_1_1.setBounds(822, 31, 483, 55);
-		contentPane.add(panel_1_1);
+		JPanel panel_idKart = new JPanel();
+		panel_idKart.setLayout(null);
+		panel_idKart.setBackground(new Color(0, 85, 125));
+		panel_idKart.setBounds(822, 31, 483, 55);
+		contentPane.add(panel_idKart);
 
 		txtidKart = new JTextField();
 		txtidKart.setColumns(10);
 		txtidKart.setBounds(153, 16, 304, 28);
-		panel_1_1.add(txtidKart);
+		panel_idKart.add(txtidKart);
 
-		JLabel lblKartVendido = new JLabel("Id Kart:");
-		lblKartVendido.setForeground(new Color(255, 255, 255));
-		lblKartVendido.setBounds(10, 16, 102, 24);
-		panel_1_1.add(lblKartVendido);
-		lblKartVendido.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		JLabel LabelIdKart = new JLabel("Id Kart:");
+		LabelIdKart.setForeground(new Color(255, 255, 255));
+		LabelIdKart.setBounds(10, 16, 102, 24);
+		panel_idKart.add(LabelIdKart);
+		LabelIdKart.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
-		JPanel panel_1_2_1 = new JPanel();
-		panel_1_2_1.setLayout(null);
-		panel_1_2_1.setBackground(new Color(0, 85, 125));
-		panel_1_2_1.setBounds(281, 31, 483, 55);
-		contentPane.add(panel_1_2_1);
+		JPanel panel_vendas = new JPanel();
+		panel_vendas.setLayout(null);
+		panel_vendas.setBackground(new Color(0, 85, 125));
+		panel_vendas.setBounds(281, 31, 483, 55);
+		contentPane.add(panel_vendas);
 		/*
 		 
 		 */
 		MaskFormatter mascaraVenda = null;
 		try {
-			mascaraVenda = new MaskFormatter("###.#");
+			mascaraVenda = new MaskFormatter("#.###.###,##");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -231,27 +210,21 @@ public class TelaVendas extends JFrame {
 
 		txtValorDaVenda.setColumns(10);
 		txtValorDaVenda.setBounds(153, 16, 304, 28);
-		panel_1_2_1.add(txtValorDaVenda);
+		panel_vendas.add(txtValorDaVenda);
 
-		JLabel lblNewLabel = new JLabel("Valor Da Venda:");
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBackground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(10, 16, 121, 24);
-		panel_1_2_1.add(lblNewLabel);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		JLabel LabelValorVenda = new JLabel("Valor Da Venda:");
+		LabelValorVenda.setForeground(new Color(255, 255, 255));
+		LabelValorVenda.setBackground(new Color(255, 255, 255));
+		LabelValorVenda.setBounds(10, 16, 121, 24);
+		panel_vendas.add(LabelValorVenda);
+		LabelValorVenda.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
-		JPanel panel_1_2_2 = new JPanel();
-		panel_1_2_2.setLayout(null);
-		panel_1_2_2.setBackground(new Color(0, 85, 125));
-		panel_1_2_2.setBounds(822, 104, 483, 55);
-		contentPane.add(panel_1_2_2);
-		/*
-		 * MaskFormatter mascaraCPF = null; try { mascaraCPF = new
-		 * MaskFormatter("###.###.###-##"); } catch (ParseException e) {
-		 * e.printStackTrace(); }
-		 * 
-		 * textCPF = new JFormattedTextField(mascaraCPF);
-		 */
+		JPanel panel_funcionario = new JPanel();
+		panel_funcionario.setLayout(null);
+		panel_funcionario.setBackground(new Color(0, 85, 125));
+		panel_funcionario.setBounds(822, 104, 483, 55);
+		contentPane.add(panel_funcionario);
+		
 		MaskFormatter mascaraCPF = null;
 		try {
 			mascaraCPF = new MaskFormatter("###.###.###-##");
@@ -261,13 +234,13 @@ public class TelaVendas extends JFrame {
 		txtFuncionarioCPF = new JFormattedTextField(mascaraCPF);
 		txtFuncionarioCPF.setColumns(10);
 		txtFuncionarioCPF.setBounds(155, 16, 304, 28);
-		panel_1_2_2.add(txtFuncionarioCPF);
+		panel_funcionario.add(txtFuncionarioCPF);
 
-		JLabel lblMatriculaFuncionario = new JLabel("Funcionario CPF:");
-		lblMatriculaFuncionario.setForeground(new Color(255, 255, 255));
-		lblMatriculaFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblMatriculaFuncionario.setBounds(10, 18, 156, 20);
-		panel_1_2_2.add(lblMatriculaFuncionario);
+		JLabel LabelFuncionarioCPF = new JLabel("Funcionario CPF:");
+		LabelFuncionarioCPF.setForeground(new Color(255, 255, 255));
+		LabelFuncionarioCPF.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		LabelFuncionarioCPF.setBounds(10, 18, 156, 20);
+		panel_funcionario.add(LabelFuncionarioCPF);
 
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.setBackground(new Color(0, 0, 0));
@@ -282,53 +255,55 @@ public class TelaVendas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table.getSelectedRow();
 
-				Long kart = (Long) table.getValueAt(selectedRow, 1);
+				Float valorTotal = (Float) table.getValueAt(selectedRow, 1);
 
 				VendasDAO dao = VendasDAO.getinstancia();
 
 				Vendas v = new Vendas();
-				v.setValorDaVenda(456f);
+				v.setValorDaVenda(valorTotal);
 				boolean retorno = dao.Deletar(v);
 
 				if (retorno == true) {
 					// Remove a linha selecionada
-					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-					tableModel.removeRow(selectedRow);
-					JOptionPane.showMessageDialog(null, "Linha Excluída com Sucesso!");
+					atualizarTabela();
+					new MensagemAcerto("Excluido com sucesso !").setVisible(true);
 				} else {
-					JOptionPane.showMessageDialog(null, "Erro na Exclução da Linha");
+					new MensagemErro("Não foi possivel excluir!").setVisible(true);
 				}
 			}
 		});
 		btnExcluir.setBounds(36, 401, 187, 49);
 		contentPane.add(btnExcluir);
 
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/CarrinhoDeCompras.png")));
-		lblNewLabel_1.setBounds(42, 814, 181, 180);
-		contentPane.add(lblNewLabel_1);
+		JLabel ImagemCarrinho = new JLabel("");
+		ImagemCarrinho.setHorizontalAlignment(SwingConstants.CENTER);
+		ImagemCarrinho.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/CarrinhoDeCompras.png")));
+		ImagemCarrinho.setBounds(42, 814, 181, 180);
+		contentPane.add(ImagemCarrinho);
 
-		JLabel lblNewLabel_5 = new JLabel("New label");
-		lblNewLabel_5.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel_5.setBounds(-13, 0, 1948, 1053);
-		contentPane.add(lblNewLabel_5);
+		JLabel ImagemFundo = new JLabel("New label");
+		ImagemFundo.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
+		ImagemFundo.setBounds(-13, 0, 1948, 1053);
+		contentPane.add(ImagemFundo);
 
-		JPanel panel1 = new JPanel();
-		panel1.setBackground(new Color(255, 255, 255));
-		panel1.setBounds(281, 224, 1589, 788);
-		contentPane.add(panel1);
-		panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
-
-		JScrollPane scrollPane1 = new JScrollPane();
-		panel1.add(scrollPane1);
+		/**
+		 * Tabela
+		 */
+		JPanel panelTabela = new JPanel();
+		panelTabela.setBounds(340, 278, 1488, 447);
 
 		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "ID_kart", "Data_da_Venda", "Cliente_CPF", "Valor_da_Venda" }));
-		table.getColumnModel().getColumn(1).setPreferredWidth(87);
-		table.getColumnModel().getColumn(3).setPreferredWidth(89);
-		scrollPane1.setViewportView(table);
+		table.setBackground(new Color(255, 255, 255));
+		panelTabela.setLayout(new BorderLayout());
+		JScrollPane scrollPane = new JScrollPane(table);
+		panelTabela.add(scrollPane, BorderLayout.NORTH);
+
+		modelo = new DefaultTableModel(new Object[][] {},
+				new String[] { "id_kart", "Data_da_Venda", "Cliente_CPF", "Valor_da_Venda" });
+		table.setModel(modelo);
+		contentPane.add(panelTabela);
+
+		atualizarTabela();
 
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
@@ -338,19 +313,20 @@ public class TelaVendas extends JFrame {
 	}
 
 	private void atualizarTabela() {
-		// TODO Auto-generated method stub
+
 		dao = VendasDAO.getinstancia();
 		ArrayList<Vendas> Vendas = dao.listar();
-
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "karts_id_kart", "data_venda", "valor_total", "funcionarios_cpf" });
+				new String[] { "id_kart", "Data_da_Venda", "Cliente_CPF", "Valor_da_Venda" });
 
 		for (Vendas vendas : Vendas) {
-			Object[] linha = { vendas.getidkarts(), vendas.getdataVendas(), vendas.getValorDaVenda(),
+			Object[] linha = { vendas.getIdKarts(), vendas.getDataVendas(), vendas.getValorDaVenda(),
 					vendas.getFuncionarioCPF() };
 			modelo.addRow(linha);
 		}
+
 		table.setModel(modelo);
+
 	}
 
 }

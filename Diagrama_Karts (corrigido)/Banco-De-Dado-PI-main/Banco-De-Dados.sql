@@ -58,8 +58,8 @@ CREATE Table IF NOT EXISTS `clientes` (
 -- Table `vendas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `vendas` (
-
-  `valor_total` FLOAT NOT NULL PRIMARY KEY,
+  `venda_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `valor_total` FLOAT NOT NULL,
   `data_venda` DATE NOT NULL ,
   `funcionarios_cpf` BIGINT(11) NOT NULL,
   `karts_id_kart` INT NOT NULL,
@@ -96,7 +96,8 @@ VALUES
   (23456789001, 'Funcionario 2', '1992-05-20', 'Vendedor'),
   (34567890102, 'Funcionario 3', '1985-11-10', 'Atendente'),
   (45678901203, 'Funcionario 4', '1994-08-05', 'Gerente'),
-  (56789012304, 'Funcionario 5', '1988-03-25', 'Vendedor');
+  (56789012304, 'Funcionario 5', '1988-03-25', 'Vendedor'),
+  (22222222222, 'x', '1988-03-25', 'Vendedor');
 
 -- Inserções na tabela clientes
 INSERT INTO `clientes` ( `nome_completo`, `data_nascimento`, `cnpj`, `cpf`, `telefone`)
