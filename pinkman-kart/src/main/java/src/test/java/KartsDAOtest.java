@@ -59,6 +59,12 @@ public class KartsDAOtest {
 		Karts k = new Karts();
 		
 		k.setCor("Preto");
+		k.setDataEntrada(LocalDate.of(2005, 11, 11));
+		k.setquantidade(2l);
+		k.setMarca("Marca Z");
+		k.setModelo("Modelo A");
+		k.setano(2000l);
+		k.setpreco(20000000l);
 		
 		KartsDAO dao = new KartsDAO();
 		boolean AlterarOK = dao.Alterar(k);

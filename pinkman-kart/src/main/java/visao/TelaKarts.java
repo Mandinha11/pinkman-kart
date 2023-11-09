@@ -467,11 +467,11 @@ public class TelaKarts extends JFrame {
 		panel_1_6.add(txtPreco_1);
 		txtPreco_1.setColumns(10);
 
-		JLabel lblPreo = new JLabel("Preço:");
-		lblPreo.setBounds(10, 17, 67, 30);
-		panel_1_6.add(lblPreo);
-		lblPreo.setForeground(new Color(255, 255, 255));
-		lblPreo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		JLabel lblPreco = new JLabel("Preço:");
+		lblPreco.setBounds(10, 17, 67, 30);
+		panel_1_6.add(lblPreco);
+		lblPreco.setForeground(new Color(255, 255, 255));
+		lblPreco.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 
 		JLabel lblNewLabel_2 = new JLabel("");
 
@@ -506,11 +506,11 @@ public class TelaKarts extends JFrame {
 				karts.setDataEntrada(DataEntrada);
 				karts.setpreco(preco);
 				
-			//	EditarKartsDialog dialog = new EditarKartsDialog(karts);
-			//	dialog.setVisible(true);
+				EditarKartsDialog dialog = new EditarKartsDialog();
+				dialog.setVisible(true);
 				
-				//if (dialog.isInformacoesAlteradas()) {
-				//	karts = dialog.getKartsAtualizado();
+				if (dialog.isInformacoesAlteradas()) {
+					karts = dialog.getKartsAtualizado();
 					
 					KartsDAO dao = KartsDAO.getinstancia();
 					boolean retorno = dao.Alterar(karts);
@@ -525,8 +525,9 @@ public class TelaKarts extends JFrame {
 
 					}
 				}
+			 }
 			//}
-		});
+			});
 		btnAlterar.setForeground(Color.WHITE);
 		btnAlterar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		btnAlterar.setBackground(Color.BLACK);

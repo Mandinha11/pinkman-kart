@@ -112,7 +112,7 @@ public class KartsDAO implements IKartDAO {
 
 		Connection conn = con.conectar();
 
-		String query = "UPDATE karts SET cor = ?, modelo = ?, marca = ?, ano = ?, quantidade = ?, data_entrada = ?, preço = ?";
+		String query = "UPDATE karts SET cor = ?, modelo = ?, marca = ?, ano = ?, quantidade = ?, data_entrada = ?, preco = ?";
 
 		try {
 
