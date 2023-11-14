@@ -136,7 +136,7 @@ public class VendasDAO implements IVendasDAO {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setInt(1, v.getIdKarts());
+			ps.setInt(1, v.getIdVenda());
 
 			ps.executeUpdate();
 

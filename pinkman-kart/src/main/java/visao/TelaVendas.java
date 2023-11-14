@@ -54,13 +54,7 @@ public class TelaVendas extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null); //ver o que é
-
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(281, 187, 1588, 807);
-		contentPane.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(null);
 
 		JButton btnCadastra = new JButton("Cadastrar");
 		btnCadastra.setForeground(new Color(255, 255, 255));
@@ -76,7 +70,9 @@ public class TelaVendas extends JFrame {
 					return;
 				} else {
 					v = v.replace(".", "");
-
+					// Substituindo virgula pelo ponto, o separador do java é o ponto
+					v = v.replace(",", ".");
+					
 					vendas.setValorDaVenda(Float.valueOf(v));
 				}
 
@@ -256,7 +252,7 @@ public class TelaVendas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table.getSelectedRow();
 
-				int idVenda = (Integer) table.getValueAt(selectedRow, 1);
+				int idVenda = (Integer) table.getValueAt(selectedRow, 0);
 
 				VendasDAO dao = VendasDAO.getinstancia();
 
@@ -283,11 +279,6 @@ public class TelaVendas extends JFrame {
 		ImagemCarrinho.setBounds(42, 814, 181, 180);
 		contentPane.add(ImagemCarrinho);
 
-		JLabel ImagemFundo = new JLabel("New label");
-		ImagemFundo.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
-		ImagemFundo.setBounds(-13, 0, 1948, 1053);
-		contentPane.add(ImagemFundo);
-
 		/**
 		 * Tabela
 		 */
@@ -304,13 +295,13 @@ public class TelaVendas extends JFrame {
 				new String[] { "id_kart", "Data_da_Venda", "Cliente_CPF", "Valor_da_Venda" });
 		table.setModel(modelo);
 		contentPane.add(panelTabela);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
+		lblNewLabel.setBounds(0, 0, 1924, 1063);
+		contentPane.add(lblNewLabel);
 
 		atualizarTabela();
-
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel_2.setBounds(0, 0, 1924, 1053);
-		contentPane.add(lblNewLabel_2);
 
 	}
 
@@ -330,5 +321,4 @@ public class TelaVendas extends JFrame {
 		table.setModel(modelo);
 
 	}
-
 }
