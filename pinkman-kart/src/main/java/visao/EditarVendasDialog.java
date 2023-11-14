@@ -3,25 +3,28 @@ package visao;
 import javax.swing.*;
 
 import modelo.Funcionario;
+import modelo.Vendas;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class EditarVendasDialog extends JDialog {
-    private Funcionario funcionario;
+    private Vendas vendas;
     private boolean informacoesAlteradas = false;
 
-    private JTextField textFieldNome;
-    private JTextField textFieldCargo;
-    private JTextField textFieldDataNascimento;
+    
+    private JTextField textFieldValorVenda;
+    private JTextField textFieldDataVenda;
 
-    public EditarVendasDialog(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public EditarVendasDialog(Vendas vendas) {
+        this.vendas = vendas;
 
-        setTitle("Editar Funcionário");
+        setTitle("Editar Vendas");
         setSize(400, 200);
         setModal(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -29,34 +32,26 @@ public class EditarVendasDialog extends JDialog {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        JLabel label = new JLabel("Nome:");
+        JLabel label = new JLabel("Valor da Venda: :");
         label.setFont(new Font("Tahoma", Font.BOLD, 14));
         label.setBounds(0, 0, 200, 50);
         panel.add(label);
-        textFieldNome = new JTextField(funcionario.getNomeCompleto());
-        textFieldNome.setBackground(SystemColor.control);
-        textFieldNome.setBounds(200, 11, 190, 39);
-        panel.add(textFieldNome);
+        textFieldValorVenda = new JTextField(String.valueOf(vendas.getValorDaVenda()));
+        textFieldValorVenda.setBackground(SystemColor.control);
+        textFieldValorVenda.setBounds(200, 11, 190, 39);
+        panel.add(textFieldValorVenda);
 
-        JLabel label_1 = new JLabel("Cargo:");
-        label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-        label_1.setBounds(0, 50, 200, 50);
-        panel.add(label_1);
-        textFieldCargo = new JTextField(funcionario.getCargo());
-        textFieldCargo.setBackground(SystemColor.control);
-        textFieldCargo.setBounds(200, 61, 190, 39);
-        panel.add(textFieldCargo);
-
-        JLabel label_2 = new JLabel("Data de Nascimento:");
+      
+        JLabel label_2 = new JLabel("Data da Venda:");
         label_2.setFont(new Font("Tahoma", Font.BOLD, 14));
         label_2.setBounds(0, 100, 200, 50);
         panel.add(label_2);
-        textFieldDataNascimento = new JTextField(
-            funcionario.getDataNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+        textFieldDataVenda = new JTextField(
+            vendas.getDataVendas().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
         );
-        textFieldDataNascimento.setBackground(SystemColor.control);
-        textFieldDataNascimento.setBounds(200, 111, 190, 39);
-        panel.add(textFieldDataNascimento);
+        textFieldDataVenda.setBackground(SystemColor.control);
+        textFieldDataVenda.setBounds(200, 111, 190, 39);
+        panel.add(textFieldDataVenda);
         
         setLocationRelativeTo(null);
 		setUndecorated(true);
@@ -83,14 +78,20 @@ public class EditarVendasDialog extends JDialog {
 
     private void salvarAlteracoes() {
         // Atualiza as informações do funcionário com os novos valores
-        funcionario.setNomeCompleto(textFieldNome.getText());
-        funcionario.setCargo(textFieldCargo.getText());
+    	NumberFormat formatoDinheiro = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+    	
+        String vendas = (textFieldValorVenda.getText());
+        vendas = formatoDinheiro.format(vendas);
+        
+        textFieldValorVenda.setText(vendas);
+    	
+    	
 
         // Converte a data de nascimento para o formato correto
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataNascimento = LocalDate.parse(textFieldDataNascimento.getText(), formato);
-        funcionario.setDataNac(dataNascimento);
-
+        LocalDate dataVendas = LocalDate.parse(textFieldDataVenda.getText(), formato);
+        //vendas.setDataVendas(dataVendas);
+        this.vendas.setDataVendas(dataVendas);
         // Indica que as informações foram alteradas
         informacoesAlteradas = true;
 
@@ -102,7 +103,7 @@ public class EditarVendasDialog extends JDialog {
         return informacoesAlteradas;
     }
 
-    public Funcionario getFuncionarioAtualizado() {
-        return funcionario;
+    public Vendas getVendasAtualizado() {
+        return vendas;
     }
 }

@@ -26,8 +26,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import controle.FuncionarioDAO;
 import controle.VendasDAO;
 import modelo.Cliente;
+import modelo.Funcionario;
 import modelo.Vendas;
 
 public class TelaVendas extends JFrame {
@@ -239,6 +241,53 @@ public class TelaVendas extends JFrame {
 		panel_funcionario.add(LabelFuncionarioCPF);
 
 		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				// Verifica se uma linha foi selecionada na tabela
+				int selectedRow = table.getSelectedRow();
+				if (selectedRow == -1) {
+					JOptionPane.showMessageDialog(null, "Selecione uma venda na tabela para atualizar.");
+					return;
+				}
+
+				// Obtém os valores da linha selecionada
+				LocalDate data_venda = (LocalDate) table.getValueAt(selectedRow, 1);
+				Float valor_total = (float) table.getValueAt(selectedRow, 2);
+				
+				// Converte a data de nascimento para o formato correto
+//				DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//				LocalDate dataVenda = LocalDate.parse(data_venda, formato);
+
+				// Preenche o objeto Funcionario com os valores da linha selecionada
+				Vendas vendas = new Vendas();
+				vendas.setDataVendas(data_venda);
+				vendas.setValorDaVenda(valor_total);
+				
+				// Abre uma janela de diálogo para editar as informações
+				EditarVendasDialog dialog = new EditarVendasDialog(vendas);
+				dialog.setVisible(true);
+
+				// Verifica se as informações foram alteradas no diálogo
+				if (dialog.isInformacoesAlteradas()) {
+					// Atualiza os valores do funcionário com as alterações
+					vendas = dialog.getVendasAtualizado();
+
+					// Chama o método alterar do FuncionarioDAO para atualizar o funcionário
+					VendasDAO dao = VendasDAO.getinstancia();
+					boolean retorno = dao.alterar(vendas);
+
+					if (retorno) {
+						new MensagemAcerto("Vendas atualizado com sucesso!").setVisible(true);
+						// Atualiza a tabela após a alteração
+						atualizarTabela();
+					} else {
+						new MensagemErro("Erro ao atualizar essa venda. !").setVisible(true);
+					}
+				}
+			
+			}
+		});
 		btnAtualizar.setBackground(new Color(0, 0, 0));
 		btnAtualizar.setForeground(new Color(255, 255, 255));
 		btnAtualizar.setBounds(36, 310, 187, 49);
