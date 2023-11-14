@@ -292,7 +292,7 @@ public class TelaVendas extends JFrame {
 		panelTabela.add(scrollPane, BorderLayout.NORTH);
 
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "id_kart", "Data_da_Venda", "Cliente_CPF", "Valor_da_Venda" });
+				new String[] {  "id_kart", "Data_da_Venda", "Valor_Da_Venda", "Funcionarios_CPF" });
 		table.setModel(modelo);
 		contentPane.add(panelTabela);
 		
@@ -310,7 +310,7 @@ public class TelaVendas extends JFrame {
 		dao = VendasDAO.getinstancia();
 		ArrayList<Vendas> Vendas = dao.listar();
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "id_kart", "Data_da_Venda", "Cliente_CPF", "Valor_da_Venda" });
+				new String[] { "id_kart", "Data_da_Venda", "Valor_Da_Venda", "Funcionarios_CPF" });
 
 		for (Vendas vendas : Vendas) {
 			Object[] linha = { vendas.getIdKarts(), vendas.getDataVendas(), vendas.getValorDaVenda(),
