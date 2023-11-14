@@ -30,6 +30,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.GraphicsConfiguration;
+
 import javax.swing.JTextField;
 import java.awt.Panel;
 import javax.swing.ImageIcon;
@@ -42,6 +44,7 @@ import javax.swing.JFormattedTextField;
 
 public class TelaKarts extends JFrame {
 
+	protected static final GraphicsConfiguration karts = null;
 	private JPanel contentPane;
 	private JTextField txtPreco;
 	private JTextField txtPreco_1;
@@ -481,11 +484,14 @@ public class TelaKarts extends JFrame {
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Verifica se uma linha foi selecionada na tabela
 				int selectedRow = table.getSelectedRow();
 				if (selectedRow == -1) {
 					JOptionPane.showMessageDialog(null, "Selecione um funcionário na tabela para atualizar.");
 					return;
 				}
+				// Obtém os valores da linha selecionada
+				long id = (long) table.getValueAt(selectedRow, 0);
 				String Cor = (String) table.getValueAt(selectedRow, 1);
 				String modelo = (String) table.getValueAt(selectedRow, 2);
 				String marca = (String) table.getValueAt(selectedRow, 3);
@@ -493,10 +499,11 @@ public class TelaKarts extends JFrame {
 				long quantidade = (long) table.getValueAt(selectedRow, 5);
 				String dataEntrada = (String) table.getValueAt(selectedRow, 6);
 				long preco = (long) table.getValueAt(selectedRow, 7);
-				
+				// Converte a data de Entrada para o formato correto
 				DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 				LocalDate DataEntrada = LocalDate.parse(dataEntrada, formato);
 				
+				// Preenche o objeto Karts com os valores da linha selecionada
 				Karts karts = new Karts();
 				karts.setCor(Cor);
 				karts.setModelo(modelo);
@@ -505,23 +512,24 @@ public class TelaKarts extends JFrame {
 				karts.setquantidade(quantidade);
 				karts.setDataEntrada(DataEntrada);
 				karts.setpreco(preco);
+				karts.setId(id);
 				
-				EditarKartsDialog dialog = new EditarKartsDialog();
+				EditarKartsDialog dialog = new EditarKartsDialog(karts);
 				dialog.setVisible(true);
 				
 				if (dialog.isInformacoesAlteradas()) {
-					karts = dialog.getKartsAtualizado();
+					karts = dialog.getkartsAtualizado();
 					
 					KartsDAO dao = KartsDAO.getinstancia();
 					boolean retorno = dao.Alterar(karts);
 					
 					if (retorno) {
-						new MensagemAcerto("Cliente atualizado com sucesso!").setVisible(true);
-						
+						new MensagemAcerto("Karts atualizado com sucesso!").setVisible(true);
+						// Atualiza a tabela após a alteração
 						
 						atualizarTabela();
 					}else {
-						new MensagemErro("Erro ao atualizar o cliente. !").setVisible(true);
+						new MensagemErro("Erro ao atualizar o Karts. !").setVisible(true);
 
 					}
 				}
