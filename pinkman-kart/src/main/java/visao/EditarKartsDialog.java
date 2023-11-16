@@ -17,7 +17,7 @@ public class EditarKartsDialog extends JDialog {
 	
 	private JTextField textFieldCor;
 	private JTextField textFieldDataEntrada;
-	private JTextField textFieldQuantidade;
+	private JTextField textFieldquantidade;
 	private JTextField textFieldMarca;
 	private JTextField textFieldModelo;
 	private JTextField textFieldAno;
@@ -39,7 +39,7 @@ public class EditarKartsDialog extends JDialog {
 		lblCor.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblCor.setBounds(10, 11, 200, 40);
 		panel.add(lblCor);
-			textFieldCor = new JTextField((String) null);
+			textFieldCor = new JTextField(karts.getCor());
 			textFieldCor.setBackground(SystemColor.menu);
 			textFieldCor.setBounds(208, 14, 190, 39);
 			panel.add(textFieldCor);
@@ -52,7 +52,6 @@ public class EditarKartsDialog extends JDialog {
 		textFieldDataEntrada = new JTextField(
 					karts.getDataEntrada().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
 			        );
-			textFieldDataEntrada = new JTextField((String) null);
 			textFieldDataEntrada.setBackground(SystemColor.menu);
 			textFieldDataEntrada.setBounds(208, 65, 190, 39);
 			panel.add(textFieldDataEntrada);
@@ -62,16 +61,16 @@ public class EditarKartsDialog extends JDialog {
 		lblquantidade.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblquantidade.setBounds(10, 113, 200, 40);
 		panel.add(lblquantidade);
-			textFieldQuantidade = new JTextField((String) null);
-			textFieldQuantidade.setBackground(SystemColor.menu);
-			textFieldQuantidade.setBounds(208, 113, 190, 39);
-			panel.add(textFieldQuantidade);
+			textFieldquantidade = new JTextField(karts.getquantidade().toString());
+			textFieldquantidade.setBackground(SystemColor.menu);
+			textFieldquantidade.setBounds(208, 113, 190, 39);
+			panel.add(textFieldquantidade);
 		
 		JLabel lblMarca = new JLabel("Marca:");
 		lblMarca.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblMarca.setBounds(10, 164, 200, 40);
 		panel.add(lblMarca);
-			textFieldMarca = new JTextField((String) null);
+			textFieldMarca = new JTextField(karts.getMarca());
 			textFieldMarca.setBackground(SystemColor.menu);
 			textFieldMarca.setBounds(208, 167, 190, 39);
 			panel.add(textFieldMarca);
@@ -80,7 +79,7 @@ public class EditarKartsDialog extends JDialog {
 		lblModelo.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblModelo.setBounds(10, 215, 200, 40);
 		panel.add(lblModelo);
-			textFieldModelo = new JTextField((String) null);
+			textFieldModelo = new JTextField(karts.getModelo());
 			textFieldModelo.setBackground(SystemColor.menu);
 			textFieldModelo.setBounds(208, 218, 190, 39);
 			panel.add(textFieldModelo);
@@ -89,7 +88,7 @@ public class EditarKartsDialog extends JDialog {
 		lblAno.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblAno.setBounds(10, 266, 200, 40);
 		panel.add(lblAno);
-			textFieldAno = new JTextField((String) null);
+			textFieldAno = new JTextField(karts.getano().toString());
 			textFieldAno.setBackground(SystemColor.menu);
 			textFieldAno.setBounds(208, 269, 190, 39);
 			panel.add(textFieldAno);
@@ -99,7 +98,7 @@ public class EditarKartsDialog extends JDialog {
 		lblPreo.setBounds(10, 317, 200, 40);
 		panel.add(lblPreo);
 		
-		textFieldPreco = new JTextField((String) null);
+		textFieldPreco = new JTextField(karts.getpreco().toString());
 		textFieldPreco.setBackground(SystemColor.menu);
 		textFieldPreco.setBounds(208, 317, 190, 39);
 		panel.add(textFieldPreco);
@@ -149,7 +148,7 @@ public class EditarKartsDialog extends JDialog {
         LocalDate DataEntrada = LocalDate.parse(textFieldDataEntrada.getText(), formato);
         karts.setDataEntrada(DataEntrada);
 
-         karts.setquantidade(Long.valueOf(textFieldQuantidade.getText()));
+         karts.setquantidade(Long.valueOf(textFieldquantidade.getText()));
 	     karts.setMarca(textFieldMarca.getText());
 	     karts.setModelo(textFieldModelo.getText());
 	     karts.setano(Long.valueOf(textFieldAno.getText()));

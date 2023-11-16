@@ -107,6 +107,13 @@ public class TelaSelecao extends JFrame {
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(71, 34, 154, 114);
 		panel_1.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_6 = new JLabel("");
+		lblNewLabel_6.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_6.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblNewLabel_6.setIcon(new ImageIcon(TelaSelecao.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_6.setBounds(0, 0, 308, 265);
+		panel_1.add(lblNewLabel_6);
 
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBounds(1006, 177, 308, 265);
@@ -136,6 +143,13 @@ public class TelaSelecao extends JFrame {
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setBounds(77, 44, 149, 89);
 		panel_1_1.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_7 = new JLabel("");
+		lblNewLabel_7.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_7.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblNewLabel_7.setIcon(new ImageIcon(TelaSelecao.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_7.setBounds(0, 0, 308, 265);
+		panel_1_1.add(lblNewLabel_7);
 
 		JPanel panel_1_2 = new JPanel();
 		panel_1_2.setBounds(429, 481, 308, 265);
@@ -165,6 +179,13 @@ public class TelaSelecao extends JFrame {
 		panel_1_2.add(lblNewLabel);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon(TelaSelecao.class.getResource("/imgs/CarrinhoDeCompras.png")));
+		
+		JLabel lblNewLabel_8 = new JLabel("");
+		lblNewLabel_8.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_8.setIcon(new ImageIcon(TelaSelecao.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_8.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblNewLabel_8.setBounds(0, 0, 308, 265);
+		panel_1_2.add(lblNewLabel_8);
 
 		JPanel panel_1_3 = new JPanel();
 		panel_1_3.setBounds(816, 481, 308, 265);
@@ -193,6 +214,13 @@ public class TelaSelecao extends JFrame {
 			}
 		});
 		btnFornecedor.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		
+		JLabel lblNewLabel_9 = new JLabel("");
+		lblNewLabel_9.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_9.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblNewLabel_9.setIcon(new ImageIcon(TelaSelecao.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_9.setBounds(0, 0, 308, 265);
+		panel_1_3.add(lblNewLabel_9);
 
 		JPanel panel_1_3_1 = new JPanel();
 		panel_1_3_1.setBackground(new Color(0, 128, 192));
@@ -226,6 +254,13 @@ public class TelaSelecao extends JFrame {
 		btnNewButton.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
 		btnNewButton.setBounds(61, 145, 206, 47);
 		panel_1_3_1.add(btnNewButton);
+		
+		JLabel lblNewLabel_10 = new JLabel("");
+		lblNewLabel_10.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_10.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblNewLabel_10.setIcon(new ImageIcon(TelaSelecao.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_10.setBounds(0, 0, 308, 265);
+		panel_1_3_1.add(lblNewLabel_10);
 
 		JLabel lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon(TelaSelecao.class.getResource("/imgs/FundoDeTela.jpg")));

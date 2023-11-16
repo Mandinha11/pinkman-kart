@@ -40,6 +40,7 @@ import javax.swing.JComboBox;
 import javax.swing.UIManager;
 //=======
 import javax.swing.JFormattedTextField;
+import javax.swing.SwingConstants;
 //>>>>>>> Stashed changes;
 
 public class TelaKarts extends JFrame {
@@ -293,14 +294,22 @@ public class TelaKarts extends JFrame {
 		panel_1.add(lblIdKart);
 		lblIdKart.setForeground(new Color(255, 255, 255));
 		lblIdKart.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_3.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_3.setBounds(0, 0, 423, 61);
+		panel_1.add(lblNewLabel_3);
 
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBackground(new Color(0, 85, 125));
 		panel_1_1.setBounds(98, 195, 423, 61);
 		contentPane.add(panel_1_1);
+		panel_1_1.setLayout(null);
 
 		JLabel lblDataEntrada = new JLabel("Data Entrada:");
-		lblDataEntrada.setBounds(10, 20, 104, 30);
+		lblDataEntrada.setBounds(10, 11, 96, 39);
 		panel_1_1.add(lblDataEntrada);
 		lblDataEntrada.setForeground(new Color(255, 255, 255));
 		lblDataEntrada.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
@@ -314,8 +323,15 @@ public class TelaKarts extends JFrame {
 		txtDataEntrada = new JFormattedTextField(mascaraDataEntrada);
 
 		txtDataEntrada.setColumns(10);
-		txtDataEntrada.setBounds(154, 20, 259, 30);
+		txtDataEntrada.setBounds(158, 17, 255, 32);
 		panel_1_1.add(txtDataEntrada);
+		
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_4.setBounds(0, 0, 423, 61);
+		panel_1_1.add(lblNewLabel_4);
 
 		JPanel panel_1_1_1 = new JPanel();
 		panel_1_1_1.setBackground(new Color(0, 85, 125));
@@ -333,6 +349,13 @@ public class TelaKarts extends JFrame {
 		panel_1_1_1.add(lblMarcaKarts);
 		lblMarcaKarts.setForeground(new Color(255, 255, 255));
 		lblMarcaKarts.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		
+		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_5.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_5.setBounds(0, 0, 423, 61);
+		panel_1_1_1.add(lblNewLabel_5);
 
 		JPanel panel_1_1_2 = new JPanel();
 		panel_1_1_2.setBackground(new Color(0, 85, 125));
@@ -348,7 +371,7 @@ public class TelaKarts extends JFrame {
 		}
 		txtCNPJ = new JFormattedTextField(mascaraCNPJ1);
 
-		txtCNPJ.setBounds(142, 20, 260, 30);
+		txtCNPJ.setBounds(152, 20, 250, 30);
 		panel_1_1_2.add(txtCNPJ);
 		txtCNPJ.setColumns(10);
 
@@ -357,6 +380,13 @@ public class TelaKarts extends JFrame {
 		lblNewLabel.setBounds(10, 21, 137, 22);
 		panel_1_1_2.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		
+		JLabel lblNewLabel_6 = new JLabel("");
+		lblNewLabel_6.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_6.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_6.setBounds(0, 0, 423, 61);
+		panel_1_1_2.add(lblNewLabel_6);
 
 		JPanel panel_1_2 = new JPanel();
 		panel_1_2.setBackground(new Color(0, 85, 125));
@@ -374,6 +404,13 @@ public class TelaKarts extends JFrame {
 		txtCor.setColumns(10);
 		txtCor.setBounds(153, 19, 260, 30);
 		panel_1_2.add(txtCor);
+		
+		JLabel lblNewLabel_7_1 = new JLabel("");
+		lblNewLabel_7_1.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_7_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_7_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_1.setBounds(0, 0, 423, 61);
+		panel_1_2.add(lblNewLabel_7_1);
 
 		JPanel panel_1_3 = new JPanel();
 		panel_1_3.setBackground(new Color(0, 85, 125));
@@ -391,6 +428,13 @@ public class TelaKarts extends JFrame {
 		txtQuantidade.setColumns(10);
 		txtQuantidade.setBounds(153, 17, 260, 30);
 		panel_1_3.add(txtQuantidade);
+		
+		JLabel lblNewLabel_7_2 = new JLabel("");
+		lblNewLabel_7_2.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_7_2.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_7_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_2.setBounds(0, 0, 423, 61);
+		panel_1_3.add(lblNewLabel_7_2);
 
 		// JPanel panel_4 = new JPanel();
 		panel_4.setBounds(996, 54, 857, 939);
@@ -432,6 +476,13 @@ public class TelaKarts extends JFrame {
 		txtModelo.setBounds(153, 20, 260, 30);
 		panel_1_4.add(txtModelo);
 		txtModelo.setColumns(10);
+		
+		JLabel lblNewLabel_7_2_1 = new JLabel("");
+		lblNewLabel_7_2_1.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_7_2_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_7_2_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_2_1.setBounds(0, 0, 423, 61);
+		panel_1_4.add(lblNewLabel_7_2_1);
 
 		JPanel panel_1_5 = new JPanel();
 		panel_1_5.setBackground(new Color(0, 85, 125));
@@ -457,6 +508,13 @@ public class TelaKarts extends JFrame {
 		txtAno.setColumns(10);
 		txtAno.setBounds(153, 17, 260, 30);
 		panel_1_5.add(txtAno);
+		
+		JLabel lblNewLabel_7_2_2 = new JLabel("");
+		lblNewLabel_7_2_2.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_7_2_2.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_7_2_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_2_2.setBounds(0, 0, 423, 61);
+		panel_1_5.add(lblNewLabel_7_2_2);
 
 		JPanel panel_1_6 = new JPanel();
 		panel_1_6.setForeground(new Color(255, 255, 255));
@@ -475,6 +533,13 @@ public class TelaKarts extends JFrame {
 		panel_1_6.add(lblPreco);
 		lblPreco.setForeground(new Color(255, 255, 255));
 		lblPreco.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		
+		JLabel lblNewLabel_7 = new JLabel("");
+		lblNewLabel_7.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_7.setBounds(0, 0, 423, 61);
+		panel_1_6.add(lblNewLabel_7);
 
 		JLabel lblNewLabel_2 = new JLabel("");
 

@@ -26,11 +26,11 @@ public class KartsDAOtest {
 	public void testMetodoInserirKarts() {
 		Karts k = new Karts();
 		k.setano(2000l);
-<<<<<<< Updated upstream
+
 		k.setCNPJ(78901230004561l);
-=======
+
 		k.setCNPJ(34567890001239l);
->>>>>>> Stashed changes
+
 		k.setCor("preto");
 		k.setDataEntrada(LocalDate.of(2000,12,22));
 		k.setMarca("Marca H");
