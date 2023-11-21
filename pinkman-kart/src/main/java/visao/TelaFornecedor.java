@@ -32,6 +32,7 @@ import javax.swing.JScrollPane;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
 
 public class TelaFornecedor extends JFrame {
 
@@ -259,6 +260,13 @@ public class TelaFornecedor extends JFrame {
 		panel_1.add(lblNomeEmpresa);
 		lblNomeEmpresa.setForeground(new Color(255, 255, 255));
 		lblNomeEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(TelaFornecedor.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(0, 0, 513, 46);
+		panel_1.add(lblNewLabel_1);
 
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
@@ -283,6 +291,13 @@ public class TelaFornecedor extends JFrame {
 		panel_1_1.add(lblCnpj);
 		lblCnpj.setForeground(new Color(255, 255, 255));
 		lblCnpj.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		
+		JLabel lblNewLabel_1_1 = new JLabel("");
+		lblNewLabel_1_1.setIcon(new ImageIcon(TelaFornecedor.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1.setBounds(0, 0, 513, 46);
+		panel_1_1.add(lblNewLabel_1_1);
 
 		JPanel panel_1_1_1 = new JPanel();
 		panel_1_1_1.setLayout(null);
@@ -307,6 +322,13 @@ public class TelaFornecedor extends JFrame {
 		panel_1_1_1.add(lblCpf);
 		lblCpf.setForeground(new Color(255, 255, 255));
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		
+		JLabel lblNewLabel_1_2 = new JLabel("");
+		lblNewLabel_1_2.setIcon(new ImageIcon(TelaFornecedor.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_2.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_2.setBounds(0, 0, 513, 46);
+		panel_1_1_1.add(lblNewLabel_1_2);
 
 		JPanel panel_1_1_1_1 = new JPanel();
 		panel_1_1_1_1.setLayout(null);
@@ -331,6 +353,13 @@ public class TelaFornecedor extends JFrame {
 		panel_1_1_1_1.add(lblTelefone);
 		lblTelefone.setForeground(new Color(255, 255, 255));
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		
+		JLabel lblNewLabel_1_3 = new JLabel("");
+		lblNewLabel_1_3.setIcon(new ImageIcon(TelaFornecedor.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_3.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_3.setBounds(0, 0, 513, 46);
+		panel_1_1_1_1.add(lblNewLabel_1_3);
 
 		table_1 = new JTable();
 		panel.setBackground(new Color(255, 255, 255));

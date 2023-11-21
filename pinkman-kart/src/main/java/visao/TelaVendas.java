@@ -170,6 +170,13 @@ public class TelaVendas extends JFrame {
 		txtDataDaVenda.setColumns(10);
 		txtDataDaVenda.setBounds(151, 16, 304, 28);
 		panel_dataVenda.add(txtDataDaVenda);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("");
+		lblNewLabel_1_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1.setBounds(0, 0, 483, 55);
+		panel_dataVenda.add(lblNewLabel_1_1);
 
 		JPanel panel_idKart = new JPanel();
 		panel_idKart.setLayout(null);
@@ -187,6 +194,13 @@ public class TelaVendas extends JFrame {
 		LabelIdKart.setBounds(10, 16, 102, 24);
 		panel_idKart.add(LabelIdKart);
 		LabelIdKart.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		JLabel lblNewLabel_1_2 = new JLabel("");
+		lblNewLabel_1_2.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_2.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_2.setBounds(0, 0, 483, 55);
+		panel_idKart.add(lblNewLabel_1_2);
 
 		JPanel panel_vendas = new JPanel();
 		panel_vendas.setLayout(null);
@@ -214,6 +228,13 @@ public class TelaVendas extends JFrame {
 		LabelValorVenda.setBounds(10, 16, 121, 24);
 		panel_vendas.add(LabelValorVenda);
 		LabelValorVenda.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(0, 0, 483, 55);
+		panel_vendas.add(lblNewLabel_1);
 
 		JPanel panel_funcionario = new JPanel();
 		panel_funcionario.setLayout(null);
@@ -237,6 +258,13 @@ public class TelaVendas extends JFrame {
 		LabelFuncionarioCPF.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		LabelFuncionarioCPF.setBounds(10, 18, 156, 20);
 		panel_funcionario.add(LabelFuncionarioCPF);
+		
+		JLabel lblNewLabel_1_3 = new JLabel("");
+		lblNewLabel_1_3.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_3.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_3.setBounds(0, 0, 483, 55);
+		panel_funcionario.add(lblNewLabel_1_3);
 
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.setBackground(new Color(0, 0, 0));

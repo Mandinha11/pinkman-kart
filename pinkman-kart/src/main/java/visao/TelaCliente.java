@@ -89,6 +89,13 @@ public class TelaCliente extends JFrame {
 		txtData.setBounds(176, 11, 320, 25);
 		panel_2.add(txtData);
 		txtData.setColumns(10);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("");
+		lblNewLabel_1_2.setIcon(new ImageIcon(TelaCliente.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_2.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_2.setBounds(0, 0, 506, 45);
+		panel_2.add(lblNewLabel_1_2);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setForeground(new Color(255, 255, 255));
@@ -208,6 +215,13 @@ public class TelaCliente extends JFrame {
 		textNomeCompleto.setBounds(177, 11, 319, 23);
 		panel.add(textNomeCompleto);
 		textNomeCompleto.setColumns(10);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("");
+		lblNewLabel_1_1.setIcon(new ImageIcon(TelaCliente.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1.setBounds(0, 0, 506, 45);
+		panel.add(lblNewLabel_1_1);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(1048, 35, 506, 45);
@@ -235,6 +249,13 @@ public class TelaCliente extends JFrame {
 		textCPF.setBounds(179, 9, 317, 25);
 		panel_1.add(textCPF);
 		textCPF.setColumns(10);
+		
+		JLabel lblNewLabel_1_2_1 = new JLabel("");
+		lblNewLabel_1_2_1.setIcon(new ImageIcon(TelaCliente.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_2_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_2_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_2_1.setBounds(0, 0, 506, 45);
+		panel_1.add(lblNewLabel_1_2_1);
 
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBounds(1048, 107, 506, 45);
@@ -260,6 +281,13 @@ public class TelaCliente extends JFrame {
 		textTelefone.setBounds(179, 11, 317, 23);
 		panel_1_1.add(textTelefone);
 		textTelefone.setColumns(10);
+		
+		JLabel lblNewLabel_1_2_2 = new JLabel("");
+		lblNewLabel_1_2_2.setIcon(new ImageIcon(TelaCliente.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_2_2.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_2_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_2_2.setBounds(0, 0, 506, 45);
+		panel_1_1.add(lblNewLabel_1_2_2);
 
 		/**
 		 * Tabela

@@ -74,7 +74,7 @@ public class TelaFuncionario extends JFrame {
 		contentPane.add(btnVoltar);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(464, 22, 516, 48);
+		panel.setBounds(464, 22, 516, 58);
 		panel.setBackground(new Color(0, 85, 125));
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -88,18 +88,25 @@ public class TelaFuncionario extends JFrame {
 
 		textCPF = new JFormattedTextField(mascaraCPF);
 
-		textCPF.setBounds(149, 11, 339, 26);
+		textCPF.setBounds(147, 15, 317, 26);
 		panel.add(textCPF);
 		textCPF.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("CPF:");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewLabel.setBounds(105, 7, 34, 28);
+		lblNewLabel.setBounds(103, 11, 34, 28);
 		panel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("");
+		lblNewLabel_1_2.setIcon(new ImageIcon(TelaFuncionario.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_2.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_2.setBounds(0, 0, 516, 58);
+		panel.add(lblNewLabel_1_2);
 
 		JPanel PnDataDeNascimento = new JPanel();
-		PnDataDeNascimento.setBounds(464, 127, 516, 48);
+		PnDataDeNascimento.setBounds(464, 127, 516, 58);
 		PnDataDeNascimento.setBackground(new Color(0, 85, 125));
 		PnDataDeNascimento.setLayout(null);
 		contentPane.add(PnDataDeNascimento);
@@ -107,7 +114,7 @@ public class TelaFuncionario extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("Data De Nascimento:");
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewLabel_2.setBounds(23, 11, 160, 26);
+		lblNewLabel_2.setBounds(24, 14, 166, 26);
 		PnDataDeNascimento.add(lblNewLabel_2);
 		MaskFormatter mascaraData = null;
 		try {
@@ -118,11 +125,18 @@ public class TelaFuncionario extends JFrame {
 		textDataNac = new JFormattedTextField((AbstractFormatter) null);
 		textDataNac = new JFormattedTextField(mascaraData);
 		textDataNac.setColumns(10);
-		textDataNac.setBounds(189, 11, 299, 26);
+		textDataNac.setBounds(207, 17, 299, 26);
 		PnDataDeNascimento.add(textDataNac);
+		
+		JLabel lblNewLabel_1_3 = new JLabel("");
+		lblNewLabel_1_3.setIcon(new ImageIcon(TelaFuncionario.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_3.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_3.setBounds(0, 0, 516, 58);
+		PnDataDeNascimento.add(lblNewLabel_1_3);
 
 		JPanel PnCargo = new JPanel();
-		PnCargo.setBounds(1095, 127, 518, 48);
+		PnCargo.setBounds(1095, 127, 518, 58);
 		PnCargo.setBackground(new Color(0, 85, 125));
 		PnCargo.setLayout(null);
 		contentPane.add(PnCargo);
@@ -134,8 +148,15 @@ public class TelaFuncionario extends JFrame {
 		PnCargo.add(lblNewLabel_1_1);
 
 		boxCargo = new JComboBox<>();
-		boxCargo.setBounds(151, 10, 338, 28);
+		boxCargo.setBounds(151, 13, 338, 28);
 		PnCargo.add(boxCargo);
+		
+		JLabel lblNewLabel_1_5 = new JLabel("");
+		lblNewLabel_1_5.setIcon(new ImageIcon(TelaFuncionario.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_5.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_5.setBounds(0, 0, 518, 58);
+		PnCargo.add(lblNewLabel_1_5);
 		boxCargo.addItem("Selecionar Cargo");
 		boxCargo.addItem("Vendedor");
 		boxCargo.addItem("Recepcionista");
@@ -307,21 +328,28 @@ public class TelaFuncionario extends JFrame {
 		contentPane.add(btnExcluir);
 
 		JPanel PnNomeCompleto = new JPanel();
-		PnNomeCompleto.setBounds(1095, 22, 518, 48);
+		PnNomeCompleto.setBounds(1095, 22, 518, 58);
 		PnNomeCompleto.setBackground(new Color(0, 85, 125));
 		PnNomeCompleto.setLayout(null);
 		contentPane.add(PnNomeCompleto);
 
 		textNomeCompleto = new JTextField();
 		textNomeCompleto.setColumns(10);
-		textNomeCompleto.setBounds(149, 11, 339, 26);
+		textNomeCompleto.setBounds(152, 11, 339, 36);
 		PnNomeCompleto.add(textNomeCompleto);
 
 		JLabel lblNomeCompleto = new JLabel("Nome Completo:");
 		lblNomeCompleto.setForeground(new Color(255, 255, 255));
 		lblNomeCompleto.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNomeCompleto.setBounds(10, 7, 129, 28);
+		lblNomeCompleto.setBounds(10, 12, 129, 28);
 		PnNomeCompleto.add(lblNomeCompleto);
+		
+		JLabel lblNewLabel_1_4 = new JLabel("");
+		lblNewLabel_1_4.setIcon(new ImageIcon(TelaFuncionario.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_4.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_4.setBounds(0, 0, 518, 58);
+		PnNomeCompleto.add(lblNewLabel_1_4);
 
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setBounds(1654, 57, 165, 132);
