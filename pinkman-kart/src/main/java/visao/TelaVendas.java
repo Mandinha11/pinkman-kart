@@ -166,6 +166,13 @@ public class TelaVendas extends JFrame {
 		String dataatual = now.format(formatter);
 		txtDataDaVenda.setText(dataatual);
 		panel_dataVenda.add(txtDataDaVenda);
+		
+		JLabel lblNewLabel_1_1_1_1 = new JLabel("");
+		lblNewLabel_1_1_1_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_1_1_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1_1_1.setBounds(0, 0, 483, 55);
+		panel_dataVenda.add(lblNewLabel_1_1_1_1);
 
 		JPanel panel_vendas = new JPanel();
 		panel_vendas.setLayout(null);
@@ -193,6 +200,13 @@ public class TelaVendas extends JFrame {
 		LabelValorVenda.setBounds(10, 16, 121, 24);
 		panel_vendas.add(LabelValorVenda);
 		LabelValorVenda.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("");
+		lblNewLabel_1_1_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_1_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1_1.setBounds(0, 0, 483, 55);
+		panel_vendas.add(lblNewLabel_1_1_1);
 
 		JPanel panel_funcionario = new JPanel();
 		panel_funcionario.setLayout(null);
@@ -302,6 +316,13 @@ public class TelaVendas extends JFrame {
 		comboBoxKart = new JComboBox<Karts>();
 		comboBoxKart.setBounds(171, 19, 291, 22);
 		panel_id.add(comboBoxKart);
+		
+		JLabel lblNewLabel_1_1_1_2 = new JLabel("");
+		lblNewLabel_1_1_1_2.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_1_1_2.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_1_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1_1_2.setBounds(0, 0, 483, 55);
+		panel_id.add(lblNewLabel_1_1_1_2);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));

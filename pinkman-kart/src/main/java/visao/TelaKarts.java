@@ -286,6 +286,13 @@ public class TelaKarts extends JFrame {
 		DateTimeFormatter formatter11= DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String dataatual = now.format(formatter11);
 		txtDataEntrada.setText(dataatual);
+		
+		JLabel lblNewLabel_7_3 = new JLabel("");
+		lblNewLabel_7_3.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_7_3.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_7_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_3.setBounds(0, 0, 423, 61);
+		panel_1_1.add(lblNewLabel_7_3);
 
 		JPanel panel_1_1_1 = new JPanel();
 		panel_1_1_1.setBackground(new Color(0, 85, 125));
@@ -426,7 +433,7 @@ public class TelaKarts extends JFrame {
 		JPanel panel_1_4 = new JPanel();
 		panel_1_4.setBackground(new Color(0, 85, 125));
 		panel_1_4.setLayout(null);
-		panel_1_4.setBounds(553, 113, 423, 61);
+		panel_1_4.setBounds(563, 113, 423, 61);
 		contentPane.add(panel_1_4);
 
 		JLabel lblModelo = new JLabel("Modelo:");
@@ -496,6 +503,13 @@ public class TelaKarts extends JFrame {
 		panel_1_6.add(lblPreco);
 		lblPreco.setForeground(new Color(255, 255, 255));
 		lblPreco.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		
+		JLabel lblNewLabel_7_4 = new JLabel("");
+		lblNewLabel_7_4.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_7_4.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_7_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_4.setBounds(0, 0, 423, 61);
+		panel_1_6.add(lblNewLabel_7_4);
 
 		JLabel lblNewLabel_2 = new JLabel("");
 
