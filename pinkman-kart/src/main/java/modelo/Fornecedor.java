@@ -1,5 +1,9 @@
 package modelo;
 
+import java.text.ParseException;
+
+import javax.swing.text.MaskFormatter;
+
 public class Fornecedor {
 	
 	private String NomeEmpresa;
@@ -38,6 +42,19 @@ public class Fornecedor {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
+		
+		
+		
+		
+		MaskFormatter mascaraCNPJ1 = null;
+		try {
+			MaskFormatter mask = new MaskFormatter("##.###.###/####-##");
+	        mask.setValueContainsLiteralCharacters(false);
+	        return mask.valueToString(String.valueOf(cnpj));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println("fora");
 		return String.valueOf(cnpj);
 	}	
 

@@ -316,13 +316,15 @@ public class TelaKarts extends JFrame {
 		panel_1_1_2.setLayout(null);
 		panel_1_1_2.setBounds(563, 363, 423, 61);
 		contentPane.add(panel_1_1_2);
-
+		
 		MaskFormatter mascaraCNPJ1 = null;
 		try {
 			mascaraCNPJ1 = new MaskFormatter("##.###.###/000#-##");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+
+	
 
 		JLabel lblNewLabel = new JLabel("Fornecedor CNPJ:");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
@@ -332,6 +334,7 @@ public class TelaKarts extends JFrame {
 		
 		comboBox = new JComboBox<Fornecedor>();
 		comboBox.setBounds(180, 24, 233, 22);
+		
 		
 		FornecedorDAO fDAO = new FornecedorDAO();
 		ArrayList<Fornecedor> lstaf = fDAO.Listar();
