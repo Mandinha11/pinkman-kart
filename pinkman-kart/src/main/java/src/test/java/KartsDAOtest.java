@@ -37,7 +37,7 @@ public class KartsDAOtest {
 		k.setModelo("Modelo Y");
 		k.setpreco(500000l);
 		k.setquantidade(2l);
-		k.setId(8l);
+		k.setId(8);
 		
 		
 		KartsDAO dao = new KartsDAO();
@@ -49,7 +49,7 @@ public class KartsDAOtest {
 	@Order(2)
 	public void testMetodoDeletarKarts() {
 		Karts k = new Karts();
-		k.setId(8l);
+		k.setId(8);
 		
 		KartsDAO dao = new KartsDAO();
 		boolean DeletarOk = dao.Deletar(k);

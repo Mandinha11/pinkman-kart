@@ -24,7 +24,7 @@ public class KartsDAO implements IKartDAO {
 			PreparedStatement ps = con.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				long idkarts = rs.getInt("id_kart");
+				Integer idkarts = rs.getInt("id_kart");
 				String cor = rs.getString("cor");
 				String modelo = rs.getString("modelo");
 				String marca = rs.getString("marca");

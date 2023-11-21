@@ -12,7 +12,7 @@ public class Karts {
 	private long quantidade;
 	private String cor;
 	private LocalDate dataEntrada;
-	private Long Id;
+	private Integer Id;
 	private Long CNPJ;
 	
 	public Karts(){
@@ -75,10 +75,10 @@ public class Karts {
 		this.dataEntrada = dataEntrada;
 	}
 	
-	public Long getId() {
+	public Integer getId() {
 		return Id;
 	}
-	public void setId(Long Id) {
+	public void setId(Integer Id) {
 		this.Id = Id;
 	}
 
@@ -93,7 +93,12 @@ public class Karts {
 	public void setCNPJ1(Long cNPJ) {
 		CNPJ = CNPJ;
 	}
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return String.valueOf(Id);
+
+}
 	
 
 
