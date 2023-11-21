@@ -14,8 +14,9 @@ import javax.swing.text.MaskFormatter;
 import com.google.protobuf.Empty;
 
 import controle.ClienteDAO;
+import controle.FornecedorDAO;
 import controle.KartsDAO;
-
+import modelo.Fornecedor;
 import modelo.Karts;
 
 import java.awt.Color;
@@ -51,8 +52,6 @@ public class TelaKarts extends JFrame {
 	private JTextField txtPreco_1;
 	private JTextField txtMarca;
 	private JTextField txtModelo;
-	private JTextField txtId;
-	private JTextField txtCNPJ;
 	private JTable tabelaKarts;
 	private JTextField txtCor;
 	private JTextField txtQuantidade;
@@ -61,6 +60,7 @@ public class TelaKarts extends JFrame {
 	private DefaultTableModel modelo;
 	private JTable table;
 	private JTextField txtDataEntrada;
+	private JComboBox<Fornecedor> comboBox;
 
 	/**
 	 * Create the frame.
@@ -135,32 +135,18 @@ public class TelaKarts extends JFrame {
 					karts.setModelo(String.valueOf(txtModelo.getText()));
 				}
 
-				if (txtId.getText().trim().length() == 0) {
-					new MensagemErro("Id Kart não preenchido!").setVisible(true);
-					return;
-				} else {
-					karts.setId(Long.valueOf(txtId.getText()));
-				}
+				
 				if (txtAno.getText().trim().length() == 0) {
 					new MensagemErro("Ano não preenchido!").setVisible(true);
 					return;
 				} else {
 					karts.setano(Long.valueOf(txtAno.getText()));
 				}
-				String CNPJ = txtCNPJ.getText();
-				CNPJ = CNPJ.replace(".", "");
-				CNPJ = CNPJ.replace(".", "");
-				CNPJ = CNPJ.replace("/", "");
-				CNPJ = CNPJ.replace("-", "");
-				CNPJ = CNPJ.trim();
+				Fornecedor fornecedor = (Fornecedor) comboBox.getSelectedItem();
 
-				if (CNPJ.trim().length() == 0) {
-					new MensagemErro("CNPJ do Fornecedor não preenchido!").setVisible(true);
-					return;
-				} else {
 
-					karts.setCNPJ(Long.valueOf(CNPJ));
-				}
+					karts.setCNPJ(Long.valueOf(fornecedor.getCnpj()));
+				
 
 				String DataEntrada = txtDataEntrada.getText();
 				if (DataEntrada.trim().length() == 0) {
@@ -213,14 +199,7 @@ public class TelaKarts extends JFrame {
 		btnCadastrar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		contentPane.add(btnCadastrar);
 
-		MaskFormatter mascaraCNPJ = null;
-		try {
-			mascaraCNPJ = new MaskFormatter("##.###.###/000#-##");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		txtCNPJ = new JFormattedTextField(mascaraCNPJ);
+	
 
 		txtPreco = new JTextField();
 		MaskFormatter formatter = null;
@@ -278,33 +257,9 @@ public class TelaKarts extends JFrame {
 		panel_4.setBounds(986, 53, 857, 939);
 		contentPane.add(panel_4);
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(0, 85, 125));
-		panel_1.setBounds(98, 113, 423, 61);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
-
-		txtId = new JTextField();
-		txtId.setBounds(153, 20, 260, 30);
-		panel_1.add(txtId);
-		txtId.setColumns(10);
-
-		JLabel lblIdKart = new JLabel("ID Kart:");
-		lblIdKart.setBounds(10, 17, 104, 30);
-		panel_1.add(lblIdKart);
-		lblIdKart.setForeground(new Color(255, 255, 255));
-		lblIdKart.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_3.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
-		lblNewLabel_3.setBounds(0, 0, 423, 61);
-		panel_1.add(lblNewLabel_3);
-
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBackground(new Color(0, 85, 125));
-		panel_1_1.setBounds(98, 195, 423, 61);
+		panel_1_1.setBounds(563, 279, 423, 61);
 		contentPane.add(panel_1_1);
 		panel_1_1.setLayout(null);
 
@@ -325,18 +280,11 @@ public class TelaKarts extends JFrame {
 		txtDataEntrada.setColumns(10);
 		txtDataEntrada.setBounds(158, 17, 255, 32);
 		panel_1_1.add(txtDataEntrada);
-		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
-		lblNewLabel_4.setBounds(0, 0, 423, 61);
-		panel_1_1.add(lblNewLabel_4);
 
 		JPanel panel_1_1_1 = new JPanel();
 		panel_1_1_1.setBackground(new Color(0, 85, 125));
 		panel_1_1_1.setLayout(null);
-		panel_1_1_1.setBounds(98, 279, 423, 61);
+		panel_1_1_1.setBounds(98, 195, 423, 61);
 		contentPane.add(panel_1_1_1);
 
 		txtMarca = new JTextField();
@@ -351,16 +299,16 @@ public class TelaKarts extends JFrame {
 		lblMarcaKarts.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		
 		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setBounds(0, 0, 423, 61);
+		panel_1_1_1.add(lblNewLabel_5);
 		lblNewLabel_5.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_5.setBounds(0, 0, 423, 61);
-		panel_1_1_1.add(lblNewLabel_5);
 
 		JPanel panel_1_1_2 = new JPanel();
 		panel_1_1_2.setBackground(new Color(0, 85, 125));
 		panel_1_1_2.setLayout(null);
-		panel_1_1_2.setBounds(98, 367, 423, 61);
+		panel_1_1_2.setBounds(563, 363, 423, 61);
 		contentPane.add(panel_1_1_2);
 
 		MaskFormatter mascaraCNPJ1 = null;
@@ -369,11 +317,6 @@ public class TelaKarts extends JFrame {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		txtCNPJ = new JFormattedTextField(mascaraCNPJ1);
-
-		txtCNPJ.setBounds(152, 20, 250, 30);
-		panel_1_1_2.add(txtCNPJ);
-		txtCNPJ.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("Fornecedor CNPJ:");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
@@ -381,17 +324,28 @@ public class TelaKarts extends JFrame {
 		panel_1_1_2.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		
-		JLabel lblNewLabel_6 = new JLabel("");
-		lblNewLabel_6.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
-		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_6.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_6.setBounds(0, 0, 423, 61);
-		panel_1_1_2.add(lblNewLabel_6);
+		comboBox = new JComboBox<Fornecedor>();
+		comboBox.setBounds(180, 24, 233, 22);
+		
+		FornecedorDAO fDAO = new FornecedorDAO();
+		ArrayList<Fornecedor> lstaf = fDAO.Listar();
+		
+		for (Fornecedor fornecedor : lstaf) {
+			comboBox.addItem(fornecedor);
+		}
+		panel_1_1_2.add(comboBox);
+		
+		JLabel lblNewLabel_7 = new JLabel("");
+		lblNewLabel_7.setBounds(0, 0, 423, 61);
+		panel_1_1_2.add(lblNewLabel_7);
+		lblNewLabel_7.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7.setVerticalAlignment(SwingConstants.TOP);
 
 		JPanel panel_1_2 = new JPanel();
 		panel_1_2.setBackground(new Color(0, 85, 125));
 		panel_1_2.setLayout(null);
-		panel_1_2.setBounds(553, 113, 423, 61);
+		panel_1_2.setBounds(98, 113, 423, 61);
 		contentPane.add(panel_1_2);
 
 		JLabel lblBuscarKarts = new JLabel("Cor:");
@@ -406,20 +360,20 @@ public class TelaKarts extends JFrame {
 		panel_1_2.add(txtCor);
 		
 		JLabel lblNewLabel_7_1 = new JLabel("");
+		lblNewLabel_7_1.setBounds(0, 0, 423, 61);
+		panel_1_2.add(lblNewLabel_7_1);
 		lblNewLabel_7_1.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
 		lblNewLabel_7_1.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel_7_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_7_1.setBounds(0, 0, 423, 61);
-		panel_1_2.add(lblNewLabel_7_1);
 
 		JPanel panel_1_3 = new JPanel();
 		panel_1_3.setBackground(new Color(0, 85, 125));
 		panel_1_3.setLayout(null);
-		panel_1_3.setBounds(553, 195, 423, 61);
+		panel_1_3.setBounds(98, 279, 423, 61);
 		contentPane.add(panel_1_3);
 
 		JLabel lblQuantidade = new JLabel("Quantidade:");
-		lblQuantidade.setBounds(10, 17, 104, 30);
+		lblQuantidade.setBounds(10, 14, 104, 30);
 		panel_1_3.add(lblQuantidade);
 		lblQuantidade.setForeground(new Color(255, 255, 255));
 		lblQuantidade.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
@@ -430,11 +384,11 @@ public class TelaKarts extends JFrame {
 		panel_1_3.add(txtQuantidade);
 		
 		JLabel lblNewLabel_7_2 = new JLabel("");
+		lblNewLabel_7_2.setBounds(0, 0, 423, 61);
+		panel_1_3.add(lblNewLabel_7_2);
 		lblNewLabel_7_2.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
 		lblNewLabel_7_2.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel_7_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_7_2.setBounds(0, 0, 423, 61);
-		panel_1_3.add(lblNewLabel_7_2);
 
 		// JPanel panel_4 = new JPanel();
 		panel_4.setBounds(996, 54, 857, 939);
@@ -463,7 +417,7 @@ public class TelaKarts extends JFrame {
 		JPanel panel_1_4 = new JPanel();
 		panel_1_4.setBackground(new Color(0, 85, 125));
 		panel_1_4.setLayout(null);
-		panel_1_4.setBounds(553, 279, 423, 61);
+		panel_1_4.setBounds(553, 113, 423, 61);
 		contentPane.add(panel_1_4);
 
 		JLabel lblModelo = new JLabel("Modelo:");
@@ -487,7 +441,7 @@ public class TelaKarts extends JFrame {
 		JPanel panel_1_5 = new JPanel();
 		panel_1_5.setBackground(new Color(0, 85, 125));
 		panel_1_5.setLayout(null);
-		panel_1_5.setBounds(553, 367, 423, 61);
+		panel_1_5.setBounds(563, 195, 423, 61);
 		contentPane.add(panel_1_5);
 
 		JLabel lblAno = new JLabel("Ano:");
@@ -510,17 +464,17 @@ public class TelaKarts extends JFrame {
 		panel_1_5.add(txtAno);
 		
 		JLabel lblNewLabel_7_2_2 = new JLabel("");
+		lblNewLabel_7_2_2.setBounds(0, 0, 423, 61);
+		panel_1_5.add(lblNewLabel_7_2_2);
 		lblNewLabel_7_2_2.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
 		lblNewLabel_7_2_2.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel_7_2_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_7_2_2.setBounds(0, 0, 423, 61);
-		panel_1_5.add(lblNewLabel_7_2_2);
 
 		JPanel panel_1_6 = new JPanel();
 		panel_1_6.setForeground(new Color(255, 255, 255));
 		panel_1_6.setBackground(new Color(0, 85, 125));
 		panel_1_6.setLayout(null);
-		panel_1_6.setBounds(98, 452, 423, 61);
+		panel_1_6.setBounds(98, 363, 423, 61);
 		contentPane.add(panel_1_6);
 
 		txtPreco_1 = new JFormattedTextField(formatter);
@@ -533,13 +487,6 @@ public class TelaKarts extends JFrame {
 		panel_1_6.add(lblPreco);
 		lblPreco.setForeground(new Color(255, 255, 255));
 		lblPreco.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		
-		JLabel lblNewLabel_7 = new JLabel("");
-		lblNewLabel_7.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/fundoAzul.jpg")));
-		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_7.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_7.setBounds(0, 0, 423, 61);
-		panel_1_6.add(lblNewLabel_7);
 
 		JLabel lblNewLabel_2 = new JLabel("");
 
@@ -567,6 +514,7 @@ public class TelaKarts extends JFrame {
 				// Converte a data de Entrada para o formato correto
 				DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 				LocalDate DataEntrada = LocalDate.parse(dataEntrada, formato);
+				Fornecedor f = (Fornecedor) comboBox.getSelectedItem();
 				
 				// Preenche o objeto Karts com os valores da linha selecionada
 				Karts karts = new Karts();
@@ -578,6 +526,7 @@ public class TelaKarts extends JFrame {
 				karts.setDataEntrada(DataEntrada);
 				karts.setpreco(preco);
 				karts.setId(id);
+				karts.setCNPJ(f.getCnpj());
 				
 				EditarKartsDialog dialog = new EditarKartsDialog(karts);
 				dialog.setVisible(true);

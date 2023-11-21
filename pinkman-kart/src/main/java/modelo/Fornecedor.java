@@ -35,6 +35,10 @@ public class Fornecedor {
 	public void setTelefone(Long telefone) {
 		this.telefone = telefone;
 	}
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return String.valueOf(cnpj);
+	}	
 
 }

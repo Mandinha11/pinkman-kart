@@ -72,16 +72,15 @@ public class VendasDAO implements IVendasDAO {
 
 			Connection conn = con.conectar();
 
-			String query = "INSERT INTO vendas (valor_total, data_venda, funcionarios_cpf, karts_id_kart) VALUES ( ? ,? ,? ,?)";
+			String query = "INSERT INTO vendas (valor_total, data_venda) VALUES ( ? ,?)";
 
 			try {
 				PreparedStatement ps = conn.prepareStatement(query);
 
 				ps.setFloat(1, v.getValorDaVenda());
 				ps.setDate(2, Date.valueOf(v.getDataVendas()));
-				ps.setLong(3, v.getFuncionarioCPF());
-				ps.setInt(4, v.getIdKarts());
-
+				
+				
 				ps.executeUpdate();
 
 				return true;

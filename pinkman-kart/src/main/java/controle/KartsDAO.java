@@ -78,21 +78,21 @@ public class KartsDAO implements IKartDAO {
 
 			Connection conn = con.conectar();
 
-			String query = "INSERT INTO karts (id_kart, cor, modelo, marca, ano, quantidade, data_entrada, preco, fornecedor_cnpj) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO karts ( cor, modelo, marca, ano, quantidade, data_entrada, preco, fornecedor_cnpj) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			try {
 
 				PreparedStatement ps = conn.prepareStatement(query);
 
-				ps.setLong(1, k.getId());
-				ps.setString(2, k.getCor());
-				ps.setString(3, k.getModelo());
-				ps.setString(4, k.getMarca());
-				ps.setLong(5, k.getano());
-				ps.setLong(6, k.getquantidade());
-				ps.setLong(8, k.getpreco());
-				ps.setDate(7, Date.valueOf(k.getDataEntrada()));
-				ps.setLong(9, k.CNPJ());
+				
+				ps.setString(1, k.getCor());
+				ps.setString(2, k.getModelo());
+				ps.setString(3, k.getMarca());
+				ps.setLong(4,k.getano());
+				ps.setLong(5, k.getquantidade());
+				ps.setDate(6, Date.valueOf(k.getDataEntrada()));
+				ps.setLong(7, k.getpreco());
+				ps.setLong(8, k.CNPJ());
 				System.out.println(ps);
 				System.out.println(ps.toString());
 				ps.executeUpdate();
