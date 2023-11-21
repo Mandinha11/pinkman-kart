@@ -224,6 +224,7 @@ public class TelaKarts extends JFrame {
 		} catch (ParseException e4) {
 			e4.printStackTrace();
 		}
+		
 
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBackground(new Color(0, 0, 0));
@@ -276,10 +277,15 @@ public class TelaKarts extends JFrame {
 			e4.printStackTrace();
 		}
 		txtDataEntrada = new JFormattedTextField(mascaraDataEntrada);
+		
 
 		txtDataEntrada.setColumns(10);
 		txtDataEntrada.setBounds(158, 17, 255, 32);
 		panel_1_1.add(txtDataEntrada);
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter formatter11= DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String dataatual = now.format(formatter11);
+		txtDataEntrada.setText(dataatual);
 
 		JPanel panel_1_1_1 = new JPanel();
 		panel_1_1_1.setBackground(new Color(0, 85, 125));
@@ -477,7 +483,7 @@ public class TelaKarts extends JFrame {
 		panel_1_6.setBounds(98, 363, 423, 61);
 		contentPane.add(panel_1_6);
 
-		txtPreco_1 = new JFormattedTextField(formatter);
+		txtPreco_1 = new JFormattedTextField(formatter11);
 		txtPreco_1.setBounds(152, 20, 261, 30);
 		panel_1_6.add(txtPreco_1);
 		txtPreco_1.setColumns(10);
@@ -576,10 +582,14 @@ public class TelaKarts extends JFrame {
 
 			Object[] linha = { Karts.getId(), Karts.getCor(), Karts.getModelo(), Karts.getMarca(), Karts.getano(),
 					Karts.getquantidade(), Karts.getDataEntrada().format(formato), Karts.getpreco(), Karts.CNPJ() };
+			
 
 			modelo.addRow(linha);
 
 		}
 		table.setModel(modelo);
+		
 	}
+
+
 }
