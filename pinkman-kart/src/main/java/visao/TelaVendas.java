@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -169,6 +170,10 @@ public class TelaVendas extends JFrame {
 		txtDataDaVenda = new JFormattedTextField(mascaraData);
 		txtDataDaVenda.setColumns(10);
 		txtDataDaVenda.setBounds(151, 16, 304, 28);
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String dataatual = now.format(formatter);
+		txtDataDaVenda.setText(dataatual);
 		panel_dataVenda.add(txtDataDaVenda);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("");
