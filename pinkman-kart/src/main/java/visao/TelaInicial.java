@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import controle.Conexao;
 import controle.LoginDao;
 import net.miginfocom.swing.MigLayout;
+import java.awt.event.KeyEvent;
 
 public class TelaInicial extends JFrame {
 
@@ -87,6 +88,7 @@ public class TelaInicial extends JFrame {
 		textLogin.setColumns(10);
 
 		JButton btnEntrar = new JButton("Logar");
+		btnEntrar.setMnemonic(KeyEvent.VK_ENTER);
 		btnEntrar.setForeground(new Color(255, 255, 255));
 		btnEntrar.setFont(new Font("Segoe UI Semibold", Font.BOLD, 16));
 		btnEntrar.setBackground(new Color(0, 0, 0));

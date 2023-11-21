@@ -61,7 +61,6 @@ public class EditarVendasDialog extends JDialog {
         buttonSalvar.setForeground(SystemColor.textHighlightText);
         buttonSalvar.setBounds(10, 150, 177, 39);
         buttonSalvar.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 salvarAlteracoes();
             }
@@ -77,25 +76,16 @@ public class EditarVendasDialog extends JDialog {
     }
 
     private void salvarAlteracoes() {
-        // Atualiza as informações do funcionário com os novos valores
-    	NumberFormat formatoDinheiro = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-    	
-        String vendas = (textFieldValorVenda.getText());
-        vendas = formatoDinheiro.format(vendas);
-        
-        textFieldValorVenda.setText(vendas);
-    	
-    	
+      
+    	vendas.setValorDaVenda(Float.valueOf(textFieldValorVenda.getText()));
 
-        // Converte a data de nascimento para o formato correto
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataVendas = LocalDate.parse(textFieldDataVenda.getText(), formato);
         //vendas.setDataVendas(dataVendas);
         this.vendas.setDataVendas(dataVendas);
-        // Indica que as informações foram alteradas
         informacoesAlteradas = true;
 
-        // Fecha a janela de diálogo
+
         dispose();
     }
 
