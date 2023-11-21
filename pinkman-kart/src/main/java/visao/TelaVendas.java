@@ -149,7 +149,7 @@ public class TelaVendas extends JFrame {
 
 		JPanel panel_dataVenda = new JPanel();
 		panel_dataVenda.setBackground(new Color(0, 85, 125));
-		panel_dataVenda.setBounds(281, 104, 483, 55);
+		panel_dataVenda.setBounds(281, 127, 483, 55);
 		contentPane.add(panel_dataVenda);
 		panel_dataVenda.setLayout(null);
 
@@ -239,7 +239,7 @@ public class TelaVendas extends JFrame {
 		JPanel panel_funcionario = new JPanel();
 		panel_funcionario.setLayout(null);
 		panel_funcionario.setBackground(new Color(0, 85, 125));
-		panel_funcionario.setBounds(822, 104, 483, 55);
+		panel_funcionario.setBounds(822, 127, 483, 55);
 		contentPane.add(panel_funcionario);
 		
 		MaskFormatter mascaraCPF = null;
@@ -259,12 +259,12 @@ public class TelaVendas extends JFrame {
 		LabelFuncionarioCPF.setBounds(10, 18, 156, 20);
 		panel_funcionario.add(LabelFuncionarioCPF);
 		
-		JLabel lblNewLabel_1_3 = new JLabel("");
-		lblNewLabel_1_3.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
-		lblNewLabel_1_3.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_1_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_3.setBounds(0, 0, 483, 55);
-		panel_funcionario.add(lblNewLabel_1_3);
+		JLabel lblNewLabel_1_1_1 = new JLabel("");
+		lblNewLabel_1_1_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_1_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1_1.setBounds(0, 0, 483, 55);
+		panel_funcionario.add(lblNewLabel_1_1_1);
 
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.setBackground(new Color(0, 0, 0));
@@ -326,7 +326,7 @@ public class TelaVendas extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel.setBounds(0, 0, 1924, 1063);
+		lblNewLabel.setBounds(10, -10, 1924, 1063);
 		contentPane.add(lblNewLabel);
 
 		atualizarTabela();
