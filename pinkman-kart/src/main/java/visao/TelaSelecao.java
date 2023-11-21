@@ -261,10 +261,10 @@ public class TelaSelecao extends JFrame {
 		painel_funcionario.setIcon(new ImageIcon(TelaSelecao.class.getResource("/imgs/fundoAzul.jpg")));
 		painel_funcionario.setBounds(0, 0, 308, 265);
 		panel_1_3_1.add(painel_funcionario);
-
+		
 		JLabel lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon(TelaSelecao.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel_5.setBounds(0, 0, 1924, 1061);
+		lblNewLabel_5.setBounds(0, -19, 1939, 1080);
 		contentPane.add(lblNewLabel_5);
 	}
 }

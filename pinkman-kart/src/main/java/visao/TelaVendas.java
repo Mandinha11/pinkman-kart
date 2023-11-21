@@ -129,7 +129,7 @@ public class TelaVendas extends JFrame {
 			}
 
 		});
-		btnCadastra.setBounds(36, 224, 187, 49);
+		btnCadastra.setBounds(36, 278, 187, 49);
 		contentPane.add(btnCadastra);
 
 		JButton btnVoltar = new JButton("Voltar");
@@ -149,7 +149,7 @@ public class TelaVendas extends JFrame {
 
 		JPanel panel_dataVenda = new JPanel();
 		panel_dataVenda.setBackground(new Color(0, 85, 125));
-		panel_dataVenda.setBounds(281, 127, 483, 55);
+		panel_dataVenda.setBounds(340, 127, 483, 55);
 		contentPane.add(panel_dataVenda);
 		panel_dataVenda.setLayout(null);
 
@@ -172,16 +172,16 @@ public class TelaVendas extends JFrame {
 		panel_dataVenda.add(txtDataDaVenda);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("");
+		lblNewLabel_1_1.setBounds(0, 0, 483, 55);
+		panel_dataVenda.add(lblNewLabel_1_1);
 		lblNewLabel_1_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
 		lblNewLabel_1_1.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1.setBounds(0, 0, 483, 55);
-		panel_dataVenda.add(lblNewLabel_1_1);
 
 		JPanel panel_idKart = new JPanel();
 		panel_idKart.setLayout(null);
 		panel_idKart.setBackground(new Color(0, 85, 125));
-		panel_idKart.setBounds(822, 31, 483, 55);
+		panel_idKart.setBounds(943, 31, 483, 55);
 		contentPane.add(panel_idKart);
 
 		txtidKart = new JTextField();
@@ -205,7 +205,7 @@ public class TelaVendas extends JFrame {
 		JPanel panel_vendas = new JPanel();
 		panel_vendas.setLayout(null);
 		panel_vendas.setBackground(new Color(0, 85, 125));
-		panel_vendas.setBounds(281, 31, 483, 55);
+		panel_vendas.setBounds(340, 31, 483, 55);
 		contentPane.add(panel_vendas);
 		/*
 		 
@@ -239,7 +239,7 @@ public class TelaVendas extends JFrame {
 		JPanel panel_funcionario = new JPanel();
 		panel_funcionario.setLayout(null);
 		panel_funcionario.setBackground(new Color(0, 85, 125));
-		panel_funcionario.setBounds(822, 127, 483, 55);
+		panel_funcionario.setBounds(943, 127, 483, 55);
 		contentPane.add(panel_funcionario);
 		
 		MaskFormatter mascaraCPF = null;
@@ -260,16 +260,16 @@ public class TelaVendas extends JFrame {
 		panel_funcionario.add(LabelFuncionarioCPF);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("");
+		lblNewLabel_1_1_1.setBounds(0, 0, 483, 55);
+		panel_funcionario.add(lblNewLabel_1_1_1);
 		lblNewLabel_1_1_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
 		lblNewLabel_1_1_1.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1_1.setBounds(0, 0, 483, 55);
-		panel_funcionario.add(lblNewLabel_1_1_1);
 
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.setBackground(new Color(0, 0, 0));
 		btnAtualizar.setForeground(new Color(255, 255, 255));
-		btnAtualizar.setBounds(36, 310, 187, 49);
+		btnAtualizar.setBounds(36, 364, 187, 49);
 		contentPane.add(btnAtualizar);
 
 		JButton btnExcluir = new JButton("Excluir");
@@ -298,7 +298,7 @@ public class TelaVendas extends JFrame {
 
 			}
 		});
-		btnExcluir.setBounds(36, 401, 187, 49);
+		btnExcluir.setBounds(36, 448, 187, 49);
 		contentPane.add(btnExcluir);
 
 		JLabel ImagemCarrinho = new JLabel("");
@@ -326,7 +326,7 @@ public class TelaVendas extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel.setBounds(10, -10, 1924, 1063);
+		lblNewLabel.setBounds(0, 0, 1924, 1053);
 		contentPane.add(lblNewLabel);
 
 		atualizarTabela();

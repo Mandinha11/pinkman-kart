@@ -77,9 +77,9 @@ public class EditarClienteDialog extends JDialog {
 
         getContentPane().add(panel);
         
-        JLabel lblNewLabel = new JLabel("New label");
-        lblNewLabel.setIcon(new ImageIcon(EditarClienteDialog.class.getResource("/imgs/alt.jpg")));
-        lblNewLabel.setBounds(-89, -12, 489, 212);
+        JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.setIcon(new ImageIcon(EditarClienteDialog.class.getResource("/imgs/fundoAzul.jpg")));
+        lblNewLabel.setBounds(-311, 0, 767, 200);
         panel.add(lblNewLabel);
     }
 

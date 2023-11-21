@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class MensagemErro extends JFrame {
 
@@ -47,7 +48,7 @@ public class MensagemErro extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(-200, 25, 477, 280);
+		lblNewLabel.setBounds(-172, 30, 477, 280);
 		lblNewLabel.setIcon(new ImageIcon(MensagemErro.class.getResource("/imgs/Atenção.png")));
 		contentPane.add(lblNewLabel);
 
@@ -73,9 +74,10 @@ public class MensagemErro extends JFrame {
 		});
 		contentPane.add(btnOk);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(MensagemErro.class.getResource("/imgs/azulFundo.png")));
-		lblNewLabel_1.setBounds(0, -14, 654, 351);
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1.setIcon(new ImageIcon(MensagemErro.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1.setBounds(-293, -27, 965, 348);
 		contentPane.add(lblNewLabel_1);
 		
 		setLocationRelativeTo(null);

@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class MensagemAcerto extends JFrame {
 
@@ -48,7 +49,7 @@ public class MensagemAcerto extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(-232, 11, 563, 272);
+		lblNewLabel.setBounds(-204, 31, 563, 272);
 		lblNewLabel.setIcon(new ImageIcon(MensagemAcerto.class.getResource("/imgs/Acerto.png")));
 		contentPane.add(lblNewLabel);
 		
@@ -71,9 +72,10 @@ public class MensagemAcerto extends JFrame {
 		lblMsgAcerto.setBounds(278, 84, 357, 60);
 		contentPane.add(lblMsgAcerto);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(MensagemAcerto.class.getResource("/imgs/azulFundo.png")));
-		lblNewLabel_1.setBounds(-23, 0, 714, 377);
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1.setIcon(new ImageIcon(MensagemAcerto.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1.setBounds(-254, 0, 1059, 349);
 		contentPane.add(lblNewLabel_1);
 		
 		if (!msg.isEmpty()) {

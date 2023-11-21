@@ -95,10 +95,10 @@ public class EditarFornecedorDialog extends JDialog {
 		panel.add(buttonSalvar);
 
 		getContentPane().add(panel);
-
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(EditarFornecedorDialog.class.getResource("/imgs/alt.jpg")));
-		lblNewLabel.setBounds(-71, 0, 471, 200);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(EditarFornecedorDialog.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel.setBounds(-322, 0, 786, 200);
 		panel.add(lblNewLabel);
 	}
 

@@ -135,8 +135,8 @@ public class EditarKartsDialog extends JDialog {
         panel.add(bntSair);
         
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(EditarKartsDialog.class.getResource("/imgs/azulFundo.png")));
-        lblNewLabel.setBounds(0, 0, 458, 506);
+        lblNewLabel.setIcon(new ImageIcon(EditarKartsDialog.class.getResource("/imgs/fundoAzul.jpg")));
+        lblNewLabel.setBounds(-329, 0, 753, 544);
         panel.add(lblNewLabel);
     }
 
