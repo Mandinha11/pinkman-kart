@@ -232,7 +232,7 @@ public class TelaKarts extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table.getSelectedRow();
-				long idkarts = (long) table.getValueAt(selectedRow, 0);
+				Integer idkarts = (Integer) table.getValueAt(selectedRow, 0);
 
 				KartsDAO dao = KartsDAO.getinstancia();
 
@@ -512,7 +512,7 @@ public class TelaKarts extends JFrame {
 					return;
 				}
 				// Obtém os valores da linha selecionada
-				long id = (long) table.getValueAt(selectedRow, 0);
+				Integer id = (Integer) table.getValueAt(selectedRow, 0);
 				String Cor = (String) table.getValueAt(selectedRow, 1);
 				String modelo = (String) table.getValueAt(selectedRow, 2);
 				String marca = (String) table.getValueAt(selectedRow, 3);

@@ -31,5 +31,10 @@ public abstract class Pessoa {
 	public void setDataNac(LocalDate dataNac) {
 		this.dataNac = dataNac;
 	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return String.valueOf(cpf);
 
+}
 }

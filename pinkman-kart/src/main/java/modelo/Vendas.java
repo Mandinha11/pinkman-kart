@@ -51,5 +51,9 @@ public class Vendas {
 	public void setIdKarts(Integer idKarts) {
 		this.idKarts = idKarts;
 	}
+	
+	public void setCPF1(Long cpf) {
+		FuncionarioCPF = cpf;
+	}
 
 }

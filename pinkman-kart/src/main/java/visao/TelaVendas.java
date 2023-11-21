@@ -27,22 +27,29 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import controle.FuncionarioDAO;
+import controle.KartsDAO;
 import controle.VendasDAO;
 import modelo.Cliente;
+import modelo.Fornecedor;
+import modelo.Funcionario;
+import modelo.Karts;
 import modelo.Vendas;
+import javax.swing.JComboBox;
 
 public class TelaVendas extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtidKart;
 	private JTextField txtValorDaVenda;
-	private JTextField txtFuncionarioCPF;
 
 	private VendasDAO dao;
 	private JTextField txtDataDaVenda;
 	private JTable table;
 	private DefaultTableModel modelo;
 	private ArrayList<Vendas> listar = new ArrayList<Vendas>();
+	private JComboBox<Funcionario> comboBoxFuncionario;
+	private JComboBox<Funcionario> comboBox_1;
+	private JComboBox<Karts> comboBoxKart;
 
 	/**
 	 * Create the frame.
@@ -77,25 +84,6 @@ public class TelaVendas extends JFrame {
 					vendas.setValorDaVenda(Float.valueOf(v));
 				}
 
-				String id = txtidKart.getText();
-				if (id.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "ID_Kart não preenchido!!");
-					return;
-				} else {
-					vendas.setIdKarts(Integer.valueOf(id));
-				}
-				String cpf = txtFuncionarioCPF.getText();
-				if (cpf.trim().length() == 0) {
-					JOptionPane.showMessageDialog(null, "CPF não preenchido!!");
-					return;
-				} else {
-					cpf = cpf.replace(".", "");
-					cpf = cpf.replace(".", "");
-					cpf = cpf.replace("-", "");
-
-					vendas.setFuncionarioCPF(Long.valueOf(cpf));
-
-				}
 
 				String DataDaVenda = txtDataDaVenda.getText();
 				if (DataDaVenda.trim().length() == 0) {
@@ -118,7 +106,10 @@ public class TelaVendas extends JFrame {
 					}
 
 				}
-
+				Funcionario f = (Funcionario) comboBoxFuncionario.getSelectedItem();
+				Karts k = (Karts) comboBoxKart.getSelectedItem();
+				vendas.setFuncionarioCPF(f.getCpf());
+				vendas.setIdKarts(k.getId());
 				VendasDAO VendasDao = VendasDAO.getinstancia();
 				if (VendasDao.inserir(vendas) == true) {
 					new MensagemAcerto("Cadastrado !").setVisible(true);
@@ -150,7 +141,7 @@ public class TelaVendas extends JFrame {
 
 		JPanel panel_dataVenda = new JPanel();
 		panel_dataVenda.setBackground(new Color(0, 85, 125));
-		panel_dataVenda.setBounds(340, 127, 483, 55);
+		panel_dataVenda.setBounds(340, 132, 483, 55);
 		contentPane.add(panel_dataVenda);
 		panel_dataVenda.setLayout(null);
 
@@ -175,42 +166,11 @@ public class TelaVendas extends JFrame {
 		String dataatual = now.format(formatter);
 		txtDataDaVenda.setText(dataatual);
 		panel_dataVenda.add(txtDataDaVenda);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("");
-		lblNewLabel_1_1.setBounds(0, 0, 483, 55);
-		panel_dataVenda.add(lblNewLabel_1_1);
-		lblNewLabel_1_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
-		lblNewLabel_1_1.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-
-		JPanel panel_idKart = new JPanel();
-		panel_idKart.setLayout(null);
-		panel_idKart.setBackground(new Color(0, 85, 125));
-		panel_idKart.setBounds(943, 31, 483, 55);
-		contentPane.add(panel_idKart);
-
-		txtidKart = new JTextField();
-		txtidKart.setColumns(10);
-		txtidKart.setBounds(153, 16, 304, 28);
-		panel_idKart.add(txtidKart);
-
-		JLabel LabelIdKart = new JLabel("Id Kart:");
-		LabelIdKart.setForeground(new Color(255, 255, 255));
-		LabelIdKart.setBounds(10, 16, 102, 24);
-		panel_idKart.add(LabelIdKart);
-		LabelIdKart.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
-		JLabel lblNewLabel_1_2 = new JLabel("");
-		lblNewLabel_1_2.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
-		lblNewLabel_1_2.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_2.setBounds(0, 0, 483, 55);
-		panel_idKart.add(lblNewLabel_1_2);
 
 		JPanel panel_vendas = new JPanel();
 		panel_vendas.setLayout(null);
 		panel_vendas.setBackground(new Color(0, 85, 125));
-		panel_vendas.setBounds(340, 31, 483, 55);
+		panel_vendas.setBounds(340, 38, 483, 55);
 		contentPane.add(panel_vendas);
 		/*
 		 
@@ -233,44 +193,39 @@ public class TelaVendas extends JFrame {
 		LabelValorVenda.setBounds(10, 16, 121, 24);
 		panel_vendas.add(LabelValorVenda);
 		LabelValorVenda.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
-		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(0, 0, 483, 55);
-		panel_vendas.add(lblNewLabel_1);
 
 		JPanel panel_funcionario = new JPanel();
 		panel_funcionario.setLayout(null);
 		panel_funcionario.setBackground(new Color(0, 85, 125));
-		panel_funcionario.setBounds(943, 127, 483, 55);
+		panel_funcionario.setBounds(1085, 132, 483, 55);
 		contentPane.add(panel_funcionario);
 		
-		MaskFormatter mascaraCPF = null;
-		try {
-			mascaraCPF = new MaskFormatter("###.###.###-##");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		txtFuncionarioCPF = new JFormattedTextField(mascaraCPF);
-		txtFuncionarioCPF.setColumns(10);
-		txtFuncionarioCPF.setBounds(155, 16, 304, 28);
-		panel_funcionario.add(txtFuncionarioCPF);
-
+		
 		JLabel LabelFuncionarioCPF = new JLabel("Funcionario CPF:");
 		LabelFuncionarioCPF.setForeground(new Color(255, 255, 255));
 		LabelFuncionarioCPF.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		LabelFuncionarioCPF.setBounds(10, 18, 156, 20);
 		panel_funcionario.add(LabelFuncionarioCPF);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("");
-		lblNewLabel_1_1_1.setBounds(0, 0, 483, 55);
-		panel_funcionario.add(lblNewLabel_1_1_1);
-		lblNewLabel_1_1_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
-		lblNewLabel_1_1_1.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-
+		comboBoxFuncionario = new JComboBox<Funcionario>();
+		comboBoxFuncionario.setBounds(176, 19, 297, 22);
+		panel_funcionario.add(comboBoxFuncionario);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("");
+		lblNewLabel_1_1.setBounds(0, 0, 483, 55);
+		panel_funcionario.add(lblNewLabel_1_1);
+		lblNewLabel_1_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_1_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		
+	
+		FuncionarioDAO fDAO = new FuncionarioDAO();
+		ArrayList<Funcionario> lstaf = ( fDAO).listar();
+		
+		for (Funcionario funcionario : lstaf) {
+			comboBoxFuncionario.addItem(funcionario);
+			
+		}
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.setBackground(new Color(0, 0, 0));
 		btnAtualizar.setForeground(new Color(255, 255, 255));
@@ -329,10 +284,37 @@ public class TelaVendas extends JFrame {
 		table.setModel(modelo);
 		contentPane.add(panelTabela);
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JPanel panel_id = new JPanel();
+		panel_id.setLayout(null);
+		panel_id.setBackground(new Color(0, 85, 125));
+		panel_id.setBounds(1085, 38, 483, 55);
+		contentPane.add(panel_id);
+		
+		JLabel Labelid = new JLabel("Id Kart:");
+		Labelid.setForeground(Color.WHITE);
+		Labelid.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		Labelid.setBackground(Color.WHITE);
+		Labelid.setBounds(10, 16, 121, 24);
+		panel_id.add(Labelid);
+		
+	
+		
+		comboBoxKart = new JComboBox<Karts>();
+		comboBoxKart.setBounds(171, 19, 291, 22);
+		panel_id.add(comboBoxKart);
+		
+		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel.setBounds(0, 0, 1924, 1053);
+		lblNewLabel.setBounds(-38, -14, 1962, 1067);
 		contentPane.add(lblNewLabel);
+		
+		KartsDAO kd = new KartsDAO();
+		ArrayList<Karts> listakart = ( kd).listar();
+		
+		for (Karts karts : listakart) {
+			comboBoxKart.addItem(karts);
+			
+		}
 
 		atualizarTabela();
 
