@@ -492,8 +492,15 @@ public class TelaKarts extends JFrame {
 		panel_1_6.setLayout(null);
 		panel_1_6.setBounds(98, 363, 423, 61);
 		contentPane.add(panel_1_6);
+		
+		MaskFormatter formatter111 = null;
+		try {
+			formatter111 = new MaskFormatter("R$ ###.###.###,##");
+		} catch (ParseException e2) {
+			e2.printStackTrace();
+		}
 
-		txtPreco_1 = new JFormattedTextField(formatter11);
+		txtPreco_1 = new JFormattedTextField(formatter111);
 		txtPreco_1.setBounds(152, 20, 261, 30);
 		panel_1_6.add(txtPreco_1);
 		txtPreco_1.setColumns(10);
