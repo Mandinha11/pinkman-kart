@@ -52,8 +52,4 @@ public class Vendas {
 		this.idKarts = idKarts;
 	}
 	
-	public void setCPF1(Long cpf) {
-		FuncionarioCPF = cpf;
-	}
-
 }
