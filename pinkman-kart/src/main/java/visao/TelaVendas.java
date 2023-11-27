@@ -122,7 +122,7 @@ public class TelaVendas extends JFrame {
 			}
 
 		});
-		btnCadastra.setBounds(36, 278, 187, 49);
+		btnCadastra.setBounds(1453, 716, 375, 49);
 		contentPane.add(btnCadastra);
 
 		JButton btnVoltar = new JButton("Voltar");
@@ -237,52 +237,6 @@ public class TelaVendas extends JFrame {
 			comboBoxFuncionario.addItem(funcionario);
 			
 		}
-		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// Verifica se uma linha foi selecionada na tabela
-				int selectedRow = table.getSelectedRow();
-				if (selectedRow == -1) {
-					JOptionPane.showMessageDialog(null, "Selecione uma venda na tabela para atualizar.");
-					return;
-				}
-				// Obtém os valores da linha selecionada
-			
-				Integer idKarts = (int) table.getValueAt(selectedRow, 0);
-				Float ValorDaVenda = (Float) table.getValueAt(selectedRow, 2);
-				
-				
-				Vendas vendas = new Vendas();
-				
-				vendas.setIdKarts(idKarts);
-				vendas.setValorDaVenda(ValorDaVenda);
-				
-				
-				EditarVendasDialog dialog = new EditarVendasDialog(vendas);
-				dialog.setVisible(true);
-				
-				if (dialog.isInformacoesAlteradas()) {
-					vendas = dialog.getVendasAtualizado();
-					
-					VendasDAO dao = VendasDAO.getinstancia();
-					boolean retorno = dao.alterar(vendas);
-					
-					if (retorno) {
-						new MensagemAcerto("vanda atualizada com sucesso!").setVisible(true);
-						// Atualiza a tabela após a alteração
-						
-						atualizarTabela();
-					}else {
-						new MensagemErro("Erro ao atualizar a Venda. !").setVisible(true);
-
-					}
-				}
-			}
-		});
-		btnAtualizar.setBackground(new Color(0, 0, 0));
-		btnAtualizar.setForeground(new Color(255, 255, 255));
-		btnAtualizar.setBounds(36, 364, 187, 49);
-		contentPane.add(btnAtualizar);
 
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBackground(new Color(0, 0, 0));
@@ -310,7 +264,7 @@ public class TelaVendas extends JFrame {
 
 			}
 		});
-		btnExcluir.setBounds(36, 448, 187, 49);
+		btnExcluir.setBounds(1068, 716, 375, 49);
 		contentPane.add(btnExcluir);
 
 		JLabel ImagemCarrinho = new JLabel("");
@@ -323,7 +277,7 @@ public class TelaVendas extends JFrame {
 		 * Tabela
 		 */
 		JPanel panelTabela = new JPanel();
-		panelTabela.setBounds(340, 278, 1488, 447);
+		panelTabela.setBounds(340, 278, 1488, 427);
 
 		table = new JTable();
 		table.setBackground(new Color(255, 255, 255));

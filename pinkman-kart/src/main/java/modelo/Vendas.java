@@ -12,7 +12,7 @@ public class Vendas {
 
 	public Vendas() {}
 
-	public int getIdVenda() {
+	public Integer getIdVenda() {
 		return idVenda;
 	}
 
