@@ -251,18 +251,12 @@ public class TelaVendas extends JFrame {
 				}
 				// Obtém os valores da linha selecionada
 			
-				Long FuncionarioCPF = (Long) table.getValueAt(selectedRow, 1);
+				Integer idKarts = (int) table.getValueAt(selectedRow, 0);
 				Float ValorDaVenda = (Float) table.getValueAt(selectedRow, 2);
-				String dataEntrada = (String) table.getValueAt(selectedRow, 6);
-				Integer idKarts = (int) table.getValueAt(selectedRow, 7);
-				DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-				LocalDate data = LocalDate.parse(dataEntrada, formato);
-				
 				
 				
 				Vendas vendas = new Vendas();
-				vendas.setDataVendas(data);
-				vendas.setFuncionarioCPF(FuncionarioCPF);
+				
 				vendas.setIdKarts(idKarts);
 				vendas.setValorDaVenda(ValorDaVenda);
 				

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Vendas {
 
-	private int idVenda;
+	private Integer idVenda;
 	private Long FuncionarioCPF;
 	private Float ValorDaVenda;
 	private LocalDate dataVendas;

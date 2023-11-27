@@ -15,12 +15,10 @@ import java.time.format.DateTimeFormatter;
 public class EditarVendasDialog extends JDialog {
 	private Vendas vendas;
 	private boolean informacoesAlteradas = false;
-	
-	private JTextField textDataVenda;
 	private JTextField textFieldCpf;
 	private JTextField textFieldPreco;
 	private JTextField textFieldIdKart;
-	
+	private JTextField textFieldIdVenda;
     public EditarVendasDialog(Vendas vendas) {
         this.vendas = vendas;
 
@@ -32,42 +30,28 @@ public class EditarVendasDialog extends JDialog {
         JPanel panel = new JPanel();
         panel.setBackground(new Color(255, 255, 255));
         panel.setLayout(null);
-
-		JLabel lblDataVenda = new JLabel("Data da venda:");
-		lblDataVenda.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDataVenda.setBounds(10, 133, 200, 40);
-		panel.add(lblDataVenda);
-		textDataVenda = new JTextField(vendas.getDataVendas().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-		textDataVenda.setBackground(SystemColor.menu);
-		textDataVenda.setBounds(208, 136, 190, 39);
-		panel.add(textDataVenda);
-			
 		
-		JLabel lblCpf = new JLabel("Cpf:");
-		lblCpf.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblCpf.setBounds(10, 184, 200, 40);
-		panel.add(lblCpf);
-			textFieldCpf = new JTextField(vendas.getFuncionarioCPF().toString());
-			textFieldCpf.setBackground(SystemColor.menu);
-			textFieldCpf.setBounds(208, 187, 190, 39);
-			panel.add(textFieldCpf);
+		
+		JLabel lblIdKart = new JLabel("Id Kart:");
+		lblIdKart.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblIdKart.setBounds(10, 130, 200, 40);
+		panel.add(lblIdKart);
+		lblIdKart.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblIdKart.setBounds(10, 112, 200, 40);
+		
 		
 		JLabel lblPreco = new JLabel("Valor total da venda:");
 		lblPreco.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblPreco.setBounds(10, 235, 200, 40);
+		lblPreco.setBounds(10, 181, 200, 40);
 		panel.add(lblPreco);
 			textFieldPreco = new JTextField(vendas.getValorDaVenda().toString());
 			textFieldPreco.setBackground(SystemColor.menu);
-			textFieldPreco.setBounds(208, 238, 190, 39);
+			textFieldPreco.setBounds(208, 184, 190, 39);
 			panel.add(textFieldPreco);
-		
-		JLabel lblIdKart = new JLabel("Id Kart:");
-		lblCpf.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblCpf.setBounds(10, 184, 200, 40);
-		panel.add(lblCpf);
+			
 			textFieldIdKart = new JTextField(vendas.getIdKarts());
 			textFieldIdKart.setBackground(SystemColor.menu);
-			textFieldIdKart.setBounds(208, 187, 190, 39);
+			textFieldIdKart.setBounds(208, 115, 190, 39);
 			panel.add(textFieldIdKart);
 		
 		setLocationRelativeTo(null);
@@ -82,7 +66,7 @@ public class EditarVendasDialog extends JDialog {
        getContentPane().add(panel);
         buttonSalvar.setForeground(Color.WHITE);
         buttonSalvar.setBackground(Color.BLACK);
-        buttonSalvar.setBounds(10, 393, 190, 39);
+        buttonSalvar.setBounds(10, 456, 190, 39);
         panel.add(buttonSalvar);
         
         JButton bntSair = new JButton("Sair");
@@ -94,28 +78,23 @@ public class EditarVendasDialog extends JDialog {
         });
         bntSair.setForeground(Color.WHITE);
         bntSair.setBackground(Color.BLACK);
-        bntSair.setBounds(224, 393, 190, 39);
+        bntSair.setBounds(224, 456, 190, 39);
         panel.add(bntSair);
         
         JLabel lblNewLabel = new JLabel("");
         lblNewLabel.setIcon(new ImageIcon(EditarVendasDialog.class.getResource("/imgs/fundoAzul.jpg")));
-        lblNewLabel.setBounds(-329, 0, 753, 544);
+        lblNewLabel.setBounds(-329, 0, 784, 545);
         panel.add(lblNewLabel);
     }
 
     private void salvarAlteracoes() {
         
-    	DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate DataEntrada = LocalDate.parse(textDataVenda.getText(), formato);
-        vendas.setDataVendas(DataEntrada);
     
-
-        vendas.setFuncionarioCPF(Long.valueOf(textFieldCpf.getText()));
-	    vendas.setValorDaVenda(Float.valueOf(textFieldPreco.getText()));
+        vendas.setIdKarts(Integer.parseInt(textFieldIdKart.getText()));
+	    vendas.setValorDaVenda(Float.parseFloat(textFieldPreco.getText()));
 	    
 	    informacoesAlteradas = true;
 
-        
         dispose();
     }
 
