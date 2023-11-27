@@ -241,6 +241,47 @@ public class TelaVendas extends JFrame {
 			
 		}
 		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Verifica se uma linha foi selecionada na tabela
+				int selectedRow = table.getSelectedRow();
+				if (selectedRow == -1) {
+					JOptionPane.showMessageDialog(null, "Selecione uma venda na tabela para atualizar.");
+					return;
+				}
+				// Obtém os valores da linha selecionada
+			
+				Integer idKarts = (int) table.getValueAt(selectedRow, 0);
+				Float ValorDaVenda = (Float) table.getValueAt(selectedRow, 2);
+				
+				
+				Vendas vendas = new Vendas();
+				
+				vendas.setIdKarts(idKarts);
+				vendas.setValorDaVenda(ValorDaVenda);
+				
+				
+				EditarVendasDialog dialog = new EditarVendasDialog(vendas);
+				dialog.setVisible(true);
+				
+				if (dialog.isInformacoesAlteradas()) {
+					vendas = dialog.getVendasAtualizado();
+					
+					VendasDAO dao = VendasDAO.getinstancia();
+					boolean retorno = dao.alterar(vendas);
+					
+					if (retorno) {
+						new MensagemAcerto("vanda atualizada com sucesso!").setVisible(true);
+						// Atualiza a tabela após a alteração
+						
+						atualizarTabela();
+					}else {
+						new MensagemErro("Erro ao atualizar a Venda. !").setVisible(true);
+
+					}
+				}
+			}
+		});
 		btnAtualizar.setBackground(new Color(0, 0, 0));
 		btnAtualizar.setForeground(new Color(255, 255, 255));
 		btnAtualizar.setBounds(36, 364, 187, 49);

@@ -103,14 +103,15 @@ public class VendasDAO implements IVendasDAO {
 
 		Connection conn = con.conectar();
 
-		String query = "UPDATE vendas SET data_venda = ?,";
+		String query = "UPDATE vendas SET valor_total = ?, karts_id_kart = ?";
 
 		try {
 
 			PreparedStatement ps = conn.prepareStatement(query);
 
-			ps.setDate(1, Date.valueOf(v.getDataVendas()));
-
+			ps.setFloat(1, v.getValorDaVenda());
+			ps.setInt(2, v.getIdKarts());
+			
 			int rowsUpdated = ps.executeUpdate();
 
 			return rowsUpdated > 0;
