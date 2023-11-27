@@ -34,6 +34,7 @@ import modelo.Cliente;
 import modelo.Fornecedor;
 import modelo.Funcionario;
 import modelo.Karts;
+import modelo.MonetarioDocument;
 import modelo.Vendas;
 import javax.swing.JComboBox;
 
@@ -179,17 +180,13 @@ public class TelaVendas extends JFrame {
 		panel_vendas.setBackground(new Color(0, 85, 125));
 		panel_vendas.setBounds(340, 38, 483, 55);
 		contentPane.add(panel_vendas);
-		/*
+		
+		 txtValorDaVenda = new JTextField(8); 
+		 txtValorDaVenda.setDocument(new MonetarioDocument());
 		 
-		 */
-		MaskFormatter mascaraVenda = null;
-		try {
-			mascaraVenda = new MaskFormatter("#.###.###,##");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		txtValorDaVenda = new JFormattedTextField(mascaraVenda);
-
+		
+		
+	
 		txtValorDaVenda.setColumns(10);
 		txtValorDaVenda.setBounds(153, 16, 304, 28);
 		panel_vendas.add(txtValorDaVenda);

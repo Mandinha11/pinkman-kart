@@ -66,7 +66,7 @@ public class TelaInicial extends JFrame {
 
 		setContentPane(contentPane);
 
-		Icon logoPinkmanKart = new ImageIcon("imgs/PinkmanKartLogo.png");
+		//Icon logoPinkmanKart = new ImageIcon("imgs/PinkmanKartLogo.png");
 		contentPane.setLayout(null);
 		JLabel lblLogoPinkmanKart = new JLabel("");
 		lblLogoPinkmanKart.setBounds(718, 433, 512, 180);
@@ -122,7 +122,7 @@ public class TelaInicial extends JFrame {
 					tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					tela.setVisible(true);
 					Conexao con = Conexao.getInstancia();
-					Connection conn = con.conectar();
+					//Connection conn = con.conectar();
 					con.conectar();
 
 					new MensagemAcerto("Você entrou com sucesso!").setVisible(true);
