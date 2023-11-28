@@ -7,7 +7,7 @@ public class Karts {
 	
 	private String modelo;
 	private String marca;
-	private long preco;
+	private Long preco;
 	private long ano;
 	private long quantidade;
 	private String cor;

@@ -97,33 +97,7 @@ public class VendasDAO implements IVendasDAO {
 
 	}
 
-	public boolean alterar(Vendas v) {
-
-		Conexao con = Conexao.getInstancia();
-
-		Connection conn = con.conectar();
-
-		String query = "UPDATE vendas SET data_venda = ?,";
-
-		try {
-
-			PreparedStatement ps = conn.prepareStatement(query);
-
-			ps.setDate(1, Date.valueOf(v.getDataVendas()));
-
-			int rowsUpdated = ps.executeUpdate();
-
-			return rowsUpdated > 0;
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		} finally {
-			con.fecharConexao();
-		}
-
-		return false;
-	}
+	
 
 	public boolean Deletar(Vendas v) {
 
@@ -150,6 +124,12 @@ public class VendasDAO implements IVendasDAO {
 			con.fecharConexao();
 		}
 
+		return false;
+	}
+
+	@Override
+	public boolean alterar(Vendas v) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Vendas {
 
-	private int idVenda;
+	private Integer idVenda;
 	private Long FuncionarioCPF;
 	private Float ValorDaVenda;
 	private LocalDate dataVendas;
@@ -12,7 +12,7 @@ public class Vendas {
 
 	public Vendas() {}
 
-	public int getIdVenda() {
+	public Integer getIdVenda() {
 		return idVenda;
 	}
 
@@ -52,8 +52,4 @@ public class Vendas {
 		this.idKarts = idKarts;
 	}
 	
-	public void setCPF1(Long cpf) {
-		FuncionarioCPF = cpf;
-	}
-
 }

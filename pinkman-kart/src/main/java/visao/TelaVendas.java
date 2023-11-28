@@ -122,7 +122,7 @@ public class TelaVendas extends JFrame {
 			}
 
 		});
-		btnCadastra.setBounds(36, 278, 187, 49);
+		btnCadastra.setBounds(1453, 716, 375, 49);
 		contentPane.add(btnCadastra);
 
 		JButton btnVoltar = new JButton("Voltar");
@@ -184,9 +184,6 @@ public class TelaVendas extends JFrame {
 		 txtValorDaVenda = new JTextField(8); 
 		 txtValorDaVenda.setDocument(new MonetarioDocument());
 		 
-		
-		
-	
 		txtValorDaVenda.setColumns(10);
 		txtValorDaVenda.setBounds(153, 16, 304, 28);
 		panel_vendas.add(txtValorDaVenda);
@@ -237,11 +234,6 @@ public class TelaVendas extends JFrame {
 			comboBoxFuncionario.addItem(funcionario);
 			
 		}
-		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.setBackground(new Color(0, 0, 0));
-		btnAtualizar.setForeground(new Color(255, 255, 255));
-		btnAtualizar.setBounds(36, 364, 187, 49);
-		contentPane.add(btnAtualizar);
 
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBackground(new Color(0, 0, 0));
@@ -269,7 +261,7 @@ public class TelaVendas extends JFrame {
 
 			}
 		});
-		btnExcluir.setBounds(36, 448, 187, 49);
+		btnExcluir.setBounds(1068, 716, 375, 49);
 		contentPane.add(btnExcluir);
 
 		JLabel ImagemCarrinho = new JLabel("");
@@ -282,7 +274,7 @@ public class TelaVendas extends JFrame {
 		 * Tabela
 		 */
 		JPanel panelTabela = new JPanel();
-		panelTabela.setBounds(340, 278, 1488, 447);
+		panelTabela.setBounds(340, 278, 1488, 427);
 
 		table = new JTable();
 		table.setBackground(new Color(255, 255, 255));
@@ -327,7 +319,7 @@ public class TelaVendas extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		KartsDAO kd = new KartsDAO();
-		ArrayList<Karts> listakart = ( kd).listar();
+		ArrayList<Karts> listakart = (kd).listar();
 		
 		for (Karts karts : listakart) {
 			comboBoxKart.addItem(karts);

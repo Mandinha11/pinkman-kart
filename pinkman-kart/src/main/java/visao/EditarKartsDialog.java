@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import modelo.Cliente;
 import modelo.Karts;
+import modelo.MonetarioDocument;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -97,8 +98,12 @@ public class EditarKartsDialog extends JDialog {
 		lblPreo.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblPreo.setBounds(10, 317, 200, 40);
 		panel.add(lblPreo);
-		
-		textFieldPreco = new JTextField(karts.getpreco().toString());
+		/*
+		 textFieldPreco = new JTextField(8); 
+		 JTextFieldDinheiro .setDocument(new MonetarioDocument());
+		 */
+		textFieldPreco = new JTextField(8); 
+		textFieldPreco.setDocument(new MonetarioDocument());
 		textFieldPreco.setBackground(SystemColor.menu);
 		textFieldPreco.setBounds(208, 317, 190, 39);
 		panel.add(textFieldPreco);
@@ -141,18 +146,25 @@ public class EditarKartsDialog extends JDialog {
     }
 
     private void salvarAlteracoes() {
-        // Atualiza as informações do funcionário com os novos valores
+        
+        String preco = textFieldPreco.getText();
+		preco = preco.replace(".", "");
+				
+		preco = preco.replace(",", "");
+         
+    
+    	// Atualiza as informações do funcionário com os novos valores
         karts.setCor(textFieldCor.getText());
      // Converte a data de nascimento para o formato correto
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate DataEntrada = LocalDate.parse(textFieldDataEntrada.getText(), formato);
         karts.setDataEntrada(DataEntrada);
 
-         karts.setquantidade(Long.valueOf(textFieldquantidade.getText()));
-	     karts.setMarca(textFieldMarca.getText());
-	     karts.setModelo(textFieldModelo.getText());
-	     karts.setano(Long.valueOf(textFieldAno.getText()));
-	     karts.setpreco(Long.valueOf(textFieldPreco.getText()));
+        karts.setquantidade(Long.valueOf(textFieldquantidade.getText()));
+	    karts.setMarca(textFieldMarca.getText());
+	    karts.setModelo(textFieldModelo.getText());
+	    karts.setano(Long.valueOf(textFieldAno.getText()));
+	    karts.setpreco(Long.valueOf(preco));
 	     
         
       

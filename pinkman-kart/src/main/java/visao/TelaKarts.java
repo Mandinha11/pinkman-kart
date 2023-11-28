@@ -18,6 +18,7 @@ import controle.FornecedorDAO;
 import controle.KartsDAO;
 import modelo.Fornecedor;
 import modelo.Karts;
+import modelo.MonetarioDocument;
 
 import java.awt.Color;
 import javax.swing.JButton;
@@ -499,8 +500,11 @@ public class TelaKarts extends JFrame {
 		} catch (ParseException e2) {
 			e2.printStackTrace();
 		}
-
-		txtPreco_1 = new JFormattedTextField(formatter111);
+		
+		 txtPreco_1 = new JTextField(8); 
+		 txtPreco_1.setDocument(new MonetarioDocument());
+		 
+		
 		txtPreco_1.setBounds(152, 20, 261, 30);
 		panel_1_6.add(txtPreco_1);
 		txtPreco_1.setColumns(10);
