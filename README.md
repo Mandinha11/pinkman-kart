@@ -11,7 +11,6 @@ Instituto Federal de Santa Catarina - Campus Gaspar
 INSERT INTO sistema_pinkman_kart (nomes) VALUES (
 'Amanda Alves de Lima',
 'Henry Janke',
-'Lucas Henrique Santos de Bairros',
 'Lucas Antonio Vieira Lemes'
 )
 ```
