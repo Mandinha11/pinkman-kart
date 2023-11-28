@@ -94,16 +94,17 @@ public class EditarKartsDialog extends JDialog {
 			textFieldAno.setBounds(208, 269, 190, 39);
 			panel.add(textFieldAno);
 		
-		JLabel lblPreo = new JLabel("Preço:");
-		lblPreo.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblPreo.setBounds(10, 317, 200, 40);
-		panel.add(lblPreo);
+		JLabel lblPreco = new JLabel("Preço:");
+		lblPreco.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPreco.setBounds(10, 317, 200, 40);
+		panel.add(lblPreco);
 		/*
 		 textFieldPreco = new JTextField(8); 
 		 JTextFieldDinheiro .setDocument(new MonetarioDocument());
 		 */
-		textFieldPreco = new JTextField(8); 
-		textFieldPreco.setDocument(new MonetarioDocument());
+		
+		textFieldPreco = new JTextField(karts.getpreco().toString()); 
+		//textFieldPreco.setDocument(new MonetarioDocument());
 		textFieldPreco.setBackground(SystemColor.menu);
 		textFieldPreco.setBounds(208, 317, 190, 39);
 		panel.add(textFieldPreco);
