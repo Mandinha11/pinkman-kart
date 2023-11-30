@@ -97,8 +97,9 @@ public class EditarFornecedorDialog extends JDialog {
 		getContentPane().add(panel);
 		
 		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setIcon(new ImageIcon(EditarFornecedorDialog.class.getResource("/imgs/fundoAzul.jpg")));
-		lblNewLabel.setBounds(-322, 0, 786, 200);
+		lblNewLabel.setBounds(0, 0, 400, 200);
 		panel.add(lblNewLabel);
 	}
 

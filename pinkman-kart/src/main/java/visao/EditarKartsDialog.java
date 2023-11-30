@@ -137,12 +137,13 @@ public class EditarKartsDialog extends JDialog {
         });
         bntSair.setForeground(Color.WHITE);
         bntSair.setBackground(Color.BLACK);
-        bntSair.setBounds(224, 393, 190, 39);
+        bntSair.setBounds(208, 393, 190, 39);
         panel.add(bntSair);
         
         JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         lblNewLabel.setIcon(new ImageIcon(EditarKartsDialog.class.getResource("/imgs/fundoAzul.jpg")));
-        lblNewLabel.setBounds(-329, 0, 753, 544);
+        lblNewLabel.setBounds(-23, 0, 437, 506);
         panel.add(lblNewLabel);
     }
 

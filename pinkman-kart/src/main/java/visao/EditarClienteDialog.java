@@ -78,8 +78,9 @@ public class EditarClienteDialog extends JDialog {
         getContentPane().add(panel);
         
         JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         lblNewLabel.setIcon(new ImageIcon(EditarClienteDialog.class.getResource("/imgs/fundoAzul.jpg")));
-        lblNewLabel.setBounds(-311, 0, 767, 200);
+        lblNewLabel.setBounds(0, 0, 400, 200);
         panel.add(lblNewLabel);
     }
 

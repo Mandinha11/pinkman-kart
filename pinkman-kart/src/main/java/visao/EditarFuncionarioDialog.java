@@ -76,9 +76,9 @@ public class EditarFuncionarioDialog extends JDialog {
         getContentPane().add(panel);
         
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+        lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         lblNewLabel.setIcon(new ImageIcon(EditarFuncionarioDialog.class.getResource("/imgs/fundoAzul.jpg")));
-        lblNewLabel.setBounds(-64, 0, 983, 200);
+        lblNewLabel.setBounds(0, 0, 400, 200);
         panel.add(lblNewLabel);
     }
 
