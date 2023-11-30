@@ -308,7 +308,7 @@ public class TelaVendas extends JFrame {
 				
 				Karts kart = (Karts) comboBoxKart.getSelectedItem();
 				
-				txtValorDaVenda.setText(String.valueOf(kart.getpreco()));
+				txtValorDaVenda.setText(String.valueOf(kart.getpreco()*100));
 				
 			}
 		});
@@ -349,10 +349,10 @@ public class TelaVendas extends JFrame {
 		dao = VendasDAO.getinstancia();
 		ArrayList<Vendas> Vendas = dao.listar();
 		modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "id_kart", "Data_da_Venda", "Valor_Da_Venda", "Funcionarios_CPF" });
+				new String[] { "Id Kart", "Data da Venda", "Valor Da Venda", "Funcionarios Cpf" });
 
 		for (Vendas vendas : Vendas) {
-			Object[] linha = { vendas.getIdKarts(), vendas.getDataVendas(), vendas.getValorDaVenda(),
+			Object[] linha = { vendas.getIdKarts(), vendas.getDataVendas(), (vendas.getValorDaVenda()),
 					vendas.getFuncionarioCPF() };
 			modelo.addRow(linha);
 		}
