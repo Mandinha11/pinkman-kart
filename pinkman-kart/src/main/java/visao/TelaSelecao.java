@@ -193,12 +193,6 @@ public class TelaSelecao extends JFrame {
 		panel_1_3.setLayout(null);
 		contentPane.add(panel_1_3);
 
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon(TelaSelecao.class.getResource("/imgs/Cliente.png")));
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(65, 24, 172, 104);
-		panel_1_3.add(lblNewLabel_2);
-
 		JButton btnFornecedor = new JButton("Fornecedor");
 		btnFornecedor.setForeground(new Color(255, 255, 255));
 		btnFornecedor.setBounds(59, 145, 206, 47);
@@ -215,12 +209,18 @@ public class TelaSelecao extends JFrame {
 		});
 		btnFornecedor.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
 		
-		JLabel painel_fornecedor = new JLabel("");
-		painel_fornecedor.setHorizontalAlignment(SwingConstants.RIGHT);
-		painel_fornecedor.setVerticalAlignment(SwingConstants.BOTTOM);
-		painel_fornecedor.setIcon(new ImageIcon(TelaSelecao.class.getResource("/imgs/fundoAzul.jpg")));
-		painel_fornecedor.setBounds(0, 0, 308, 265);
-		panel_1_3.add(painel_fornecedor);
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setIcon(new ImageIcon(TelaSelecao.class.getResource("/imgs/fornec.png")));
+		lblNewLabel_2.setBounds(24, 27, 260, 165);
+		panel_1_3.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_6 = new JLabel("New label");
+		lblNewLabel_6.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblNewLabel_6.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_6.setIcon(new ImageIcon(TelaSelecao.class.getResource("/imgs/fundoAzul.jpg")));
+		lblNewLabel_6.setBounds(0, 0, 329, 265);
+		panel_1_3.add(lblNewLabel_6);
 
 		JPanel panel_1_3_1 = new JPanel();
 		panel_1_3_1.setBackground(new Color(0, 128, 192));

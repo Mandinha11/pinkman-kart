@@ -60,7 +60,7 @@ public class TelaCliente extends JFrame {
 		setContentPane(contentPane);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(380, 107, 506, 45);
+		panel_2.setBounds(334, 107, 506, 45);
 		panel_2.setLayout(null);
 		panel_2.setToolTipText("");
 		panel_2.setBackground(new Color(0, 85, 125));
@@ -198,7 +198,7 @@ public class TelaCliente extends JFrame {
 		contentPane.add(btnNewButton_2);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(380, 35, 506, 45);
+		panel.setBounds(334, 35, 506, 45);
 		panel.setBackground(new Color(0, 85, 125));
 		panel.setToolTipText("");
 		contentPane.add(panel);
@@ -224,7 +224,7 @@ public class TelaCliente extends JFrame {
 		panel.add(lblNewLabel_1_1);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(1048, 35, 506, 45);
+		panel_1.setBounds(1021, 35, 506, 45);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		panel_1.setToolTipText("");
@@ -258,7 +258,7 @@ public class TelaCliente extends JFrame {
 		panel_1.add(lblNewLabel_1_2_1);
 
 		JPanel panel_1_1 = new JPanel();
-		panel_1_1.setBounds(1048, 107, 506, 45);
+		panel_1_1.setBounds(1021, 107, 506, 45);
 		panel_1_1.setLayout(null);
 		panel_1_1.setToolTipText("");
 		panel_1_1.setBackground(new Color(0, 85, 125));
@@ -293,7 +293,7 @@ public class TelaCliente extends JFrame {
 		 * Tabela
 		 */
 		JPanel panelTabela = new JPanel();
-		panelTabela.setBounds(340, 278, 1488, 447);
+		panelTabela.setBounds(334, 218, 1488, 494);
 		contentPane.add(panelTabela);
 
 		table = new JTable();
@@ -416,18 +416,22 @@ public class TelaCliente extends JFrame {
 		btnExcluir.setBounds(51, 424, 242, 57);
 		btnExcluir.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		contentPane.add(btnExcluir);
-
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setForeground(Color.BLACK);
-		lblNewLabel_1.setBounds(1600, 35, 141, 115);
-		lblNewLabel_1.setIcon(new ImageIcon(TelaCliente.class.getResource("/imgs/Cliente2.png")));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblNewLabel_1);
-
+		
 		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setIcon(new ImageIcon(TelaCliente.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel_4.setBounds(0, 0, 1939, 1071);
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setIcon(new ImageIcon(TelaCliente.class.getResource("/imgs/Cliente.png")));
+		lblNewLabel_4.setBounds(97, 841, 161, 122);
 		contentPane.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_1 = new JLabel("Cliente");
+		lblNewLabel_1.setFont(new Font("Segoe UI Semibold", Font.BOLD, 50));
+		lblNewLabel_1.setBounds(236, 865, 345, 99);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5.setIcon(new ImageIcon(TelaCliente.class.getResource("/imgs/FundoDeTela.jpg")));
+		lblNewLabel_5.setBounds(0, 0, 1924, 1073);
+		contentPane.add(lblNewLabel_5);
 
 	}
 

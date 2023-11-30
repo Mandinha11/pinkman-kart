@@ -71,7 +71,7 @@ public class TelaKarts extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 2218, 1126);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 128, 128));
+		contentPane.setBackground(new Color(240, 128, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -256,12 +256,12 @@ public class TelaKarts extends JFrame {
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(new Color(211, 211, 211));
-		panel_4.setBounds(986, 53, 857, 939);
+		panel_4.setBounds(996, 54, 884, 939);
 		contentPane.add(panel_4);
 
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBackground(new Color(0, 85, 125));
-		panel_1_1.setBounds(563, 279, 423, 61);
+		panel_1_1.setBounds(563, 322, 423, 61);
 		contentPane.add(panel_1_1);
 		panel_1_1.setLayout(null);
 
@@ -298,7 +298,7 @@ public class TelaKarts extends JFrame {
 		JPanel panel_1_1_1 = new JPanel();
 		panel_1_1_1.setBackground(new Color(0, 85, 125));
 		panel_1_1_1.setLayout(null);
-		panel_1_1_1.setBounds(98, 195, 423, 61);
+		panel_1_1_1.setBounds(98, 232, 423, 61);
 		contentPane.add(panel_1_1_1);
 
 		txtMarca = new JTextField();
@@ -322,7 +322,7 @@ public class TelaKarts extends JFrame {
 		JPanel panel_1_1_2 = new JPanel();
 		panel_1_1_2.setBackground(new Color(0, 85, 125));
 		panel_1_1_2.setLayout(null);
-		panel_1_1_2.setBounds(563, 363, 423, 61);
+		panel_1_1_2.setBounds(563, 413, 423, 61);
 		contentPane.add(panel_1_1_2);
 		
 		MaskFormatter mascaraCNPJ1 = null;
@@ -362,7 +362,7 @@ public class TelaKarts extends JFrame {
 		JPanel panel_1_2 = new JPanel();
 		panel_1_2.setBackground(new Color(0, 85, 125));
 		panel_1_2.setLayout(null);
-		panel_1_2.setBounds(98, 113, 423, 61);
+		panel_1_2.setBounds(98, 142, 423, 61);
 		contentPane.add(panel_1_2);
 
 		JLabel lblBuscarKarts = new JLabel("Cor:");
@@ -386,7 +386,7 @@ public class TelaKarts extends JFrame {
 		JPanel panel_1_3 = new JPanel();
 		panel_1_3.setBackground(new Color(0, 85, 125));
 		panel_1_3.setLayout(null);
-		panel_1_3.setBounds(98, 279, 423, 61);
+		panel_1_3.setBounds(98, 322, 423, 61);
 		contentPane.add(panel_1_3);
 
 		JLabel lblQuantidade = new JLabel("Quantidade:");
@@ -415,7 +415,7 @@ public class TelaKarts extends JFrame {
 		panel_4.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 857, 1003);
+		scrollPane.setBounds(0, 0, 879, 1003);
 		panel_4.add(scrollPane);
 
 		table = new JTable();
@@ -434,7 +434,7 @@ public class TelaKarts extends JFrame {
 		JPanel panel_1_4 = new JPanel();
 		panel_1_4.setBackground(new Color(0, 85, 125));
 		panel_1_4.setLayout(null);
-		panel_1_4.setBounds(563, 113, 423, 61);
+		panel_1_4.setBounds(563, 142, 423, 61);
 		contentPane.add(panel_1_4);
 
 		JLabel lblModelo = new JLabel("Modelo:");
@@ -458,7 +458,7 @@ public class TelaKarts extends JFrame {
 		JPanel panel_1_5 = new JPanel();
 		panel_1_5.setBackground(new Color(0, 85, 125));
 		panel_1_5.setLayout(null);
-		panel_1_5.setBounds(563, 195, 423, 61);
+		panel_1_5.setBounds(563, 232, 423, 61);
 		contentPane.add(panel_1_5);
 
 		JLabel lblAno = new JLabel("Ano:");
@@ -491,7 +491,7 @@ public class TelaKarts extends JFrame {
 		panel_1_6.setForeground(new Color(255, 255, 255));
 		panel_1_6.setBackground(new Color(0, 85, 125));
 		panel_1_6.setLayout(null);
-		panel_1_6.setBounds(98, 363, 423, 61);
+		panel_1_6.setBounds(98, 413, 423, 61);
 		contentPane.add(panel_1_6);
 		
 		MaskFormatter formatter111 = null;
@@ -521,11 +521,6 @@ public class TelaKarts extends JFrame {
 		lblNewLabel_7_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_7_4.setBounds(0, 0, 423, 61);
 		panel_1_6.add(lblNewLabel_7_4);
-
-		JLabel lblNewLabel_2 = new JLabel("");
-
-		lblNewLabel_2.setBounds(343, 733, 301, 217);
-		contentPane.add(lblNewLabel_2);
 		
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.addActionListener(new ActionListener() {
@@ -590,10 +585,22 @@ public class TelaKarts extends JFrame {
 		btnAlterar.setBounds(692, 556, 271, 41);
 		contentPane.add(btnAlterar);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel_1.setBounds(0, 0, 1924, 1061);
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/kart1.2.png")));
+		lblNewLabel_1.setBounds(50, 822, 300, 171);
 		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_3 = new JLabel("Kart");
+		lblNewLabel_3.setForeground(new Color(0, 0, 0));
+		lblNewLabel_3.setFont(new Font("Segoe UI Semibold", Font.BOLD, 50));
+		lblNewLabel_3.setBounds(259, 865, 176, 77);
+		contentPane.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon(TelaKarts.class.getResource("/imgs/FundoDeTela.jpg")));
+		lblNewLabel_2.setBounds(-11, 0, 1946, 1061);
+		contentPane.add(lblNewLabel_2);
 	}
 
 	private void atualizarTabela() {

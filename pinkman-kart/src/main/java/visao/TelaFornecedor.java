@@ -81,7 +81,7 @@ public class TelaFornecedor extends JFrame {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setForeground(new Color(255, 255, 255));
 		btnCadastrar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		btnCadastrar.setBounds(1687, 293, 210, 42);
+		btnCadastrar.setBounds(32, 293, 210, 42);
 		btnCadastrar.setBackground(new Color(0, 0, 0));
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -154,7 +154,7 @@ public class TelaFornecedor extends JFrame {
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.setForeground(new Color(255, 255, 255));
 		btnAtualizar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-		btnAtualizar.setBounds(1687, 135, 210, 42);
+		btnAtualizar.setBounds(32, 150, 210, 42);
 		btnAtualizar.setBackground(new Color(0, 0, 0));
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -233,19 +233,19 @@ public class TelaFornecedor extends JFrame {
 
 			}
 		});
-		btnExcluir.setBounds(1689, 213, 208, 42);
+		btnExcluir.setBounds(34, 218, 208, 42);
 		btnExcluir.setBackground(new Color(0, 0, 0));
 		contentPane.add(btnExcluir);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(25, 135, 1616, 855);
+		panel.setBounds(280, 150, 1515, 593);
 		panel.setBackground(new Color(0, 0, 0));
 		contentPane.add(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(0, 85, 125));
-		panel_1.setBounds(513, 12, 513, 46);
+		panel_1.setBounds(280, 12, 513, 46);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -271,7 +271,7 @@ public class TelaFornecedor extends JFrame {
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
 		panel_1_1.setBackground(new Color(0, 85, 125));
-		panel_1_1.setBounds(513, 78, 513, 46);
+		panel_1_1.setBounds(280, 78, 513, 46);
 		contentPane.add(panel_1_1);
 
 		MaskFormatter mascaraCNPJ = null;
@@ -302,7 +302,7 @@ public class TelaFornecedor extends JFrame {
 		JPanel panel_1_1_1 = new JPanel();
 		panel_1_1_1.setLayout(null);
 		panel_1_1_1.setBackground(new Color(0, 85, 125));
-		panel_1_1_1.setBounds(1092, 12, 513, 46);
+		panel_1_1_1.setBounds(945, 12, 513, 46);
 		contentPane.add(panel_1_1_1);
 
 		MaskFormatter mascaraCEP = null;
@@ -333,7 +333,7 @@ public class TelaFornecedor extends JFrame {
 		JPanel panel_1_1_1_1 = new JPanel();
 		panel_1_1_1_1.setLayout(null);
 		panel_1_1_1_1.setBackground(new Color(0, 85, 125));
-		panel_1_1_1_1.setBounds(1090, 78, 513, 46);
+		panel_1_1_1_1.setBounds(945, 78, 513, 46);
 		contentPane.add(panel_1_1_1_1);
 
 		MaskFormatter mascaraTel = null;
@@ -394,11 +394,22 @@ public class TelaFornecedor extends JFrame {
 			}
 		});
 		panel.add(scrollPane_1);
-
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(TelaFornecedor.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel.setBounds(0, 0, 1924, 1061);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(new ImageIcon(TelaFornecedor.class.getResource("/imgs/fornec.png")));
+		lblNewLabel.setBounds(47, 840, 137, 176);
 		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_2 = new JLabel("Fornecedor");
+		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.BOLD, 50));
+		lblNewLabel_2.setBounds(194, 864, 372, 60);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setIcon(new ImageIcon(TelaFornecedor.class.getResource("/imgs/FundoDeTela.jpg")));
+		lblNewLabel_3.setBounds(-15, 0, 1939, 1061);
+		contentPane.add(lblNewLabel_3);
 
 	}
 

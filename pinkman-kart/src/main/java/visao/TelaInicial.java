@@ -102,11 +102,6 @@ public class TelaInicial extends JFrame {
 		textSenha.setBounds(674, 675, 637, 20);
 		contentPane.add(textSenha);
 		contentPane.add(btnEntrar);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(TelaInicial.class.getResource("/imgs/FundoDegradeAzul.png")));
-		lblNewLabel.setBounds(0, 0, 1924, 1061);
-		contentPane.add(lblNewLabel);
 
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

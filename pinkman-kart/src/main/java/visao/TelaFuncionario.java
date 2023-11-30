@@ -351,12 +351,6 @@ public class TelaFuncionario extends JFrame {
 		lblNewLabel_1_4.setBounds(0, 0, 518, 58);
 		PnNomeCompleto.add(lblNewLabel_1_4);
 
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setBounds(1654, 57, 165, 132);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon(TelaFuncionario.class.getResource("/imgs/Funcionario2.png")));
-		contentPane.add(lblNewLabel_1);
-
 		JPanel panel_1 = new JPanel();
 
 		panel_1.setBounds(464, 223, 1151, 466);
@@ -375,11 +369,21 @@ public class TelaFuncionario extends JFrame {
 
 		JScrollPane scrollPane_1 = new JScrollPane(table_1);
 		panel_1.add(scrollPane_1);
-
-		JLabel lblNewLabel_6 = new JLabel("");
-		lblNewLabel_6.setIcon(new ImageIcon(TelaFuncionario.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel_6.setBounds(0, 0, 1924, 1146);
-		contentPane.add(lblNewLabel_6);
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setIcon(new ImageIcon(TelaFuncionario.class.getResource("/imgs/Funcionario2.png")));
+		lblNewLabel_3.setBounds(-44, 803, 352, 247);
+		contentPane.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_1 = new JLabel("Funcionario");
+		lblNewLabel_1.setFont(new Font("Segoe UI Semibold", Font.BOLD, 50));
+		lblNewLabel_1.setBounds(277, 910, 326, 58);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_4 = new JLabel("New label");
+		lblNewLabel_4.setIcon(new ImageIcon(TelaFuncionario.class.getResource("/imgs/FundoDeTela.jpg")));
+		lblNewLabel_4.setBounds(0, -49, 1948, 1110);
+		contentPane.add(lblNewLabel_4);
 
 	}
 

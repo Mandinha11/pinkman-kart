@@ -122,7 +122,7 @@ public class TelaVendas extends JFrame {
 			}
 
 		});
-		btnCadastra.setBounds(1453, 716, 375, 49);
+		btnCadastra.setBounds(28, 371, 280, 49);
 		contentPane.add(btnCadastra);
 
 		JButton btnVoltar = new JButton("Voltar");
@@ -261,7 +261,7 @@ public class TelaVendas extends JFrame {
 
 			}
 		});
-		btnExcluir.setBounds(1068, 716, 375, 49);
+		btnExcluir.setBounds(28, 278, 280, 49);
 		contentPane.add(btnExcluir);
 
 		JLabel ImagemCarrinho = new JLabel("");
@@ -303,6 +303,15 @@ public class TelaVendas extends JFrame {
 	
 		
 		comboBoxKart = new JComboBox<Karts>();
+		comboBoxKart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Karts kart = (Karts) comboBoxKart.getSelectedItem();
+				
+				txtValorDaVenda.setText(String.valueOf(kart.getpreco()));
+				
+			}
+		});
 		comboBoxKart.setBounds(171, 19, 291, 22);
 		panel_id.add(comboBoxKart);
 		
@@ -313,10 +322,15 @@ public class TelaVendas extends JFrame {
 		lblNewLabel_1_1_1_2.setBounds(0, 0, 483, 55);
 		panel_id.add(lblNewLabel_1_1_1_2);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
-		lblNewLabel.setBounds(-38, -14, 1962, 1067);
+		JLabel lblNewLabel = new JLabel("Vendas");
+		lblNewLabel.setFont(new Font("Segoe UI Semibold", Font.BOLD, 50));
+		lblNewLabel.setBounds(210, 850, 198, 49);
 		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon(TelaVendas.class.getResource("/imgs/FundoDeTela.jpg")));
+		lblNewLabel_1.setBounds(0, 0, 1934, 1053);
+		contentPane.add(lblNewLabel_1);
 		
 		KartsDAO kd = new KartsDAO();
 		ArrayList<Karts> listakart = (kd).listar();
