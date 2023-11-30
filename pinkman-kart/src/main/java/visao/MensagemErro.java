@@ -48,12 +48,12 @@ public class MensagemErro extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(-172, 30, 477, 280);
+		lblNewLabel.setBounds(-213, 30, 477, 280);
 		lblNewLabel.setIcon(new ImageIcon(MensagemErro.class.getResource("/imgs/Atenção.png")));
 		contentPane.add(lblNewLabel);
 
 		JLabel lblMsgErro = new JLabel("");
-		lblMsgErro.setBounds(267, 66, 377, 104);
+		lblMsgErro.setBounds(249, 66, 395, 104);
 		lblMsgErro.setFont(new Font("Segoe UI Semibold", Font.BOLD, 21));
 		lblMsgErro.setForeground(new Color(255, 255, 255));
 		contentPane.add(lblMsgErro);

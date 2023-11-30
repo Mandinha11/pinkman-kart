@@ -68,20 +68,16 @@ public class TelaInicial extends JFrame {
 
 		//Icon logoPinkmanKart = new ImageIcon("imgs/PinkmanKartLogo.png");
 		contentPane.setLayout(null);
-		JLabel lblLogoPinkmanKart = new JLabel("");
-		lblLogoPinkmanKart.setBounds(718, 433, 512, 180);
-		lblLogoPinkmanKart.setIcon(new ImageIcon(TelaInicial.class.getResource("/imgs/PinkmanKartLogo.png")));
-		contentPane.add(lblLogoPinkmanKart);
 
 		JLabel txtLog = new JLabel("Login:");
 		txtLog.setBounds(608, 637, 56, 27);
-		txtLog.setForeground(Color.WHITE);
+		txtLog.setForeground(new Color(0, 0, 0));
 		txtLog.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		contentPane.add(txtLog);
 
 		JLabel txtSe = new JLabel("Senha:");
 		txtSe.setBounds(603, 667, 61, 27);
-		txtSe.setForeground(Color.WHITE);
+		txtSe.setForeground(new Color(0, 0, 0));
 		txtSe.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		contentPane.add(txtSe);
 
@@ -102,6 +98,16 @@ public class TelaInicial extends JFrame {
 		textSenha.setBounds(674, 675, 637, 20);
 		contentPane.add(textSenha);
 		contentPane.add(btnEntrar);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(TelaInicial.class.getResource("/imgs/logPinkMan.png")));
+		lblNewLabel.setBounds(738, 437, 550, 197);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(TelaInicial.class.getResource("/imgs/FundoDeTela.jpg")));
+		lblNewLabel_1.setBounds(0, 0, 1924, 1061);
+		contentPane.add(lblNewLabel_1);
 
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -285,7 +285,7 @@ public class TelaFuncionario extends JFrame {
 						// Atualiza a tabela após a alteração
 						atualizarTabela();
 					} else {
-						new MensagemErro("Erro ao atualizar o cliente. !").setVisible(true);
+						new MensagemErro("Erro ao atualizar o funcionario. !").setVisible(true);
 					}
 				}
 			}
